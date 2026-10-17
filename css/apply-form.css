@@ -1,0 +1,53 @@
+/* =============================================
+   APPLY PAGE - FORM STRUCTURE (FLEXBOX)
+   Author: Sy Tho Nguyen (105705546)
+   Description: Fieldset, legend, and Flexbox row layout
+   ============================================= */
+
+/* ===== Fieldset Sections ===== */
+.form-section {
+  border: 2px solid #4380f1;
+  border-radius: 10px;
+  padding: 25px;
+  margin-bottom: 25px;
+  background-color: #f9f9f9;
+}
+
+.form-section legend {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #4380f1;
+  padding: 0 10px;
+}
+
+/* ===== Flexbox Row Layout ===== */
+/* Two-column row using Flexbox */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+/* Each form group takes equal space in a row */
+.form-group {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+/* Full-width group (spans entire row) */
+.form-group-full {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* ===== Labels ===== */
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+  font-size: 0.95rem;
+}
