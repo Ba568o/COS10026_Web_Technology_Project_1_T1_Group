@@ -43,7 +43,90 @@
     <h1 class="apply-title">Job Application Form</h1>
     <p class="apply-subtitle">Please fill in all required fields marked with *</p>
 
-    <!-- Form will be added in next commits -->
+    <!-- ===== JOB APPLICATION FORM ===== -->
+    <form action="https://mercury.swin.edu.au/it000000/formtest.php" method="POST" class="apply-form" novalidate>
+
+      <!-- ===== SECTION 1: PERSONAL INFORMATION ===== -->
+      <fieldset class="form-section" id="personal-info">
+        <legend>Personal Information</legend>
+
+        <div class="form-row">
+          <!-- First Name -->
+          <div class="form-group">
+            <label for="first-name">First Name <span class="required">*</span></label>
+            <input type="text" id="first-name" name="first_name"
+              placeholder="e.g. Sy Tho"
+              pattern="[A-Za-z\s]{2,50}"
+              title="Only letters and spaces, 2-50 characters"
+              maxlength="50"
+              required
+              aria-required="true">
+          </div>
+
+          <!-- Last Name -->
+          <div class="form-group">
+            <label for="last-name">Last Name <span class="required">*</span></label>
+            <input type="text" id="last-name" name="last_name"
+              placeholder="e.g. Nguyen"
+              pattern="[A-Za-z\s]{2,50}"
+              title="Only letters and spaces, 2-50 characters"
+              maxlength="50"
+              required
+              aria-required="true">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <!-- Date of Birth -->
+          <div class="form-group">
+            <label for="dob">Date of Birth <span class="required">*</span></label>
+            <input type="date" id="dob" name="date_of_birth"
+              required
+              aria-required="true">
+          </div>
+
+          <!-- Gender -->
+          <div class="form-group">
+            <label>Gender <span class="required">*</span></label>
+            <div class="radio-group" role="radiogroup" aria-label="Gender selection">
+              <label class="radio-label">
+                <input type="radio" name="gender" value="male" required> Male
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="gender" value="female"> Female
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="gender" value="other"> Other
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" name="email"
+              placeholder="e.g. example@email.com"
+              required
+              aria-required="true">
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group">
+            <label for="phone">Phone Number <span class="required">*</span></label>
+            <input type="tel" id="phone" name="phone"
+              placeholder="e.g. 0412 345 678"
+              pattern="[0-9\s\+\-]{8,15}"
+              title="8-15 digits, spaces, + or - allowed"
+              required
+              aria-required="true">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- More sections will be added in next commits -->
+    </form>
   </main>
 
   <!-- ===== FOOTER ===== -->
