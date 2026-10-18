@@ -1,0 +1,60 @@
+<!-- =============================================
+  COMPONENT: ADDRESS FORM SECTION
+  Author: Sy Tho Nguyen (105705546)
+  Description: Street address, suburb, state dropdown,
+               postcode with Australian format validation
+  Usage: Place inside <form class="apply-form">
+  ============================================= -->
+
+<fieldset class="form-section" id="address-info">
+  <legend>Address</legend>
+
+  <!-- Street Address (full width) -->
+  <div class="form-group form-group-full">
+    <label for="street">Street Address <span class="required">*</span></label>
+    <input type="text" id="street" name="street_address"
+      placeholder="e.g. 123 Burwood Road"
+      maxlength="100"
+      required
+      aria-required="true">
+  </div>
+
+  <!-- Row: Suburb + State + Postcode -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="suburb">Suburb/City <span class="required">*</span></label>
+      <input type="text" id="suburb" name="suburb"
+        placeholder="e.g. Hawthorn"
+        pattern="[A-Za-z\s\-]{2,50}"
+        title="Only letters, spaces and hyphens"
+        required
+        aria-required="true">
+    </div>
+
+    <div class="form-group">
+      <label for="state">State <span class="required">*</span></label>
+      <select id="state" name="state" required aria-required="true">
+        <option value="" disabled selected>-- Select State --</option>
+        <option value="VIC">VIC</option>
+        <option value="NSW">NSW</option>
+        <option value="QLD">QLD</option>
+        <option value="SA">SA</option>
+        <option value="WA">WA</option>
+        <option value="TAS">TAS</option>
+        <option value="NT">NT</option>
+        <option value="ACT">ACT</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="postcode">Postcode <span class="required">*</span></label>
+      <input type="text" id="postcode" name="postcode"
+        placeholder="e.g. 3122"
+        pattern="[0-9]{4}"
+        title="Australian postcode must be exactly 4 digits"
+        maxlength="4"
+        required
+        aria-required="true">
+    </div>
+  </div>
+</fieldset>
