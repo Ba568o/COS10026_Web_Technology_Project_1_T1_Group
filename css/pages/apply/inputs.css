@@ -1,0 +1,54 @@
+/* =============================================
+   APPLY PAGE - INPUT, SELECT, TEXTAREA STYLES
+   Author: Sy Tho Nguyen (105705546)
+   Description: Styling for all form input elements
+   ============================================= */
+
+/* ===== Text Inputs, Email, Tel, Date, Select ===== */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+  padding: 10px 14px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ===== Focus State ===== */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #4380f1;
+  box-shadow: 0 0 6px rgba(67, 128, 241, 0.3);
+}
+
+/* ===== HTML5 Validation States ===== */
+/* Valid input indicator */
+.form-group input:valid:not(:placeholder-shown) {
+  border-color: #2ecc71;
+}
+
+/* Invalid input indicator */
+.form-group input:invalid:not(:placeholder-shown):not(:focus) {
+  border-color: #e74c3c;
+}
+
+/* ===== Textarea ===== */
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ===== Help Text ===== */
+.form-help {
+  color: #888;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
