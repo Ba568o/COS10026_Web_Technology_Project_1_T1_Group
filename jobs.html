@@ -9,39 +9,44 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="navbar">
-    <a href="index.html" class="logo"><img src="/images/logo.png" alt="My site"></a>
-    <form action="https://duckduckgo.com" method="GET">
-      <input type="search" name="q" placeholder="Search for job" required />
-      <input type="hidden" name="sites" value="jobs.html" />
-      <button type="submit">Search</button>
-    </form>
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="/images/logo.png" alt="My site"></a>
+      <form id = "search-form" action="https://duckduckgo.com" method="GET">
+        <input class="search-input" type="search" name="q" placeholder="Search for job" required />
+        <input type="hidden" name="sites" value="jobs.html" />
+        <button class ="search-button" type="submit">
+          <img src="/images/search.png" alt="Search">
+        </button>
+      </form>
     
-    <ul class="nav-links">
-      <li><a href="#query=">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="jobs.html">Jobs Description</a></li>
+        <li><a href="apply.html">Apply</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
 
-<!-- Hidden checkbox to toggle dark mode -->
-  <input type="checkbox" id="dark-toggle" class="dark-checkbox">
-  <!-- Iconic label between sun/moon -->
-  <label for="dark-toggle" class="darkmode-toggle" id="mobile-menu">
-    <img src="images/half-moon.png" alt="Toggle Dark Mode" class="moon">
-    <img src="images/sun.png" alt="Toggle Light Mode" class="sun">
-  </label>
-  </nav>
-  <div id="main">
-    <div id="job_card">
-      <h2 id="job_title">President</h2>
+      <!-- Hidden checkbox to toggle dark mode -->
+      <input hidden type="checkbox" id="dark-toggle" class="dark-checkbox">
+      <!-- Iconic label between sun/moon -->
+      <label for="dark-toggle" class="darkmode-toggle" id="mobile-menu">
+        <img src="images/half-moon.png" alt="Toggle Dark Mode" class="moon">
+        <img src="images/sun.png" alt="Toggle Light Mode" class="sun">
+      </label>
+    </nav>
+  </header>
+
+  <div class="main">
+    <div class="job_card">
+      <div class="ref_code">
+        <p>Reference Code: <span class="ref_code_value">T1PRE</span></p>
+      </div>
+      <h2 class="job_title">President</h2>
       <h3>Description</h3>
       <p>As the President of our company, you will be responsible for leading and managing the overall operations, setting strategic goals, and ensuring the company's growth and success. You will work closely with the executive team to make critical decisions and drive the organization forward.</p>
-      <input hidden type="checkbox" id="show_details" class="show-details-checkbox">
-      <label for="show_details" class="show-details-label">
-        <img src="images/down.png" alt="Show Details" class="arrow">
-      </label>
-      <div id="job_details">
+
+      <div class="job_details">
         <h3>Requirements</h3>
         <ul>
           <li>Proven experience in a senior leadership role.</li>
@@ -65,10 +70,51 @@
         <h3>How to Apply</h3>
         <p>To apply for the President position, please submit your resume and a cover letter.</p>
       </div>
+            <input hidden type="checkbox" id="show_details" class="show-details-checkbox">
+      <label for="show_details" class="show-details-label">
+        <img src="images/down.png" alt="Show Details" class="arrow">
+      </label>
+    </div>
+    <div class="job_card">
+      <div class="ref_code">
+        <p>Reference Code: <span class="ref_code_value">T1VPR</span></p>
+      </div>
+      <h2 class="job_title">President</h2>
+      <h3>Description</h3>
+      <p>As the President of our company, you will be responsible for leading and managing the overall operations, setting strategic goals, and ensuring the company's growth and success. You will work closely with the executive team to make critical decisions and drive the organization forward.</p>
+
+      <div class="job_details_2">
+        <h3>Requirements</h3>
+        <ul>
+          <li>Proven experience in a senior leadership role.</li>
+          <li>Strong business acumen and strategic thinking.</li>
+          <li>Excellent communication and interpersonal skills.</li>
+          <li>Ability to inspire and motivate teams.</li>
+          <li>Track record of achieving business objectives and driving growth.</li>
+        </ul>
+        <h3>Salary</h3>
+        <p>$200,000 - $300,000 per year</p>
+        <h3>Location</h3>
+        <p>New York, NY</p>
+        <h3>Benefits</h3>
+        <ul>
+          <li>Health, dental, and vision insurance</li>
+          <li>Retirement savings plan</li>
+          <li>Paid time off and holidays</li>
+          <li>Professional development opportunities</li>
+          <li>Flexible work arrangements</li>
+        </ul>
+        <h3>How to Apply</h3>
+        <p>To apply for the Vice-President position, please submit your resume and a cover letter.</p>
+      </div>
+            <input hidden type="checkbox" id="show_details_2" class="show-details-checkbox">
+      <label for="show_details_2" class="show-details-label">
+        <img src="images/down.png" alt="Show Details" class="arrow">
+      </label>
     </div>
   </div>
 </body>
 <footer>
-  <p>&copy; 2026 My Site. All rights reserved.</p>
+  <p>&copy; 2026 Swinburne University. All rights reserved.</p>
 </footer>
 </html>
