@@ -3,266 +3,310 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="images/logo.png" type="image/png">
   <title>Job Application - T1 Group</title>
   <meta name="description" content="Apply for a job position at T1 Group. Fill out the application form with your details.">
 
   <link rel="stylesheet" href="apply.css">
 </head>
 <body>
-  <!-- ===== NAVIGATION BAR (shared across all pages) ===== -->
-  <nav class="navbar">
-    <a href="index.html" class="logo"><img src="images/logo.png" alt="T1 Group Logo"></a>
-    <form action="https://duckduckgo.com" method="GET">
-      <input type="search" name="q" placeholder="Search for job" required />
-      <input type="hidden" name="sites" value="jobs.html" />
-      <button type="submit">Search</button>
-    </form>
+  <a class="skip-link" href="#application">Skip to application</a>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="index.html" class="logo" aria-label="T1 Group home">
+        <span class="logo-mark" aria-hidden="true">T1<span>.</span></span>
+        <span class="logo-name">TOGETHER<br>AS ONE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="jobs.html">Jobs</a></li>
+        <li><a href="apply.html" aria-current="page">Apply</a></li>
+      </ul>
+      <form class="nav-search" action="https://duckduckgo.com" method="GET" role="search">
+        <label class="visually-hidden" for="job-search">Search jobs</label>
+        <input type="search" id="job-search" name="q" placeholder="Search jobs…" required>
+        <input type="hidden" name="sites" value="jobs.html">
+        <button type="submit">Search</button>
+      </form>
+      <div class="theme-control">
+        <input type="checkbox" id="dark-toggle" class="dark-checkbox">
+        <label for="dark-toggle" class="darkmode-toggle">
+          <span class="theme-icon" aria-hidden="true">◐</span>
+          <span class="visually-hidden">Dark mode</span>
+        </label>
+      </div>
+    </nav>
+  </header>
 
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="jobs.html">Jobs</a></li>
-      <li><a href="apply.html">Apply</a></li>
-    </ul>
-
-    <!-- Hidden checkbox to toggle dark mode -->
-    <input type="checkbox" id="dark-toggle" class="dark-checkbox">
-    <!-- Iconic label between sun/moon -->
-    <label for="dark-toggle" class="darkmode-toggle" id="mobile-menu">
-      <img src="images/half-moon.png" alt="Toggle Dark Mode" class="moon">
-      <img src="images/sun.png" alt="Toggle Light Mode" class="sun">
-    </label>
-  </nav>
-
-  <!-- ===== MAIN CONTENT ===== -->
   <main class="apply-container">
-    <h1 class="apply-title">Job Application Form</h1>
-    <p class="apply-subtitle">Please fill in all required fields marked with *</p>
-    <!-- Application form: all field sections must remain inside this form. -->
-    <form action="https://mercury.swin.edu.au/it000000/formtest.php" method="POST" class="apply-form">
-      <fieldset class="form-section" id="personal-info">
-        <legend>Personal Information</legend>
+    <header class="page-intro">
+      <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> YOUR FUTURE AT T1</p>
+      <h1 class="apply-title">Great things start<br>with <em>you.</em></h1>
+      <div class="intro-bottom">
+        <p class="apply-subtitle">Bring your curiosity, your ideas, and your ambition.<br>Let’s take the next step, together.</p>
+        <a class="text-link" href="jobs.html">Explore open roles</a>
+      </div>
+    </header>
 
-        <!-- Row 1: First Name + Last Name -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="first-name">First Name <span class="required">*</span></label>
-            <input type="text" id="first-name" name="first_name"
-              placeholder="e.g. Sy Tho"
-              pattern="[A-Za-z\s]{2,50}"
-              title="Only letters and spaces, 2-50 characters"
-              maxlength="50"
-              required
-              aria-required="true">
+    <div class="application-layout">
+      <aside class="application-sidebar" aria-label="Application guide">
+        <div class="sidebar-content">
+          <p class="eyebrow">YOUR APPLICATION</p>
+          <h2>A little about you.<br>A world of possibility.</h2>
+          <p class="sidebar-description">Have your job reference ready, then tell us what you can bring to the team.</p>
+          <nav class="section-nav" aria-label="Jump to application section">
+            <ol>
+              <li><a href="#personal-info"><span>01</span><div>Personal information<small>Start with the basics</small></div></a></li>
+              <li><a href="#address-info"><span>02</span><div>Your address<small>Where you’re based</small></div></a></li>
+              <li><a href="#job-details"><span>03</span><div>The right fit<small>Your role and skills</small></div></a></li>
+              <li><a href="#submit-section"><span>04</span><div>Review &amp; submit<small>Ready for what’s next</small></div></a></li>
+            </ol>
+          </nav>
+          <div class="team-note">
+            <span class="team-symbol" aria-hidden="true">✳</span>
+            <p>Different strengths.<br><strong>One team.</strong></p>
+            <span class="team-caption">That’s the T1 spirit.</span>
           </div>
-
-          <div class="form-group">
-            <label for="last-name">Last Name <span class="required">*</span></label>
-            <input type="text" id="last-name" name="last_name"
-              placeholder="e.g. Nguyen"
-              pattern="[A-Za-z\s]{2,50}"
-              title="Only letters and spaces, 2-50 characters"
-              maxlength="50"
-              required
-              aria-required="true">
-          </div>
+          <p class="sidebar-help">Still finding your fit?<br><a href="jobs.html">Take a look at our open roles</a></p>
         </div>
+      </aside>
+      <div class="application-card" id="application">
+        <div class="form-heading">
+          <div><p class="eyebrow">MAKE YOUR NEXT MOVE</p><h2>Job application</h2></div>
+          <p class="required-note"><span class="required">*</span> Required fields</p>
+        </div>
+        <!-- Application form: all field sections must remain inside this form. -->
+        <form action="https://mercury.swin.edu.au/it000000/formtest.php" method="POST" class="apply-form">
+          <fieldset class="form-section" id="personal-info">
+            <legend><span class="section-number" aria-hidden="true">01</span> Personal information</legend>
+            <p class="section-description">Let’s start with your details and how we can reach you.</p>
 
-        <!-- Row 2: Date of Birth + Gender -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="dob">Date of Birth <span class="required">*</span></label>
-            <input type="date" id="dob" name="date_of_birth"
-              required
-              aria-required="true">
-          </div>
+            <!-- Row 1: First Name + Last Name -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name">First Name <span class="required">*</span></label>
+                <input type="text" id="first-name" autocomplete="given-name" name="first_name"
+                  placeholder="e.g. Sy Tho"
+                  pattern="[A-Za-z\s]{2,50}"
+                  title="Only letters and spaces, 2-50 characters"
+                  maxlength="50"
+                  required
+                  aria-required="true">
+              </div>
 
-          <div class="form-group">
-            <label>Gender <span class="required">*</span></label>
-            <div class="radio-group" role="radiogroup" aria-label="Gender selection">
-              <label class="radio-label">
-                <input type="radio" name="gender" value="male" required> Male
-              </label>
-              <label class="radio-label">
-                <input type="radio" name="gender" value="female"> Female
-              </label>
-              <label class="radio-label">
-                <input type="radio" name="gender" value="other"> Other
+              <div class="form-group">
+                <label for="last-name">Last Name <span class="required">*</span></label>
+                <input type="text" id="last-name" autocomplete="family-name" name="last_name"
+                  placeholder="e.g. Nguyen"
+                  pattern="[A-Za-z\s]{2,50}"
+                  title="Only letters and spaces, 2-50 characters"
+                  maxlength="50"
+                  required
+                  aria-required="true">
+              </div>
+            </div>
+
+            <!-- Row 2: Date of Birth + Gender -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="dob">Date of Birth <span class="required">*</span></label>
+                <input type="date" id="dob" autocomplete="bday" name="date_of_birth"
+                  required
+                  aria-required="true">
+              </div>
+
+              <div class="form-group">
+                <span class="field-label" id="gender-label">Gender <span class="required">*</span></span>
+                <div class="radio-group" role="radiogroup" aria-labelledby="gender-label">
+                  <label class="radio-label">
+                    <input type="radio" name="gender" value="male" required> Male
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="gender" value="female"> Female
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="gender" value="other"> Other
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 3: Email + Phone -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" autocomplete="email" name="email"
+                  placeholder="e.g. example@email.com"
+                  required
+                  aria-required="true">
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" autocomplete="tel" name="phone"
+                  placeholder="e.g. 0412 345 678"
+                  pattern="[0-9\s\+\-]{8,15}"
+                  title="8-15 digits, spaces, + or - allowed"
+                  required
+                  aria-required="true">
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="form-section" id="address-info">
+            <legend><span class="section-number" aria-hidden="true">02</span> Your address</legend>
+            <p class="section-description">Tell us where you’re currently based.</p>
+
+            <!-- Street Address (full width) -->
+            <div class="form-group form-group-full">
+              <label for="street">Street Address <span class="required">*</span></label>
+              <input type="text" id="street" autocomplete="street-address" name="street_address"
+                placeholder="e.g. 123 Burwood Road"
+                maxlength="100"
+                required
+                aria-required="true">
+            </div>
+
+            <!-- Row: Suburb + State + Postcode -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="suburb">Suburb/City <span class="required">*</span></label>
+                <input type="text" id="suburb" autocomplete="address-level2" name="suburb"
+                  placeholder="e.g. Hawthorn"
+                  pattern="[A-Za-z\s\-]{2,50}"
+                  title="Only letters, spaces and hyphens"
+                  required
+                  aria-required="true">
+              </div>
+
+              <div class="form-group">
+                <label for="state">State <span class="required">*</span></label>
+                <select id="state" autocomplete="address-level1" name="state" required aria-required="true">
+                  <option value="" disabled selected>-- Select State --</option>
+                  <option value="VIC">VIC</option>
+                  <option value="NSW">NSW</option>
+                  <option value="QLD">QLD</option>
+                  <option value="SA">SA</option>
+                  <option value="WA">WA</option>
+                  <option value="TAS">TAS</option>
+                  <option value="NT">NT</option>
+                  <option value="ACT">ACT</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="postcode">Postcode <span class="required">*</span></label>
+                <input type="text" id="postcode" inputmode="numeric" autocomplete="postal-code" name="postcode"
+                  placeholder="e.g. 3122"
+                  pattern="[0-9]{4}"
+                  title="Australian postcode must be exactly 4 digits"
+                  maxlength="4"
+                  required
+                  aria-required="true">
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="form-section" id="job-details">
+            <legend><span class="section-number" aria-hidden="true">03</span> Your role &amp; skills</legend>
+            <p class="section-description">Choose your role and the skills you’d bring to T1.</p>
+
+            <!-- Row: Job Reference + Preferred Position -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="job-ref">Job Reference Number <span class="required">*</span></label>
+                <input type="text" id="job-ref" name="job_reference"
+                  placeholder="e.g. AB123"
+                  pattern="[A-Za-z0-9]{5}"
+                  title="Exactly 5 alphanumeric characters (e.g. AB123)"
+                  maxlength="5"
+                  required
+                  aria-required="true">
+              </div>
+
+              <div class="form-group">
+                <label for="position">Preferred Position <span class="required">*</span></label>
+                <select id="position" name="position" required aria-required="true">
+                  <option value="" disabled selected>-- Select Position --</option>
+                  <option value="president">President</option>
+                  <option value="vice-president">Vice President</option>
+                  <option value="manager">Manager</option>
+                  <option value="developer">Developer</option>
+                  <option value="designer">Designer</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Key Skills Checkboxes -->
+            <div class="form-group form-group-full">
+              <span class="field-label" id="skills-label">Key Skills <span class="optional">(optional)</span></span>
+              <div class="checkbox-group" role="group" aria-labelledby="skills-label">
+                <label class="checkbox-label">
+                  <input type="checkbox" name="skills[]" value="html-css"> HTML/CSS
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="skills[]" value="javascript"> JavaScript
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="skills[]" value="php"> PHP
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="skills[]" value="sql"> SQL/Database
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="skills[]" value="python"> Python
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="skills[]" value="project-management"> Project Management
+                </label>
+              </div>
+            </div>
+
+            <!-- Other Skills Textarea -->
+            <div class="form-group form-group-full">
+              <label for="other-skills">Other Skills &amp; Qualifications</label>
+              <textarea id="other-skills" name="other_skills"
+                rows="5"
+                placeholder="Describe any additional skills, certifications, or relevant experience..."
+                maxlength="500"
+                aria-describedby="other-skills-help"></textarea>
+              <small id="other-skills-help" class="form-help">Maximum 500 characters</small>
+            </div>
+          </fieldset>
+          <fieldset class="form-section" id="submit-section">
+            <legend><span class="section-number" aria-hidden="true">04</span> Review &amp; submit</legend>
+            <p class="section-description">One last look, then you’re ready to take the next step.</p>
+
+            <!-- Acknowledgement of Country -->
+            <div class="acknowledgement">
+              <h3>Acknowledgement of Country</h3>
+              <p>We acknowledge the Traditional Owners of the land on which we work and live,
+                and pay our respects to Elders past, present and emerging.</p>
+            </div>
+
+            <!-- Terms and Conditions Checkbox -->
+            <div class="form-group form-group-full">
+              <label class="checkbox-label terms-label">
+                <input type="checkbox" id="terms" name="terms" required aria-required="true">
+                <span>I confirm that all information provided is accurate and I agree to the
+                <a href="#">terms and conditions</a>. <span class="required">*</span></span>
               </label>
             </div>
-          </div>
-        </div>
 
-        <!-- Row 3: Email + Phone -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="email">Email Address <span class="required">*</span></label>
-            <input type="email" id="email" name="email"
-              placeholder="e.g. example@email.com"
-              required
-              aria-required="true">
-          </div>
-
-          <div class="form-group">
-            <label for="phone">Phone Number <span class="required">*</span></label>
-            <input type="tel" id="phone" name="phone"
-              placeholder="e.g. 0412 345 678"
-              pattern="[0-9\s\+\-]{8,15}"
-              title="8-15 digits, spaces, + or - allowed"
-              required
-              aria-required="true">
-          </div>
-        </div>
-      </fieldset>
-      <fieldset class="form-section" id="address-info">
-        <legend>Address</legend>
-
-        <!-- Street Address (full width) -->
-        <div class="form-group form-group-full">
-          <label for="street">Street Address <span class="required">*</span></label>
-          <input type="text" id="street" name="street_address"
-            placeholder="e.g. 123 Burwood Road"
-            maxlength="100"
-            required
-            aria-required="true">
-        </div>
-
-        <!-- Row: Suburb + State + Postcode -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="suburb">Suburb/City <span class="required">*</span></label>
-            <input type="text" id="suburb" name="suburb"
-              placeholder="e.g. Hawthorn"
-              pattern="[A-Za-z\s\-]{2,50}"
-              title="Only letters, spaces and hyphens"
-              required
-              aria-required="true">
-          </div>
-
-          <div class="form-group">
-            <label for="state">State <span class="required">*</span></label>
-            <select id="state" name="state" required aria-required="true">
-              <option value="" disabled selected>-- Select State --</option>
-              <option value="VIC">VIC</option>
-              <option value="NSW">NSW</option>
-              <option value="QLD">QLD</option>
-              <option value="SA">SA</option>
-              <option value="WA">WA</option>
-              <option value="TAS">TAS</option>
-              <option value="NT">NT</option>
-              <option value="ACT">ACT</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="postcode">Postcode <span class="required">*</span></label>
-            <input type="text" id="postcode" name="postcode"
-              placeholder="e.g. 3122"
-              pattern="[0-9]{4}"
-              title="Australian postcode must be exactly 4 digits"
-              maxlength="4"
-              required
-              aria-required="true">
-          </div>
-        </div>
-      </fieldset>
-      <fieldset class="form-section" id="job-details">
-        <legend>Job Application Details</legend>
-
-        <!-- Row: Job Reference + Preferred Position -->
-        <div class="form-row">
-          <div class="form-group">
-            <label for="job-ref">Job Reference Number <span class="required">*</span></label>
-            <input type="text" id="job-ref" name="job_reference"
-              placeholder="e.g. AB123"
-              pattern="[A-Za-z0-9]{5}"
-              title="Exactly 5 alphanumeric characters (e.g. AB123)"
-              maxlength="5"
-              required
-              aria-required="true">
-          </div>
-
-          <div class="form-group">
-            <label for="position">Preferred Position <span class="required">*</span></label>
-            <select id="position" name="position" required aria-required="true">
-              <option value="" disabled selected>-- Select Position --</option>
-              <option value="president">President</option>
-              <option value="vice-president">Vice President</option>
-              <option value="manager">Manager</option>
-              <option value="developer">Developer</option>
-              <option value="designer">Designer</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Key Skills Checkboxes -->
-        <div class="form-group form-group-full">
-          <label>Key Skills <span class="required">*</span></label>
-          <div class="checkbox-group" role="group" aria-label="Select your key skills">
-            <label class="checkbox-label">
-              <input type="checkbox" name="skills[]" value="html-css"> HTML/CSS
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="skills[]" value="javascript"> JavaScript
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="skills[]" value="php"> PHP
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="skills[]" value="sql"> SQL/Database
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="skills[]" value="python"> Python
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="skills[]" value="project-management"> Project Management
-            </label>
-          </div>
-        </div>
-
-        <!-- Other Skills Textarea -->
-        <div class="form-group form-group-full">
-          <label for="other-skills">Other Skills &amp; Qualifications</label>
-          <textarea id="other-skills" name="other_skills"
-            rows="5"
-            placeholder="Describe any additional skills, certifications, or relevant experience..."
-            maxlength="500"
-            aria-describedby="other-skills-help"></textarea>
-          <small id="other-skills-help" class="form-help">Maximum 500 characters</small>
-        </div>
-      </fieldset>
-      <fieldset class="form-section" id="submit-section">
-        <legend>Review &amp; Submit</legend>
-
-        <!-- Acknowledgement of Country -->
-        <div class="acknowledgement">
-          <h3>Acknowledgement of Country</h3>
-          <p>We acknowledge the Traditional Owners of the land on which we work and live,
-            and pay our respects to Elders past, present and emerging.</p>
-        </div>
-
-        <!-- Terms and Conditions Checkbox -->
-        <div class="form-group form-group-full">
-          <label class="checkbox-label terms-label">
-            <input type="checkbox" id="terms" name="terms" required aria-required="true">
-            I confirm that all information provided is accurate and I agree to the
-            <a href="#" target="_blank">terms and conditions</a>. <span class="required">*</span>
-          </label>
-        </div>
-
-        <!-- Submit and Reset Buttons -->
-        <div class="form-buttons">
-          <button type="reset" class="btn btn-reset">Reset Form</button>
-          <button type="submit" class="btn btn-submit">Submit Application</button>
-        </div>
-      </fieldset>
-    </form>
+            <!-- Submit and Reset Buttons -->
+            <div class="form-buttons">
+              <button type="reset" class="btn btn-reset">Reset Form</button>
+              <button type="submit" class="btn btn-submit">Submit Application</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
   </main>
 
   <!-- ===== FOOTER ===== -->
   <footer>
+    <a class="footer-brand" href="index.html">T1<span>.</span> <span>Together as one.</span></a>
     <p>&copy; 2026 T1 Group. All rights reserved.</p>
+    <a href="#application">Back to application</a>
   </footer>
 </body>
 </html>
