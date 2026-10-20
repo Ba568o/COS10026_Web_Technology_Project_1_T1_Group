@@ -33,7 +33,7 @@ html {
 /* Small red label above headings, e.g. "YOUR APPLICATION" */
 .eyebrow {
   margin: 0;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -47,7 +47,7 @@ html {
 
 .optional {
   margin-left: 3px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400;
   color: var(--muted);
 }
@@ -76,7 +76,7 @@ html {
   padding: 6px 12px;
   background: var(--red);
   color: var(--white);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -91,7 +91,7 @@ html {
   max-width: 520px;
   margin: 0 0 32px;
   color: var(--muted);
-  font-size: 16px;
+  font-size: 18px;
 }
 
 /* Black "One team." card */
@@ -120,7 +120,7 @@ html {
 }
 
 .team-caption {
-  font-size: 13px;
+  font-size: 15px;
   color: #bdbdbd;
 }
 
@@ -179,7 +179,7 @@ html {
 
 .section-nav a {
   display: flex;
-  align-items: flex-start;            /* number lines up with the first line of text */
+  align-items: baseline;              /* number sits on the same baseline as the title */
   gap: 14px;
   padding: 16px 0;
   text-decoration: none;
@@ -191,28 +191,28 @@ html {
 
 .step-number {
   flex: 0 0 28px;                     /* same width for every number */
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.5;
   color: var(--red-text);
 }
 
 .step-text {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.5;
 }
 
 .section-nav small {
   display: block;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--muted);
 }
 
 .sidebar-help {
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted);
 }
 
@@ -236,7 +236,7 @@ html {
 .form-heading {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;           /* bottom edges line up */
   gap: 16px;
   padding: 28px 36px;
   border-bottom: 1px solid var(--line);
@@ -249,7 +249,7 @@ html {
 
 .required-note {
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
 }
 
@@ -273,6 +273,8 @@ html {
 }
 
 .form-section legend {
+  display: flex;
+  align-items: center;     /* number badge and title centred on one line */
   width: 100%;
   padding: 0;
   font-size: 18px;
@@ -281,22 +283,20 @@ html {
 
 /* Small red square with the section number */
 .section-number {
-  display: inline-block;
-  width: 30px;
+  flex: 0 0 30px;
   height: 30px;
-  margin-right: 10px;
+  margin-right: 12px;
   border-radius: 4px;
   background: var(--red);
   color: var(--white);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 30px;
   text-align: center;
-  vertical-align: middle;
 }
 
 .section-description {
   margin: 10px 0 24px;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted);
 }
 
@@ -329,7 +329,7 @@ html {
 .field-label {
   display: block;
   margin-bottom: 8px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
 }
 
@@ -345,7 +345,7 @@ html {
   background: var(--field);
   color: var(--ink);
   font: inherit;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .form-group textarea {
@@ -376,7 +376,7 @@ html {
 
 .form-help {
   margin-top: 6px;
-  font-size: 12px;
+  font-size: 14px;
   text-align: right;
   color: var(--muted);
 }
@@ -394,7 +394,7 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -422,7 +422,7 @@ input[type="checkbox"] {
   padding: 11px 14px;
   border: 1px solid var(--field-border);
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -449,12 +449,12 @@ input[type="checkbox"] {
 
 .acknowledgement h3 {
   margin: 0 0 6px;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .acknowledgement p {
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted);
 }
 
@@ -465,7 +465,7 @@ input[type="checkbox"] {
   gap: 10px;
   padding: 0;
   border: 0;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 400;
 }
 
@@ -496,7 +496,7 @@ input[type="checkbox"] {
   min-height: 46px;
   padding: 13px 26px;
   border-radius: 2px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   text-align: center;
   text-decoration: none;
@@ -588,7 +588,7 @@ input[type="checkbox"] {
   }
 
   .step-text {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
