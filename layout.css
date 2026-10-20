@@ -39,7 +39,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.6;
   color: var(--ink);
   background: var(--beige);
@@ -109,7 +109,7 @@ a {
 }
 
 .brand-logo {
-  height: 28px;
+  height: 30px;
   width: auto;
 }
 
@@ -125,6 +125,7 @@ a {
 
 .brand-text span {
   font-size: 12px;
+  letter-spacing: 0.5px;
 }
 
 /* Menu links: HOME  JOBS  APPLY  ABOUT */
@@ -139,7 +140,7 @@ a {
 .nav-links a {
   display: block;
   padding: 8px 0;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   text-decoration: none;
@@ -166,7 +167,7 @@ a {
   border-radius: 999px;      /* fully rounded = pill shape */
   background: var(--dark-grey);
   color: var(--white);
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
 }
 
@@ -175,11 +176,11 @@ a {
 }
 
 .btn-pill {
-  padding: 9px 18px;
+  padding: 10px 20px;
   border-radius: 999px;
   background: var(--red);
   color: var(--white);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   text-decoration: none;
