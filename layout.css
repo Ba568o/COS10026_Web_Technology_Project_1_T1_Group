@@ -26,12 +26,22 @@
   --muted: #5f5f5a;       /* secondary, softer text */
   --line: #dcdcd5;        /* thin borders */
   --dark-grey: #262626;   /* search box in the header */
+
+  /* Page width: content grows with the screen instead of staying in a narrow strip */
+  --page-max: 112rem;                      /* upper limit on very large screens */
+  --page-gutter: clamp(1.5rem, 5vw, 7.5rem); /* space left and right of the content */
 }
 
 
 /* --------------------------------------------------------------------------
    2. Base reset
    -------------------------------------------------------------------------- */
+
+/* Root text size follows the screen width: 16px on laptops, up to 24px on big monitors.
+   Every size in the site uses rem, so ALL text and spacing scale together. */
+html {
+  font-size: clamp(16px, 1vw, 24px);
+}
 * {
   box-sizing: border-box;   /* width includes padding and border */
 }
@@ -39,7 +49,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--ink);
   background: var(--beige);
@@ -51,8 +61,8 @@ a {
 
 /* Visible keyboard focus for links, buttons and form fields */
 :focus-visible {
-  outline: 3px solid var(--red);
-  outline-offset: 3px;
+  outline: 0.1875rem solid var(--red);
+  outline-offset: 0.1875rem;
 }
 
 /* Hides something visually but keeps it readable for screen readers */
@@ -69,15 +79,15 @@ a {
 .skip-link {
   position: absolute;
   top: -100px;
-  left: 20px;
+  left: 1.25rem;
   z-index: 10;
-  padding: 12px 20px;
+  padding: 0.75rem 1.25rem;
   background: var(--white);
   color: var(--red-text);
 }
 
 .skip-link:focus {
-  top: 10px;
+  top: 0.625rem;
 }
 
 
@@ -94,22 +104,22 @@ a {
   display: grid;
   grid-template-columns: 1fr auto 1fr;   /* 3 columns, the middle one sized by its content */
   align-items: center;
-  gap: 24px;
-  max-width: 1240px;
+  gap: 1.5rem;
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: 14px 40px;
+  padding: 0.875rem var(--page-gutter);
 }
 
 /* Logo + brand name */
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
   text-decoration: none;
 }
 
 .brand-logo {
-  height: 30px;
+  height: 1.875rem;
   width: auto;
 }
 
@@ -120,18 +130,18 @@ a {
 }
 
 .brand-text strong {
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .brand-text span {
-  font-size: 13px;
+  font-size: 0.8125rem;
   letter-spacing: 0.5px;
 }
 
 /* Menu links: HOME  JOBS  APPLY  ABOUT */
 .nav-links {
   display: flex;
-  gap: 24px;
+  gap: 1.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -139,8 +149,8 @@ a {
 
 .nav-links a {
   display: block;
-  padding: 8px 0;
-  font-size: 14px;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   text-decoration: none;
@@ -157,17 +167,17 @@ a {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
 }
 
 .nav-search input {
-  width: 170px;
-  padding: 9px 16px;
+  width: 10.625rem;
+  padding: 0.5625rem 1rem;
   border: 0;
   border-radius: 999px;      /* fully rounded = pill shape */
   background: var(--dark-grey);
   color: var(--white);
-  font-size: 13px;
+  font-size: 0.8125rem;
   text-transform: uppercase;
 }
 
@@ -176,11 +186,11 @@ a {
 }
 
 .btn-pill {
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
   border-radius: 999px;
   background: var(--red);
   color: var(--white);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 700;
   text-transform: uppercase;
   text-decoration: none;
@@ -204,29 +214,29 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
-  max-width: 1240px;
+  gap: 1.5rem;
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: 36px 40px 28px;
+  padding: 2.25rem var(--page-gutter) 1.75rem;
 }
 
 .footer-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
   text-decoration: none;
 }
 
 .footer-nav ul {
   display: flex;
-  gap: 24px;
+  gap: 1.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .footer-nav a {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   text-decoration: none;
@@ -237,11 +247,11 @@ a {
 }
 
 .footer-copy {
-  max-width: 1240px;
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: 18px 40px 28px;
+  padding: 1.125rem var(--page-gutter) 1.75rem;
   border-top: 1px solid #333333;
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: #a8a8a8;
 }
 
@@ -253,14 +263,14 @@ a {
   /* Stack the header: brand + actions on top, menu underneath */
   .navbar {
     grid-template-columns: 1fr auto;
-    padding: 14px 24px;
+    padding: 0.875rem 1.5rem;
   }
 
   .nav-links {
     grid-column: 1 / -1;     /* menu takes the full width on its own row */
     grid-row: 2;
     justify-content: space-between;
-    padding-top: 6px;
+    padding-top: 0.375rem;
     border-top: 1px solid #333333;
   }
 
@@ -270,8 +280,8 @@ a {
 
   .footer-inner,
   .footer-copy {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
@@ -283,6 +293,6 @@ a {
 
   .footer-nav ul {
     flex-wrap: wrap;
-    gap: 12px 20px;
+    gap: 0.75rem 1.25rem;
   }
 }
