@@ -1,252 +1,611 @@
-/* T1 Group — application page
+/* ==========================================================================
+   apply.css - styles ONLY for apply.html (job application page)
    Author: Sy Tho Nguyen (105705546)
-   HTML and CSS only. Theme switching uses the navigation checkbox. */
 
-/* Palette and foundation */
+   Colours, header and footer come from layout.css (loaded first).
+   This file uses the same colour variables, so the page matches the design plan:
+     - beige hero area  ->  white application area
+     - black text, red accents
+   HTML and CSS only - no JavaScript.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   0. Page-only variables and small helpers
+   -------------------------------------------------------------------------- */
 :root {
-  color-scheme: light;
-  --page: #f5f6f8;
-  --surface: #ffffff;
-  --ink: #182944;
-  --muted: #657185;
-  --line: #e0e5ec;
-  --accent: #2459d3;
-  --accent-soft: #edf2ff;
-  --input: #fbfcfe;
-  --danger: #b73846;
-  --note: #f4f6fa;
+  --field: #f7f7f4;        /* background of input fields */
+  --red-soft: #fdecee;     /* very light red (selected checkbox) */
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 28px; }
-body {
-  margin: 0;
-  background: var(--page);
-  color: var(--ink);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
+html {
+  scroll-behavior: smooth;   /* smooth jump when clicking the section guide */
 }
-button, input, select, textarea { font: inherit; }
-a { color: inherit; }
-button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
-button, input[type="checkbox"], input[type="radio"] { cursor: pointer; }
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
-.visually-hidden, .dark-checkbox {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-.skip-link {
-  position: absolute;
-  left: 20px;
-  top: -100px;
-  z-index: 10;
-  padding: 12px 20px;
-  background: var(--surface);
-  color: var(--accent);
-}
-.skip-link:focus { top: 10px; }
 
-/* Navigation */
-.site-header { background: var(--surface); border-bottom: 1px solid var(--line); }
-.navbar {
+/* Centres content and stops it from getting too wide */
+.container {
   max-width: 1240px;
-  min-height: 88px;
-  margin: auto;
-  padding: 16px 40px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Small red label above headings, e.g. "YOUR APPLICATION" */
+.eyebrow {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--red-text);
+}
+
+/* Required star and optional hint */
+.required {
+  color: var(--red-text);
+}
+
+.optional {
+  margin-left: 3px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+
+/* --------------------------------------------------------------------------
+   1. Hero (beige area at the top)
+   -------------------------------------------------------------------------- */
+.hero {
+  padding: 64px 0 72px;
+  background: var(--beige);
+}
+
+/* Red label with white text, same as "DIGITAL HEALTHCARE" in the plan */
+.tag {
+  display: inline-block;
+  margin: 0 0 16px;
+  padding: 5px 10px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0 0 18px;
+  font-size: clamp(40px, 6vw, 56px);   /* grows with screen width, between 40px and 56px */
+  line-height: 1.1;
+}
+
+.hero-text {
+  max-width: 560px;
+  margin: 0 0 28px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. Application area (white background)
+      Two columns: sidebar guide (left) + form card (right)
+   -------------------------------------------------------------------------- */
+.application-section {
+  padding: 60px 0 80px;
+  background: var(--white);
+}
+
+.application-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;   /* fixed sidebar, form takes the rest */
+  align-items: start;
+  gap: 48px;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. Sidebar guide
+   -------------------------------------------------------------------------- */
+.sidebar-content {
+  position: sticky;      /* stays visible while scrolling the long form */
+  top: 24px;
+}
+
+.application-sidebar h2 {
+  margin: 10px 0;
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+.sidebar-description {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Numbered list of links: 01 Personal information, 02 Your address ... */
+.section-nav {
+  margin: 24px 0 28px;
+}
+
+.section-nav ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.section-nav li + li {
+  border-top: 1px solid var(--line);
+}
+
+.section-nav a {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 12px;
+  padding: 14px 0;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
 }
-.logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
-.logo-mark { font-size: 36px; line-height: 1; font-weight: 800; letter-spacing: -3px; }
-.logo-mark > span, .footer-brand > span:first-child { color: var(--accent); }
-.logo-name { padding-left: 11px; border-left: 1px solid var(--line); font-size: 9px; line-height: 1.5; font-weight: 700; letter-spacing: 1.6px; }
-.nav-links { display: flex; list-style: none; gap: 30px; margin: 0 0 0 auto; padding: 0; }
-.nav-links a { position: relative; display: block; padding: 10px 0; text-decoration: none; font-size: 13px; font-weight: 600; color: var(--muted); }
-.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent); }
-.nav-links a[aria-current="page"]::after { content: ""; position: absolute; height: 2px; background: var(--accent); left: 0; right: 0; bottom: 1px; }
-.nav-search { display: flex; width: 170px; border: 1px solid var(--line); border-radius: 6px; background: var(--input); }
-.nav-search input { width: 100%; min-width: 0; border: 0; background: transparent; padding: 9px 0 9px 12px; color: var(--ink); font-size: 12px; }
-.nav-search button { border: 0; background: transparent; color: var(--accent); padding: 8px 12px; font-size: 12px; font-weight: 600; }
-.theme-control { position: relative; }
-.darkmode-toggle { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; cursor: pointer; }
-.theme-icon { font-size: 22px; line-height: 1; }
-.dark-checkbox:focus-visible + label { outline: 3px solid var(--accent); outline-offset: 4px; }
-.darkmode-toggle:hover { background: var(--accent-soft); }
 
-/* Introduction */
-.apply-container { max-width: 1240px; margin: auto; padding: 0 40px 80px; }
-.page-intro { padding: 59px 0 40px; border-bottom: 1px solid var(--line); margin-bottom: 44px; }
-.eyebrow { margin: 0; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--accent); }
-.page-intro .eyebrow { display: flex; align-items: center; gap: 9px; }
-.status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-.apply-title { margin: 19px 0 20px; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(44px, 5.5vw, 70px); font-weight: 400; letter-spacing: -2.8px; line-height: 1.08; }
-.apply-title em { color: var(--accent); font-weight: 400; }
-.intro-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
-.apply-subtitle { margin: 0; font-size: 15px; line-height: 1.8; color: var(--muted); }
-.text-link { display: inline-flex; gap: 22px; align-items: center; color: var(--accent); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 7px; white-space: nowrap; }
+.section-nav a:hover {
+  color: var(--red-text);
+}
 
-/* Section guide */
-.application-layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); align-items: start; gap: 50px; }
-.sidebar-content { position: sticky; top: 28px; }
-.application-sidebar { align-self: stretch; }
-.application-sidebar h2 { font-size: 22px; line-height: 1.4; letter-spacing: -.5px; margin: 13px 0; }
-.sidebar-description { color: var(--muted); font-size: 13px; margin: 0; }
-.section-nav { margin: 27px 0 30px; }
-.section-nav ol { padding: 0; margin: 0; list-style: none; }
-.section-nav li + li { border-top: 1px solid var(--line); }
-.section-nav a { display: flex; gap: 12px; align-items: center; padding: 15px 0; text-decoration: none; }
-.section-nav a > span { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
-.section-nav a > div { font-size: 12px; font-weight: 600; }
-.section-nav small { display: block; color: var(--muted); font-size: 11px; font-weight: 400; margin-top: 2px; }
-.section-nav a:hover { color: var(--accent); }
-.team-note { position: relative; overflow: hidden; padding: 25px; background: #172b4d; border-radius: 10px; color: #fff; }
-.team-note::after { content: ""; position: absolute; width: 170px; height: 170px; border: 1px solid #385076; border-radius: 50%; top: -85px; right: -65px; }
-.team-symbol { color: #b9ccff; font-size: 45px; line-height: 1; }
-.team-note p { font-size: 20px; line-height: 1.4; margin: 20px 0 10px; }
-.team-note strong { font-weight: 400; color: #b9ccff; }
-.team-caption { color: #c3ccdc; font-size: 11px; }
-.sidebar-help { margin: 23px 0 0; color: var(--muted); font-size: 12px; line-height: 1.9; }
-.sidebar-help a { color: var(--accent); text-underline-offset: 4px; }
+.section-nav a > span {
+  font-size: 11px;
+  color: var(--red-text);
+}
 
-/* Application card and fields */
-.application-card { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 8px 28px #18294404; }
-.form-heading { padding: 30px 34px 26px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-.form-heading .eyebrow { font-size: 9px; letter-spacing: 1.6px; }
-.form-heading h2 { margin: 6px 0 0; font-size: 23px; letter-spacing: -.6px; }
-.required-note { font-size: 11px; margin: 0; color: var(--muted); white-space: nowrap; }
-.required { color: var(--danger); }
-.apply-form { padding: 30px 34px 10px; }
-.form-section { margin: 0 0 30px; padding: 0 0 26px; min-width: 0; border: 0; border-bottom: 1px solid var(--line); scroll-margin-top: 28px; }
-.form-section:last-child { border-bottom: 0; margin-bottom: 0; }
-.form-section legend { width: 100%; padding: 0; font-size: 16px; font-weight: 700; letter-spacing: -.25px; }
-.section-number { display: inline-grid; place-items: center; width: 28px; height: 28px; background: var(--accent-soft); color: var(--accent); border-radius: 7px; font-size: 10px; font-weight: 700; margin-right: 8px; vertical-align: middle; }
-.section-description { margin: 10px 0 23px; font-size: 12px; color: var(--muted); }
-.form-row { display: flex; gap: 20px; }
-.form-group { display: flex; flex: 1; flex-direction: column; min-width: 0; margin-bottom: 18px; }
-.form-section > .form-row:last-child .form-group, .form-section > .form-group:last-child { margin-bottom: 0; }
-.form-group > label, .field-label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
-.form-group .required { margin-left: 2px; }
-.optional { color: var(--muted); font-size: 11px; font-weight: 400; margin-left: 3px; }
-.form-group input:not([type="radio"]):not([type="checkbox"]), .form-group select, .form-group textarea {
-  width: 100%;
+.section-nav small {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* Black "One team." box */
+.team-note {
+  padding: 24px;
+  border-radius: 6px;
+  background: var(--black);
+  color: var(--white);
+}
+
+.team-symbol {
+  font-size: 36px;
+  line-height: 1;
+  color: var(--red);
+}
+
+.team-note p {
+  margin: 16px 0 8px;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.team-note strong {
+  color: var(--red);
+}
+
+.team-caption {
+  font-size: 11px;
+  color: #bdbdbd;
+}
+
+.sidebar-help {
+  margin: 20px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sidebar-help a {
+  color: var(--red-text);
+}
+
+
+/* --------------------------------------------------------------------------
+   4. Form card
+   -------------------------------------------------------------------------- */
+.application-card {
+  min-width: 0;                       /* lets the card shrink inside the grid */
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--white);
+}
+
+/* Card title: "Job application" + "* Required fields" */
+.form-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--line);
+}
+
+.form-heading h2 {
+  margin: 6px 0 0;
+  font-size: 24px;
+}
+
+.required-note {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.apply-form {
+  padding: 28px 32px 8px;
+}
+
+/* Each <fieldset> is one numbered section of the form */
+.form-section {
   min-width: 0;
+  margin: 0 0 28px;
+  padding: 0 0 28px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 24px;           /* keeps a gap when jumping from the sidebar */
+}
+
+.form-section:last-child {
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+
+.form-section legend {
+  width: 100%;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Small red square with the section number */
+.section-number {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  border-radius: 4px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 11px;
+  line-height: 28px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.section-description {
+  margin: 10px 0 22px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+
+/* --------------------------------------------------------------------------
+   5. Form fields
+   -------------------------------------------------------------------------- */
+
+/* A row puts 2-3 fields side by side */
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  margin-bottom: 18px;
+}
+
+/* No extra space under the very last field of a section */
+.form-section > .form-row:last-child .form-group,
+.form-section > .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group > label,
+.field-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Text boxes, dropdowns and textarea share the same look */
+.form-group input:not([type="radio"]):not([type="checkbox"]),
+.form-group select,
+.form-group textarea {
+  width: 100%;
   min-height: 46px;
   padding: 11px 13px;
   border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--input);
+  border-radius: 4px;
+  background: var(--field);
   color: var(--ink);
+  font: inherit;
   font-size: 13px;
-  transition: border-color .15s ease, box-shadow .15s ease;
-}
-::placeholder { color: var(--muted); opacity: 1; }
-.form-group select:has(option:checked[value=""]) { color: var(--muted); }
-.form-group textarea { min-height: 125px; resize: vertical; line-height: 1.7; }
-.form-group input:not([type="radio"]):not([type="checkbox"]):focus, .form-group select:focus, .form-group textarea:focus { outline: 0; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-.form-group input:user-invalid, .form-group select:user-invalid { border-color: var(--danger); }
-.form-help { color: var(--muted); font-size: 11px; margin-top: 7px; text-align: right; }
-.radio-group { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; min-height: 46px; }
-.radio-label { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; cursor: pointer; }
-input[type="radio"], input[type="checkbox"] { margin: 0; accent-color: var(--accent); width: 16px; height: 16px; flex-shrink: 0; }
-.checkbox-group { display: flex; flex-wrap: wrap; gap: 9px; }
-.checkbox-label { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; cursor: pointer; }
-.checkbox-group .checkbox-label:hover { border-color: var(--accent); }
-.checkbox-group .checkbox-label:has(input:checked) { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-.acknowledgement { background: var(--note); border-left: 2px solid var(--accent); padding: 17px 20px; margin-bottom: 23px; border-radius: 0 6px 6px 0; }
-.acknowledgement h3 { font-size: 12px; margin: 0 0 7px; }
-.acknowledgement p { color: var(--muted); font-size: 12px; line-height: 1.8; margin: 0; }
-.form-group .terms-label { display: flex; align-items: flex-start; gap: 10px; padding: 0; border: 0; font-size: 12px; font-weight: 400; line-height: 1.8; }
-.terms-label input { margin-top: 3px; }
-.terms-label a { color: var(--accent); text-underline-offset: 3px; }
-.form-buttons { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 26px; padding-top: 23px; border-top: 1px solid var(--line); }
-.btn { min-height: 46px; border-radius: 6px; padding: 12px 20px; font-size: 12px; font-weight: 600; transition: background-color .15s ease; }
-.btn-reset { border: 1px solid var(--line); color: var(--muted); background: var(--surface); }
-.btn-reset:hover { background: var(--note); color: var(--ink); }
-.btn-submit { display: inline-flex; align-items: center; justify-content: center; gap: 24px; background: var(--accent); color: var(--surface); border: 1px solid var(--accent); }
-.btn-submit:hover { background: var(--ink); border-color: var(--ink); }
-
-/* Footer stays in the document flow, clear of the form controls. */
-footer { max-width: 1160px; margin: auto; padding: 26px 0 32px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 20px; color: var(--muted); font-size: 11px; }
-footer p { margin: 0; }
-footer > a { text-decoration: none; }
-footer > a:hover { color: var(--accent); }
-.footer-brand { font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing: -1px; }
-.footer-brand > span:last-child { font-size: 11px; font-weight: 400; letter-spacing: 0; margin-left: 12px; color: var(--muted); }
-
-/* CSS-only dark mode */
-body:has(#dark-toggle:checked) {
-  color-scheme: dark;
-  --page: #101927;
-  --surface: #172235;
-  --ink: #e5ebf7;
-  --muted: #a9b6cb;
-  --line: #324056;
-  --accent: #9cbaff;
-  --accent-soft: #233656;
-  --input: #141e30;
-  --danger: #ff9fa9;
-  --note: #1d2c43;
 }
 
-/* Responsive layouts */
-@media (max-width: 1100px) {
-  .navbar { gap: 22px; }
-  .nav-links { gap: 24px; }
-  .nav-search { display: none; }
-  .application-layout { grid-template-columns: 220px minmax(0, 1fr); gap: 30px; }
-  .form-heading { padding: 26px; }
-  .apply-form { padding: 26px 26px 8px; }
-  footer { margin: 0 40px; }
+.form-group textarea {
+  min-height: 125px;
+  resize: vertical;
 }
-@media (max-width: 800px) {
-  .application-layout { grid-template-columns: minmax(0, 1fr); gap: 25px; }
-  .sidebar-content { position: static; }
-  .application-sidebar h2, .sidebar-description, .team-note, .sidebar-help { display: none; }
-  .section-nav { margin: 12px 0 0; }
-  .section-nav ol { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
-  .section-nav li + li { border-top: 0; }
-  .section-nav a { flex-direction: column; align-items: flex-start; gap: 5px; padding: 0; }
-  .section-nav small { display: none; }
-  .section-nav a > span { color: var(--accent); }
-  .page-intro { margin-bottom: 26px; }
-  footer { flex-wrap: wrap; }
+
+::placeholder {
+  color: var(--muted);
+  opacity: 1;
 }
-@media (max-width: 520px) {
-  .navbar { padding: 16px 20px; gap: 16px; flex-wrap: wrap; min-height: 0; }
-  .logo { margin-right: auto; }
-  .nav-links { order: 3; width: 100%; justify-content: space-between; gap: 15px; border-top: 1px solid var(--line); padding-top: 6px; }
-  .nav-links a { font-size: 12px; }
-  .apply-container { padding: 0 20px 42px; }
-  .page-intro { padding: 35px 0 28px; }
-  .apply-title { font-size: 48px; letter-spacing: -2px; }
-  .apply-subtitle { font-size: 13px; }
-  .intro-bottom { flex-direction: column; align-items: flex-start; gap: 18px; }
-  .text-link { font-size: 12px; gap: 15px; }
-  .section-nav a > div { font-size: 10px; }
-  .section-nav ol { gap: 12px; }
-  .form-heading { padding: 22px 18px; align-items: flex-start; flex-direction: column; gap: 8px; }
-  .form-heading h2 { font-size: 22px; }
-  .apply-form { padding: 25px 18px 0; }
-  .form-row { flex-direction: column; gap: 0; }
-  .form-section > .form-row:last-child .form-group { margin-bottom: 18px; }
-  .form-section > .form-row:last-child .form-group:last-child { margin-bottom: 0; }
-  .form-section legend { font-size: 15px; }
-  .section-description { font-size: 12px; }
-  .form-group input:not([type="radio"]):not([type="checkbox"]), .form-group select, .form-group textarea { font-size: 16px; }
-  .checkbox-label { font-size: 11px; padding: 10px; }
-  .acknowledgement { padding: 15px; }
-  .form-buttons { flex-direction: column-reverse; gap: 10px; }
-  .btn { width: 100%; }
-  footer { margin: 0 20px; flex-direction: column; align-items: flex-start; gap: 12px; padding: 22px 0; }
+
+/* Focused field: black border */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: 0;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px var(--beige);
 }
+
+/* Field that was filled in wrongly: red border */
+.form-group input:user-invalid,
+.form-group select:user-invalid {
+  border-color: var(--red-text);
+}
+
+.form-help {
+  margin-top: 6px;
+  font-size: 11px;
+  text-align: right;
+  color: var(--muted);
+}
+
+/* Radio buttons (Gender) */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  min-height: 46px;
+}
+
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: var(--red);      /* red tick / dot */
+  cursor: pointer;
+}
+
+/* Checkboxes (Key Skills) look like small clickable chips */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.checkbox-group .checkbox-label:hover {
+  border-color: var(--red);
+}
+
+/* A ticked chip turns light red */
+.checkbox-group .checkbox-label:has(input:checked) {
+  border-color: var(--red);
+  background: var(--red-soft);
+}
+
+
+/* --------------------------------------------------------------------------
+   6. Review and submit section
+   -------------------------------------------------------------------------- */
+.acknowledgement {
+  margin-bottom: 22px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--red);
+  background: var(--beige);
+}
+
+.acknowledgement h3 {
+  margin: 0 0 6px;
+  font-size: 12px;
+}
+
+.acknowledgement p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Terms checkbox: plain text, not a chip */
+.form-group .terms-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.terms-label input {
+  margin-top: 3px;
+}
+
+.terms-label a {
+  color: var(--red-text);
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+
+/* --------------------------------------------------------------------------
+   7. Buttons (same style as the red buttons in the plan)
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  min-height: 44px;
+  padding: 12px 22px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-submit {
+  border: 1px solid var(--red);
+  background: var(--red);
+  color: var(--white);
+}
+
+.btn-submit:hover {
+  border-color: var(--black);
+  background: var(--black);
+}
+
+.btn-reset {
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--muted);
+}
+
+.btn-reset:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+
+/* --------------------------------------------------------------------------
+   8. Responsive (tablet and phone)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .container {
+    padding: 0 24px;
+  }
+
+  .application-layout {
+    grid-template-columns: 1fr;       /* stack: guide on top, form below */
+    gap: 28px;
+  }
+
+  .sidebar-content {
+    position: static;
+  }
+
+  /* On small screens keep only the numbered links, in one row */
+  .application-sidebar .eyebrow,
+  .application-sidebar h2,
+  .sidebar-description,
+  .team-note,
+  .sidebar-help,
+  .section-nav small {
+    display: none;
+  }
+
+  .section-nav {
+    margin: 0;
+  }
+
+  .section-nav ol {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .section-nav li + li {
+    border-top: 0;
+  }
+
+  .section-nav a {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 0;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 40px 0 48px;
+  }
+
+  .application-section {
+    padding: 36px 0 48px;
+  }
+
+  .form-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 22px 18px;
+  }
+
+  .apply-form {
+    padding: 24px 18px 0;
+  }
+
+  .form-row {
+    flex-direction: column;           /* fields stack vertically */
+    gap: 0;
+  }
+
+  /* Re-add the gap between stacked fields */
+  .form-section > .form-row:last-child .form-group:not(:last-child) {
+    margin-bottom: 18px;
+  }
+
+  /* 16px stops iPhones from zooming in when a field is tapped */
+  .form-group input:not([type="radio"]):not([type="checkbox"]),
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px;
+  }
+
+  .form-buttons {
+    flex-direction: column-reverse;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Respect users who prefer less motion */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { transition: none !important; }
+  html {
+    scroll-behavior: auto;
+  }
 }
