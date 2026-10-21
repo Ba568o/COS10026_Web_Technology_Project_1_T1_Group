@@ -1,0 +1,64 @@
+{
+	"files": [
+		{
+			"path": "jobs.html",
+			"bookmarks": [
+				{
+					"line": 58,
+					"column": 0,
+					"label": "Job card 2"
+				},
+				{
+					"line": 70,
+					"column": 0,
+					"label": "Card container"
+				}
+			]
+		},
+		{
+			"path": "style.css",
+			"bookmarks": [
+				{
+					"line": 32,
+					"column": 0,
+					"label": "Dark mode toggle"
+				},
+				{
+					"line": 47,
+					"column": 0,
+					"label": "Dark GUI"
+				},
+				{
+					"line": 90,
+					"column": 0,
+					"label": "Main"
+				},
+				{
+					"line": 133,
+					"column": 0,
+					"label": "Card Container"
+				},
+				{
+					"line": 141,
+					"column": 0,
+					"label": "Job card"
+				},
+				{
+					"line": 206,
+					"column": 0,
+					"label": "Job details *"
+				},
+				{
+					"line": 216,
+					"column": 0,
+					"label": "Filter"
+				},
+				{
+					"line": 244,
+					"column": 0,
+					"label": "Footer"
+				}
+			]
+		}
+	]
+}
