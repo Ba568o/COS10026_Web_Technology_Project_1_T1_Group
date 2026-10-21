@@ -25,15 +25,15 @@ html {
 
 /* Centres content and stops it from getting too wide */
 .container {
-  max-width: 1240px;
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 var(--page-gutter);
 }
 
 /* Small red label above headings, e.g. "YOUR APPLICATION" */
 .eyebrow {
   margin: 0;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -46,8 +46,8 @@ html {
 }
 
 .optional {
-  margin-left: 3px;
-  font-size: 12px;
+  margin-left: 0.1875rem;
+  font-size: 0.75rem;
   font-weight: 400;
   color: var(--muted);
 }
@@ -57,60 +57,60 @@ html {
    1. Hero (beige area at the top)
    -------------------------------------------------------------------------- */
 .hero {
-  padding: 72px 0 80px;
+  padding: 4.5rem 0 5rem;
   background: var(--beige);
 }
 
 /* Two columns: text on the left, black team card on the right */
 .hero-layout {
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: 1fr 21.25rem;
   align-items: center;
-  gap: 48px;
+  gap: 3rem;
 }
 
 /* Red label with white text, same as "DIGITAL HEALTHCARE" in the plan */
 .tag {
   display: inline-block;
-  margin: 0 0 18px;
-  padding: 6px 12px;
+  margin: 0 0 1.125rem;
+  padding: 0.375rem 0.75rem;
   background: var(--red);
   color: var(--white);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
 }
 
 .hero h1 {
-  margin: 0 0 20px;
-  font-size: clamp(42px, 6vw, 64px);   /* grows with screen width, between 42px and 64px */
+  margin: 0 0 1.25rem;
+  font-size: 4rem;
   line-height: 1.08;
 }
 
 .hero-text {
-  max-width: 520px;
-  margin: 0 0 32px;
+  max-width: 32.5rem;
+  margin: 0 0 2rem;
   color: var(--muted);
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 /* Black "One team." card */
 .team-note {
-  padding: 36px;
-  border-radius: 6px;
+  padding: 2.25rem;
+  border-radius: 0.375rem;
   background: var(--black);
   color: var(--white);
 }
 
 .team-logo {
   display: block;
-  height: 40px;
+  height: 2.5rem;
   width: auto;
 }
 
 .team-note p {
-  margin: 28px 0 10px;
-  font-size: 28px;
+  margin: 1.75rem 0 0.625rem;
+  font-size: 1.75rem;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -120,7 +120,7 @@ html {
 }
 
 .team-caption {
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: #bdbdbd;
 }
 
@@ -130,15 +130,15 @@ html {
       Two columns: sidebar guide (left) + form card (right)
    -------------------------------------------------------------------------- */
 .application-section {
-  padding: 64px 0 96px;
+  padding: 4rem 0 6rem;
   background: var(--white);
 }
 
 .application-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;   /* fixed sidebar, form takes the rest */
+  grid-template-columns: 17.5rem 1fr;   /* fixed sidebar, form takes the rest */
   align-items: start;
-  gap: 56px;
+  gap: 3.5rem;
 }
 
 
@@ -147,13 +147,13 @@ html {
    -------------------------------------------------------------------------- */
 .sidebar-content {
   position: sticky;      /* stays visible while scrolling the long form */
-  top: 24px;
-  padding-top: 28px;     /* lines up with the heading inside the form card */
+  top: 1.5rem;
+  padding-top: 1.75rem;     /* lines up with the heading inside the form card */
 }
 
 .application-sidebar h2 {
-  margin: 10px 0 12px;
-  font-size: 24px;
+  margin: 0.625rem 0 0.75rem;
+  font-size: 1.5rem;
   line-height: 1.25;
 }
 
@@ -164,7 +164,7 @@ html {
 
 /* Numbered list of links: 01 Personal information, 02 Your address ... */
 .section-nav {
-  margin: 28px 0;
+  margin: 1.75rem 0;
 }
 
 .section-nav ol {
@@ -180,8 +180,8 @@ html {
 .section-nav a {
   display: flex;
   align-items: baseline;              /* number sits on the same baseline as the title */
-  gap: 14px;
-  padding: 16px 0;
+  gap: 0.875rem;
+  padding: 1rem 0;
   text-decoration: none;
 }
 
@@ -190,29 +190,29 @@ html {
 }
 
 .step-number {
-  flex: 0 0 28px;                     /* same width for every number */
-  font-size: 14px;
+  flex: 0 0 1.75rem;                     /* same width for every number */
+  font-size: 0.875rem;
   font-weight: 700;
   line-height: 1.5;
   color: var(--red-text);
 }
 
 .step-text {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.5;
 }
 
 .section-nav small {
   display: block;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   color: var(--muted);
 }
 
 .sidebar-help {
   margin: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: var(--muted);
 }
 
@@ -227,7 +227,7 @@ html {
 .application-card {
   min-width: 0;                       /* lets the card shrink inside the grid */
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 0.375rem;
   background: var(--white);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
 }
@@ -237,34 +237,34 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;           /* bottom edges line up */
-  gap: 16px;
-  padding: 28px 36px;
+  gap: 1rem;
+  padding: 1.75rem 2.25rem;
   border-bottom: 1px solid var(--line);
 }
 
 .form-heading h2 {
-  margin: 6px 0 0;
-  font-size: 26px;
+  margin: 0.375rem 0 0;
+  font-size: 1.625rem;
 }
 
 .required-note {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--muted);
 }
 
 .apply-form {
-  padding: 32px 36px 12px;
+  padding: 2rem 2.25rem 0.75rem;
 }
 
 /* Each <fieldset> is one numbered section of the form */
 .form-section {
   min-width: 0;
-  margin: 0 0 32px;
-  padding: 0 0 32px;
+  margin: 0 0 2rem;
+  padding: 0 0 2rem;
   border: 0;
   border-bottom: 1px solid var(--line);
-  scroll-margin-top: 24px;           /* keeps a gap when jumping from the sidebar */
+  scroll-margin-top: 1.5rem;           /* keeps a gap when jumping from the sidebar */
 }
 
 .form-section:last-child {
@@ -277,26 +277,26 @@ html {
   align-items: center;     /* number badge and title centred on one line */
   width: 100%;
   padding: 0;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
 }
 
 /* Small red square with the section number */
 .section-number {
-  flex: 0 0 30px;
-  height: 30px;
-  margin-right: 12px;
-  border-radius: 4px;
+  flex: 0 0 1.875rem;
+  height: 1.875rem;
+  margin-right: 0.75rem;
+  border-radius: 0.25rem;
   background: var(--red);
   color: var(--white);
-  font-size: 14px;
-  line-height: 30px;
+  font-size: 0.875rem;
+  line-height: 1.875rem;
   text-align: center;
 }
 
 .section-description {
-  margin: 10px 0 24px;
-  font-size: 15px;
+  margin: 0.625rem 0 1.5rem;
+  font-size: 0.9375rem;
   color: var(--muted);
 }
 
@@ -308,7 +308,7 @@ html {
 /* A row puts 2-3 fields side by side */
 .form-row {
   display: flex;
-  gap: 24px;
+  gap: 1.5rem;
 }
 
 .form-group {
@@ -316,7 +316,7 @@ html {
   flex: 1;
   flex-direction: column;
   min-width: 0;
-  margin-bottom: 22px;
+  margin-bottom: 1.375rem;
 }
 
 /* No extra space under the very last field of a section */
@@ -328,8 +328,8 @@ html {
 .form-group > label,
 .field-label {
   display: block;
-  margin-bottom: 8px;
-  font-size: 15px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9375rem;
   font-weight: 700;
 }
 
@@ -338,18 +338,18 @@ html {
 .form-group select,
 .form-group textarea {
   width: 100%;
-  min-height: 48px;
-  padding: 12px 14px;
+  min-height: 3rem;
+  padding: 0.75rem 0.875rem;
   border: 1px solid var(--field-border);
-  border-radius: 4px;
+  border-radius: 0.25rem;
   background: var(--field);
   color: var(--ink);
   font: inherit;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .form-group textarea {
-  min-height: 125px;
+  min-height: 7.8125rem;
   resize: vertical;
 }
 
@@ -375,8 +375,8 @@ html {
 }
 
 .form-help {
-  margin-top: 6px;
-  font-size: 14px;
+  margin-top: 0.375rem;
+  font-size: 0.875rem;
   text-align: right;
   color: var(--muted);
 }
@@ -386,22 +386,22 @@ html {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 20px;
-  min-height: 48px;      /* same height as a text box, so the row lines up */
+  gap: 1.25rem;
+  min-height: 3rem;      /* same height as a text box, so the row lines up */
 }
 
 .radio-label {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 16px;
+  gap: 0.5rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
 input[type="radio"],
 input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
+  width: 1rem;
+  height: 1rem;
   margin: 0;
   flex-shrink: 0;
   accent-color: var(--red);      /* red tick / dot */
@@ -412,17 +412,17 @@ input[type="checkbox"] {
 .checkbox-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
+  gap: 0.5625rem;
 }
 
 .checkbox-label {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 11px 14px;
+  gap: 0.5rem;
+  padding: 0.6875rem 0.875rem;
   border: 1px solid var(--field-border);
-  border-radius: 4px;
-  font-size: 15px;
+  border-radius: 0.25rem;
+  font-size: 0.9375rem;
   cursor: pointer;
 }
 
@@ -441,20 +441,20 @@ input[type="checkbox"] {
    6. Review and submit section
    -------------------------------------------------------------------------- */
 .acknowledgement {
-  margin-bottom: 24px;
-  padding: 18px 22px;
-  border-left: 3px solid var(--red);
+  margin-bottom: 1.5rem;
+  padding: 1.125rem 1.375rem;
+  border-left: 0.1875rem solid var(--red);
   background: var(--beige);
 }
 
 .acknowledgement h3 {
-  margin: 0 0 6px;
-  font-size: 15px;
+  margin: 0 0 0.375rem;
+  font-size: 0.9375rem;
 }
 
 .acknowledgement p {
   margin: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: var(--muted);
 }
 
@@ -462,15 +462,15 @@ input[type="checkbox"] {
 .form-group .terms-label {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0.625rem;
   padding: 0;
   border: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 400;
 }
 
 .terms-label input {
-  margin-top: 3px;
+  margin-top: 0.1875rem;
 }
 
 .terms-label a {
@@ -481,9 +481,9 @@ input[type="checkbox"] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  margin-top: 26px;
-  padding-top: 22px;
+  gap: 1rem;
+  margin-top: 1.625rem;
+  padding-top: 1.375rem;
   border-top: 1px solid var(--line);
 }
 
@@ -493,10 +493,10 @@ input[type="checkbox"] {
    -------------------------------------------------------------------------- */
 .btn {
   display: inline-block;
-  min-height: 46px;
-  padding: 13px 26px;
-  border-radius: 2px;
-  font-size: 15px;
+  min-height: 2.875rem;
+  padding: 0.8125rem 1.625rem;
+  border-radius: 0.125rem;
+  font-size: 0.9375rem;
   font-weight: 700;
   text-align: center;
   text-decoration: none;
@@ -532,21 +532,25 @@ input[type="checkbox"] {
    -------------------------------------------------------------------------- */
 @media (max-width: 900px) {
   .container {
-    padding: 0 24px;
+    padding: 0 1.5rem;
   }
 
   .application-layout {
     grid-template-columns: 1fr;       /* stack: guide on top, form below */
-    gap: 28px;
+    gap: 1.75rem;
+  }
+
+  .hero h1 {
+    font-size: 3.25rem;
   }
 
   .hero-layout {
     grid-template-columns: 1fr;       /* team card goes under the text */
-    gap: 32px;
+    gap: 2rem;
   }
 
   .team-note {
-    max-width: 340px;
+    max-width: 21.25rem;
   }
 
   .sidebar-content {
@@ -570,7 +574,7 @@ input[type="checkbox"] {
   .section-nav ol {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 0.625rem;
   }
 
   .section-nav li + li {
@@ -579,7 +583,7 @@ input[type="checkbox"] {
 
   .section-nav a {
     flex-direction: column;
-    gap: 4px;
+    gap: 0.25rem;
     padding: 0;
   }
 
@@ -588,32 +592,36 @@ input[type="checkbox"] {
   }
 
   .step-text {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 }
 
 @media (max-width: 600px) {
   .hero {
-    padding: 40px 0 48px;
+    padding: 2.5rem 0 3rem;
   }
 
   .team-note {
-    padding: 26px;
+    padding: 1.625rem;
+  }
+
+  .hero h1 {
+    font-size: 2.6rem;
   }
 
   .application-section {
-    padding: 36px 0 48px;
+    padding: 2.25rem 0 3rem;
   }
 
   .form-heading {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
-    padding: 22px 18px;
+    gap: 0.5rem;
+    padding: 1.375rem 1.125rem;
   }
 
   .apply-form {
-    padding: 24px 18px 4px;
+    padding: 1.5rem 1.125rem 0.25rem;
   }
 
   .form-row {
@@ -623,14 +631,14 @@ input[type="checkbox"] {
 
   /* Re-add the gap between stacked fields */
   .form-section > .form-row:last-child .form-group:not(:last-child) {
-    margin-bottom: 22px;
+    margin-bottom: 1.375rem;
   }
 
   /* 16px stops iPhones from zooming in when a field is tapped */
   .form-group input:not([type="radio"]):not([type="checkbox"]),
   .form-group select,
   .form-group textarea {
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   .form-buttons {
