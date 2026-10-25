@@ -10,7 +10,7 @@ body {
     background: linear-gradient(180deg, #EFF6FF 0%, #F0FDF4 100%);
 }
 
-header {
+/* header {
     display: flex;
     width: 100%;
     height: 10%;
@@ -112,7 +112,7 @@ header {
     to {
         opacity: 0.5;
     }
-}
+} */
 
 
 /* Toggle icon */

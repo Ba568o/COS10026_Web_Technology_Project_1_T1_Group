@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application - T1 Health &amp; Wellness</title>
+  <meta name="description"
+    content="Apply for a job position at T1 Health &amp; Wellness. Fill out the application form with your details.">
+  <link rel="icon" href="images/logo.png" type="image/png">
+
+  <!-- layout.css = shared header/footer/colours (same on every page) -->
+  <!-- apply.css  = styles only for this page -->
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="apply.css">
+</head>
+
+<body>
+
+  <!-- ===== HEADER (copied from templates/header.html) ===== -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+
+      <!-- Left: logo + brand name -->
+      <a href="index.html" class="brand" aria-label="T1 Health &amp; Wellness - home">
+        <img src="images/logo.png" alt="" class="brand-logo">
+        <span class="brand-text">
+          <strong>T1</strong>
+          <span>HEALTH &amp; WELLNESS</span>
+        </span>
+      </a>
+
+      <!-- Middle: main menu -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="jobs.html">Jobs</a></li>
+        <li><a href="apply.html" aria-current="page">Apply</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+
+      <!-- Right: search box + call-to-action button -->
+      <div class="nav-actions">
+        <form class="nav-search" action="https://duckduckgo.com" method="GET" role="search">
+          <label class="visually-hidden" for="site-search">Search</label>
+          <input type="search" id="site-search" name="q" placeholder="Search" required>
+          <input type="hidden" name="sites" value="jobs.html">
+        </form>
+        <a class="btn-pill" href="apply.html">Get started</a>
+      </div>
+
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ===== INTRO (beige hero area) ===== -->
+    <section class="hero" aria-labelledby="apply-heading">
+      <div class="container hero-layout">
+
+        <!-- Left: heading, short text and button -->
+        <div class="hero-content">
+          <p class="tag">YOUR FUTURE AT T1</p>
+          <h1 id="apply-heading">Great things start<br>with you.</h1>
+          <p class="hero-text">Bring your curiosity, your ideas, and your ambition. Let&rsquo;s take the next step, together.</p>
+          <a class="btn btn-submit" href="jobs.html">Explore open roles &rarr;</a>
+        </div>
+
+        <!-- Right: black team card -->
+        <div class="team-note">
+          <img src="images/logo.png" alt="" class="team-logo">
+          <p>Different strengths.<br><strong>One team.</strong></p>
+          <span class="team-caption">That&rsquo;s the T1 spirit.</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== APPLICATION (white area: guide on the left, form on the right) ===== -->
+    <section class="application-section">
+      <div class="container">
+        <div class="application-layout">
+          <aside class="application-sidebar" aria-label="Application guide">
+            <div class="sidebar-content">
+              <p class="eyebrow">YOUR APPLICATION</p>
+              <h2>A little about you.<br>A world of possibility.</h2>
+              <p class="sidebar-description">Have your job reference ready, then tell us what you can bring to the team.</p>
+              <nav class="section-nav" aria-label="Jump to application section">
+                <ol>
+                  <li><a href="#personal-info"><span class="step-number">01</span><span class="step-text">Personal information<small>Start with the basics</small></span></a></li>
+                  <li><a href="#address-info"><span class="step-number">02</span><span class="step-text">Your address<small>Where you’re based</small></span></a></li>
+                  <li><a href="#job-details"><span class="step-number">03</span><span class="step-text">The right fit<small>Your role and skills</small></span></a></li>
+                  <li><a href="#submit-section"><span class="step-number">04</span><span class="step-text">Review &amp; submit<small>Ready for what’s next</small></span></a></li>
+                </ol>
+              </nav>
+              <p class="sidebar-help">Still finding your fit?<br><a href="jobs.html">Take a look at our open roles</a></p>
+            </div>
+          </aside>
+          <div class="application-card" id="application">
+            <div class="form-heading">
+              <div>
+                <p class="eyebrow">MAKE YOUR NEXT MOVE</p>
+                <h2>Job application</h2>
+              </div>
+              <p class="required-note"><span class="required">*</span> Required fields</p>
+            </div>
+            <!-- Application form: all field sections must remain inside this form. -->
+            <form action="https://mercury.swin.edu.au/it000000/formtest.php" method="POST" class="apply-form">
+              <fieldset class="form-section" id="personal-info">
+                <legend><span class="section-number" aria-hidden="true">01</span> Personal information</legend>
+                <p class="section-description">Let’s start with your details and how we can reach you.</p>
+
+                <!-- Row 1: First Name + Last Name -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="first-name">First Name <span class="required">*</span></label>
+                    <input type="text" id="first-name" autocomplete="given-name" name="first_name" placeholder="e.g. Sy Tho"
+                      pattern="[A-Za-z\s]{2,50}" title="Only letters and spaces, 2-50 characters" maxlength="50" required
+                      aria-required="true">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="last-name">Last Name <span class="required">*</span></label>
+                    <input type="text" id="last-name" autocomplete="family-name" name="last_name" placeholder="e.g. Nguyen"
+                      pattern="[A-Za-z\s]{2,50}" title="Only letters and spaces, 2-50 characters" maxlength="50" required
+                      aria-required="true">
+                  </div>
+                </div>
+
+                <!-- Row 2: Date of Birth + Gender -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="dob">Date of Birth <span class="required">*</span></label>
+                    <input type="date" id="dob" autocomplete="bday" name="date_of_birth" required aria-required="true">
+                  </div>
+
+                  <div class="form-group">
+                    <span class="field-label" id="gender-label">Gender <span class="required">*</span></span>
+                    <div class="radio-group" role="radiogroup" aria-labelledby="gender-label">
+                      <label class="radio-label">
+                        <input type="radio" name="gender" value="male" required> Male
+                      </label>
+                      <label class="radio-label">
+                        <input type="radio" name="gender" value="female"> Female
+                      </label>
+                      <label class="radio-label">
+                        <input type="radio" name="gender" value="other"> Other
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Row 3: Email + Phone -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" autocomplete="email" name="email" placeholder="e.g. example@email.com"
+                      required aria-required="true">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" autocomplete="tel" name="phone" placeholder="e.g. 0412 345 678"
+                      pattern="[0-9\s\+\-]{8,15}" title="8-15 digits, spaces, + or - allowed" required aria-required="true">
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="form-section" id="address-info">
+                <legend><span class="section-number" aria-hidden="true">02</span> Your address</legend>
+                <p class="section-description">Tell us where you’re currently based.</p>
+
+                <!-- Street Address (full width) -->
+                <div class="form-group form-group-full">
+                  <label for="street">Street Address <span class="required">*</span></label>
+                  <input type="text" id="street" autocomplete="street-address" name="street_address"
+                    placeholder="e.g. 123 Burwood Road" maxlength="100" required aria-required="true">
+                </div>
+
+                <!-- Row: Suburb + State + Postcode -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="suburb">Suburb/City <span class="required">*</span></label>
+                    <input type="text" id="suburb" autocomplete="address-level2" name="suburb" placeholder="e.g. Hawthorn"
+                      pattern="[A-Za-z\s\-]{2,50}" title="Only letters, spaces and hyphens" required aria-required="true">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="state">State <span class="required">*</span></label>
+                    <select id="state" autocomplete="address-level1" name="state" required aria-required="true">
+                      <option value="" disabled selected>-- Select State --</option>
+                      <option value="VIC">VIC</option>
+                      <option value="NSW">NSW</option>
+                      <option value="QLD">QLD</option>
+                      <option value="SA">SA</option>
+                      <option value="WA">WA</option>
+                      <option value="TAS">TAS</option>
+                      <option value="NT">NT</option>
+                      <option value="ACT">ACT</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="postcode">Postcode <span class="required">*</span></label>
+                    <input type="text" id="postcode" inputmode="numeric" autocomplete="postal-code" name="postcode"
+                      placeholder="e.g. 3122" pattern="[0-9]{4}" title="Australian postcode must be exactly 4 digits"
+                      maxlength="4" required aria-required="true">
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="form-section" id="job-details">
+                <legend><span class="section-number" aria-hidden="true">03</span> Your role &amp; skills</legend>
+                <p class="section-description">Choose your role and the skills you’d bring to T1.</p>
+
+                <!-- Row: Job Reference + Preferred Position -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="job-ref">Job Reference Number <span class="required">*</span></label>
+                    <input type="text" id="job-ref" name="job_reference" placeholder="e.g. AB123" pattern="[A-Za-z0-9]{5}"
+                      title="Exactly 5 alphanumeric characters (e.g. AB123)" maxlength="5" required aria-required="true">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="position">Preferred Position <span class="required">*</span></label>
+                    <select id="position" name="position" required aria-required="true">
+                      <option value="" disabled selected>-- Select Position --</option>
+                      <option value="president">President</option>
+                      <option value="vice-president">Vice President</option>
+                      <option value="manager">Manager</option>
+                      <option value="developer">Developer</option>
+                      <option value="designer">Designer</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Key Skills Checkboxes -->
+                <div class="form-group form-group-full">
+                  <span class="field-label" id="skills-label">Key Skills <span class="optional">(optional)</span></span>
+                  <div class="checkbox-group" role="group" aria-labelledby="skills-label">
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="skills[]" value="html-css"> HTML/CSS
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="skills[]" value="javascript"> JavaScript
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="skills[]" value="php"> PHP
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="skills[]" value="sql"> SQL/Database
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="skills[]" value="python"> Python
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="skills[]" value="project-management"> Project Management
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Other Skills Textarea -->
+                <div class="form-group form-group-full">
+                  <label for="other-skills">Other Skills &amp; Qualifications</label>
+                  <textarea id="other-skills" name="other_skills" rows="5"
+                    placeholder="Describe any additional skills, certifications, or relevant experience..." maxlength="500"
+                    aria-describedby="other-skills-help"></textarea>
+                  <small id="other-skills-help" class="form-help">Maximum 500 characters</small>
+                </div>
+              </fieldset>
+              <fieldset class="form-section" id="submit-section">
+                <legend><span class="section-number" aria-hidden="true">04</span> Review &amp; submit</legend>
+                <p class="section-description">One last look, then you’re ready to take the next step.</p>
+
+                <!-- Acknowledgement of Country -->
+                <div class="acknowledgement">
+                  <h3>Acknowledgement of Country</h3>
+                  <p>We acknowledge the Traditional Owners of the land on which we work and live,
+                    and pay our respects to Elders past, present and emerging.</p>
+                </div>
+
+                <!-- Terms and Conditions Checkbox -->
+                <div class="form-group form-group-full">
+                  <label class="checkbox-label terms-label">
+                    <input type="checkbox" id="terms" name="terms" required aria-required="true">
+                    <span>I confirm that all information provided is accurate and I agree to the
+                      <a href="#">terms and conditions</a>. <span class="required">*</span></span>
+                  </label>
+                </div>
+
+                <!-- Submit and Reset Buttons -->
+                <div class="form-buttons">
+                  <button type="reset" class="btn btn-reset">Reset Form</button>
+                  <button type="submit" class="btn btn-submit">Submit Application</button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER (copied from templates/footer.html) ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <!-- Left: logo + brand name -->
+      <a href="index.html" class="footer-brand" aria-label="T1 Health &amp; Wellness - home">
+        <img src="images/logo.png" alt="" class="brand-logo">
+        <span class="brand-text">
+          <strong>T1</strong>
+          <span>HEALTH &amp; WELLNESS</span>
+        </span>
+      </a>
+
+      <!-- Right: quick links -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="jobs.html">Jobs</a></li>
+          <li><a href="apply.html">Apply</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <p class="footer-copy">&copy; 2026 T1 Health &amp; Wellness. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
