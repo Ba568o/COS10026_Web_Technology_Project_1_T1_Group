@@ -214,26 +214,12 @@ main {
     border-radius: 12px;
     background: white;
 
-    &:has(#show_details:checked) .job_details {
+    &:has(.show-details-checkbox:checked) .job_details {
         display: block;
     }
 
-    &:has(#show_details:checked) {
-        #arrow_1 {
-            transition: rotate 0.3s ease;
-            transform: rotate(180deg);
-        }
-    }
-
-    &:has(#show_details_2:checked) .job_details_2 {
-        display: block;
-    }
-
-    &:has(#show_details_2:checked) {
-        #arrow_2 {
-            transition: rotate 0.3s ease;
-            transform: rotate(180deg);
-        }
+    &:has(.show-details-checkbox:checked) .arrow {
+        transform: rotate(180deg);
     }
 
 
@@ -274,38 +260,158 @@ The arrow image will rotate to indicate that the details are being shown. */
     margin-top: 10px;
 }
 
-.job_details_2 {
-    display: none;
-    margin-top: 10px;
-}
-
 #job_filter {
     width: 30%;
     height: 100%;
     position: fixed;
     right: 5%;
+    top: 12%;
+
+    fieldset {
+        border: 1px solid #cccccc;
+        border-left: 5px solid #000000;
+        padding: 20px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
 
     form {
         padding: 5%;
 
         br {
-            margin-bottom: 10px;
-        }
-
-        fieldset {
-            border: 4px solid #ccc;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 8px;
+            display: block;
+            margin-bottom: 12px;
         }
 
         legend {
+            padding: 8px;
+            color: #000000;
+            font-size: 1.2rem;
             font-weight: bold;
-            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 6px;
+            color: #333333;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            margin-bottom: 4px;
+            border: 1px solid #999999;
+            border-radius: 5px;
+            padding: 9px 10px;
+            background: #ffffff;
+            color: #000000;
+        }
+
+        input[type="text"]:focus {
+            outline: 2px solid #000000;
+            border-color: #000000;
+        }
+
+        input[type="radio"] {
+            accent-color: #000000;
+            margin: 0 0 0 6px;
+        }
+
+        button {
+            width: 100%;
+            border: 0;
+            border-radius: 5px;
+            padding: 10px 16px;
+            background: #000000;
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover,
+        button:focus-visible {
+            background: #333333;
         }
     }
 }
 
+.sidebar {
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transform: translateY(-10%);
+}
+
+.sidebar section {
+    border: 1px solid #cccccc;
+    border-left: 5px solid #000000;
+    border-radius: 10px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+    margin-bottom: 8px;
+    color: #000000;
+}
+
+.sidebar p {
+    color: #333333;
+    line-height: 1.5;
+}
+
+.sidebar a {
+    color: #000000;
+    font-weight: bold;
+}
+
+body:has(#dark-toggle:checked) #job_filter fieldset,
+body:has(#dark-toggle:checked) .sidebar section {
+    border-color: #555555;
+    border-left-color: #000000;
+    background: #1a1a1a;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+body:has(#dark-toggle:checked) #job_filter legend,
+body:has(#dark-toggle:checked) .sidebar h3 {
+    color: #ffffff;
+}
+
+body:has(#dark-toggle:checked) #job_filter label,
+body:has(#dark-toggle:checked) .sidebar p {
+    color: #cccccc;
+}
+
+body:has(#dark-toggle:checked) #job_filter input[type="text"] {
+    border-color: #666666;
+    background: #2f2f2f;
+    color: #f0f0f0;
+}
+
+body:has(#dark-toggle:checked) .sidebar a {
+    color: #ffffff;
+}
+
+@media (max-width: 800px) {
+    #job_filter,
+    .sidebar {
+        position: static;
+        width: 100%;
+        transform: none;
+        margin-top: 20px;
+    }
+
+    .sidebar {
+        padding: 0 3% 70px;
+    }
+}
 
 footer {
     background: rgb(0, 0, 0);
