@@ -44,8 +44,18 @@
           <input type="hidden" name="sites" value="jobs.html">
         </form>
         <a class="btn-pill" href="apply.html">Get started</a>
+        <input hidden type="checkbox" id="setting-toggle">
+        <div id ="setting-container">
+          <!-- Hidden checkbox to toggle dark mode -->
+        <input hidden type="checkbox" id="dark-toggle" class="dark-checkbox">
+        <!-- Iconic label between sun/moon -->
+        <label for="dark-toggle" class="darkmode-toggle">
+          <img src="images/half-moon.png" alt="Toggle Dark Mode" class="moon">
+          <img src="images/sun.png" alt="Toggle Light Mode" class="sun">
+        </label>
+        </div>
       </div>
-
+      
     </nav>
   </header>
   <main>
@@ -200,8 +210,32 @@
       <p>Contact our HR team at <a href="mailto:careers@swinburne.edu.au">careers@swinburne.edu.au</a></p>
     </section>
   </aside>
-  <footer>
-    <p>&copy; 2026 Swinburne University. All rights reserved.</p>
+<!-- ===== FOOTER (copied from templates/footer.html) ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <!-- Left: logo + brand name -->
+      <a href="index.html" class="footer-brand" aria-label="T1 Health &amp; Wellness - home">
+        <img src="images/logo.png" alt="" class="brand-logo">
+        <span class="brand-text">
+          <strong>T1</strong>
+          <span>HEALTH &amp; WELLNESS</span>
+        </span>
+      </a>
+
+      <!-- Right: quick links -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="jobs.html">Jobs</a></li>
+          <li><a href="apply.html">Apply</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <p class="footer-copy">&copy; 2026 T1 Health &amp; Wellness. All rights reserved.</p>
   </footer>
 </body>
 

@@ -66,11 +66,11 @@ body {
 
     img {
         /* invert */
-        filter: invert(100%);
+        /* filter: invert(100%);
         width: 20px;
         height: 20px;
     }
-}
+} */
 
 .nav-links {
     display: flex;
@@ -153,10 +153,6 @@ body:has(#dark-toggle:checked) {
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
     }
 
-    footer {
-        background: rgb(17, 17, 17);
-        color: #cccccc;
-    }
 
     .sun {
         display: block;
@@ -192,6 +188,7 @@ main {
     padding: 3%;
     position: absolute;
     top: 10%;
+    bottom: 10%;
 }
 
 #Card_container {
@@ -399,26 +396,48 @@ body:has(#dark-toggle:checked) .sidebar a {
     color: #ffffff;
 }
 
-@media (max-width: 800px) {
-    #job_filter,
-    .sidebar {
-        position: static;
+
+
+@media (max-width: 900px) {
+    main {
+        flex-direction: column;
+        padding: 5%;
+    }
+
+    #Card_container {
         width: 100%;
-        transform: none;
-        margin-top: 20px;
+    }
+
+    .job_card {
+        width: 100%;
+    }
+
+    #job_filter {
+        width: 90%;
+        right: 5%;
+        top: auto;
+        bottom: 20%;
     }
 
     .sidebar {
-        padding: 0 3% 70px;
+        width: 90%;
+        right: 5%;
+        bottom: 5%;
     }
 }
 
-footer {
-    background: rgb(0, 0, 0);
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    width: 100%;
-    bottom: 0;
-    position: fixed;
+@media (max-width: 600px) {
+    
+    #job_filter {
+        width: 100%;
+        right: 0;
+        top: auto;
+        bottom: 15%;
+    }
+
+    .sidebar {
+        width: 100%;
+        right: 0;
+        bottom: 5%;
+    }
 }
