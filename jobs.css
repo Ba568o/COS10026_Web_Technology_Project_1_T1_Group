@@ -74,14 +74,28 @@ main {
 
 .job_card {
     width: 100%;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 3px solid rgb(0, 0, 0);
+    padding: 28px;
+    background-color: #ffffff;
+    
+    border: 1px solid #e2e2dc; 
     border-radius: 12px;
-    background: white;
 
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transform: translateY(0);
+
+
+
+    /* Try cubic bezier transition at site https://cubic-bezier.com/ */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &:hover {
+        transform: translateY(-4px); 
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(217, 47, 68, 0.08);
+        border-color: #d92f44;
+        
+    }
+
+    /* Job reference code badge */
     .ref_code {
         display: inline-flex;
         align-items: center;
@@ -94,65 +108,71 @@ main {
         font-size: 0.78rem;
         font-weight: bold;
         letter-spacing: 0.04em;
+
+        p {
+            margin: 0;
+        }
+
+        .ref_code_value {
+            color: #d92f44;
+        }
     }
 
-    .ref_code p {
-        margin: 0;
+    /* Toggle job details visibility */
+    &:has(.show-details-checkbox:checked) {
+        .job_details {
+            display: block;
+        }
+        .arrow {
+            transform: rotate(180deg);
+        }
     }
 
-    .ref_code_value {
-        color: #d92f44;
-    }
-
-    &:has(.show-details-checkbox:checked) .job_details {
-        display: block;
-    }
-
-    &:has(.show-details-checkbox:checked) .arrow {
-        transform: rotate(180deg);
-    }
-
-
-    label {
-        display: flex;
-    }
-
-    h2,
-    h3 {
-        margin-bottom: 10px;
+    /* Arrow rotation */
+    .arrow {
+        transition: transform 0.25s ease;
     }
 
     h2 {
-        color: rgb(0, 0, 0);
+        margin-bottom: 10px;
+        color: #111111;
     }
 
     h3 {
-        color: #333;
         margin-top: 15px;
+        margin-bottom: 10px;
+        color: #333333;
     }
 
     .company-name {
         margin: -4px 0 10px;
-        color: black;
+        color: #111111;
         font-weight: bold;
     }
 
+    p {
+        color: #555555;
+        line-height: 1.6;
+    }
+
+    /* Job Metadata (Salary & Location) */
     .job-meta {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        margin: 18px 0 4px;
-    }
+        gap: 12px;
+        margin: 18px 0 8px;
 
-    .job-meta p {
-        flex: 1 1 12rem;
-        min-width: 0;
-        margin: 0;
-        padding: 10px 12px;
-        border-left: 3px solid #ef4f5d;
-        background: #f6f6f2;
-        color: #222222;
-        font-weight: bold;
+        p {
+            flex: 1 1 12rem;
+            min-width: 0;
+            margin: 0;
+            padding: 10px 14px;
+            border-left: 3px solid #ef4f5d;
+            background: #f8f8f6;
+            color: #222222;
+            font-weight: bold;
+            border-radius: 0 6px 6px 0; /* Slightly rounded right edge */
+        }
     }
 
     .meta-label {
@@ -164,14 +184,17 @@ main {
         text-transform: uppercase;
     }
 
-    p {
-        color: #555;
-        line-height: 1.6;
-    }
+    /* Iconic Label for Job details Toggle  */
+    label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
 
-    label>img {
-        height: auto;
-        width: 5%;
+        img {
+            width: 20px;
+            height: 20px;
+        }
     }
 }
 
@@ -185,14 +208,12 @@ The arrow image will rotate to indicate that the details are being shown. */
 
 
 
-
 #job_filter {
     width: 100%;
     height: fit-content;
 
     fieldset {
         border: 1px solid #cccccc;
-        border-left: 5px solid #000000;
         padding: 20px;
         border-radius: 10px;
         background: rgba(255, 255, 255, 0.92);
@@ -220,42 +241,6 @@ The arrow image will rotate to indicate that the details are being shown. */
             color: #333333;
             font-weight: bold;
         }
-
-        input[type="text"] {
-            width: 100%;
-            margin-bottom: 4px;
-            border: 1px solid #999999;
-            border-radius: 5px;
-            padding: 9px 10px;
-            background: #ffffff;
-            color: #000000;
-        }
-
-        input[type="text"]:focus {
-            outline: 2px solid #000000;
-            border-color: #000000;
-        }
-
-        input[type="radio"] {
-            accent-color: #000000;
-            margin: 0 0 0 6px;
-        }
-
-        button {
-            width: 100%;
-            border: 0;
-            border-radius: 5px;
-            padding: 10px 16px;
-            background: #000000;
-            color: #ffffff;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        button:hover,
-        button:focus-visible {
-            background: #333333;
-        }
     }
 }
 
@@ -267,8 +252,9 @@ The arrow image will rotate to indicate that the details are being shown. */
 }
 
 .filter-group legend {
-    padding: 0 4px 0 0;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #000000;
 }
 
 .filter-group label {
@@ -300,7 +286,7 @@ body:has(#job-type-content:checked) .job_card:not(.job-content) {
     display: none;
 }
 
-.job-side-column {
+.FilterSidebar-Container {
     flex: 0 0 var(--side-width);
     display: flex;
     flex-direction: column;
@@ -404,13 +390,16 @@ body:has(#dark-toggle:checked) {
 
     .job_card {
         background: #1b1b1b;
-        border-color: #e9223e;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
-
+        border-color: #2a2a2a;
+        border: 1px solid #282828;
+        
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);    
         h2 {
-            color: #ff5268;
+            color: #ffffff;
         }
-
+        &:hover {
+        border-color: #e9223e;
+        }
         h3,
         p,
         li {
@@ -418,7 +407,7 @@ body:has(#dark-toggle:checked) {
         }
 
         .company-name {
-            color: #ff5268;
+            color: #ffffff;
         }
 
         .ref_code {
@@ -447,20 +436,19 @@ body:has(#dark-toggle:checked) {
 
     #job_filter fieldset,
     .sidebar section {
-        border-color: #5a1b25;
-        border-left-color: #e9223e;
+        border-color: #4e4e4e;
         background: #1b1b1b;
         box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
     }
 
     .filter-group {
-        border-top-color: #5a1b25;
+        border-top-color: #1b5a56;
     }
 
     #job_filter legend,
     #job_filter label,
     .sidebar h3 {
-        color: #ff5268;
+        color: white;
     }
 
     .sidebar p,
@@ -472,29 +460,8 @@ body:has(#dark-toggle:checked) {
         color: #ff5268;
     }
 
-    #job_filter input[type="text"] {
-        border-color: #6b333d;
-        background: #111111;
-        color: #f5f5f5;
-
-        &:focus {
-            outline-color: #ff5268;
-            border-color: #ff5268;
-        }
-    }
-
     #job_filter input[type="radio"] {
         accent-color: #e9223e;
-    }
-
-    #job_filter button {
-        background: #e9223e;
-        color: #ffffff;
-
-        &:hover,
-        &:focus-visible {
-            background: #ff5268;
-        }
     }
 }
 
