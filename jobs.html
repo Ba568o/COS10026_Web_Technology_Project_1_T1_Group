@@ -9,7 +9,8 @@
 
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="jobs.css">
+  <link rel="stylesheet" href="apply.css">
 </head>
 
 <body>
@@ -58,7 +59,32 @@
       
     </nav>
   </header>
-  <main>
+
+  <main id="main-content">
+
+    <!-- ===== INTRO (beige hero area) ===== -->
+    <section class="hero" aria-labelledby="apply-heading">
+      <div class="container hero-layout">
+
+        <!-- Left: heading, short text and button -->
+        <div class="hero-content">
+          <p class="tag">YOUR FUTURE AT T1</p>
+          <h1 id="apply-heading">Great things start<br>with you.</h1>
+          <p class="hero-text">Bring your curiosity, your ideas, and your ambition. Let&rsquo;s take the next step, together.</p>
+          <a class="btn btn-submit" href="jobs.html">Explore open roles &rarr;</a>
+        </div>
+
+        <!-- Right: black team card -->
+        <div class="team-note">
+          <img src="images/logo.png" alt="" class="team-logo">
+          <p>Different strengths.<br><strong>One team.</strong></p>
+          <span class="team-caption">That&rsquo;s the T1 spirit.</span>
+        </div>
+
+      </div>
+    </section>
+
+  <section class="job-listing" aria-labelledby="job-listing-heading">
     <div id="Card_container">
       <div class="job_card">
         <div class="ref_code"><p>Job ID: <span class="ref_code_value">DHS02</span></p></div>
@@ -176,7 +202,8 @@
         <label for="show_details"><img src="images/down.png" alt="Show Details" id="arrow_1" class="arrow"></label>
       </div>
     </div>
-    <div id="job_filter">
+    <div class="job-side-column">
+      <div id="job_filter">
       <form id="filter-form">
         <fieldset>
           <legend>Filters</legend>
@@ -196,9 +223,9 @@
           <button type="submit">Apply</button>
         </fieldset>
       </form>
-    </div>
-  </main>
-  <aside class="sidebar">
+      </div>
+
+      <aside class="sidebar">
 
     <section class="tips-box">
       <h3>Application Tips</h3>
@@ -209,7 +236,10 @@
       <h3>Need Help?</h3>
       <p>Contact our HR team at <a href="mailto:careers@swinburne.edu.au">careers@swinburne.edu.au</a></p>
     </section>
-  </aside>
+      </aside>
+    </div>
+  </section>
+</main>
 <!-- ===== FOOTER (copied from templates/footer.html) ===== -->
   <footer class="site-footer">
     <div class="footer-inner">
