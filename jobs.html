@@ -86,7 +86,7 @@
 
   <section class="job-listing" aria-labelledby="job-listing-heading">
     <div id="Card_container">
-      <div class="job_card">
+      <div class="job_card salary-under-30 location-hcm job-support">
         <div class="ref_code"><p>Job ID: <span class="ref_code_value">DHS02</span></p></div>
         <h2 class="job_title">Digital Health Support Specialist</h2>
         <p class="company-name">T1 Health &amp; Wellness</p>
@@ -106,7 +106,7 @@
         <label for="show_details_dhs02"><img src="images/down.png" alt="Show Details" class="arrow"></label>
       </div>
 
-      <div class="job_card">
+      <div class="job_card salary-30-50 location-hanoi job-design">
         <div class="ref_code"><p>Job ID: <span class="ref_code_value">UXD04</span></p></div>
         <h2 class="job_title">Healthcare UX/UI Designer</h2>
         <p class="company-name">Vinmec Digital Health</p>
@@ -126,7 +126,7 @@
         <label for="show_details_uxd04"><img src="images/down.png" alt="Show Details" class="arrow"></label>
       </div>
 
-      <div class="job_card">
+      <div class="job_card salary-over-50 location-danang job-development">
         <div class="ref_code"><p>Job ID: <span class="ref_code_value">DHD05</span></p></div>
         <h2 class="job_title">Digital Health Software Developer</h2>
         <p class="company-name">FPT Smart Healthcare</p>
@@ -146,7 +146,7 @@
         <label for="show_details_dhd05"><img src="images/down.png" alt="Show Details" class="arrow"></label>
       </div>
 
-      <div class="job_card">
+      <div class="job_card salary-under-30 location-hanoi job-qa">
         <div class="ref_code"><p>Job ID: <span class="ref_code_value">T1-QAT-006</span></p></div>
         <h2 class="job_title">Healthcare Quality Assurance Tester</h2>
         <p class="company-name">Medlatec Digital</p>
@@ -166,7 +166,7 @@
         <label for="show_details_qat006"><img src="images/down.png" alt="Show Details" class="arrow"></label>
       </div>
 
-      <div class="job_card">
+      <div class="job_card salary-over-50 location-hcm job-analytics">
         <div class="ref_code"><p>Job ID: <span class="ref_code_value">T1-HDA-003</span></p></div>
         <h2 class="job_title">Health Data Analyst</h2>
         <p class="company-name">VNG HealthTech</p>
@@ -186,7 +186,7 @@
         <label for="show_details_hda003"><img src="images/down.png" alt="Show Details" class="arrow"></label>
       </div>
 
-      <div class="job_card">
+      <div class="job_card salary-negotiable location-cantho job-content">
         <div class="ref_code">
           <p>Job ID: <span class="ref_code_value">HCW01</span></p>
         </div>
@@ -232,21 +232,36 @@
       <div id="job_filter">
       <form id="filter-form">
         <fieldset>
-          <legend>Filters</legend>
+          <legend>Filter jobs</legend>
 
-          <label for="job-title">Job Title:</label>
-          <input type="radio" id="job-title" name="job-title" placeholder="Enter job title">
-          <br>
+          <fieldset class="filter-group">
+            <legend>Salary</legend>
+            <label><input type="radio" name="salary" id="salary-all" checked> All salaries</label>
+            <label><input type="radio" name="salary" id="salary-under-30"> Under 30M VND</label>
+            <label><input type="radio" name="salary" id="salary-30-50"> 30M - 50M VND</label>
+            <label><input type="radio" name="salary" id="salary-over-50"> Over 50M VND</label>
+            <label><input type="radio" name="salary" id="salary-negotiable"> Negotiable</label>
+          </fieldset>
 
-          <label for="location">Location:</label>
-          <input type="text" id="location" name="location" placeholder="Enter location">
-          <br>
+          <fieldset class="filter-group">
+            <legend>Location</legend>
+            <label><input type="radio" name="location" id="location-all" checked> All locations</label>
+            <label><input type="radio" name="location" id="location-hcm"> Ho Chi Minh City</label>
+            <label><input type="radio" name="location" id="location-hanoi"> Hanoi</label>
+            <label><input type="radio" name="location" id="location-danang"> Da Nang</label>
+            <label><input type="radio" name="location" id="location-cantho"> Can Tho</label>
+          </fieldset>
 
-          <label for="salary-range">Salary Range:</label>
-          <input type="text" id="salary-range" name="salary-range" placeholder="Enter salary range">
-          <br>
-
-          <button type="submit">Apply</button>
+          <fieldset class="filter-group">
+            <legend>Job type</legend>
+            <label><input type="radio" name="job-type" id="job-type-all" checked> All job types</label>
+            <label><input type="radio" name="job-type" id="job-type-support"> Customer support</label>
+            <label><input type="radio" name="job-type" id="job-type-design"> Product design</label>
+            <label><input type="radio" name="job-type" id="job-type-development"> Software development</label>
+            <label><input type="radio" name="job-type" id="job-type-qa"> Quality assurance</label>
+            <label><input type="radio" name="job-type" id="job-type-analytics"> Data analytics</label>
+            <label><input type="radio" name="job-type" id="job-type-content"> Content writing</label>
+          </fieldset>
         </fieldset>
       </form>
       </div>

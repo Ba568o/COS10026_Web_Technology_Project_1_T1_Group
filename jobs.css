@@ -259,6 +259,47 @@ The arrow image will rotate to indicate that the details are being shown. */
     }
 }
 
+.filter-group {
+    margin-top: 14px;
+    padding: 10px 0 0;
+    border: 0;
+    border-top: 1px solid #dcdcd5;
+}
+
+.filter-group legend {
+    padding: 0 4px 0 0;
+    font-size: 0.9rem;
+}
+
+.filter-group label {
+    display: block;
+    padding: 4px 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.filter-group input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* CSS-only filtering: selecting a radio hides cards outside that category. */
+body:has(#salary-under-30:checked) .job_card:not(.salary-under-30),
+body:has(#salary-30-50:checked) .job_card:not(.salary-30-50),
+body:has(#salary-over-50:checked) .job_card:not(.salary-over-50),
+body:has(#salary-negotiable:checked) .job_card:not(.salary-negotiable),
+body:has(#location-hcm:checked) .job_card:not(.location-hcm),
+body:has(#location-hanoi:checked) .job_card:not(.location-hanoi),
+body:has(#location-danang:checked) .job_card:not(.location-danang),
+body:has(#location-cantho:checked) .job_card:not(.location-cantho),
+body:has(#job-type-support:checked) .job_card:not(.job-support),
+body:has(#job-type-design:checked) .job_card:not(.job-design),
+body:has(#job-type-development:checked) .job_card:not(.job-development),
+body:has(#job-type-qa:checked) .job_card:not(.job-qa),
+body:has(#job-type-analytics:checked) .job_card:not(.job-analytics),
+body:has(#job-type-content:checked) .job_card:not(.job-content) {
+    display: none;
+}
+
 .job-side-column {
     flex: 0 0 var(--side-width);
     display: flex;
@@ -410,6 +451,10 @@ body:has(#dark-toggle:checked) {
         border-left-color: #e9223e;
         background: #1b1b1b;
         box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    .filter-group {
+        border-top-color: #5a1b25;
     }
 
     #job_filter legend,
