@@ -138,11 +138,6 @@ html {
     cursor: pointer;
 }
 
-.darkmode-toggle img {
-    width: 30px;
-    height: 30px;
-}
-
 html:has(#font-super-small:checked) {
     font-size: 12px;
 }
@@ -634,12 +629,12 @@ body:has(#dark-toggle:checked) #setting-container .font-size-options {
 
 
 @media (max-width: 900px) {
-    .job-listing {
+    .job-layout {
         flex-direction: column;
         padding: 5%;
     }
 
-    #Card_container {
+    #job-list {
         width: 100%;
     }
 
@@ -647,7 +642,7 @@ body:has(#dark-toggle:checked) #setting-container .font-size-options {
         width: 100%;
     }
 
-    .job-side-column {
+    .FilterSidebar-Container {
         width: 100%;
         flex-basis: auto;
         position: static;
@@ -655,12 +650,12 @@ body:has(#dark-toggle:checked) #setting-container .font-size-options {
 }
 
 @media (max-width: 600px) {
-    .job-listing {
+    .job-layout {
         flex-direction: column;
         padding: 5%;
     }
 
-    #Card_container {
+    #job-list {
         width: 100%;
     }
 
@@ -668,7 +663,7 @@ body:has(#dark-toggle:checked) #setting-container .font-size-options {
         width: 100%;
     }
 
-    .job-side-column {
+    .FilterSidebar-Container {
         width: 100%;
         flex-basis: auto;
         position: static;
