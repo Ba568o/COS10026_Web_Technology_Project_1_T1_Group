@@ -623,4 +623,61 @@ html {
     gap: 0.25rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   2e. Card 04 — Fun Facts Table
+   -------------------------------------------------------------------------- */
+
+.about-table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0.5rem 0 0;
+  border: 1px solid var(--line, #e5e5e5);
+  border-radius: 0.5rem;
+}
+
+.about-fun-facts-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.about-fun-facts-table caption {
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--ink, #111111);
+  text-align: left;
+  background: #fafaf8;
+  border-bottom: 1px solid var(--line, #e5e5e5);
+}
+
+.about-fun-facts-table th,
+.about-fun-facts-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--line, #e5e5e5);
+  vertical-align: top;
+}
+
+.about-fun-facts-table th {
+  background: #f4f4f2;
+  font-weight: 700;
+  color: var(--ink, #111111);
+  white-space: nowrap;
+}
+
+.about-fun-facts-table tbody tr:hover {
+  background-color: #fbfbf9;
+}
+
+.about-fun-facts-table tfoot td {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--muted, #5f5f5a);
+  background: #fafaf8;
+  text-align: center;
+  border-bottom: none;
+}
+
 
