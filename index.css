@@ -1,0 +1,602 @@
+
+/* ========================================
+   INDEX PAGE - T1 HEALTH & WELLNESS
+   ======================================== */
+
+:root {
+    --index-red: #d92f44;
+    --index-red-dark: #9f1d2c;
+    --index-text: #263746;
+    --index-muted: #5f6b76;
+    --index-white: #ffffff;
+    --index-background: #f5f6f8;
+    --index-pink: #fbecee;
+    --index-border: #e2e6eb;
+    --index-radius: 10px;
+}
+
+/* General settings */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    color: var(--index-text);
+    background: var(--index-white);
+}
+
+#main-content {
+    width: 100%;
+    padding: 0;
+}
+
+#main-content section {
+    width: 100%;
+}
+
+#main-content .container,
+#main-content .home-container {
+    width: 82%;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#main-content h1,
+#main-content h2,
+#main-content h3,
+#main-content p {
+    overflow-wrap: break-word;
+}
+
+#main-content h2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--index-text);
+}
+
+#main-content h3 {
+    color: var(--index-text);
+}
+
+#main-content p {
+    line-height: 1.6;
+}
+
+/* ========================================
+                 HERO SECTION
+   ======================================== */
+
+.hero {
+    padding: 3.5rem 0;
+    background: #f0f1ed;
+}
+
+.hero-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.hero-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.hero .tag {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.45rem 0.7rem;
+    background: var(--index-red);
+    color: var(--index-white);
+    font-weight: bold;
+}
+
+.hero h1 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #151515;
+}
+
+.hero .hero-text {
+    max-width: 35rem;
+    margin-bottom: 1.5rem;
+    color: var(--index-muted);
+}
+
+.hero .btn-submit {
+    display: inline-block;
+    padding: 0.8rem 1.3rem;
+    border: 0;
+    background: var(--index-red);
+    color: var(--index-white);
+    text-decoration: none;
+    transition: background 0.25s ease;
+}
+
+.hero .btn-submit:hover,
+.hero .btn-submit:focus-visible {
+    background: var(--index-red-dark);
+}
+
+.team-note {
+    flex: 0 1 18rem;
+    padding: 1.8rem;
+    border-radius: var(--index-radius);
+    background: #080808;
+    color: var(--index-white);
+}
+
+.team-note .team-logo {
+    display: none;
+}
+
+.team-note p {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.team-note strong {
+    color: #ff6677;
+}
+
+.team-caption {
+    color: #cccccc;
+}
+
+/* ========================================
+              SECTION LABELS
+   ======================================== */
+
+.section-label {
+    margin: 0 0 0.45rem;
+    color: var(--index-red-dark);
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ========================================
+         SECTION 1: OUR SERVICES
+         AND OUR DIGITAL SOLUTIONS
+   ======================================== */
+
+.home-services {
+    padding: 2.5rem 0;
+    background: #ffffff;
+}
+
+.services-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: stretch;
+    gap: 2rem;
+}
+
+.services-content,
+.solutions-content {
+    min-width: 0;
+}
+
+.services-content h2,
+.solutions-content h2 {
+    margin-bottom: 1rem;
+}
+
+/* Three separate service cards */
+
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.service-card {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid #edf0f3;
+    border-radius: var(--index-radius);
+    background: #f5f7fa;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+    border-color: #f0b7bf;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.service-icon,
+.feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-bottom: 0.8rem;
+    border-radius: 50%;
+    background: #fbe6e9;
+    color: var(--index-red);
+}
+
+.service-card h3 {
+    margin: 0 0 0.5rem;
+}
+
+.service-card p {
+    margin: 0;
+    color: var(--index-muted);
+}
+
+/* Digital solutions table */
+
+.solutions-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--index-border);
+    border-radius: var(--index-radius);
+    background: #ffffff;
+}
+
+.solutions-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.solutions-table th,
+.solutions-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--index-border);
+    vertical-align: top;
+}
+
+.solutions-table th {
+    background: #f0f2f5;
+    color: #202832;
+    font-weight: bold;
+}
+
+.solutions-table tbody tr:nth-child(even) {
+    background: #fafbfc;
+}
+
+.solutions-table tbody tr:hover {
+    background: #fff5f6;
+}
+
+.solutions-table tfoot td {
+    padding: 0.85rem;
+    background: var(--index-pink);
+    color: var(--index-red-dark);
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 0;
+}
+
+/* ========================================
+         SECTION 2: WHY CHOOSE T1
+         Separate background layer
+   ======================================== */
+
+.why-t1 {
+    padding: 2.5rem 0;
+    background: #f1f4f7;
+    border-top: 1px solid #e8ebef;
+    border-bottom: 1px solid #e8ebef;
+}
+
+.why-layout {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1.25rem;
+}
+
+.why-intro {
+    min-width: 0;
+    padding-right: 1rem;
+}
+
+.why-intro h2 {
+    margin-bottom: 0.75rem;
+}
+
+.why-intro > p:last-child {
+    margin-bottom: 0;
+    color: var(--index-muted);
+}
+
+/* Each feature is its own card */
+
+.why-feature {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid #e2e7ed;
+    border-radius: var(--index-radius);
+    background: #ffffff;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.why-feature:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.why-feature .feature-icon {
+    margin-bottom: 0.75rem;
+}
+
+.why-feature h3 {
+    margin: 0 0 0.5rem;
+}
+
+.why-feature p {
+    margin: 0;
+    color: var(--index-muted);
+}
+
+/* ========================================
+         SECTION 3: CAREERS BANNER
+         Separate pink background layer
+   ======================================== */
+
+.careers-banner {
+    padding: 1rem 0 2.5rem;
+    background: #ffffff;
+}
+
+.careers-card {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: stretch;
+    overflow: hidden;
+    border: 1px solid #f3dfe2;
+    border-radius: var(--index-radius);
+    background: var(--index-pink);
+}
+
+.careers-content {
+    align-self: center;
+    padding: 1.5rem;
+}
+
+.careers-content h2 {
+    margin-top: 0.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.careers-content > p:not(.section-label) {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #4f5963;
+}
+
+.careers-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    background: var(--index-red);
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.25s ease;
+}
+
+.careers-button:hover,
+.careers-button:focus-visible {
+    background: var(--index-red-dark);
+}
+
+.careers-image {
+    min-width: 0;
+    min-height: 14rem;
+    overflow: hidden;
+}
+
+.careers-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 14rem;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* ========================================
+                   FOOTER
+   ======================================== */
+
+.site-footer {
+    margin-top: 0;
+}
+
+/* ========================================
+                 DARK MODE
+    Uses the existing checkbox in header
+   ======================================== */
+
+body:has(#dark-toggle:checked) {
+    background: #111111;
+    color: #eeeeee;
+}
+
+body:has(#dark-toggle:checked) .hero {
+    background: #171717;
+}
+
+body:has(#dark-toggle:checked) .hero h1 {
+    color: #ffffff;
+}
+
+body:has(#dark-toggle:checked) .hero .hero-text {
+    color: #cccccc;
+}
+
+body:has(#dark-toggle:checked) .home-services {
+    background: #111111;
+}
+
+body:has(#dark-toggle:checked) .why-t1 {
+    background: #191d22;
+    border-color: #30343a;
+}
+
+body:has(#dark-toggle:checked) .careers-banner {
+    background: #111111;
+}
+
+body:has(#dark-toggle:checked) #main-content h2,
+body:has(#dark-toggle:checked) #main-content h3 {
+    color: #f5f5f5;
+}
+
+body:has(#dark-toggle:checked) .service-card,
+body:has(#dark-toggle:checked) .why-feature,
+body:has(#dark-toggle:checked) .solutions-table-wrapper {
+    background: #202328;
+    border-color: #353a42;
+}
+
+body:has(#dark-toggle:checked) .service-card p,
+body:has(#dark-toggle:checked) .why-intro > p:last-child,
+body:has(#dark-toggle:checked) .why-feature p {
+    color: #cccccc;
+}
+
+body:has(#dark-toggle:checked) .solutions-table th {
+    background: #30343a;
+    color: #ffffff;
+}
+
+body:has(#dark-toggle:checked) .solutions-table td {
+    border-color: #353a42;
+    color: #eeeeee;
+}
+
+body:has(#dark-toggle:checked) .solutions-table tbody tr:nth-child(even) {
+    background: #25292f;
+}
+
+body:has(#dark-toggle:checked) .solutions-table tbody tr:hover {
+    background: #352328;
+}
+
+body:has(#dark-toggle:checked) .solutions-table tfoot td {
+    background: #352328;
+    color: #ff8794;
+}
+
+body:has(#dark-toggle:checked) .careers-card {
+    background: #292024;
+    border-color: #4b3036;
+}
+
+body:has(#dark-toggle:checked) .careers-content > p:not(.section-label) {
+    color: #dddddd;
+}
+
+/* ========================================
+            RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 1000px) {
+    #main-content .container,
+    #main-content .home-container {
+        width: 88%;
+    }
+
+    .services-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .why-layout {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .why-intro {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 700px) {
+    #main-content .container,
+    #main-content .home-container {
+        width: 90%;
+    }
+
+    .hero {
+        padding: 2.5rem 0;
+    }
+
+    .hero-layout {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+    }
+
+    .team-note {
+        flex-basis: auto;
+        width: auto;
+    }
+
+    .home-services,
+    .why-t1 {
+        padding: 2rem 0;
+    }
+
+    .service-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .why-layout {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .why-feature {
+        padding: 1rem;
+    }
+
+    .careers-card {
+        grid-template-columns: 1fr;
+    }
+
+    .careers-content {
+        padding: 1.25rem;
+    }
+
+    .careers-image,
+    .careers-image img {
+        min-height: 12rem;
+        max-height: 18rem;
+    }
+
+    .solutions-table th,
+    .solutions-table td {
+        padding: 0.6rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

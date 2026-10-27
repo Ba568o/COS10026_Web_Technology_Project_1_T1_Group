@@ -1,11 +1,512 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <title>T1 Group - Health &amp; Wellness</title>
+
+  <link rel="stylesheet" href="jobs.css">
+  <link rel="stylesheet" href="apply.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="index.css">
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+    integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  >
 </head>
+
 <body>
-    
+
+  <!-- HEADER -->
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+
+      <!-- Logo and brand -->
+      <a href="index.html" class="brand"
+         aria-label="T1 Health &amp; Wellness - home">
+
+        <img src="images/logo.png" alt="" class="brand-logo">
+
+        <span class="brand-text">
+          <strong>T1</strong>
+          <span>HEALTH &amp; WELLNESS</span>
+        </span>
+
+      </a>
+
+      <!-- Main navigation -->
+      <ul class="nav-links">
+        <li>
+          <a href="index.html" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="jobs.html">Jobs</a>
+        </li>
+        <li>
+          <a href="apply.html">Apply</a>
+        </li>
+        <li>
+          <a href="about.html">About</a>
+        </li>
+      </ul>
+
+      <!-- Search -->
+      <div class="nav-actions">
+
+        <form
+          class="nav-search"
+          action="https://duckduckgo.com/"
+          method="GET"
+          role="search"
+        >
+          <label class="visually-hidden" for="site-search">
+            Search
+          </label>
+
+          <input
+            type="search"
+            id="site-search"
+            name="q"
+            placeholder="Search"
+            required
+          >
+
+          <input
+            type="hidden"
+            name="sites"
+            value="jobs.html"
+          >
+        </form>
+
+        <a class="btn-pill" href="apply.html">
+          Get started
+        </a>
+
+        <input hidden type="checkbox" id="setting-toggle">
+
+        <div id="setting-container">
+
+          <input hidden type="checkbox" id="dark-toggle">
+
+          <label
+            for="setting-toggle"
+            class="setting-icon"
+            aria-label="Toggle settings"
+          >
+            <i class="fa-solid fa-gear"></i>
+          </label>
+
+          <div class="settings-dropdown">
+
+            <p class="settings-title">Display settings</p>
+
+            <label for="dark-toggle" class="darkmode-toggle">
+              <span>Dark mode</span>
+
+              <span class="theme-icons" aria-hidden="true">
+                <i class="fa-solid fa-sun sun"></i>
+                <i class="fa-solid fa-moon moon"></i>
+              </span>
+            </label>
+
+            <fieldset class="font-size-options">
+              <legend>Font size</legend>
+
+              <label>
+                <input type="radio" name="font-size"
+                       id="font-super-small">
+                Super small
+              </label>
+
+              <label>
+                <input type="radio" name="font-size"
+                       id="font-small">
+                Small
+              </label>
+
+              <label>
+                <input type="radio" name="font-size"
+                       id="font-normal" checked>
+                Normal
+              </label>
+
+              <label>
+                <input type="radio" name="font-size"
+                       id="font-large">
+                Large
+              </label>
+
+              <label>
+                <input type="radio" name="font-size"
+                       id="font-super-large">
+                Super large
+              </label>
+            </fieldset>
+
+          </div>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- MAIN -->
+
+  <main id="main-content">
+
+    <!-- HERO -->
+
+    <section class="hero" aria-labelledby="apply-heading">
+
+      <div class="container hero-layout">
+
+        <div class="hero-content">
+
+          <p class="tag">YOUR FUTURE AT T1</p>
+
+          <h1 id="apply-heading">
+            Great things start<br>with you.
+          </h1>
+
+          <p class="hero-text">
+            Bring your curiosity, your ideas, and your ambition.
+            Let&rsquo;s take the next step, together.
+          </p>
+
+          <a class="btn btn-submit" href="apply.html">
+            Apply Now &rarr;
+          </a>
+
+        </div>
+
+        <div class="team-note">
+
+          <img
+            src="images/logo.png"
+            alt=""
+            class="team-logo"
+          >
+
+          <p>
+            Different strengths.<br>
+            <strong>One team.</strong>
+          </p>
+
+          <span class="team-caption">
+            That&rsquo;s the T1 spirit.
+          </span>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- SECTION 1: OUR SERVICES -->
+
+    <section class="home-services"
+             aria-labelledby="services-heading">
+
+      <div class="home-container services-layout">
+
+        <!-- Three service cards -->
+        <div class="services-content">
+
+          <p class="section-label">OUR SERVICES</p>
+
+          <h2 id="services-heading">
+            Healthcare designed around you.
+          </h2>
+
+          <div class="service-cards">
+
+            <article class="service-card">
+
+              <div class="service-icon" aria-hidden="true">
+                <i class="fa-solid fa-laptop-medical"></i>
+              </div>
+
+              <h3>Online Patient Platforms</h3>
+
+              <p>
+                We support digital platforms that help patients
+                access healthcare services conveniently.
+              </p>
+
+            </article>
+
+            <article class="service-card">
+
+              <div class="service-icon" aria-hidden="true">
+                <i class="fa-regular fa-calendar-check"></i>
+              </div>
+
+              <h3>Appointment Booking Systems</h3>
+
+              <p>
+                We make it easier for patients to book and manage
+                healthcare appointments online.
+              </p>
+
+            </article>
+
+            <article class="service-card">
+
+              <div class="service-icon" aria-hidden="true">
+                <i class="fa-solid fa-book-open"></i>
+              </div>
+
+              <h3>Health Information Websites</h3>
+
+              <p>
+                We provide accessible digital resources to help
+                people find useful health information.
+              </p>
+
+            </article>
+
+          </div>
+        </div>
+
+
+        <!-- Digital solutions table -->
+        <div class="solutions-content">
+
+          <p class="section-label">OUR DIGITAL SOLUTIONS</p>
+
+          <div class="solutions-table-wrapper">
+
+            <table class="solutions-table">
+
+              <thead>
+                <tr>
+                  <th scope="col">Digital Service</th>
+                  <th scope="col">Purpose</th>
+                  <th scope="col">Target Users</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Online Patient Platforms</td>
+                  <td>Access healthcare services online</td>
+                  <td>Patients</td>
+                </tr>
+
+                <tr>
+                  <td>Appointment Booking Systems</td>
+                  <td>Book and manage appointments</td>
+                  <td>Patients, Clinics</td>
+                </tr>
+
+                <tr>
+                  <td>Health Information Websites</td>
+                  <td>Access health information</td>
+                  <td>General Public</td>
+                </tr>
+              </tbody>
+
+              <tfoot>
+                <tr>
+                  <td colspan="3">
+                    Technology designed to improve digital
+                    healthcare access.
+                  </td>
+                </tr>
+              </tfoot>
+
+            </table>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- SECTION 2: WHY CHOOSE T1 -->
+
+    <section class="why-t1" aria-labelledby="why-heading">
+
+      <div class="home-container why-layout">
+
+        <!-- Introduction -->
+        <div class="why-intro">
+
+          <p class="section-label">WHY CHOOSE T1</p>
+
+          <h2 id="why-heading">
+            Technology with people in mind.
+          </h2>
+
+          <p>
+            Our focus is on creating simple, accessible and
+            reliable digital experiences that connect people
+            with healthcare information and services.
+          </p>
+
+        </div>
+
+
+        <!-- Feature 1 -->
+        <article class="why-feature">
+
+          <div class="feature-icon" aria-hidden="true">
+            <i class="fa-solid fa-users"></i>
+          </div>
+
+          <h3>User-focused</h3>
+
+          <p>
+            We design with real people and their needs in mind.
+          </p>
+
+        </article>
+
+
+        <!-- Feature 2 -->
+        <article class="why-feature">
+
+          <div class="feature-icon" aria-hidden="true">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+
+          <h3>Reliable</h3>
+
+          <p>
+            We build secure and dependable technology you can trust.
+          </p>
+
+        </article>
+
+
+        <!-- Feature 3 -->
+        <article class="why-feature">
+
+          <div class="feature-icon" aria-hidden="true">
+            <i class="fa-regular fa-lightbulb"></i>
+          </div>
+
+          <h3>Innovative</h3>
+
+          <p>
+            We continuously improve for a healthier tomorrow.
+          </p>
+
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- SECTION 3: CAREERS BANNER -->
+
+    <section class="careers-banner"
+             aria-labelledby="careers-heading">
+
+      <div class="home-container">
+
+        <div class="careers-card">
+
+          <!-- Banner text -->
+          <div class="careers-content">
+
+            <p class="section-label">CAREERS AT T1</p>
+
+            <h2 id="careers-heading">
+              Build a healthier digital future.
+            </h2>
+
+            <p>
+              Be part of a team using technology to improve
+              digital healthcare experiences. Explore our career
+              opportunities and discover where you can make
+              a difference.
+            </p>
+
+            <a class="careers-button" href="jobs.html">
+              Explore Careers
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+
+          </div>
+
+          <!-- Team image -->
+          <div class="careers-image">
+
+            <img
+              src="images/team.jpg"
+              alt="Team members collaborating on digital healthcare solutions"
+              loading="lazy"
+            >
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="site-footer">
+
+    <div class="footer-inner">
+
+      <!-- Logo and brand -->
+      <a href="index.html"
+         class="footer-brand"
+         aria-label="T1 Health &amp; Wellness - home">
+
+        <img
+          src="images/logo.png"
+          alt=""
+          class="brand-logo"
+        >
+
+        <span class="brand-text">
+          <strong>T1</strong>
+          <span>HEALTH &amp; WELLNESS</span>
+        </span>
+
+      </a>
+
+
+      <!-- Footer navigation -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="jobs.html">Jobs</a></li>
+          <li><a href="apply.html">Apply</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+
+      </nav>
+
+    </div>
+
+    <p class="footer-copy">
+      &copy; 2026 T1 Health &amp; Wellness. All rights reserved.
+    </p>
+
+  </footer>
+
 </body>
 </html>
