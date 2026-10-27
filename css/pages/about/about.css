@@ -399,59 +399,6 @@ html {
 }
 
 
-/* --------------------------------------------------------------------------
-   3. Responsive — split layout
-   -------------------------------------------------------------------------- */
-
-/* Tablet: collapse sidebar above cards */
-@media (max-width: 960px) {
-  .about-split-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .about-sidebar-content {
-    position: static;
-    padding-top: 0;
-  }
-
-  .about-section-nav {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .about-section-nav li + li {
-    border-top: none;
-  }
-
-  .about-section-nav li {
-    border-top: 1px solid var(--line, #dcdcd5);
-  }
-}
-
-/* Mobile: single column info blocks */
-@media (max-width: 600px) {
-  .about-info-block {
-    grid-template-columns: 1fr;
-    gap: 0.25rem;
-  }
-
-  .about-card-header,
-  .about-card-body {
-    padding: 1.25rem;
-  }
-
-  .about-section-nav {
-    grid-template-columns: 1fr;
-  }
-
-  .about-member-list li {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.375rem;
-  }
-}
-
-
 /* ==========================================================================
    Card 02 — Member Contributions
    ========================================================================== */
@@ -612,28 +559,48 @@ html {
   color: var(--muted, #5f5f5a);
 }
 
-/* Mobile overrides for contribution items */
-@media (max-width: 600px) {
-  .contribution-member {
-    gap: 0.5rem;
-  }
+/* --------------------------------------------------------------------------
+   2d. Card 03 — Team Photo
+   -------------------------------------------------------------------------- */
 
-  .contribution-page {
-    flex-direction: column;
-    gap: 0.25rem;
-  }
+.team-photo-wrapper {
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 100%;
+}
+
+.team-photo-wrapper img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.team-photo-wrapper figcaption {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--muted, #5f5f5a);
+  text-align: center;
+  background: #fafaf8;
+  border-top: 1px solid #e5e5e5;
 }
 
 /* --------------------------------------------------------------------------
    2e. Card 04 — Fun Facts Table
    -------------------------------------------------------------------------- */
 
+.table-responsive,
 .about-table-container {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   margin: 0.5rem 0 0;
   border: 1px solid var(--line, #e5e5e5);
   border-radius: 0.5rem;
+  width: 100%;
 }
 
 /* 1. Styling Bảng (.about-card table) */
@@ -680,6 +647,175 @@ tfoot td {
   font-style: italic;
   color: #5f5f5a;
   padding: 0.875rem 1rem;
+}
+
+
+/* ==========================================================================
+   3. Responsive Media Queries (Tablet & Mobile)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   3a. Tablet (< 900px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .about-split-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-sidebar-content {
+    position: static;
+    padding-top: 0;
+  }
+
+  .about-section-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-section-nav li + li {
+    border-top: none;
+  }
+
+  .about-section-nav li {
+    border-top: 1px solid var(--line, #dcdcd5);
+  }
+
+  /* 1. Tablet (< 900px): Giảm padding của các thẻ .about-card xuống 1.5rem */
+  .about-card {
+    padding: 1.5rem;
+  }
+
+  .about-card-header {
+    padding: 0 0 1rem 0;
+  }
+
+  .about-card-body {
+    padding: 1rem 0 0 0;
+  }
+
+  /* 2. Tablet (< 900px): Khối bọc cuộn ngang cho Bảng Fun Facts */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  .about-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3b. Mobile (< 600px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  .about-split-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-section-nav {
+    grid-template-columns: 1fr;
+  }
+
+  /* Card padding on mobile */
+  .about-card {
+    padding: 1.25rem;
+  }
+
+  /* Tiêu đề card co giãn mượt mà thành 1 cột xếp chồng */
+  .about-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0 0 0.875rem 0;
+  }
+
+  .about-card-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .about-card-body {
+    padding: 0.875rem 0 0 0;
+    gap: 1.25rem;
+  }
+
+  /* Card 01: Info blocks single column */
+  .about-info-block {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .about-member-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+  }
+
+  /* Card 02: Danh sách đóng góp (<dl>) co giãn mượt mà thành 1 cột xếp chồng */
+  .contributions-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .contribution-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .contribution-member {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .contribution-page {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .contribution-details {
+    width: 100%;
+  }
+
+  .contribution-quote {
+    width: 100%;
+  }
+
+  .contribution-quote blockquote {
+    padding: 0.875rem 1rem;
+  }
+
+  /* Card 03: Ảnh nhóm (.team-photo-wrapper img) luôn giữ width 100% không bị vỡ layout */
+  .team-photo-wrapper {
+    margin: 1rem 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .team-photo-wrapper img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Card 04: Bảng Fun Facts cuộn ngang mượt mà trên điện thoại */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  .about-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
 }
 
 
