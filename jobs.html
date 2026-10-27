@@ -1,74 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/images/logo.png" type="image/png">
-  <title>My site</title>
+  <title>T1 group</title>
 
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="jobs.css">
+  <link rel="stylesheet" href="apply.css">
   <link rel="stylesheet" href="style.css">
+  <!-- Link to Font Awesome for icons through CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
-<body>
-  <nav class="navbar">
-    <a href="index.html" class="logo"><img src="/images/logo.png" alt="My site"></a>
-    <form action="https://duckduckgo.com" method="GET">
-      <input type="search" name="q" placeholder="Search for job" required />
-      <input type="hidden" name="sites" value="jobs.html" />
-      <button type="submit">Search</button>
-    </form>
-    
-    <ul class="nav-links">
-      <li><a href="#query=">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
 
-<!-- Hidden checkbox to toggle dark mode -->
-  <input type="checkbox" id="dark-toggle" class="dark-checkbox">
-  <!-- Iconic label between sun/moon -->
-  <label for="dark-toggle" class="darkmode-toggle" id="mobile-menu">
-    <img src="images/half-moon.png" alt="Toggle Dark Mode" class="moon">
-    <img src="images/sun.png" alt="Toggle Light Mode" class="sun">
-  </label>
-  </nav>
-  <div id="main">
-    <div id="job_card">
-      <h2 id="job_title">President</h2>
-      <h3>Description</h3>
-      <p>As the President of our company, you will be responsible for leading and managing the overall operations, setting strategic goals, and ensuring the company's growth and success. You will work closely with the executive team to make critical decisions and drive the organization forward.</p>
-      <input hidden type="checkbox" id="show_details" class="show-details-checkbox">
-      <label for="show_details" class="show-details-label">
-        <img src="images/down.png" alt="Show Details" class="arrow">
-      </label>
-      <div id="job_details">
-        <h3>Requirements</h3>
-        <ul>
-          <li>Proven experience in a senior leadership role.</li>
-          <li>Strong business acumen and strategic thinking.</li>
-          <li>Excellent communication and interpersonal skills.</li>
-          <li>Ability to inspire and motivate teams.</li>
-          <li>Track record of achieving business objectives and driving growth.</li>
-        </ul>
-        <h3>Salary</h3>
-        <p>$200,000 - $300,000 per year</p>
-        <h3>Location</h3>
-        <p>New York, NY</p>
-        <h3>Benefits</h3>
-        <ul>
-          <li>Health, dental, and vision insurance</li>
-          <li>Retirement savings plan</li>
-          <li>Paid time off and holidays</li>
-          <li>Professional development opportunities</li>
-          <li>Flexible work arrangements</li>
-        </ul>
-        <h3>How to Apply</h3>
-        <p>To apply for the President position, please submit your resume and a cover letter.</p>
+<body>
+  <!--  HEADER -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+
+      <!-- Left: logo + brand name -->
+      <a href="index.html" class="brand" aria-label="T1 Health &amp; Wellness - home">
+        <img src="images/logo.png" alt="" class="brand-logo">
+        <span class="brand-text">
+          <strong>T1</strong>
+          <span>HEALTH &amp; WELLNESS</span>
+        </span>
+      </a>
+
+      <!-- Middle: main menu -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="jobs.html" aria-current="page">Jobs</a></li>
+        <li><a href="apply.html">Apply</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+
+      <!-- Right: search box + call-to-action button -->
+      <div class="nav-actions">
+        <form class="nav-search" action="https://duckduckgo.com" method="GET" role="search">
+          <label class="visually-hidden" for="site-search">Search</label>
+          <input type="search" id="site-search" name="q" placeholder="Search" required>
+          <input type="hidden" name="sites" value="jobs.html">
+        </form>
+        <a class="btn-pill" href="jobs.html">Get started</a>
+        <input hidden type="checkbox" id="setting-toggle">
+        <div id="setting-container">
+          <!-- Hidden checkbox to toggle dark mode -->
+          <input hidden type="checkbox" id="dark-toggle">
+          <label for="setting-toggle" class="setting-icon" aria-label="Toggle settings">
+            <i class="fa-solid fa-gear"></i>
+          </label>
+          <div class="settings-dropdown">
+            <p class="settings-title">Display settings</p>
+            <label for="dark-toggle" class="darkmode-toggle">
+              <span>Dark mode</span>
+              <span class="theme-icons" aria-hidden="true">
+                <i class="fa-solid fa-sun sun"></i>
+                <i class="fa-solid fa-moon moon"></i>
+              </span>
+            </label>
+            <fieldset class="font-size-options">
+              <legend>Font size</legend>
+              <label><input type="radio" name="font-size" id="font-super-small"> Super small</label>
+              <label><input type="radio" name="font-size" id="font-small"> Small</label>
+              <label><input type="radio" name="font-size" id="font-normal" checked> Normal</label>
+              <label><input type="radio" name="font-size" id="font-large"> Large</label>
+              <label><input type="radio" name="font-size" id="font-super-large"> Super large</label>
+            </fieldset>
+          </div>
+        </div>
       </div>
+
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- INTRO (beige hero area) -->
+    <section class="hero" aria-labelledby="apply-heading">
+      <div class="container hero-layout">
+
+        <!-- Left: heading, short text and button -->
+        <div class="hero-content">
+          <p class="tag">YOUR FUTURE AT T1</p>
+          <h1 id="apply-heading">Great things start<br>with you.</h1>
+          <p class="hero-text">Bring your curiosity, your ideas, and your ambition. Let&rsquo;s take the next step,
+            together.</p>
+          <a class="btn btn-submit" href="apply.html">Apply Now &rarr;</a>
+        </div>
+
+        <!-- Right: black team card -->
+        <div class="team-note">
+          <img src="images/logo.png" alt="" class="team-logo">
+          <p>Different strengths.<br><strong>One team.</strong></p>
+          <span class="team-caption">That&rsquo;s the T1 spirit.</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="job-layout" aria-label="Job opportunities">
+      <div id="job-list">
+        <div class="job-card salary-under-30 location-hcm job-support">
+          <div class="ref-code">
+            <p>Job ID: <span class="ref-code-value">DHS02</span></p>
+          </div>
+          <h2>Digital Health Support Specialist</h2>
+          <p class="company-name">T1 Health &amp; Wellness</p>
+          <h3>Customer Support | Full-time</h3>
+          <p>Assist users with online patient platforms and appointment booking systems, resolving common technical or
+            account-related issues.</p>
+          <div class="job-meta">
+            <p><span class="meta-label">Salary</span>18 - 28 million VND / month</p>
+            <p><span class="meta-label">Location</span>Ho Chi Minh City, Vietnam</p>
+          </div>
+          <div class="job-details">
+            <h3>Key Responsibilities</h3>
+            <ul>
+              <li>Assist users with accessing and navigating online platforms.</li>
+              <li>Guide users through appointment booking and account management.</li>
+              <li>Respond to enquiries and coordinate reported issues with technical teams.</li>
+              <li>Maintain professional and helpful communication.</li>
+            </ul>
+            <h3>Requirements</h3>
+            <ul>
+              <li>Strong communication and problem-solving skills.</li>
+              <li>Basic computer and digital platform skills.</li>
+              <li>Patience and a customer-focused attitude.</li>
+              <li>Ability to explain technical steps clearly.</li>
+              <li>Previous customer support experience is desirable.</li>
+            </ul>
+          </div>
+          <input type="checkbox" id="show_details_dhs02" class="show-details-checkbox visually-hidden">
+          <label for="show_details_dhs02" class="details-toggle-label">
+            <span class="visually-hidden">Toggle job details for Digital Health Support Specialist</span>
+            <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+          </label>
+          <a class="job-apply-button" href="apply.html#skip-to-application">Apply for this job</a>
+        </div>
+
+        <div class="job-card salary-30-50 location-hanoi job-design">
+          <div class="ref-code">
+            <p>Job ID: <span class="ref-code-value">UXD04</span></p>
+          </div>
+          <h2>Healthcare UX/UI Designer</h2>
+          <p class="company-name">Vinmec Digital Health</p>
+          <h3>Product Design | Full-time</h3>
+          <p>Create intuitive and accessible interfaces that help patients find health information and manage
+            appointments with ease.</p>
+          <div class="job-meta">
+            <p><span class="meta-label">Salary</span>30 - 50 million VND / month</p>
+            <p><span class="meta-label">Location</span>Hanoi, Vietnam</p>
+          </div>
+          <div class="job-details">
+            <h3>Key Responsibilities</h3>
+            <ul>
+              <li>Design interfaces for patient platforms and booking systems.</li>
+              <li>Create wireframes, prototypes and user journey maps.</li>
+              <li>Conduct user research and collaborate with product teams.</li>
+              <li>Ensure designs are consistent, accessible and user-friendly.</li>
+            </ul>
+            <h3>Requirements</h3>
+            <ul>
+              <li>Knowledge of UI/UX design principles.</li>
+              <li>Familiarity with tools such as Figma.</li>
+              <li>Understanding of responsive web design and accessibility.</li>
+              <li>Strong visual communication and problem-solving skills.</li>
+              <li>A portfolio is desirable.</li>
+            </ul>
+          </div>
+          <input type="checkbox" id="show_details_uxd04" class="show-details-checkbox visually-hidden">
+          <label for="show_details_uxd04" class="details-toggle-label">
+            <span class="visually-hidden">Toggle job details for Digital Health Support Specialist</span>
+            <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+          </label>
+          <a class="job-apply-button" href="apply.html#skip-to-application">Apply for this job</a>
+        </div>
+
+        <div class="job-card salary-over-50 location-danang job-development">
+          <div class="ref-code">
+            <p>Job ID: <span class="ref-code-value">DHD05</span></p>
+          </div>
+          <h2>Digital Health Software Developer</h2>
+          <p class="company-name">FPT Smart Healthcare</p>
+          <h3>Software Development | Full-time</h3>
+          <p>Build and maintain reliable, user-friendly software for patient platforms, appointment systems and health
+            information websites.</p>
+          <div class="job-meta">
+            <p><span class="meta-label">Salary</span>45 - 75 million VND / month</p>
+            <p><span class="meta-label">Location</span>Da Nang, Vietnam</p>
+          </div>
+          <div class="job-details">
+            <h3>Key Responsibilities</h3>
+            <ul>
+              <li>Develop and maintain digital healthcare platform features.</li>
+              <li>Write clean, maintainable and well-tested code.</li>
+              <li>Collaborate with designers, analysts and developers.</li>
+              <li>Resolve bugs and follow security and data protection practices.</li>
+            </ul>
+            <h3>Requirements</h3>
+            <ul>
+              <li>Knowledge of JavaScript, Python or Java.</li>
+              <li>Understanding of web development fundamentals.</li>
+              <li>Familiarity with databases and APIs is an advantage.</li>
+              <li>Strong logical thinking and problem-solving skills.</li>
+              <li>Ability to learn new technologies.</li>
+            </ul>
+          </div>
+          <input type="checkbox" id="show_details_dhd05" class="show-details-checkbox visually-hidden">
+          <label for="show_details_dhd05" class="details-toggle-label">
+            <span class="visually-hidden">Toggle job details for Digital Health Support Specialist</span>
+            <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+          </label>
+          <a class="job-apply-button" href="apply.html#skip-to-application">Apply for this job</a>
+        </div>
+
+        <div class="job-card salary-under-30 location-hanoi job-qa">
+          <div class="ref-code">
+            <p>Job ID: <span class="ref-code-value">QAT06</span></p>
+          </div>
+          <h2>Healthcare Quality Assurance Tester</h2>
+          <p class="company-name">Medlatec Digital</p>
+          <h3>Quality Assurance | Full-time</h3>
+          <p>Test digital healthcare services and appointment workflows to identify issues before release and provide a
+            reliable user experience.</p>
+          <div class="job-meta">
+            <p><span class="meta-label">Salary</span>22 - 38 million VND / month</p>
+            <p><span class="meta-label">Location</span>Hanoi, Vietnam</p>
+          </div>
+          <div class="job-details">
+            <h3>Key Responsibilities</h3>
+            <ul>
+              <li>Test website features and healthcare workflows.</li>
+              <li>Create and execute test cases from requirements.</li>
+              <li>Document defects and perform regression testing.</li>
+              <li>Work with developers to verify fixes.</li>
+            </ul>
+            <h3>Requirements</h3>
+            <ul>
+              <li>Understanding of software testing fundamentals.</li>
+              <li>Ability to follow procedures and document results.</li>
+              <li>Strong attention to detail and analytical skills.</li>
+              <li>Bug-tracking experience is an advantage.</li>
+              <li>Basic knowledge of web applications.</li>
+            </ul>
+          </div>
+          <input type="checkbox" id="show_details_qat06" class="show-details-checkbox visually-hidden">
+          <label for="show_details_qat06" class="details-toggle-label">
+            <span class="visually-hidden">Toggle job details for Digital Health Support Specialist</span>
+            <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+          </label>
+          <a class="job-apply-button" href="apply.html#skip-to-application">Apply for this job</a>
+        </div>
+
+        <div class="job-card salary-over-50 location-hcm job-analytics">
+          <div class="ref-code">
+            <p>Job ID: <span class="ref-code-value">HDA03</span></p>
+          </div>
+          <h2>Health Data Analyst</h2>
+          <p class="company-name">VNG HealthTech</p>
+          <h3>Data Analytics | Full-time</h3>
+          <p>Analyse digital healthcare data to identify trends, evaluate service performance and support data-driven
+            decisions responsibly.</p>
+          <div class="job-meta">
+            <p><span class="meta-label">Salary</span>35 - 60 million VND / month</p>
+            <p><span class="meta-label">Location</span>Ho Chi Minh City, Vietnam</p>
+          </div>
+          <div class="job-details">
+            <h3>Key Responsibilities</h3>
+            <ul>
+              <li>Analyse platform usage and appointment booking records.</li>
+              <li>Prepare reports, dashboards and visualisations.</li>
+              <li>Monitor performance and identify opportunities for improvement.</li>
+              <li>Check data quality and follow privacy requirements.</li>
+            </ul>
+            <h3>Requirements</h3>
+            <ul>
+              <li>Basic knowledge of data analysis and statistics.</li>
+              <li>Microsoft Excel experience; SQL or visualisation tools are an advantage.</li>
+              <li>Strong analytical thinking and attention to detail.</li>
+              <li>Ability to communicate findings clearly.</li>
+              <li>Understanding of data privacy is desirable.</li>
+            </ul>
+          </div>
+          <input type="checkbox" id="show_details_hda003" class="show-details-checkbox visually-hidden">
+          <label for="show_details_hda003" class="details-toggle-label">
+            <span class="visually-hidden">Toggle job details for Digital Health Support Specialist</span>
+            <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+          </label>
+          <a class="job-apply-button" href="apply.html#skip-to-application">Apply for this job</a>
+        </div>
+
+        <div class="job-card salary-negotiable location-cantho job-content">
+          <div class="ref-code">
+            <p>Job ID: <span class="ref-code-value">HCW01</span></p>
+          </div>
+          <h2>Healthcare Content Writer</h2>
+          <p class="company-name">eDoctor Vietnam</p>
+          <h3>Description</h3>
+          <p>We are looking for a Healthcare Content Writer to create clear, engaging and reliable health-related
+            content for our digital health information websites. The successful candidate will help users understand
+            health topics through accessible and well-organised digital content.</p>
+          <div class="job-meta">
+            <p><span class="meta-label">Salary</span>Negotiable</p>
+            <p><span class="meta-label">Location</span>Can Tho, Vietnam</p>
+          </div>
+          <div class="job-details">
+            <h3>Key Responsibilities:</h3>
+            <ul>
+              <li>Research and write health-related articles and educational content.</li>
+              <li>Review content for clarity, accuracy and readability.</li>
+              <li>Collaborate with healthcare professionals and the digital content team.</li>
+              <li>Update existing website content when information needs revision.</li>
+              <li>Follow content guidelines and maintain consistent writing standards.</li>
+            </ul>
+            <h3>Requirements:</h3>
+            <ul>
+              <li>Strong written communication and research skills.</li>
+              <li>Excellent attention to detail.</li>
+              <li>Ability to explain complex information in simple language.</li>
+              <li>Understanding of health and wellness topics.</li>
+              <li>Experience in content writing or health communication is an advantage.</li>
+            </ul>
+            <h3>Benefits</h3>
+            <ul>
+              <li>Health, dental, and vision insurance</li>
+              <li>Retirement savings plan</li>
+              <li>Paid time off and holidays</li>
+              <li>Professional development opportunities</li>
+              <li>Flexible work arrangements</li>
+            </ul>
+          </div>
+          <input type="checkbox" id="show_details_hcw01" class="show-details-checkbox visually-hidden">
+          <label for="show_details_hcw01" class="details-toggle-label">
+            <span class="visually-hidden">Toggle job details for Digital Health Support Specialist</span>
+            <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+          </label>
+          <a class="job-apply-button" href="apply.html#skip-to-application">Apply for this job</a>
+        </div>
+      </div>
+      <div class="FilterSidebar-Container">
+        <div id="job-filter">
+          <form>
+            <fieldset>
+              <legend class="filter-main-title">Filter</legend>
+
+              <fieldset class="filter-group">
+                <legend>Salary</legend>
+                <label><input type="radio" name="salary" id="salary-all" checked> All salaries</label>
+                <label><input type="radio" name="salary" id="salary-under-30"> Under 30M VND</label>
+                <label><input type="radio" name="salary" id="salary-30-50"> 30M - 50M VND</label>
+                <label><input type="radio" name="salary" id="salary-over-50"> Over 50M VND</label>
+                <label><input type="radio" name="salary" id="salary-negotiable"> Negotiable</label>
+              </fieldset>
+
+              <fieldset class="filter-group">
+                <legend>Location</legend>
+                <label><input type="radio" name="location" id="location-all" checked> All locations</label>
+                <label><input type="radio" name="location" id="location-hcm"> Ho Chi Minh City</label>
+                <label><input type="radio" name="location" id="location-hanoi"> Hanoi</label>
+                <label><input type="radio" name="location" id="location-danang"> Da Nang</label>
+                <label><input type="radio" name="location" id="location-cantho"> Can Tho</label>
+              </fieldset>
+
+              <fieldset class="filter-group">
+                <legend>Job type</legend>
+                <label><input type="radio" name="job-type" id="job-type-all" checked> All job types</label>
+                <label><input type="radio" name="job-type" id="job-type-support"> Customer support</label>
+                <label><input type="radio" name="job-type" id="job-type-design"> Product design</label>
+                <label><input type="radio" name="job-type" id="job-type-development"> Software development</label>
+                <label><input type="radio" name="job-type" id="job-type-qa"> Quality assurance</label>
+                <label><input type="radio" name="job-type" id="job-type-analytics"> Data analytics</label>
+                <label><input type="radio" name="job-type" id="job-type-content"> Content writing</label>
+              </fieldset>
+              <button type="reset" class="clear-filters">Clear filters</button>
+            </fieldset>
+          </form>
+        </div>
+
+        <aside class="sidebar">
+
+          <section class="tips-box">
+            <h3>Application Tips</h3>
+            <ul>
+              <li>Read the job description carefully to understand the role and requirements.</li>
+              <li>Prepare your resume and cover letter tailored to the specific job.</li>
+              <li>Highlight relevant skills, experiences, and achievements.</li>
+              <li>Follow the application instructions provided in the job listing.</li>
+              <li>Submit your application before the deadline.</li>
+            </ul>
+          </section>
+          <section class="disclaimer-box">
+            <h3>Disclaimer</h3>
+            <p>All job listings are subject to change and may be filled or removed at any time. T1 Health & Wellness is not responsible for any discrepancies or inaccuracies in the job postings.</p>
+          </section>
+          <section class="ref-code-box">
+            <h3>Job Reference Code</h3>
+            <p>Double-check your <strong>Job Reference Code</strong> before submitting the application form!</p>
+          </section>
+
+          <section class="help-box">
+            <h3>Need Help?</h3>
+            <p>Contact our HR team at <a href="mailto:106208127@student.swin.edu.au">106208127@student.swin.edu.au</a>
+            </p>
+          </section>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <!-- ===== FOOTER (copied from templates/footer.html) ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <!-- Left: logo + brand name -->
+      <a href="index.html" class="footer-brand" aria-label="T1 Health &amp; Wellness - home">
+        <img src="images/logo.png" alt="" class="brand-logo">
+        <span class="brand-text">
+          <strong>T1</strong>
+          <span>HEALTH &amp; WELLNESS</span>
+        </span>
+      </a>
+
+      <!-- Right: quick links -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="jobs.html">Jobs</a></li>
+          <li><a href="apply.html">Apply</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+
     </div>
-  </div>
+
+    <p class="footer-copy">&copy; 2026 T1 Health &amp; Wellness. All rights reserved.</p>
+  </footer>
 </body>
-<footer>
-  <p>&copy; 2026 My Site. All rights reserved.</p>
-</footer>
+
 </html>
