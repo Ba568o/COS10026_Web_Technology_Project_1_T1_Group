@@ -449,4 +449,178 @@ html {
     align-items: flex-start;
     gap: 0.375rem;
   }
-}
+}
+
+
+/* ==========================================================================
+   Card 02 — Member Contributions
+   ========================================================================== */
+
+/* The description list has no default margins or bullet padding */
+.contributions-list {
+  margin: 0;
+  padding: 0;
+}
+
+/* Each member block — visually separated card within the card */
+.contribution-item {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.contribution-item:first-child {
+  padding-top: 0;
+}
+
+.contribution-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* dt — member header row: name chip, ID badge, role badge */
+.contribution-member {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0 0 1rem;
+}
+
+.contribution-name {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--ink, #111111);
+}
+
+/* Role badge: black pill */
+.contribution-role {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.625rem;
+  border-radius: 999px;
+  background: var(--ink, #111111);
+  color: var(--white, #ffffff);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* dd — generic reset */
+.contributions-list dd {
+  margin: 0 0 0.875rem;
+}
+
+.contributions-list dd:last-child {
+  margin-bottom: 0;
+}
+
+/* Assigned page row */
+.contribution-page {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Contributions row */
+.contribution-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Small muted label above a value (shared) */
+.contribution-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--muted, #5f5f5a);
+}
+
+/* Inline filename in monospace */
+.contribution-file {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--red-text, #d92f44);
+  background: #fff0f1;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+}
+
+/* Bullet list of tasks */
+.contribution-tasks {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  color: var(--ink, #111111);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.contribution-tasks code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.8125rem;
+  color: var(--red-text, #d92f44);
+  background: #fff0f1;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.2rem;
+}
+
+/* Quote block */
+.contribution-quote {
+  margin-top: 0.25rem !important;
+}
+
+.contribution-quote blockquote {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--red, #ef4f5d);
+  background: #fafaf8;
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+
+.contribution-quote blockquote p {
+  margin: 0 0 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--ink, #111111);
+  font-style: italic;
+}
+
+.contribution-quote blockquote p:last-of-type {
+  margin-bottom: 0.375rem;
+}
+
+/* English translation — slightly muted */
+.contribution-quote-en {
+  color: var(--muted, #5f5f5a) !important;
+  font-size: 0.875rem !important;
+}
+
+/* Attribution line */
+.contribution-quote-attr {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--muted, #5f5f5a);
+}
+
+/* Mobile overrides for contribution items */
+@media (max-width: 600px) {
+  .contribution-member {
+    gap: 0.5rem;
+  }
+
+  .contribution-page {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
