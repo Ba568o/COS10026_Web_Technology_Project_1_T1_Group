@@ -1,6 +1,10 @@
 :root {
     --side-width: clamp(16rem, 30vw, 24rem);    
-
+    --font-size-super-small: 12px;
+    --font-size-small: 14px;
+    --font-size-medium: 16px;
+    --font-size-large: 20px;
+    --font-size-super-large: 24px;
 }
 * {
     margin: 0;
@@ -27,7 +31,6 @@ html {
         height: 2rem;
         cursor: pointer;
         color: #ffffff;
-        font-size: 1.1rem;
     }
 
     .settings-dropdown {
@@ -158,14 +161,14 @@ main {
     padding: 0;
 }
 
-.job-listing {
+.job-layout {
     display: flex;
     align-items: flex-start;
     gap: 2rem;
     padding: 3%;
 }
 
-#Card_container {
+#job-list {
     display: flex;
     flex: 1 1 auto;
     min-width: 0;
