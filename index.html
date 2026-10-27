@@ -545,6 +545,128 @@
       </div>
     </section>
 
+    
+ <!-- SECTION 4: BOOK AN APPOINTMENT -->
+
+<section class="appointment-section" id="appointment">
+
+    <input
+        type="checkbox"
+        id="appointment-confirm"
+        class="appointment-confirm-toggle"
+    >
+
+    <div class="appointment-container">
+
+        <div class="appointment-heading">
+            <p class="section-label">BOOK AN APPOINTMENT</p>
+            <h2>Your health, one click away.</h2>
+            <p>
+                Request an online consultation with our healthcare team.
+                Choose a service and your preferred appointment date.
+            </p>
+        </div>
+
+        <div class="appointment-card">
+
+            <div class="appointment-card-heading">
+                <span class="appointment-icon" aria-hidden="true">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </span>
+
+                <div>
+                    <h3>Schedule your consultation</h3>
+                    <p>Choose your preferred service and date.</p>
+                </div>
+            </div>
+
+            <form class="appointment-form">
+
+                <div class="appointment-field">
+                    <label for="appointment-service">
+                        Healthcare service
+                    </label>
+
+                    <select id="appointment-service" name="service" required>
+                        <option value="" disabled selected>
+                            Select a service
+                        </option>
+                        <option value="general">
+                            General Consultation
+                        </option>
+                        <option value="specialist">
+                            Specialist Consultation
+                        </option>
+                        <option value="mental-health">
+                            Mental Health Consultation
+                        </option>
+                    </select>
+                </div>
+
+                <div class="appointment-field">
+                    <label for="appointment-date">
+                        Preferred date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="appointment-date"
+                        name="date"
+                        required
+                    >
+                </div>
+
+                <div class="appointment-field">
+                    <label for="appointment-time">
+                        Preferred time
+                    </label>
+
+                    <select id="appointment-time" name="time" required>
+                        <option value="" disabled selected>
+                            Select a time
+                        </option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                    </select>
+                </div>
+
+                <label
+                    for="appointment-confirm"
+                    class="appointment-button"
+                >
+                    Book Appointment
+                    <i class="fa-solid fa-arrow-right"
+                       aria-hidden="true"></i>
+                </label>
+
+            </form>
+
+            <p class="appointment-note">
+                Your preferred time is a request and is not yet confirmed.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Confirmation message -->
+    <div class="appointment-confirmation" role="status">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+
+        <p>
+            <strong>Appointment request received!</strong>
+            This is a demo confirmation. No real appointment has been submitted.
+        </p>
+
+        <label for="appointment-confirm" class="appointment-dismiss">
+            Dismiss
+        </label>
+    </div>
+
+</section>
+
+
   </main>
 
 
