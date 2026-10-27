@@ -147,6 +147,7 @@ body {
   color: #cccccc;
 }
 
+
 /** ========================================*
 *              SECTION LABELS*
 *   ======================================== */
@@ -168,7 +169,7 @@ body {
 
 *   ======================================== */
 
-.home-services {
+#home-services {
   padding: 2.5rem 0;
   background: #ffffff;
 }
@@ -647,7 +648,7 @@ body:has(#dark-toggle:checked) .hero .hero-text {
   color: #cccccc;
 }
 
-body:has(#dark-toggle:checked) .home-services {
+body:has(#dark-toggle:checked) #home-services {
   background: #111111;
 }
 
@@ -788,7 +789,7 @@ body:has(#dark-toggle:checked) .appointment-field select {
     width: auto;
   }
 
-  .home-services,
+  #home-services,
   .why-t1 {
     padding: 2rem 0;
   }
@@ -1451,4 +1452,3 @@ body:has(#dark-toggle:checked) .appointment-field select {
     margin: 0 auto;
   }
 }
-
