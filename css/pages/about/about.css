@@ -2,6 +2,16 @@
    about.css — About Us Page Styles
    ========================================== */
 
+/* Accessibility — Skip link keyboard navigation */
+.skip-link:focus {
+  top: 0.625rem;
+  outline: 2px solid var(--red, #ef4f5d);
+  outline-offset: 2px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-weight: 700;
+  z-index: 9999;
+}
+
 /* --- Container --- */
 .about-container {
   max-width: var(--page-max, 112rem);
@@ -97,30 +107,7 @@
   color: #bdbdbd;
 }
 
-/* --- Responsive --- */
-@media (max-width: 900px) {
-  .about-hero-layout {
-    grid-template-columns: 1fr;
-  }
 
-  .about-hero h1 {
-    font-size: 2.75rem;
-  }
-
-  .about-team-note {
-    max-width: 28rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .about-hero {
-    padding: 3rem 0 3.5rem;
-  }
-
-  .about-hero h1 {
-    font-size: 2.25rem;
-  }
-}
 
 
 /* ==========================================================================
@@ -658,6 +645,20 @@ tfoot td {
    3a. Tablet (< 900px)
    -------------------------------------------------------------------------- */
 @media (max-width: 900px) {
+  /* Hero banner on tablet */
+  .about-hero-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-hero h1 {
+    font-size: 2.75rem;
+  }
+
+  .about-team-note {
+    max-width: 28rem;
+  }
+
+  /* Split layout on tablet */
   .about-split-layout {
     grid-template-columns: 1fr;
   }
@@ -711,6 +712,15 @@ tfoot td {
    3b. Mobile (< 600px)
    -------------------------------------------------------------------------- */
 @media (max-width: 600px) {
+  /* Hero banner on mobile */
+  .about-hero {
+    padding: 3rem 0 3.5rem;
+  }
+
+  .about-hero h1 {
+    font-size: 2.25rem;
+  }
+
   .about-split-layout {
     grid-template-columns: 1fr;
   }
