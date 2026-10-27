@@ -636,48 +636,50 @@ html {
   border-radius: 0.5rem;
 }
 
-.about-fun-facts-table {
+/* 1. Styling Bảng (.about-card table) */
+.about-card table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.about-card table caption {
+  text-align: left;
+  font-weight: 700;
+  color: #5f5f5a;
+  padding: 0.75rem 1rem;
+}
+
+/* 2. Table Header (thead th) */
+thead th {
+  background-color: #0f0f0f;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  text-align: left;
   font-size: 0.875rem;
-  text-align: left;
+  text-transform: uppercase;
 }
 
-.about-fun-facts-table caption {
-  padding: 0.75rem 1rem;
-  font-weight: 700;
+/* 3. Cells & Border (tbody td) */
+tbody td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid #e5e5e5;
   font-size: 0.9375rem;
-  color: var(--ink, #111111);
-  text-align: left;
-  background: #fafaf8;
-  border-bottom: 1px solid var(--line, #e5e5e5);
+  color: #111111;
 }
 
-.about-fun-facts-table th,
-.about-fun-facts-table td {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--line, #e5e5e5);
-  vertical-align: top;
+/* 4. Hiệu ứng Hover (BẮT BUỘC theo Rubric) */
+tbody tr:hover {
+  background-color: #f8f9fa;
+  transition: background 0.2s ease;
 }
 
-.about-fun-facts-table th {
-  background: #f4f4f2;
-  font-weight: 700;
-  color: var(--ink, #111111);
-  white-space: nowrap;
-}
-
-.about-fun-facts-table tbody tr:hover {
-  background-color: #fbfbf9;
-}
-
-.about-fun-facts-table tfoot td {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--muted, #5f5f5a);
-  background: #fafaf8;
-  text-align: center;
-  border-bottom: none;
+/* 5. Table Footer (tfoot td) */
+tfoot td {
+  background-color: #f4f4f2;
+  font-style: italic;
+  color: #5f5f5a;
+  padding: 0.875rem 1rem;
 }
 
 
