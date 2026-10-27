@@ -170,6 +170,7 @@ main {
     align-items: flex-start;
     gap: 2rem;
     padding: 3%;
+    background: #f8f8f6;
 }
 
 #job-list {
@@ -181,7 +182,7 @@ main {
     width: 100%;
 }
 
-.job_card {
+.job-card {
     width: 100%;
     padding: 28px;
     background-color: #ffffff;
@@ -205,7 +206,7 @@ main {
     }
 
     /* Job reference code badge */
-    .ref_code {
+    .ref-code {
         display: inline-flex;
         align-items: center;
         margin-bottom: 12px;
@@ -222,14 +223,14 @@ main {
             margin: 0;
         }
 
-        .ref_code_value {
+        .ref-code-value {
             color: #d92f44;
         }
     }
 
     /* Toggle job details visibility */
     &:has(.show-details-checkbox:checked) {
-        .job_details {
+        .job-details {
             display: block;
         }
         .arrow {
@@ -305,19 +306,35 @@ main {
             height: 20px;
         }
     }
+
+    .job-apply-button {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.65rem 1.1rem;
+        border-radius: 999px;
+        background: #ef4f5d;
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .job-apply-button:hover,
+    .job-apply-button:focus-visible {
+        background: #d92f44;
+    }
 }
 
 
 /* Details for each job are initially hidden and will be displayed when the corresponding checkbox is checked. 
 The arrow image will rotate to indicate that the details are being shown. */
-.job_details {
+.job-details {
     display: none;
     margin-top: 10px;
 }
 
 
 
-#job_filter {
+#job-filter {
     width: 100%;
     height: fit-content;
 
@@ -401,20 +418,20 @@ The arrow image will rotate to indicate that the details are being shown. */
 
 
 /* Jobs Filtering: selecting a radio hides cards outside that category. */
-body:has(#salary-under-30:checked) .job_card:not(.salary-under-30),
-body:has(#salary-30-50:checked) .job_card:not(.salary-30-50),
-body:has(#salary-over-50:checked) .job_card:not(.salary-over-50),
-body:has(#salary-negotiable:checked) .job_card:not(.salary-negotiable),
-body:has(#location-hcm:checked) .job_card:not(.location-hcm),
-body:has(#location-hanoi:checked) .job_card:not(.location-hanoi),
-body:has(#location-danang:checked) .job_card:not(.location-danang),
-body:has(#location-cantho:checked) .job_card:not(.location-cantho),
-body:has(#job-type-support:checked) .job_card:not(.job-support),
-body:has(#job-type-design:checked) .job_card:not(.job-design),
-body:has(#job-type-development:checked) .job_card:not(.job-development),
-body:has(#job-type-qa:checked) .job_card:not(.job-qa),
-body:has(#job-type-analytics:checked) .job_card:not(.job-analytics),
-body:has(#job-type-content:checked) .job_card:not(.job-content) {
+body:has(#salary-under-30:checked) .job-card:not(.salary-under-30),
+body:has(#salary-30-50:checked) .job-card:not(.salary-30-50),
+body:has(#salary-over-50:checked) .job-card:not(.salary-over-50),
+body:has(#salary-negotiable:checked) .job-card:not(.salary-negotiable),
+body:has(#location-hcm:checked) .job-card:not(.location-hcm),
+body:has(#location-hanoi:checked) .job-card:not(.location-hanoi),
+body:has(#location-danang:checked) .job-card:not(.location-danang),
+body:has(#location-cantho:checked) .job-card:not(.location-cantho),
+body:has(#job-type-support:checked) .job-card:not(.job-support),
+body:has(#job-type-design:checked) .job-card:not(.job-design),
+body:has(#job-type-development:checked) .job-card:not(.job-development),
+body:has(#job-type-qa:checked) .job-card:not(.job-qa),
+body:has(#job-type-analytics:checked) .job-card:not(.job-analytics),
+body:has(#job-type-content:checked) .job-card:not(.job-content) {
     display: none;
 }
 
@@ -527,7 +544,11 @@ body:has(#dark-toggle:checked) {
         color: #bbbbbb;
     }
 
-    .job_card {
+    .job-layout {
+        background: #111111;
+    }
+
+    .job-card {
         background: #1b1b1b;
         border-color: #2a2a2a;
         border: 1px solid #282828;
@@ -549,13 +570,13 @@ body:has(#dark-toggle:checked) {
             color: #ffffff;
         }
 
-        .ref_code {
+        .ref-code {
             border-color: #5a1b25;
             background: #111111;
             color: #bbbbbb;
         }
 
-        .ref_code_value {
+        .ref-code-value {
             color: #ff5268;
         }
 
@@ -573,7 +594,7 @@ body:has(#dark-toggle:checked) {
         }
     }
 
-    #job_filter fieldset,
+    #job-filter fieldset,
     .sidebar section {
         border-color: #4e4e4e;
         background: #1b1b1b;
@@ -584,8 +605,8 @@ body:has(#dark-toggle:checked) {
         border-top-color: #1b5a56;
     }
 
-    #job_filter legend,
-    #job_filter label,
+    #job-filter legend,
+    #job-filter label,
     .sidebar h3 {
         color: white;
     }
@@ -599,17 +620,17 @@ body:has(#dark-toggle:checked) {
         color: #ff5268;
     }
 
-    #job_filter input[type="radio"] {
+    #job-filter input[type="radio"] {
         accent-color: #e9223e;
     }
 
-    #job_filter .clear-filters {
+    #job-filter .clear-filters {
         border-color: #ff5268;
         color: #ff5268;
     }
 
-    #job_filter .clear-filters:hover,
-    #job_filter .clear-filters:focus-visible {
+    #job-filter .clear-filters:hover,
+    #job-filter .clear-filters:focus-visible {
         background: #e9223e;
         color: #ffffff;
     }
@@ -638,7 +659,7 @@ body:has(#dark-toggle:checked) #setting-container .font-size-options {
         width: 100%;
     }
 
-    .job_card {
+    .job-card {
         width: 100%;
     }
 
@@ -659,7 +680,7 @@ body:has(#dark-toggle:checked) #setting-container .font-size-options {
         width: 100%;
     }
 
-    .job_card {
+    .job-card {
         width: 100%;
     }
 
