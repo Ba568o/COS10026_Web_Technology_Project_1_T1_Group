@@ -224,7 +224,7 @@ main {
         }
 
         .ref-code-value {
-            color: #d92f44;
+            color: #9F1D2C;
         }
     }
 
@@ -288,7 +288,7 @@ main {
     .meta-label {
         display: block;
         margin-bottom: 2px;
-        color: #d92f44;
+        color: #9F1D2C;
         font-size: 0.72rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
@@ -312,7 +312,7 @@ main {
         margin-top: 1rem;
         padding: 0.65rem 1.1rem;
         border-radius: 999px;
-        background: #ef4f5d;
+        background: #9F1D2C;
         color: #ffffff;
         font-weight: bold;
         text-decoration: none;
