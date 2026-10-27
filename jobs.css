@@ -355,6 +355,25 @@ The arrow image will rotate to indicate that the details are being shown. */
             color: #333333;
             font-weight: bold;
         }
+
+        .clear-filters {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.7rem 1rem;
+            border: 1px solid #d92f44;
+            border-radius: 0.4rem;
+            background: transparent;
+            color: #d92f44;
+            font: inherit;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .clear-filters:hover,
+        .clear-filters:focus-visible {
+            background: #d92f44;
+            color: #ffffff;
+        }
     }
 }
 
@@ -587,6 +606,17 @@ body:has(#dark-toggle:checked) {
 
     #job_filter input[type="radio"] {
         accent-color: #e9223e;
+    }
+
+    #job_filter .clear-filters {
+        border-color: #ff5268;
+        color: #ff5268;
+    }
+
+    #job_filter .clear-filters:hover,
+    #job_filter .clear-filters:focus-visible {
+        background: #e9223e;
+        color: #ffffff;
     }
 }
 
