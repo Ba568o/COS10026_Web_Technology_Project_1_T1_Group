@@ -1164,6 +1164,10 @@ body:has(#dark-toggle:checked) .careers-content > p:not(.section-label) {
   min-width: 0;
 }
 
+.orb-one,
+.orb-two {
+    display: none
+}
 /** ===== RESPONSIVE LAYOUT ===== */
 
 @media (max-width: 1000px) {
