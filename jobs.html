@@ -11,6 +11,8 @@
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="stylesheet" href="jobs.css">
   <link rel="stylesheet" href="apply.css">
+  <!-- Link to Font Awesome for icons through CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body>
@@ -49,11 +51,27 @@
         <div id="setting-container">
           <!-- Hidden checkbox to toggle dark mode -->
           <input hidden type="checkbox" id="dark-toggle" class="dark-checkbox">
-          <!-- Iconic label between sun/moon -->
-          <label for="dark-toggle" class="darkmode-toggle">
-            <img src="images/half-moon.png" alt="Toggle Dark Mode" class="moon">
-            <img src="images/sun.png" alt="Toggle Light Mode" class="sun">
+          <label for="setting-toggle" class="setting-icon" aria-label="Toggle settings">
+            <i class="fa-solid fa-gear"></i>
           </label>
+          <div class="settings-dropdown" aria-label="Display settings">
+            <p class="settings-title">Display settings</p>
+            <label for="dark-toggle" class="darkmode-toggle">
+              <span>Dark mode</span>
+              <span class="theme-icons" aria-hidden="true">
+                <i class="fa-solid fa-sun sun"></i>
+                <i class="fa-solid fa-moon moon"></i>
+              </span>
+            </label>
+            <fieldset class="font-size-options">
+              <legend>Font size</legend>
+              <label><input type="radio" name="font-size" id="font-super-small"> Super small</label>
+              <label><input type="radio" name="font-size" id="font-small"> Small</label>
+              <label><input type="radio" name="font-size" id="font-normal" checked> Normal</label>
+              <label><input type="radio" name="font-size" id="font-large"> Large</label>
+              <label><input type="radio" name="font-size" id="font-super-large"> Super large</label>
+            </fieldset>
+          </div>
         </div>
       </div>
 
@@ -118,7 +136,9 @@
             </ul>
           </div>
           <input hidden type="checkbox" id="show_details_dhs02" class="show-details-checkbox">
-          <label for="show_details_dhs02"><img src="images/down.png" alt="Show Details" class="arrow"></label>
+          <label for="show_details_dhs02">
+            <i class="fa-solid fa-caret-down arrow"></i>
+          </label>
         </div>
 
         <div class="job_card salary-30-50 location-hanoi job-design">
@@ -152,7 +172,7 @@
             </ul>
           </div>
           <input hidden type="checkbox" id="show_details_uxd04" class="show-details-checkbox">
-          <label for="show_details_uxd04"><img src="images/down.png" alt="Show Details" class="arrow"></label>
+          <label for="show_details_uxd04"><i class="fa-solid fa-caret-down arrow"></i></label>
         </div>
 
         <div class="job_card salary-over-50 location-danang job-development">
@@ -186,7 +206,7 @@
             </ul>
           </div>
           <input hidden type="checkbox" id="show_details_dhd05" class="show-details-checkbox">
-          <label for="show_details_dhd05"><img src="images/down.png" alt="Show Details" class="arrow"></label>
+          <label for="show_details_dhd05"><i class="fa-solid fa-caret-down arrow"></i></label>
         </div>
 
         <div class="job_card salary-under-30 location-hanoi job-qa">
@@ -220,7 +240,7 @@
             </ul>
           </div>
           <input hidden type="checkbox" id="show_details_qat006" class="show-details-checkbox">
-          <label for="show_details_qat006"><img src="images/down.png" alt="Show Details" class="arrow"></label>
+          <label for="show_details_qat006"><i class="fa-solid fa-caret-down arrow"></i></label>
         </div>
 
         <div class="job_card salary-over-50 location-hcm job-analytics">
@@ -254,7 +274,7 @@
             </ul>
           </div>
           <input hidden type="checkbox" id="show_details_hda003" class="show-details-checkbox">
-          <label for="show_details_hda003"><img src="images/down.png" alt="Show Details" class="arrow"></label>
+          <label for="show_details_hda003"><i class="fa-solid fa-caret-down arrow"></i></label>
         </div>
 
         <div class="job_card salary-negotiable location-cantho job-content">
@@ -298,7 +318,7 @@
             </ul>
           </div>
           <input hidden type="checkbox" id="show_details" class="show-details-checkbox">
-          <label for="show_details"><img src="images/down.png" alt="Show Details" id="arrow_1" class="arrow"></label>
+          <label for="show_details"><i class="fa-solid fa-caret-down arrow"></i></label>
         </div>
       </div>
       <div class="FilterSidebar-Container">
