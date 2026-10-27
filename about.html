@@ -15,6 +15,32 @@
   <link rel="stylesheet" href="layout.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="css/pages/about/about.css">
+
+  <!-- Embedded CSS (Required by Assignment Rubric) -->
+  <style>
+    .team-photo-wrapper {
+      border: 2px solid #e5e5e5;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .team-photo-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .team-photo-wrapper figcaption {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      color: var(--muted, #5f5f5a);
+      text-align: center;
+      background: #fafaf8;
+      border-top: 1px solid #e5e5e5;
+    }
+  </style>
 </head>
 
 <body>
@@ -325,6 +351,21 @@
                 </dl>
               </div><!-- /.about-card-body -->
             </article><!-- /#contributions -->
+
+            <!-- CARD 03: Our Team -->
+            <article class="about-card" id="our-team-cards">
+              <header class="about-card-header">
+                <span class="about-card-badge" aria-hidden="true">03</span>
+                <h2>Our Team</h2>
+              </header>
+
+              <div class="about-card-body">
+                <figure class="team-photo-wrapper">
+                  <img src="images/t1_team.png" alt="T1 Team Members — Thai Bao, Minh Hoang, Sy Tho, and Anh Vu">
+                  <figcaption>T1 Team Members &mdash; Working together on COS10026 Web Technology Project 1.</figcaption>
+                </figure>
+              </div><!-- /.about-card-body -->
+            </article><!-- /#our-team-cards -->
 
           </div><!-- /.about-cards-area -->
         </div><!-- /.about-split-layout -->
