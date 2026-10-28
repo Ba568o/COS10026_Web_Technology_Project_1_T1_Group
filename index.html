@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <title>T1 Group - Health &amp; Wellness</title>
+
+  <link rel="stylesheet" href="jobs.css">
+  <link rel="stylesheet" href="apply.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="index.css">
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+    integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  >
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+
+      <!-- Logo and brand -->
+      <a href="index.html" class="brand"
+         aria-label="T1 Health &amp; Wellness - home">
+
+        <img src="images/logo.png" alt="" class="brand-logo">
+
+        <span class="brand-text">
+          <strong>T1</strong>
+          <span>HEALTH &amp; WELLNESS</span>
+        </span>
+
+      </a>
+
+      <!-- Main navigation -->
+      <ul class="nav-links">
+        <li>
+          <a href="index.html" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="jobs.html">Jobs</a>
+        </li>
+        <li>
+          <a href="apply.html">Apply</a>
+        </li>
+        <li>
+          <a href="about.html">About</a>
+        </li>
+      </ul>
+
+      <!-- Search -->
+      <div class="nav-actions">
+
+        <form
+          class="nav-search"
+          action="https://duckduckgo.com/"
+          method="GET"
+          role="search"
+        >
+          <label class="visually-hidden" for="site-search">
+            Search
+          </label>
+
+          <input
+            type="search"
+            id="site-search"
+            name="q"
+            placeholder="Search"
+            required
+          >
+
+          <input
+            type="hidden"
+            name="sites"
+            value="jobs.html"
+          >
+        </form>
+
+        <a class="btn-pill" href="apply.html">
+          Get started
+        </a>
+
+        <input hidden type="checkbox" id="setting-toggle">
+
+        <div id="setting-container">
+
+          <input hidden type="checkbox" id="dark-toggle">
+
+          <label
+            for="setting-toggle"
+            class="setting-icon"
+            aria-label="Toggle settings"
+          >
+            <i class="fa-solid fa-gear"></i>
+          </label>
+
+          <div class="settings-dropdown">
+
+            <p class="settings-title">Display settings</p>
+
+            <label for="dark-toggle" class="darkmode-toggle">
+              <span>Dark mode</span>
+
+              <span class="theme-icons" aria-hidden="true">
+                <i class="fa-solid fa-sun sun"></i>
+                <i class="fa-solid fa-moon moon"></i>
+              </span>
+            </label>
+
+            <fieldset class="font-size-options">
+              <legend>Font size</legend>
+
+              <label>
+                <input type="radio" name="font-size"
+                       id="font-super-small">
+                Super small
+              </label>
+
+              <label>
+                <input type="radio" name="font-size"
+                       id="font-small">
+                Small
+              </label>
+
+              <label>
+                <input type="radio" name="font-size"
+                       id="font-normal" checked>
+                Normal
+              </label>
+
+              <label>
+                <input type="radio" name="font-size"
+                       id="font-large">
+                Large
+              </label>
+
+              <label>
+                <input type="radio" name="font-size"
+                       id="font-super-large">
+                Super large
+              </label>
+            </fieldset>
+
+          </div>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- MAIN -->
+
+  <main id="main-content">
+
+    <!-- HERO -->
+
+    
+<!-- HERO -->
+<section class="hero" aria-labelledby="apply-heading">
+
+    <!-- Background animation -->
+    <div class="hero-background" aria-hidden="true">
+        <div class="hero-glow"></div>
+        <div class="hero-orb orb-one"></div>
+        <div class="hero-orb orb-two"></div>
+    </div>
+
+    <div class="container hero-layout">
+
+        <!-- Left content -->
+        <div class="hero-content">
+
+            <p class="tag">DIGITAL HEALTHCARE</p>
+
+            <h1 id="apply-heading">
+                Better Health <br> Smarter Care
+            </h1>
+
+            <p class="hero-text">
+                T1 is a digital health and wellness provider delivering accessible online health information, convenient appointment booking and patient-focused digital services
+            </p>
+
+            <a class="btn btn-submit" href="#home-services">
+                EXPLORE OUR SERVICE
+                <span>&nbsp<i class="fa-solid fa-arrow-right-long"></i></span>
+            </a>
+
+        </div>
+
+        <!-- Right: Online healthcare animation -->
+        <div class="health-animation" aria-label="Illustration of an online doctor consultation">
+
+            <!-- Floating medical icons -->
+            <div class="float-icon icon-heart" aria-hidden="true">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+
+            <div class="float-icon icon-cross" aria-hidden="true">
+                <i class="fa-solid fa-stethoscope"></i>
+            </div>
+
+            <div class="float-icon icon-plus" aria-hidden="true">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+
+            <!-- Video consultation window -->
+            <div class="video-window">
+
+                <div class="video-header">
+                    <span class="live-dot"></span>
+                    <span>ONLINE CONSULTATION</span>
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+
+                <div class="doctor-area">
+
+                    <div class="doctor-avatar" aria-hidden="true">
+
+                        <div class="doctor-hair"></div>
+
+                        <div class="doctor-face">
+                            <div class="doctor-eyes"></div>
+                            <div class="doctor-smile"></div>
+                        </div>
+
+                        <div class="doctor-neck"></div>
+
+                        <div class="doctor-coat">
+                            <div class="doctor-shirt"></div>
+                            <div class="doctor-pocket">T1</div>
+                        </div>
+
+                        <div class="doctor-stethoscope"></div>
+
+                    </div>
+
+                    <div class="doctor-label">
+                        <i class="fa-solid fa-circle-check"></i>
+                        Your doctor is here
+                    </div>
+
+                </div>
+
+                <div class="call-controls">
+                    <span><i class="fa-solid fa-microphone"></i></span>
+                    <span><i class="fa-solid fa-video"></i></span>
+                    <span class="end-call">
+                        <i class="fa-solid fa-phone"></i>
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- Floating health information card -->
+            <div class="health-status">
+
+                <div class="status-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+
+                <div>
+                    <strong>Health matters</strong>
+                    <p>Care from anywhere</p>
+                </div>
+
+                <span class="status-check">
+                    <i class="fa-solid fa-check"></i>
+                </span>
+
+            </div>
+
+            <!-- Heartbeat decoration -->
+            <div class="pulse-line" aria-hidden="true">
+                <svg viewBox="0 0 240 55">
+                    <polyline
+                        points="0,30 45,30 60,30 75,8 91,47 108,18 122,30 160,30 175,30 190,12 205,30 240,30"
+                    />
+                </svg>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+    <!-- SECTION 1: OUR SERVICES -->
+
+    <section id="home-services"
+             aria-labelledby="services-heading">
+
+      <div class="home-container services-layout">
+
+        <!-- Three service cards -->
+        <div class="services-content">
+
+          <p class="section-label">OUR SERVICES</p>
+
+          <h2 id="services-heading">
+            Healthcare designed around you.
+          </h2>
+
+          <div class="service-cards">
+
+            <article class="service-card">
+
+              <div class="service-icon" aria-hidden="true">
+                <i class="fa-solid fa-laptop-medical"></i>
+              </div>
+
+              <h3>Online Patient Platforms</h3>
+
+              <p>
+                We support digital platforms that help patients
+                access healthcare services conveniently.
+              </p>
+
+            </article>
+
+            <article class="service-card">
+
+              <div class="service-icon" aria-hidden="true">
+                <i class="fa-regular fa-calendar-check"></i>
+              </div>
+
+              <h3>Appointment Booking Systems</h3>
+
+              <p>
+                We make it easier for patients to book and manage
+                healthcare appointments online.
+              </p>
+
+            </article>
+
+            <article class="service-card">
+
+              <div class="service-icon" aria-hidden="true">
+                <i class="fa-solid fa-book-open"></i>
+              </div>
+
+              <h3>Health Information Websites</h3>
+
+              <p>
+                We provide accessible digital resources to help
+                people find useful health information.
+              </p>
+
+            </article>
+
+          </div>
+        </div>
+
+
+        <!-- Digital solutions table -->
+        <div class="solutions-content">
+
+          <p class="section-label">OUR DIGITAL SOLUTIONS</p>
+
+          <div class="solutions-table-wrapper">
+
+            <table class="solutions-table">
+
+              <thead>
+                <tr>
+                  <th scope="col">Digital Service</th>
+                  <th scope="col">Purpose</th>
+                  <th scope="col">Target Users</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Online Patient Platforms</td>
+                  <td>Access healthcare services online</td>
+                  <td>Patients</td>
+                </tr>
+
+                <tr>
+                  <td>Appointment Booking Systems</td>
+                  <td>Book and manage appointments</td>
+                  <td>Patients, Clinics</td>
+                </tr>
+
+                <tr>
+                  <td>Health Information Websites</td>
+                  <td>Access health information</td>
+                  <td>General Public</td>
+                </tr>
+              </tbody>
+
+              <tfoot>
+                <tr>
+                  <td colspan="3">
+                    Technology designed to improve digital
+                    healthcare access.
+                  </td>
+                </tr>
+              </tfoot>
+
+            </table>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- SECTION 2: WHY CHOOSE T1 -->
+
+    <section class="why-t1" aria-labelledby="why-heading">
+
+      <div class="home-container why-layout">
+
+        <!-- Introduction -->
+        <div class="why-intro">
+
+          <p class="section-label">WHY CHOOSE T1</p>
+
+          <h2 id="why-heading">
+            Technology with people in mind.
+          </h2>
+
+          <p>
+            Our focus is on creating simple, accessible and
+            reliable digital experiences that connect people
+            with healthcare information and services.
+          </p>
+
+        </div>
+
+
+        <!-- Feature 1 -->
+        <article class="why-feature">
+
+          <div class="feature-icon" aria-hidden="true">
+            <i class="fa-solid fa-users"></i>
+          </div>
+
+          <h3>User-focused</h3>
+
+          <p>
+            We design with real people and their needs in mind.
+          </p>
+
+        </article>
+
+
+        <!-- Feature 2 -->
+        <article class="why-feature">
+
+          <div class="feature-icon" aria-hidden="true">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+
+          <h3>Reliable</h3>
+
+          <p>
+            We build secure and dependable technology you can trust.
+          </p>
+
+        </article>
+
+
+        <!-- Feature 3 -->
+        <article class="why-feature">
+
+          <div class="feature-icon" aria-hidden="true">
+            <i class="fa-regular fa-lightbulb"></i>
+          </div>
+
+          <h3>Innovative</h3>
+
+          <p>
+            We continuously improve for a healthier tomorrow.
+          </p>
+
+        </article>
+
+      </div>
+    </section>
+
+
+    
+<!-- SECTION 3: CAREERS BANNER -->
+
+<section class="careers-banner" aria-labelledby="careers-heading">
+
+    <div class="careers-card">
+
+        <!-- Left content -->
+        <div class="careers-content">
+
+            <p class="section-label">CAREERS AT T1</p>
+
+            <h2 id="careers-heading">
+                We're building a healthier future!
+            </h2>
+
+            <p class="careers-description">
+                Join T1 Health & Wellness and help create
+                better digital healthcare experiences for everyone.
+            </p>
+
+            <!-- Career highlights -->
+            <div class="careers-stats">
+
+                <div class="career-stat">
+                    <strong>124</strong>
+                    <span>Open positions</span>
+                </div>
+
+                <div class="career-stat">
+                    <strong>4</strong>
+                    <span>Offices</span>
+                </div>
+
+            </div>
+
+            <a href="jobs.html" class="careers-button">
+                Explore Careers
+                <span aria-hidden="true">&nbsp<i class="fa-solid fa-arrow-right-long"></i></span>
+            </a>
+
+        </div>
+
+        <!-- Right image -->
+        <div class="careers-image">
+
+            <img
+                src="images/Section3.png"
+                alt="T1 team collaborating on digital healthcare solutions"
+                loading="lazy"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+    
+ <!-- SECTION 4: BOOK AN APPOINTMENT -->
+
+<section class="appointment-section" id="appointment">
+
+    <input
+        type="checkbox"
+        id="appointment-confirm"
+        class="appointment-confirm-toggle"
+    >
+
+    <div class="appointment-container">
+
+        <div class="appointment-heading">
+            <p class="section-label">BOOK AN APPOINTMENT</p>
+            <h2>Your health, one click away.</h2>
+            <p>
+                Request an online consultation with our healthcare team.
+                Choose a service and your preferred appointment date.
+            </p>
+        </div>
+
+        <div class="appointment-card">
+
+            <div class="appointment-card-heading">
+                <span class="appointment-icon" aria-hidden="true">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </span>
+
+                <div>
+                    <h3>Schedule your consultation</h3>
+                    <p>Choose your preferred service and date.</p>
+                </div>
+            </div>
+
+            <form class="appointment-form">
+
+                <div class="appointment-field">
+                    <label for="appointment-service">
+                        Healthcare service
+                    </label>
+
+                    <select id="appointment-service" name="service" required>
+                        <option value="" disabled selected>
+                            Select a service
+                        </option>
+                        <option value="general">
+                            General Consultation
+                        </option>
+                        <option value="specialist">
+                            Specialist Consultation
+                        </option>
+                        <option value="mental-health">
+                            Mental Health Consultation
+                        </option>
+                        <option value="physical-health">
+                            Physical Health Consultation
+                        </option>
+                    </select>
+                </div>
+
+                <div class="appointment-field">
+                    <label for="appointment-date">
+                        Preferred date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="appointment-date"
+                        name="date"
+                        required
+                    >
+                </div>
+
+                <div class="appointment-field">
+                    <label for="appointment-time">
+                        Preferred time
+                    </label>
+
+                    <select id="appointment-time" name="time" required>
+                        <option value="" disabled selected>
+                            Select a time
+                        </option>
+                        <option value="7:00">7:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                    </select>
+                </div>
+                <div class="appointment-field">
+                    <label for="appointment-type">
+                        Consultation Type
+                    </label>
+
+                    <select id="appointment-type" name="consultation-type" required>
+                        <option value="" disabled selected>
+                            Select consultation type
+                        </option>
+                        <option value="online">
+                            Online Consultation
+                        </option>
+                        <option value="in-person">
+                            In-person Consultation (at our office)
+                        </option>
+                    </select>
+                </div>
+
+                <label
+                    for="appointment-confirm"
+                    class="appointment-button"
+                >
+                    Book Appointment
+                    <span aria-hidden="true">
+                    <i class="fa-solid fa-arrow-right"
+                       aria-hidden="true"></i>
+                      </span>
+                </label>
+
+            </form>
+
+            <p class="appointment-note">
+                Your appointment time is subject to availability and confirmation by our team.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Confirmation message -->
+    <div class="appointment-confirmation" role="status">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+
+        <p>
+            <strong>Appointment request received!</strong>
+            This is a demo confirmation. No real appointment has been submitted.
+        </p>
+
+        <label for="appointment-confirm" class="appointment-dismiss">
+            Dismiss
+        </label>
+    </div>
+
+</section>
+
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="site-footer">
+
+    <div class="footer-inner">
+
+      <!-- Logo and brand -->
+      <a href="index.html"
+         class="footer-brand"
+         aria-label="T1 Health &amp; Wellness - home">
+
+        <img
+          src="images/logo.png"
+          alt=""
+          class="brand-logo"
+        >
+
+        <span class="brand-text">
+          <strong>T1</strong>
+          <span>HEALTH &amp; WELLNESS</span>
+        </span>
+
+      </a>
+
+
+      <!-- Footer navigation -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="jobs.html">Jobs</a></li>
+          <li><a href="apply.html">Apply</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+
+      </nav>
+
+    </div>
+
+    <p class="footer-copy">
+      &copy; 2026 T1 Health &amp; Wellness. All rights reserved.
+    </p>
+
+  </footer>
+
+</body>
+</html>
