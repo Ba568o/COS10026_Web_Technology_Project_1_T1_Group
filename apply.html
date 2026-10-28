@@ -106,7 +106,8 @@
               <p class="required-note"><span class="required">*</span> Required fields</p>
             </div>
             <!-- Application form: all field sections must remain inside this form. -->
-            <form action="https://mercury.swin.edu.au/it000000/formtest.php" method="POST" class="apply-form">
+            <!-- enctype is required so the CV file is sent with the form -->
+            <form action="https://mercury.swin.edu.au/it000000/formtest.php" method="POST" enctype="multipart/form-data" class="apply-form">
               <fieldset class="form-section" id="personal-info">
                 <legend><span class="section-number" aria-hidden="true">01</span> Personal information</legend>
                 <p class="section-description">Let’s start with your details and how we can reach you.</p>
@@ -210,7 +211,7 @@
               </fieldset>
               <fieldset class="form-section" id="job-details">
                 <legend><span class="section-number" aria-hidden="true">03</span> Your role &amp; skills</legend>
-                <p class="section-description">Choose your role and the skills you’d bring to T1.</p>
+                <p class="section-description">Choose your role, the skills you’d bring to T1, and upload your CV.</p>
 
                 <!-- Row: Job Reference + Preferred Position -->
                 <div class="form-row">
@@ -265,6 +266,14 @@
                     placeholder="Describe any additional skills, certifications, or relevant experience..." maxlength="500"
                     aria-describedby="other-skills-help"></textarea>
                   <small id="other-skills-help" class="form-help">Maximum 500 characters</small>
+                </div>
+
+                <!-- CV upload. accept only suggests a file type; the server still has to check it. -->
+                <div class="form-group form-group-full">
+                  <label for="cv">Upload CV <span class="required">*</span></label>
+                  <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required aria-required="true"
+                    aria-describedby="cv-help">
+                  <small id="cv-help" class="form-help file-note">PDF, DOC or DOCX</small>
                 </div>
               </fieldset>
               <fieldset class="form-section" id="submit-section">
