@@ -33,10 +33,10 @@
 
       <!-- Middle: main menu -->
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="jobs.html" aria-current="page">Jobs</a></li>
-        <li><a href="apply.html">Apply</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="index.html"><span class="language-en">Home</span><span class="language-vi">Trang chủ</span></a></li>
+        <li><a href="jobs.html" aria-current="page"><span class="language-en">Jobs</span><span class="language-vi">Việc làm</span></a></li>
+        <li><a href="apply.html"><span class="language-en">Apply</span><span class="language-vi">Ứng tuyển</span></a></li>
+        <li><a href="about.html"><span class="language-en">About</span><span class="language-vi">Giới thiệu</span></a></li>
       </ul>
 
       <!-- Right: search box + call-to-action button -->
@@ -46,7 +46,7 @@
           <input type="search" id="site-search" name="q" placeholder="Search" required>
           <input type="hidden" name="sites" value="jobs.html">
         </form>
-        <a class="btn-pill" href="jobs.html">Get started</a>
+        <a class="btn-pill" href="jobs.html"><span class="language-en">Get started</span><span class="language-vi">Bắt đầu</span></a>
         <input hidden type="checkbox" id="setting-toggle">
         <div id="setting-container">
           <!-- Hidden checkbox to toggle dark mode -->
@@ -55,21 +55,26 @@
             <i class="fa-solid fa-gear"></i>
           </label>
           <div class="settings-dropdown">
-            <p class="settings-title">Display settings</p>
+            <p class="settings-title"><span class="language-en">Display settings</span><span class="language-vi">Cài đặt hiển thị</span></p>
+            <fieldset class="language-options">
+              <legend><span class="language-en">Language</span><span class="language-vi">Ngôn ngữ</span></legend>
+              <label><input type="radio" name="language" id="language-en" checked> English</label>
+              <label><input type="radio" name="language" id="language-vi"> Tiếng Việt</label>
+            </fieldset>
             <label for="dark-toggle" class="darkmode-toggle">
-              <span>Dark mode</span>
+              <span><span class="language-en">Dark mode</span><span class="language-vi">Chế độ tối</span></span>
               <span class="theme-icons" aria-hidden="true">
                 <i class="fa-solid fa-sun sun"></i>
                 <i class="fa-solid fa-moon moon"></i>
               </span>
             </label>
             <fieldset class="font-size-options">
-              <legend>Font size</legend>
-              <label><input type="radio" name="font-size" id="font-super-small"> Super small</label>
-              <label><input type="radio" name="font-size" id="font-small"> Small</label>
-              <label><input type="radio" name="font-size" id="font-normal" checked> Normal</label>
-              <label><input type="radio" name="font-size" id="font-large"> Large</label>
-              <label><input type="radio" name="font-size" id="font-super-large"> Super large</label>
+              <legend><span class="language-en">Font size</span><span class="language-vi">Cỡ chữ</span></legend>
+              <label><input type="radio" name="font-size" id="font-super-small"> <span class="language-en">Super small</span><span class="language-vi">Rất nhỏ</span></label>
+              <label><input type="radio" name="font-size" id="font-small"> <span class="language-en">Small</span><span class="language-vi">Nhỏ</span></label>
+              <label><input type="radio" name="font-size" id="font-normal" checked> <span class="language-en">Normal</span><span class="language-vi">Bình thường</span></label>
+              <label><input type="radio" name="font-size" id="font-large"> <span class="language-en">Large</span><span class="language-vi">Lớn</span></label>
+              <label><input type="radio" name="font-size" id="font-super-large"> <span class="language-en">Super large</span><span class="language-vi">Rất lớn</span></label>
             </fieldset>
           </div>
         </div>
@@ -86,18 +91,17 @@
 
         <!-- Left: heading, short text and button -->
         <div class="hero-content">
-          <p class="tag">YOUR FUTURE AT T1</p>
-          <h1 id="apply-heading">Great things start<br>with you.</h1>
-          <p class="hero-text">Bring your curiosity, your ideas, and your ambition. Let&rsquo;s take the next step,
-            together.</p>
-          <a class="btn btn-submit" href="apply.html">Apply Now &rarr;</a>
+          <p class="tag"><span class="language-en">YOUR FUTURE AT T1</span><span class="language-vi">TƯƠNG LAI CỦA BẠN TẠI T1</span></p>
+          <h1 id="apply-heading"><span class="language-en">Great things start<br>with you.</span><span class="language-vi">Điều tuyệt vời bắt đầu<br>từ bạn.</span></h1>
+          <p class="hero-text"><span class="language-en">Bring your curiosity, your ideas, and your ambition. Let&rsquo;s take the next step, together.</span><span class="language-vi">Mang theo sự tò mò, ý tưởng và khát vọng của bạn. Hãy cùng nhau tiến thêm một bước.</span></p>
+          <a class="btn btn-submit" href="apply.html"><span class="language-en">Apply Now &rarr;</span><span class="language-vi">Ứng tuyển ngay &rarr;</span></a>
         </div>
 
         <!-- Right: black team card -->
         <div class="team-note">
           <img src="images/logo.png" alt="" class="team-logo">
-          <p>Different strengths.<br><strong>One team.</strong></p>
-          <span class="team-caption">That&rsquo;s the T1 spirit.</span>
+          <p><span class="language-en">Different strengths.<br><strong>One team.</strong></span><span class="language-vi">Mỗi người một thế mạnh.<br><strong>Một đội ngũ.</strong></span></p>
+          <span class="team-caption"><span class="language-en">That&rsquo;s the T1 spirit.</span><span class="language-vi">Đó là tinh thần T1.</span></span>
         </div>
 
       </div>
@@ -107,32 +111,31 @@
       <div id="job-list">
         <div class="job-card salary-under-30 location-hcm job-support">
           <div class="ref-code">
-            <p>Job ID: <span class="ref-code-value">DHS02</span></p>
+            <p><span class="language-en">Job ID:</span><span class="language-vi">Mã việc làm:</span> <span class="ref-code-value">DHS02</span></p>
           </div>
-          <h2>Digital Health Support Specialist</h2>
-          <p class="company-name">T1 Health &amp; Wellness</p>
-          <h3>Customer Support | Full-time</h3>
-          <p>Assist users with online patient platforms and appointment booking systems, resolving common technical or
-            account-related issues.</p>
+          <h2><span class="language-en">Digital Health Support Specialist</span><span class="language-vi">Chuyên viên hỗ trợ sức khỏe số</span></h2>
+          <p class="company-name"><span class="language-en">T1 Health &amp; Wellness</span><span class="language-vi">T1 Sức khỏe &amp; Wellness</span></p>
+          <h3><span class="language-en">Customer Support | Full-time</span><span class="language-vi">Hỗ trợ khách hàng | Toàn thời gian</span></h3>
+          <p><span class="language-en">Assist users with online patient platforms and appointment booking systems, resolving common technical or account-related issues.</span><span class="language-vi">Hỗ trợ người dùng các nền tảng bệnh nhân trực tuyến và hệ thống đặt lịch, giải quyết các vấn đề kỹ thuật hoặc tài khoản thường gặp.</span></p>
           <div class="job-meta">
-            <p><span class="meta-label">Salary</span>18 - 28 million VND / month</p>
-            <p><span class="meta-label">Location</span>Ho Chi Minh City, Vietnam</p>
+            <p><span class="meta-label"><span class="language-en">Salary</span><span class="language-vi">Lương</span></span><span class="language-en">18 - 28 million VND / month</span><span class="language-vi">18 - 28 triệu VND / tháng</span></p>
+            <p><span class="meta-label"><span class="language-en">Location</span><span class="language-vi">Địa điểm</span></span><span class="language-en">Ho Chi Minh City, Vietnam</span><span class="language-vi">Thành phố Hồ Chí Minh, Việt Nam</span></p>
           </div>
           <div class="job-details">
-            <h3>Key Responsibilities</h3>
+            <h3><span class="language-en">Key Responsibilities</span><span class="language-vi">Trách nhiệm chính</span></h3>
             <ul>
-              <li>Assist users with accessing and navigating online platforms.</li>
-              <li>Guide users through appointment booking and account management.</li>
-              <li>Respond to enquiries and coordinate reported issues with technical teams.</li>
-              <li>Maintain professional and helpful communication.</li>
+              <li><span class="language-en">Assist users with accessing and navigating online platforms.</span><span class="language-vi">Hỗ trợ người dùng truy cập và sử dụng các nền tảng trực tuyến.</span></li>
+              <li><span class="language-en">Guide users through appointment booking and account management.</span><span class="language-vi">Hướng dẫn người dùng đặt lịch và quản lý tài khoản.</span></li>
+              <li><span class="language-en">Respond to enquiries and coordinate reported issues with technical teams.</span><span class="language-vi">Phản hồi thắc mắc và phối hợp vấn đề với đội ngũ kỹ thuật.</span></li>
+              <li><span class="language-en">Maintain professional and helpful communication.</span><span class="language-vi">Duy trì giao tiếp chuyên nghiệp và hữu ích.</span></li>
             </ul>
-            <h3>Requirements</h3>
+            <h3><span class="language-en">Requirements</span><span class="language-vi">Yêu cầu</span></h3>
             <ul>
-              <li>Strong communication and problem-solving skills.</li>
-              <li>Basic computer and digital platform skills.</li>
-              <li>Patience and a customer-focused attitude.</li>
-              <li>Ability to explain technical steps clearly.</li>
-              <li>Previous customer support experience is desirable.</li>
+              <li><span class="language-en">Strong communication and problem-solving skills.</span><span class="language-vi">Kỹ năng giao tiếp và giải quyết vấn đề tốt.</span></li>
+              <li><span class="language-en">Basic computer and digital platform skills.</span><span class="language-vi">Kỹ năng máy tính và nền tảng số cơ bản.</span></li>
+              <li><span class="language-en">Patience and a customer-focused attitude.</span><span class="language-vi">Kiên nhẫn và thái độ hướng đến khách hàng.</span></li>
+              <li><span class="language-en">Ability to explain technical steps clearly.</span><span class="language-vi">Có khả năng giải thích rõ ràng các bước kỹ thuật.</span></li>
+              <li><span class="language-en">Previous customer support experience is desirable.</span><span class="language-vi">Ưu tiên có kinh nghiệm hỗ trợ khách hàng.</span></li>
             </ul>
           </div>
           <input type="checkbox" id="show_details_dhs02" class="show-details-checkbox visually-hidden">
@@ -140,18 +143,17 @@
             <span class="visually-hidden">Toggle job details for Digital Health Support Specialist</span>
             <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
           </label>
-          <a class="job-apply-button" href="apply.html#skip-to-application">Apply for this job</a>
+          <a class="job-apply-button" href="apply.html#skip-to-application"><span class="language-en">Apply for this job</span><span class="language-vi">Ứng tuyển công việc này</span></a>
         </div>
 
         <div class="job-card salary-30-50 location-hanoi job-design">
           <div class="ref-code">
             <p>Job ID: <span class="ref-code-value">UXD04</span></p>
           </div>
-          <h2>Healthcare UX/UI Designer</h2>
-          <p class="company-name">Vinmec Digital Health</p>
-          <h3>Product Design | Full-time</h3>
-          <p>Create intuitive and accessible interfaces that help patients find health information and manage
-            appointments with ease.</p>
+          <h2><span class="language-en">Healthcare UX/UI Designer</span><span class="language-vi">Nhà thiết kế UX/UI chăm sóc sức khỏe</span></h2>
+          <p class="company-name"><span class="language-en">Vinmec Digital Health</span><span class="language-vi">Vinmec Sức khỏe số</span></p>
+          <h3><span class="language-en">Product Design | Full-time</span><span class="language-vi">Thiết kế sản phẩm | Toàn thời gian</span></h3>
+          <p><span class="language-en">Create intuitive and accessible interfaces that help patients find health information and manage appointments with ease.</span><span class="language-vi">Tạo giao diện trực quan và dễ tiếp cận giúp bệnh nhân tìm thông tin sức khỏe và quản lý lịch hẹn dễ dàng.</span></p>
           <div class="job-meta">
             <p><span class="meta-label">Salary</span>30 - 50 million VND / month</p>
             <p><span class="meta-label">Location</span>Hanoi, Vietnam</p>
@@ -178,18 +180,17 @@
             <span class="visually-hidden">Toggle job details for Digital Health Support Specialist</span>
             <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
           </label>
-          <a class="job-apply-button" href="apply.html#skip-to-application">Apply for this job</a>
+          <a class="job-apply-button" href="apply.html#skip-to-application"><span class="language-en">Apply for this job</span><span class="language-vi">Ứng tuyển công việc này</span></a>
         </div>
 
         <div class="job-card salary-over-50 location-danang job-development">
           <div class="ref-code">
             <p>Job ID: <span class="ref-code-value">DHD05</span></p>
           </div>
-          <h2>Digital Health Software Developer</h2>
-          <p class="company-name">FPT Smart Healthcare</p>
-          <h3>Software Development | Full-time</h3>
-          <p>Build and maintain reliable, user-friendly software for patient platforms, appointment systems and health
-            information websites.</p>
+          <h2><span class="language-en">Digital Health Software Developer</span><span class="language-vi">Lập trình viên phần mềm sức khỏe số</span></h2>
+          <p class="company-name"><span class="language-en">FPT Smart Healthcare</span><span class="language-vi">FPT Chăm sóc sức khỏe thông minh</span></p>
+          <h3><span class="language-en">Software Development | Full-time</span><span class="language-vi">Phát triển phần mềm | Toàn thời gian</span></h3>
+          <p><span class="language-en">Build and maintain reliable, user-friendly software for patient platforms, appointment systems and health information websites.</span><span class="language-vi">Xây dựng và duy trì phần mềm đáng tin cậy, thân thiện cho nền tảng bệnh nhân, hệ thống đặt lịch và website thông tin sức khỏe.</span></p>
           <div class="job-meta">
             <p><span class="meta-label">Salary</span>45 - 75 million VND / month</p>
             <p><span class="meta-label">Location</span>Da Nang, Vietnam</p>
@@ -216,18 +217,17 @@
             <span class="visually-hidden">Toggle job details for Digital Health Support Specialist</span>
             <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
           </label>
-          <a class="job-apply-button" href="apply.html#skip-to-application">Apply for this job</a>
+          <a class="job-apply-button" href="apply.html#skip-to-application"><span class="language-en">Apply for this job</span><span class="language-vi">Ứng tuyển công việc này</span></a>
         </div>
 
         <div class="job-card salary-under-30 location-hanoi job-qa">
           <div class="ref-code">
             <p>Job ID: <span class="ref-code-value">QAT06</span></p>
           </div>
-          <h2>Healthcare Quality Assurance Tester</h2>
-          <p class="company-name">Medlatec Digital</p>
-          <h3>Quality Assurance | Full-time</h3>
-          <p>Test digital healthcare services and appointment workflows to identify issues before release and provide a
-            reliable user experience.</p>
+          <h2><span class="language-en">Healthcare Quality Assurance Tester</span><span class="language-vi">Kiểm thử đảm bảo chất lượng chăm sóc sức khỏe</span></h2>
+          <p class="company-name"><span class="language-en">Medlatec Digital</span><span class="language-vi">Medlatec Số</span></p>
+          <h3><span class="language-en">Quality Assurance | Full-time</span><span class="language-vi">Đảm bảo chất lượng | Toàn thời gian</span></h3>
+          <p><span class="language-en">Test digital healthcare services and appointment workflows to identify issues before release and provide a reliable user experience.</span><span class="language-vi">Kiểm thử dịch vụ chăm sóc sức khỏe số và quy trình đặt lịch để phát hiện lỗi trước khi phát hành.</span></p>
           <div class="job-meta">
             <p><span class="meta-label">Salary</span>22 - 38 million VND / month</p>
             <p><span class="meta-label">Location</span>Hanoi, Vietnam</p>
@@ -254,18 +254,17 @@
             <span class="visually-hidden">Toggle job details for Digital Health Support Specialist</span>
             <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
           </label>
-          <a class="job-apply-button" href="apply.html#skip-to-application">Apply for this job</a>
+          <a class="job-apply-button" href="apply.html#skip-to-application"><span class="language-en">Apply for this job</span><span class="language-vi">Ứng tuyển công việc này</span></a>
         </div>
 
         <div class="job-card salary-over-50 location-hcm job-analytics">
           <div class="ref-code">
             <p>Job ID: <span class="ref-code-value">HDA03</span></p>
           </div>
-          <h2>Health Data Analyst</h2>
-          <p class="company-name">VNG HealthTech</p>
-          <h3>Data Analytics | Full-time</h3>
-          <p>Analyse digital healthcare data to identify trends, evaluate service performance and support data-driven
-            decisions responsibly.</p>
+          <h2><span class="language-en">Health Data Analyst</span><span class="language-vi">Chuyên viên phân tích dữ liệu sức khỏe</span></h2>
+          <p class="company-name"><span class="language-en">VNG HealthTech</span><span class="language-vi">VNG HealthTech</span></p>
+          <h3><span class="language-en">Data Analytics | Full-time</span><span class="language-vi">Phân tích dữ liệu | Toàn thời gian</span></h3>
+          <p><span class="language-en">Analyse digital healthcare data to identify trends, evaluate service performance and support data-driven decisions responsibly.</span><span class="language-vi">Phân tích dữ liệu chăm sóc sức khỏe số để nhận diện xu hướng, đánh giá hiệu quả dịch vụ và hỗ trợ quyết định dựa trên dữ liệu.</span></p>
           <div class="job-meta">
             <p><span class="meta-label">Salary</span>35 - 60 million VND / month</p>
             <p><span class="meta-label">Location</span>Ho Chi Minh City, Vietnam</p>
@@ -299,12 +298,10 @@
           <div class="ref-code">
             <p>Job ID: <span class="ref-code-value">HCW01</span></p>
           </div>
-          <h2>Healthcare Content Writer</h2>
-          <p class="company-name">eDoctor Vietnam</p>
-          <h3>Description</h3>
-          <p>We are looking for a Healthcare Content Writer to create clear, engaging and reliable health-related
-            content for our digital health information websites. The successful candidate will help users understand
-            health topics through accessible and well-organised digital content.</p>
+          <h2><span class="language-en">Healthcare Content Writer</span><span class="language-vi">Biên tập viên nội dung chăm sóc sức khỏe</span></h2>
+          <p class="company-name"><span class="language-en">eDoctor Vietnam</span><span class="language-vi">eDoctor Việt Nam</span></p>
+          <h3><span class="language-en">Description</span><span class="language-vi">Mô tả</span></h3>
+          <p><span class="language-en">We are looking for a Healthcare Content Writer to create clear, engaging and reliable health-related content for our digital health information websites. The successful candidate will help users understand health topics through accessible and well-organised digital content.</span><span class="language-vi">Chúng tôi tìm kiếm biên tập viên nội dung chăm sóc sức khỏe để tạo nội dung rõ ràng, hấp dẫn và đáng tin cậy cho các website thông tin sức khỏe số.</span></p>
           <div class="job-meta">
             <p><span class="meta-label">Salary</span>Negotiable</p>
             <p><span class="meta-label">Location</span>Can Tho, Vietnam</p>
@@ -340,31 +337,31 @@
             <span class="visually-hidden">Toggle job details for Digital Health Support Specialist</span>
             <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
           </label>
-          <a class="job-apply-button" href="apply.html#skip-to-application">Apply for this job</a>
+          <a class="job-apply-button" href="apply.html#skip-to-application"><span class="language-en">Apply for this job</span><span class="language-vi">Ứng tuyển công việc này</span></a>
         </div>
       </div>
       <div class="FilterSidebar-Container">
         <div id="job-filter">
           <form>
             <fieldset>
-              <legend class="filter-main-title">Filter</legend>
+                <legend class="filter-main-title"><span class="language-en">Filter</span><span class="language-vi">Bộ lọc</span></legend>
 
               <fieldset class="filter-group">
-                <legend>Salary</legend>
-                <label><input type="radio" name="salary" id="salary-all" checked> All salaries</label>
-                <label><input type="radio" name="salary" id="salary-under-30"> Under 30M VND</label>
-                <label><input type="radio" name="salary" id="salary-30-50"> 30M - 50M VND</label>
-                <label><input type="radio" name="salary" id="salary-over-50"> Over 50M VND</label>
-                <label><input type="radio" name="salary" id="salary-negotiable"> Negotiable</label>
+                <legend><span class="language-en">Salary</span><span class="language-vi">Lương</span></legend>
+                <label><input type="radio" name="salary" id="salary-all" checked> <span class="language-en">All salaries</span><span class="language-vi">Tất cả mức lương</span></label>
+                <label><input type="radio" name="salary" id="salary-under-30"> <span class="language-en">Under 30M VND</span><span class="language-vi">Dưới 30 triệu VND</span></label>
+                <label><input type="radio" name="salary" id="salary-30-50"> <span class="language-en">30M - 50M VND</span><span class="language-vi">30 - 50 triệu VND</span></label>
+                <label><input type="radio" name="salary" id="salary-over-50"> <span class="language-en">Over 50M VND</span><span class="language-vi">Trên 50 triệu VND</span></label>
+                <label><input type="radio" name="salary" id="salary-negotiable"> <span class="language-en">Negotiable</span><span class="language-vi">Thỏa thuận</span></label>
               </fieldset>
 
               <fieldset class="filter-group">
-                <legend>Location</legend>
-                <label><input type="radio" name="location" id="location-all" checked> All locations</label>
-                <label><input type="radio" name="location" id="location-hcm"> Ho Chi Minh City</label>
-                <label><input type="radio" name="location" id="location-hanoi"> Hanoi</label>
-                <label><input type="radio" name="location" id="location-danang"> Da Nang</label>
-                <label><input type="radio" name="location" id="location-cantho"> Can Tho</label>
+                <legend><span class="language-en">Location</span><span class="language-vi">Địa điểm</span></legend>
+                <label><input type="radio" name="location" id="location-all" checked> <span class="language-en">All locations</span><span class="language-vi">Tất cả địa điểm</span></label>
+                <label><input type="radio" name="location" id="location-hcm"> <span class="language-en">Ho Chi Minh City</span><span class="language-vi">Thành phố Hồ Chí Minh</span></label>
+                <label><input type="radio" name="location" id="location-hanoi"> <span class="language-en">Hanoi</span><span class="language-vi">Hà Nội</span></label>
+                <label><input type="radio" name="location" id="location-danang"> <span class="language-en">Da Nang</span><span class="language-vi">Đà Nẵng</span></label>
+                <label><input type="radio" name="location" id="location-cantho"> <span class="language-en">Can Tho</span><span class="language-vi">Cần Thơ</span></label>
               </fieldset>
 
               <fieldset class="filter-group">
@@ -377,7 +374,7 @@
                 <label><input type="radio" name="job-type" id="job-type-analytics"> Data analytics</label>
                 <label><input type="radio" name="job-type" id="job-type-content"> Content writing</label>
               </fieldset>
-              <button type="reset" class="clear-filters">Clear filters</button>
+              <button type="reset" class="clear-filters"><span class="language-en">Clear filters</span><span class="language-vi">Xóa bộ lọc</span></button>
             </fieldset>
           </form>
         </div>
@@ -385,7 +382,7 @@
         <aside class="sidebar">
 
           <section class="tips-box">
-            <h3>Application Tips</h3>
+            <h3><span class="language-en">Application Tips</span><span class="language-vi">Mẹo ứng tuyển</span></h3>
             <ul>
               <li>Read the job description carefully to understand the role and requirements.</li>
               <li>Prepare your resume and cover letter tailored to the specific job.</li>
@@ -395,16 +392,16 @@
             </ul>
           </section>
           <section class="disclaimer-box">
-            <h3>Disclaimer</h3>
+            <h3><span class="language-en">Disclaimer</span><span class="language-vi">Tuyên bố miễn trừ</span></h3>
             <p>All job listings are subject to change and may be filled or removed at any time. T1 Health & Wellness is not responsible for any discrepancies or inaccuracies in the job postings.</p>
           </section>
           <section class="ref-code-box">
-            <h3>Job Reference Code</h3>
+            <h3><span class="language-en">Job Reference Code</span><span class="language-vi">Mã tham chiếu công việc</span></h3>
             <p>Double-check your <strong>Job Reference Code</strong> before submitting the application form!</p>
           </section>
 
           <section class="help-box">
-            <h3>Need Help?</h3>
+            <h3><span class="language-en">Need Help?</span><span class="language-vi">Cần trợ giúp?</span></h3>
             <p>Contact our HR team at <a href="mailto:106208127@student.swin.edu.au">106208127@student.swin.edu.au</a>
             </p>
           </section>
@@ -428,10 +425,10 @@
       <!-- Right: quick links -->
       <nav class="footer-nav" aria-label="Footer navigation">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="jobs.html">Jobs</a></li>
-          <li><a href="apply.html">Apply</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="index.html"><span class="language-en">Home</span><span class="language-vi">Trang chủ</span></a></li>
+          <li><a href="jobs.html"><span class="language-en">Jobs</span><span class="language-vi">Việc làm</span></a></li>
+          <li><a href="apply.html"><span class="language-en">Apply</span><span class="language-vi">Ứng tuyển</span></a></li>
+          <li><a href="about.html"><span class="language-en">About</span><span class="language-vi">Giới thiệu</span></a></li>
         </ul>
       </nav>
 
