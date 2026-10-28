@@ -673,9 +673,243 @@ input[type="checkbox"] {
   }
 }
 
+/* --------------------------------------------------------------------------
+   9. Display settings (gear in the header, same idea as the jobs page)
+   A hidden checkbox opens the panel. No JavaScript.
+   -------------------------------------------------------------------------- */
+#setting-container {
+  position: relative;
+}
+
+.setting-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.setting-icon .fa-gear {
+  transition: transform 0.3s ease;
+}
+
+.setting-icon:hover .fa-gear {
+  transform: rotate(90deg);
+}
+
+/* The checkbox is the previous sibling of #setting-container */
+#setting-toggle:checked + #setting-container .fa-gear {
+  transform: rotate(180deg);
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  right: 0;
+  z-index: 20;
+  display: none;
+  width: 15rem;
+  padding: 1rem;
+  border: 1px solid #dcdcd5;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  color: #111111;
+  box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.2);
+}
+
+#setting-toggle:checked + #setting-container .settings-dropdown {
+  display: block;
+}
+
+.settings-title {
+  margin: 0 0 0.75rem;
+  font-weight: 700;
+}
+
+.darkmode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 0.75rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.theme-icons {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 3.5rem;
+  height: 1.8rem;
+  padding: 0.2rem;
+  overflow: hidden;
+  border: 1px solid #dcdcd5;
+  border-radius: 999px;
+  background: #f4f4f0;
+  color: #5f5f5a;
+}
+
+.sun,
+.moon {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 1.35rem;
+  border-radius: 50%;
+  line-height: 1.35rem;
+  text-align: center;
+}
+
+.sun {
+  display: block;
+}
+
+.moon {
+  display: none;
+}
+
+.font-size-options {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0.75rem 0 0;
+  border: 0;
+  border-top: 1px solid #dcdcd5;
+}
+
+.font-size-options legend {
+  padding: 0;
+  font-weight: 700;
+}
+
+.font-size-options label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/* Font size choices change the root size. The page uses rem, so text scales. */
+html:has(#font-super-small:checked) {
+  font-size: 12px;
+}
+
+html:has(#font-small:checked) {
+  font-size: 14px;
+}
+
+html:has(#font-normal:checked) {
+  font-size: clamp(16px, 1vw, 24px);
+}
+
+html:has(#font-large:checked) {
+  font-size: 20px;
+}
+
+html:has(#font-super-large:checked) {
+  font-size: 24px;
+}
+
+/* Dark mode only on this page, so the jobs page keeps its own colours */
+body.apply-page:has(#dark-toggle:checked) {
+  background: #111111;
+  color: #f5f5f5;
+}
+
+body.apply-page:has(#dark-toggle:checked) .site-header,
+body.apply-page:has(#dark-toggle:checked) .site-footer {
+  background: #050505;
+}
+
+body.apply-page:has(#dark-toggle:checked) .theme-icons {
+  border-color: #5a1b25;
+  background: #111111;
+  color: #ff5268;
+}
+
+body.apply-page:has(#dark-toggle:checked) .sun {
+  display: none;
+}
+
+body.apply-page:has(#dark-toggle:checked) .moon {
+  display: block;
+  transform: translateX(1.7rem);
+}
+
+body.apply-page:has(#dark-toggle:checked) .hero,
+body.apply-page:has(#dark-toggle:checked) .application-section {
+  background: #111111;
+}
+
+body.apply-page:has(#dark-toggle:checked) .hero h1,
+body.apply-page:has(#dark-toggle:checked) .application-sidebar h2,
+body.apply-page:has(#dark-toggle:checked) .form-heading h2,
+body.apply-page:has(#dark-toggle:checked) .form-section legend {
+  color: #f5f5f5;
+}
+
+body.apply-page:has(#dark-toggle:checked) .hero-text,
+body.apply-page:has(#dark-toggle:checked) .sidebar-description,
+body.apply-page:has(#dark-toggle:checked) .section-description,
+body.apply-page:has(#dark-toggle:checked) .section-nav small,
+body.apply-page:has(#dark-toggle:checked) .sidebar-help,
+body.apply-page:has(#dark-toggle:checked) .required-note,
+body.apply-page:has(#dark-toggle:checked) .form-help,
+body.apply-page:has(#dark-toggle:checked) .acknowledgement p {
+  color: #dddddd;
+}
+
+body.apply-page:has(#dark-toggle:checked) .team-note {
+  border: 1px solid #5a1b25;
+  background: #1b1b1b;
+}
+
+body.apply-page:has(#dark-toggle:checked) .application-card,
+body.apply-page:has(#dark-toggle:checked) .settings-dropdown {
+  border-color: #4e4e4e;
+  background: #1b1b1b;
+  color: #f5f5f5;
+}
+
+body.apply-page:has(#dark-toggle:checked) .form-heading,
+body.apply-page:has(#dark-toggle:checked) .form-section,
+body.apply-page:has(#dark-toggle:checked) .section-nav li + li,
+body.apply-page:has(#dark-toggle:checked) .form-buttons,
+body.apply-page:has(#dark-toggle:checked) .font-size-options {
+  border-color: #4e4e4e;
+}
+
+body.apply-page:has(#dark-toggle:checked) .form-group input:not([type="radio"]):not([type="checkbox"]),
+body.apply-page:has(#dark-toggle:checked) .form-group select,
+body.apply-page:has(#dark-toggle:checked) .form-group textarea {
+  border-color: #4e4e4e;
+  background: #111111;
+  color: #f5f5f5;
+}
+
+body.apply-page:has(#dark-toggle:checked) .checkbox-label {
+  border-color: #4e4e4e;
+}
+
+body.apply-page:has(#dark-toggle:checked) .acknowledgement {
+  background: #111111;
+}
+
+body.apply-page:has(#dark-toggle:checked) .btn-reset {
+  border-color: #4e4e4e;
+  background: #1b1b1b;
+  color: #dddddd;
+}
+
 /* Respect users who prefer less motion */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .setting-icon .fa-gear {
+    transition: none;
   }
 }
