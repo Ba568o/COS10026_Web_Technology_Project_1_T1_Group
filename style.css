@@ -417,12 +417,12 @@ a {
 }
 
 .sun {
-  display: block;
+  display: block !important;
   transform: translateX(0);
 }
 
 .moon {
-  display: none;
+  display: none !important;
 }
 
 html {
