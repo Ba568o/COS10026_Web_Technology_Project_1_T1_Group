@@ -554,152 +554,143 @@
 
     </div>
 
-</section>
-
-
-    
- <!-- SECTION 4: BOOK AN APPOINTMENT -->
-
+</section>   
+ 
+<!-- SECTION 4: HEALTHCARE SERVICES AND BOOKING -->
 <section class="appointment-section" id="appointment">
-
-    <input
-        type="checkbox"
-        id="appointment-confirm"
-        class="appointment-confirm-toggle"
-    >
-
-    <div class="appointment-container">
-
-        <div class="appointment-heading">
-            <p class="section-label">BOOK AN APPOINTMENT</p>
-            <h2>Your health, one click away.</h2>
-            <p>
-                Request an online consultation with our healthcare team.
-                Choose a service and your preferred appointment date.
-            </p>
-        </div>
-
-        <div class="appointment-card">
-
-            <div class="appointment-card-heading">
-                <span class="appointment-icon" aria-hidden="true">
-                    <i class="fa-solid fa-calendar-check"></i>
-                </span>
-
-                <div>
-                    <h3>Schedule your consultation</h3>
-                    <p>Choose your preferred service and date.</p>
-                </div>
-            </div>
-
-            <form class="appointment-form">
-
-                <div class="appointment-field">
-                    <label for="appointment-service">
-                        Healthcare service
-                    </label>
-
-                    <select id="appointment-service" name="service" required>
-                        <option value="" disabled selected>
-                            Select a service
-                        </option>
-                        <option value="general">
-                            General Consultation
-                        </option>
-                        <option value="specialist">
-                            Specialist Consultation
-                        </option>
-                        <option value="mental-health">
-                            Mental Health Consultation
-                        </option>
-                        <option value="physical-health">
-                            Physical Health Consultation
-                        </option>
-                    </select>
-                </div>
-
-                <div class="appointment-field">
-                    <label for="appointment-date">
-                        Preferred date
-                    </label>
-
-                    <input
-                        type="date"
-                        id="appointment-date"
-                        name="date"
-                        required
-                    >
-                </div>
-
-                <div class="appointment-field">
-                    <label for="appointment-time">
-                        Preferred time
-                    </label>
-
-                    <select id="appointment-time" name="time" required>
-                        <option value="" disabled selected>
-                            Select a time
-                        </option>
-                        <option value="7:00">7:00 AM</option>
-                        <option value="10:00">10:00 AM</option>
-                        <option value="14:00">2:00 PM</option>
-                        <option value="16:00">4:00 PM</option>
-                    </select>
-                </div>
-                <div class="appointment-field">
-                    <label for="appointment-type">
-                        Consultation Type
-                    </label>
-
-                    <select id="appointment-type" name="consultation-type" required>
-                        <option value="" disabled selected>
-                            Select consultation type
-                        </option>
-                        <option value="online">
-                            Online Consultation
-                        </option>
-                        <option value="in-person">
-                            In-person Consultation (at our office)
-                        </option>
-                    </select>
-                </div>
-
-                <label
-                    for="appointment-confirm"
-                    class="appointment-button"
-                >
-                    Book Appointment
-                    <span aria-hidden="true">
-                    <i class="fa-solid fa-arrow-right"
-                       aria-hidden="true"></i>
-                      </span>
-                </label>
-
-            </form>
-
-            <p class="appointment-note">
-                Your appointment time is subject to availability and confirmation by our team.
-            </p>
-
-        </div>
-
+  <div class="appointment-container">
+    <!-- Section heading -->
+    <div class="appointment-heading">
+      <p class="section-label">OUR HEALTHCARE SERVICES</p>
+      <h2>Find the right care for you.</h2>
+      <p>Explore our consultation services, available hours and fees. Select a service to view its booking confirmation.</p>
     </div>
 
-    <!-- Confirmation message -->
-    <div class="appointment-confirmation" role="status">
-        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-
-        <p>
-            <strong>Appointment request received!</strong>
-            This is a demo confirmation. No real appointment has been submitted.
-        </p>
-
-        <label for="appointment-confirm" class="appointment-dismiss">
-            Dismiss
-        </label>
+    <!-- Service table -->
+    <div class="appointment-table-wrapper">
+      <table class="appointment-table">
+        <thead>
+          <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Healthcare Service</th>
+            <th scope="col">Delivery Mode</th>
+            <th scope="col">Available Days &amp; Hours</th>
+            <th scope="col">Fee (AUD)</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- General healthcare services -->
+          <tr>
+            <td><strong>General Care</strong></td>
+            <td>General Health Consultation<small>GEN-01</small></td>
+            <td>Online / In-person</td>
+            <td>Mon–Fri<br>9:00 AM–5:00 PM</td>
+            <td class="appointment-fee">$80.00</td>
+            <td>
+              <input type="checkbox" id="book-gen-01" class="appointment-book-toggle">
+              <label for="book-gen-01" class="appointment-book-button">Book Slot</label>
+              <p class="appointment-success" role="status">Booking confirmed for General Health Consultation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>General Care</strong></td>
+            <td>Follow-up Consultation<small>GEN-02</small></td>
+            <td>Online / In-person</td>
+            <td>Mon–Fri<br>10:00 AM–4:00 PM</td>
+            <td class="appointment-fee">$45.00</td>
+            <td>
+              <input type="checkbox" id="book-gen-02" class="appointment-book-toggle">
+              <label for="book-gen-02" class="appointment-book-button">Book Slot</label>
+              <p class="appointment-success" role="status">Booking confirmed for Follow-up Consultation.</p>
+            </td>
+          </tr>
+          <!-- Specialist healthcare services -->
+          <tr>
+            <td><strong>Specialist Care</strong></td>
+            <td>Cardiology Consultation<small>SPC-01</small></td>
+            <td>Online</td>
+            <td>Tue &amp; Thu<br>9:00 AM–1:00 PM</td>
+            <td class="appointment-fee">$180.00</td>
+            <td>
+              <input type="checkbox" id="book-spc-01" class="appointment-book-toggle">
+              <label for="book-spc-01" class="appointment-book-button">Book Slot</label>
+              <p class="appointment-success" role="status">Booking confirmed for Cardiology Consultation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Specialist Care</strong></td>
+            <td>Diabetes &amp; Endocrine Consultation<small>SPC-02</small></td>
+            <td>Online / In-person</td>
+            <td>Wed &amp; Fri<br>10:00 AM–4:00 PM</td>
+            <td class="appointment-fee">$160.00</td>
+            <td>
+              <input type="checkbox" id="book-spc-02" class="appointment-book-toggle">
+              <label for="book-spc-02" class="appointment-book-button">Book Slot</label>
+              <p class="appointment-success" role="status">Booking confirmed for Diabetes &amp; Endocrine Consultation.</p>
+            </td>
+          </tr>
+          <!-- Mental healthcare services -->
+          <tr>
+            <td><strong>Mental Health</strong></td>
+            <td>Psychology Consultation<small>MHT-01</small></td>
+            <td>Online / In-person</td>
+            <td>Mon–Sat<br>9:00 AM–5:00 PM</td>
+            <td class="appointment-fee">$150.00</td>
+            <td>
+              <input type="checkbox" id="book-mht-01" class="appointment-book-toggle">
+              <label for="book-mht-01" class="appointment-book-button">Book Slot</label>
+              <p class="appointment-success" role="status">Booking confirmed for Psychology Consultation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Mental Health</strong></td>
+            <td>Wellbeing &amp; Stress Consultation<small>MHT-02</small></td>
+            <td>Online</td>
+            <td>Mon–Fri<br>11:00 AM–6:00 PM</td>
+            <td class="appointment-fee">$95.00</td>
+            <td>
+              <input type="checkbox" id="book-mht-02" class="appointment-book-toggle">
+              <label for="book-mht-02" class="appointment-book-button">Book Slot</label>
+              <p class="appointment-success" role="status">Booking confirmed for Wellbeing &amp; Stress Consultation.</p>
+            </td>
+          </tr>
+          <!-- Physical healthcare services -->
+          <tr>
+            <td><strong>Physical Health</strong></td>
+            <td>Physiotherapy Consultation<small>PHY-01</small></td>
+            <td>In-person</td>
+            <td>Mon–Fri<br>8:00 AM–4:00 PM</td>
+            <td class="appointment-fee">$110.00</td>
+            <td>
+              <input type="checkbox" id="book-phy-01" class="appointment-book-toggle">
+              <label for="book-phy-01" class="appointment-book-button">Book Slot</label>
+              <p class="appointment-success" role="status">Booking confirmed for Physiotherapy Consultation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Physical Health</strong></td>
+            <td>Nutrition &amp; Diet Consultation<small>PHY-02</small></td>
+            <td>Online / In-person</td>
+            <td>Mon, Wed &amp; Fri<br>9:00 AM–3:00 PM</td>
+            <td class="appointment-fee">$90.00</td>
+            <td>
+              <input type="checkbox" id="book-phy-02" class="appointment-book-toggle">
+              <label for="book-phy-02" class="appointment-book-button">Book Slot</label>
+              <p class="appointment-success" role="status">Booking confirmed for Nutrition &amp; Diet Consultation.</p>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6">Our healthcare services offer flexible appointment schedules and transparent pricing to help you find the right care for your needs. Please explore the available services and book a consultation at a time that suits you.</td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
-
+  </div>
 </section>
+
 
 
   </main>

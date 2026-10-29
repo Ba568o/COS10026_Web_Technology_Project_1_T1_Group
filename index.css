@@ -6,7 +6,7 @@ Author: Nguyen Thai Bao
 */
 
 :root {
-  --index-red: #d92f44;
+  --index-red: #e9223e;
   --index-red-dark: #9f1d2c;
   --index-text: #263746;
   --index-muted: #5f6b76;
@@ -495,201 +495,201 @@ body {
 
 
 /* ========================================
-   SECTION 4: BOOK AN APPOINTMENT
-======================================== */
-
+   SECTION 4: HEALTHCARE SERVICES AND BOOKING
+   ======================================== */
 .appointment-section {
-    padding: 3rem 0;
-    background: #f5f6f8;
+  padding: 48px 0 56px;
+  background: var(--index-background);
+  color: var(--index-text);
 }
-
 .appointment-container {
-    width: 82%;
-    max-width: 1200px;
-    margin: 0 auto;
+  width: 90%;
+  max-width: 1450px;
+  margin: 0 auto;
 }
-
 .appointment-heading {
-    max-width: 650px;
-    margin-bottom: 1.75rem;
+  max-width: 760px;
+  margin: 0 auto 28px;
+  text-align: center;
 }
-
 .appointment-heading h2 {
-    margin: 0 0 0.75rem;
-    color: var(--index-text);
+  margin: 8px 0 12px;
+  font-size: clamp(28px, 3vw, 38px);
 }
-
 .appointment-heading > p:last-child {
-    margin: 0;
-    color: var(--index-muted);
-    line-height: 1.6;
+  margin: 0;
+  color: var(--index-muted);
+  line-height: 1.6;
 }
-
-.appointment-card {
-    max-width: 720px;
-    padding: 1.75rem;
-    border: 1px solid var(--index-border);
-    border-radius: var(--index-radius);
-    background: #ffffff;
-    box-shadow: 0 8px 24px rgba(38, 55, 70, 0.05);
+.appointment-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--index-border);
+  border-radius: 12px;
+  background: var(--index-white);
+  box-shadow: 0 8px 28px rgba(20, 30, 45, 0.06);
 }
-
-.appointment-card-heading {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+.appointment-table {
+  width: 100%;
+  min-width: 950px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
 }
-
-.appointment-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 12px;
-    background: var(--index-pink);
-    color: var(--index-red);
-    font-size: 1.25rem;
+.appointment-table th,
+.appointment-table td {
+  padding: 16px 14px;
+  border-bottom: 1px solid var(--index-border);
+  vertical-align: middle;
 }
-
-.appointment-card-heading h3 {
-    margin: 0 0 0.35rem;
-    color: var(--index-text);
+.appointment-table thead {
+  background: #171717;
+  color: #ffffff;
 }
-
-.appointment-card-heading p {
-    margin: 0;
-    color: var(--index-muted);
-    font-size: 0.9rem;
+.appointment-table thead th {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
 }
-
-.appointment-form {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
+.appointment-table tbody tr:nth-child(even) {
+  background: #f8f9fb;
 }
-
-.appointment-field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    min-width: 0;
+.appointment-table tbody tr {
+  transition: background 0.2s ease;
 }
-
-.appointment-field label {
-    color: var(--index-text);
-    font-size: 0.9rem;
-    font-weight: 600;
+.appointment-table tbody tr:hover {
+  background: #fff0f2;
 }
-
-.appointment-field input,
-.appointment-field select {
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 46px;
-    padding: 0.75rem;
-    border: 1px solid var(--index-border);
-    border-radius: 6px;
-    background: #ffffff;
-    color: var(--index-text);
-    font: inherit;
+.appointment-table tbody td:first-child {
+  min-width: 115px;
 }
-
-.appointment-field input:focus,
-.appointment-field select:focus {
-    outline: 2px solid var(--index-red);
-    outline-offset: 2px;
+.appointment-table td strong {
+  display: block;
+  font-size: 14px;
 }
-
-.appointment-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    align-self: end;
-    gap: 0.6rem;
-    min-height: 46px;
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    background: var(--index-red);
-    color: #ffffff;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    transition: background 0.25s ease;
+.appointment-table td small {
+  display: block;
+  margin-top: 5px;
+  color: var(--index-muted);
+  font-size: 11px;
+  letter-spacing: 0.04em;
 }
-
-.appointment-button:hover,
-.appointment-button:focus-visible {
-    background: var(--index-red-dark);
+.appointment-table .appointment-fee {
+  white-space: nowrap;
+  font-weight: 700;
+  color: var(--index-text);
 }
-
-.appointment-note {
-    margin: 1rem 0 0;
-    color: var(--index-muted);
-    font-size: 0.8rem;
-    line-height: 1.5;
+.appointment-book-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
-
-/* Confirmation message */
-
-.appointment-confirm-toggle {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+.appointment-book-button {
+  display: inline-block;
+  padding: 10px 13px;
+  border: 0;
+  border-radius: 5px;
+  background: #171717;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
-
-.appointment-confirmation {
-    display: none;
-    align-items: center;
-    gap: 0.75rem;
-    width: 82%;
-    max-width: 1200px;
-    box-sizing: border-box;
-    margin: 1.5rem auto 0;
-    padding: 1rem 1.25rem;
-    border: 1px solid #a7e2ce;
-    border-radius: 8px;
-    background: #e8f8f1;
-    color: #18794e;
+.appointment-book-button:hover {
+  background: var(--index-red);
+  transform: translateY(-1px);
 }
-
-.appointment-confirm-toggle:checked
-~ .appointment-confirmation {
-    display: flex;
+.appointment-book-toggle:focus-visible + .appointment-book-button {
+  outline: 3px solid var(--index-red);
+  outline-offset: 3px;
 }
-
-.appointment-confirmation > i {
-    flex-shrink: 0;
-    font-size: 1.25rem;
+.appointment-success {
+  display: none;
+  min-width: 180px;
+  margin: 10px 0 0;
+  padding: 10px;
+  border: 1px solid #a5dfc2;
+  border-radius: 6px;
+  background: #e8f8ef;
+  color: #126b43;
+  font-size: 12px;
+  line-height: 1.5;
 }
-
-.appointment-confirmation p {
-    flex: 1;
-    margin: 0;
-    line-height: 1.5;
+.appointment-book-toggle:checked ~ .appointment-success {
+  display: block;
 }
-
-.appointment-confirmation strong {
-    display: block;
-    margin-bottom: 0.2rem;
+.appointment-book-toggle:checked + .appointment-book-button {
+  background: #147849;
 }
-
-.appointment-dismiss {
-    flex-shrink: 0;
-    color: #18794e;
-    text-decoration: underline;
-    cursor: pointer;
+.appointment-table tfoot td {
+  padding: 16px;
+  background: #f0f2f5;
+  color: var(--index-muted);
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+  border-bottom: 0;
 }
-
-.appointment-confirm-toggle:focus-visible
-~ .appointment-container .appointment-button {
-    outline: 2px solid var(--index-red-dark);
-    outline-offset: 3px;
+/* Section 4 dark mode follows the site's existing checkbox toggle. */
+body:has(#dark-toggle:checked) .appointment-section {
+  background: #111111;
+  color: #eeeeee;
+}
+body:has(#dark-toggle:checked) .appointment-heading h2 {
+  color: #f5f5f5;
+}
+body:has(#dark-toggle:checked) .appointment-heading > p:last-child {
+  color: #cccccc;
+}
+body:has(#dark-toggle:checked) .appointment-table-wrapper {
+  background: #202328;
+  border-color: #353a42;
+  box-shadow: none;
+}
+body:has(#dark-toggle:checked) .appointment-table th,
+body:has(#dark-toggle:checked) .appointment-table td {
+  border-color: #353a42;
+}
+body:has(#dark-toggle:checked) .appointment-table tbody tr,
+body:has(#dark-toggle:checked) .appointment-table tbody tr:nth-child(even) {
+  background: #202328;
+  color: #eeeeee;
+}
+body:has(#dark-toggle:checked) .appointment-table tbody tr:hover {
+  background: #33252a;
+}
+body:has(#dark-toggle:checked) .appointment-table td small,
+body:has(#dark-toggle:checked) .appointment-table .appointment-fee {
+  color: #d0d6de;
+}
+body:has(#dark-toggle:checked) .appointment-table tfoot td {
+  background: #292e36;
+  color: #c4cbd4;
+}
+body:has(#dark-toggle:checked) .appointment-success {
+  background: #163c2d;
+  border-color: #286b4b;
+  color: #b9f2d2;
+}
+/* Responsive layout for smaller screens. */
+@media (max-width: 768px) {
+  .appointment-section { padding: 36px 0; }
+  .appointment-container { width: 94%; }
+  .appointment-heading { margin-bottom: 22px; text-align: left; }
+  .appointment-table { min-width: 900px; }
+  .appointment-table th,
+  .appointment-table td { padding: 12px 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .appointment-table tbody tr,
+  .appointment-book-button { transition: none; }
 }
 
 /** ========================================*
@@ -809,34 +809,6 @@ body:has(#dark-toggle:checked) .careers-button {
 
 body:has(#dark-toggle:checked) .careers-button:hover {
     background: #ef454d;
-}
-
-body:has(#dark-toggle:checked) .appointment-section {
-    background: #111111;
-}
-
-body:has(#dark-toggle:checked) .appointment-card {
-    background: #202328;
-    border-color: #353a42;
-}
-
-body:has(#dark-toggle:checked) .appointment-heading h2,
-body:has(#dark-toggle:checked) .appointment-card-heading h3,
-body:has(#dark-toggle:checked) .appointment-field label {
-    color: #f5f5f5;
-}
-
-body:has(#dark-toggle:checked) .appointment-heading > p:last-child,
-body:has(#dark-toggle:checked) .appointment-card-heading p,
-body:has(#dark-toggle:checked) .appointment-note {
-    color: #cccccc;
-}
-
-body:has(#dark-toggle:checked) .appointment-field input,
-body:has(#dark-toggle:checked) .appointment-field select {
-    background: #292d33;
-    border-color: #454b54;
-    color: #eeeeee;
 }
 
 
@@ -970,30 +942,6 @@ body:has(#dark-toggle:checked) .appointment-field select {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
-}
-
-@media (max-width: 700px) {
-    .appointment-section {
-        padding: 2rem 0;
-    }
-
-    .appointment-container {
-        width: 90%;
-    }
-
-    .appointment-card {
-        padding: 1.25rem;
-    }
-
-    .appointment-form {
-        grid-template-columns: 1fr;
-    }
-
-    .appointment-confirmation {
-        width: 90%;
-        align-items: flex-start;
-        flex-wrap: wrap;
-    }
 }
 
 /** ========================================*
@@ -1586,7 +1534,3 @@ body:has(#dark-toggle:checked) .appointment-field select {
     margin: 0 auto;
   }
 }
-
-
-
-
