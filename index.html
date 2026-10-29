@@ -34,113 +34,75 @@
 
   <header class="site-header">
     <nav class="navbar" aria-label="Main navigation">
-
-      <!-- Logo and brand -->
-      <a href="index.html" class="brand"
-         aria-label="T1 Health &amp; Wellness - home">
-
+      <!-- Brand links to the home page. -->
+      <a href="index.html" class="brand" aria-label="T1 Health &amp; Wellness - home">
         <img src="images/logo.png" alt="" class="brand-logo">
-
         <span class="brand-text">
           <strong>T1</strong>
           <span>HEALTH &amp; WELLNESS</span>
         </span>
-
       </a>
 
-      <!-- Main navigation -->
+      <!-- Primary navigation; the brand provides the link to Home. -->
       <ul class="nav-links">
-        <li>
-          <a href="index.html" aria-current="page">Home</a>
-        </li>
-        <li>
-          <a href="jobs.html">Jobs</a>
-        </li>
-        <li>
-          <a href="apply.html">Apply</a>
-        </li>
-        <li>
-          <a href="about.html">About</a>
-        </li>
+        <li><a href="jobs.html">Jobs</a></li>
+        <li><a href="apply.html">Apply</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
 
-      <!-- Search -->
+      <!-- Display settings, site search, and the primary call to action. -->
       <div class="nav-actions">
-
-        <form class="nav-search" action="https://www.google.com/search" method="GET" role="search" target="_blank">
-          <label class="visually-hidden" for="site-search">Search</label>
-          <input type="search" id="site-search" name="q" placeholder="Search" required>
-
-          <input type="hidden" name="as_sitesearch" value="ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group">
-        </form>
-
-        <a class="btn-pill" href="apply.html">
-          Get started
-        </a>
-
         <input hidden type="checkbox" id="setting-toggle">
-
         <div id="setting-container">
-
           <input hidden type="checkbox" id="dark-toggle">
-
-          <label
-            for="setting-toggle"
-            class="setting-icon"
-          >
-            <i class="fa-solid fa-gear"></i>
+          <label for="setting-toggle" class="setting-icon">
+            <i class="fa-solid fa-gear" aria-hidden="true"></i>
+            <span class="visually-hidden">Toggle display settings</span>
           </label>
 
           <div class="settings-dropdown">
-
             <p class="settings-title">Display settings</p>
-
             <label for="dark-toggle" class="darkmode-toggle">
               <span>Dark mode</span>
-
               <span class="theme-icons" aria-hidden="true">
                 <i class="fa-solid fa-sun sun"></i>
                 <i class="fa-solid fa-moon moon"></i>
               </span>
             </label>
-
             <fieldset class="font-size-options">
               <legend>Font size</legend>
-
               <label>
-                <input type="radio" name="font-size"
-                       id="font-super-small">
+                <input type="radio" name="font-size" id="font-super-small">
                 Super small
               </label>
-
               <label>
-                <input type="radio" name="font-size"
-                       id="font-small">
+                <input type="radio" name="font-size" id="font-small">
                 Small
               </label>
-
               <label>
-                <input type="radio" name="font-size"
-                       id="font-normal" checked>
+                <input type="radio" name="font-size" id="font-normal" checked>
                 Normal
               </label>
-
               <label>
-                <input type="radio" name="font-size"
-                       id="font-large">
+                <input type="radio" name="font-size" id="font-large">
                 Large
               </label>
-
               <label>
-                <input type="radio" name="font-size"
-                       id="font-super-large">
+                <input type="radio" name="font-size" id="font-super-large">
                 Super large
               </label>
             </fieldset>
-
           </div>
         </div>
 
+        <form class="nav-search" action="https://www.google.com/search" method="GET" role="search" target="_blank">
+          <label class="visually-hidden" for="site-search">Search</label>
+          <button type="submit" class="nav-search-submit" aria-label="Submit search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
+          <input type="search" id="site-search" name="q" placeholder="Search" required>
+          <input type="hidden" name="as_sitesearch" value="ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group">
+        </form>
+
+        <a class="btn-pill" href="apply.html">Get started</a>
       </div>
     </nav>
   </header>
