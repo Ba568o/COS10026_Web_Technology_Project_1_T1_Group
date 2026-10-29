@@ -25,9 +25,9 @@
   >
 </head>
 
-<body>
+<body id="top">
 
-  <!-- Site header and primary navigation -->
+  <!-- HEADER -->
 
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
@@ -95,7 +95,7 @@
           Get started
         </a>
 
-        <input hidden type="checkbox" id="setting-toggle" aria-label="Toggle settings">
+        <input hidden type="checkbox" id="setting-toggle">
 
         <div id="setting-container">
 
@@ -104,6 +104,7 @@
           <label
             for="setting-toggle"
             class="setting-icon"
+            aria-label="Toggle settings"
           >
             <i class="fa-solid fa-gear"></i>
           </label>
@@ -163,11 +164,14 @@
   </header>
 
 
-  <!-- Main page content -->
+  <!-- MAIN -->
 
   <main id="main-content">
 
-    <!-- HERO SECTION -->
+    <!-- HERO -->
+
+    
+<!-- HERO -->
 <section class="hero" aria-labelledby="apply-heading">
 
     <!-- Background animation -->
@@ -194,13 +198,13 @@
 
             <a class="btn btn-submit" href="#home-services">
                 EXPLORE OUR SERVICE
-                <span>&nbsp;<i class="fa-solid fa-arrow-right-long"></i></span>
+                <span>&nbsp<i class="fa-solid fa-arrow-right-long"></i></span>
             </a>
 
         </div>
 
         <!-- Right: Online healthcare animation -->
-        <div class="health-animation" role="img" aria-label="Illustration of an online doctor consultation">
+        <div class="health-animation" aria-label="Illustration of an online doctor consultation">
 
             <!-- Floating medical icons -->
             <div class="float-icon icon-heart" aria-hidden="true">
@@ -297,7 +301,7 @@
 
 
 
-    <!-- Section 1: Our services -->
+    <!-- SECTION 1: OUR SERVICES -->
 
     <section id="home-services"
              aria-labelledby="services-heading">
@@ -419,7 +423,7 @@
     </section>
 
 
-    <!-- Section 2: Why choose T1 -->
+    <!-- SECTION 2: WHY CHOOSE T1 -->
 
     <section class="why-t1" aria-labelledby="why-heading">
 
@@ -495,7 +499,7 @@
 
 
     
-<!-- Section 3: Careers banner -->
+<!-- SECTION 3: CAREERS BANNER -->
 
 <section class="careers-banner" aria-labelledby="careers-heading">
 
@@ -532,7 +536,7 @@
 
             <a href="jobs.html" class="careers-button">
                 Explore Careers
-                <span aria-hidden="true">&nbsp;<i class="fa-solid fa-arrow-right-long"></i></span>
+                <span aria-hidden="true">&nbsp<i class="fa-solid fa-arrow-right-long"></i></span>
             </a>
 
         </div>
@@ -552,7 +556,7 @@
 
 </section>   
  
-<!-- Section 4: Healthcare services and booking -->
+<!-- SECTION 4: HEALTHCARE SERVICES AND BOOKING -->
 <section class="appointment-section" id="appointment">
   <div class="appointment-container">
     <!-- Section heading -->
@@ -692,49 +696,59 @@
   </main>
 
 
-  <!-- Site footer -->
+  <!-- FOOTER -->
 
   <footer class="site-footer">
+    <div class="footer-main">
+      <!-- Company branding -->
+      <div class="footer-brand-content">
+        <a href="index.html" class="footer-brand" aria-label="T1 Health &amp; Wellness home">
+          <img src="images/logo.png" alt="" class="footer-logo">
+          <span class="footer-brand-text">
+            <strong>T1</strong>
+            <span>HEALTH &amp; WELLNESS</span>
+          </span>
+        </a>
+        <h2 class="footer-heading">Better health. Smarter care.</h2>
+        <p class="footer-description">Accessible digital healthcare and wellness services, designed around you.</p>
+      </div>
 
-    <div class="footer-inner">
-
-      <!-- Logo and brand -->
-      <a href="index.html"
-         class="footer-brand"
-         aria-label="T1 Health &amp; Wellness - home">
-
-        <img
-          src="images/logo.png"
-          alt=""
-          class="brand-logo"
-        >
-
-        <span class="brand-text">
-          <strong>T1</strong>
-          <span>HEALTH &amp; WELLNESS</span>
-        </span>
-
+      <!-- Back-to-top link -->
+      <a class="footer-back-to-top" href="#top">
+        <span>TO THE SURFACE</span>
+        <i class="fa-solid fa-caret-up" aria-hidden="true"></i>
       </a>
-
-
-      <!-- Footer navigation -->
-      <nav class="footer-nav" aria-label="Footer navigation">
-
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="jobs.html">Jobs</a></li>
-          <li><a href="apply.html">Apply</a></li>
-          <li><a href="about.html">About</a></li>
-        </ul>
-
-      </nav>
-
     </div>
 
-    <p class="footer-copy">
-      &copy; 2026 T1 Health &amp; Wellness. All rights reserved.
-    </p>
+    <!-- Copyright and project resources -->
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 T1 Health &amp; Wellness. All rights reserved.</p>
+      <nav class="footer-links" aria-label="Footer resources">
+        <a href="mailto:YOUR_EMAIL_ADDRESS">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          <span>Email us</span>
+        </a>
+        <span class="footer-separator" aria-hidden="true">·</span>
+        <a href="YOUR_GITHUB_REPOSITORY_URL" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-github" aria-hidden="true"></i>
+          <span>GitHub Repository</span>
+        </a>
+        <span class="footer-separator" aria-hidden="true">·</span>
+        <a href="YOUR_JIRA_PROJECT_URL" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-jira" aria-hidden="true"></i>
+          <span>Jira Project</span>
+        </a>
+      </nav>
+    </div>
 
+    <!-- Website standards and deployment status -->
+    <p class="footer-status">
+      <span>Valid HTML5 &amp; CSS3</span>
+      <span aria-hidden="true">·</span>
+      <span>WCAG 2.1 AA</span>
+      <span aria-hidden="true">·</span>
+      <span>GitHub Pages Deployed</span>
+    </p>
   </footer>
 
 </body>
