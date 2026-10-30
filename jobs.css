@@ -123,7 +123,7 @@ main {
             margin: 0;
             padding: 10px 14px;
             border-left: 3px solid #ef4f5d;
-            background: #f8f8f6;
+            background: #ffffff;
             color: #222222;
             font-weight: bold;
             border-radius: 0 6px 6px 0;
@@ -138,6 +138,14 @@ main {
         font-size: 0.72rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+    }
+
+    .experience-meta {
+        border-left-color: #db363b !important;
+
+        .meta-label {
+            color: #db363b;
+        }
     }
 
     /* Iconic Label for Job details Toggle  */
@@ -192,6 +200,11 @@ The arrow image will rotate to indicate that the details are being shown. */
 
 #job-filter {
     width: 100%;
+    max-height: 72vh;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    scrollbar-gutter: stable;
+    overscroll-behavior: contain;
 
     fieldset {
         border: 1px solid #cccccc;
@@ -274,9 +287,17 @@ The arrow image will rotate to indicate that the details are being shown. */
 
 /* Jobs Filtering: selecting a radio hides cards outside that category. */
 body:has(#salary-under-30:checked) .job-card:not(.salary-under-30),
+body:has(#salary-10-20:checked) .job-card:not(.salary-10-20),
+body:has(#salary-20-under-30:checked) .job-card:not(.salary-20-under-30),
 body:has(#salary-30-50:checked) .job-card:not(.salary-30-50),
 body:has(#salary-over-50:checked) .job-card:not(.salary-over-50),
 body:has(#salary-negotiable:checked) .job-card:not(.salary-negotiable),
+body:has(#experience-none:checked) .job-card:not(.experience-none),
+body:has(#experience-1-year:checked) .job-card:not(.experience-1-year),
+body:has(#experience-2-years:checked) .job-card:not(.experience-2-years),
+body:has(#experience-3-years:checked) .job-card:not(.experience-3-years),
+body:has(#experience-5-years:checked) .job-card:not(.experience-5-years),
+body:has(#experience-8-years:checked) .job-card:not(.experience-8-years),
 body:has(#location-hcm:checked) .job-card:not(.location-hcm),
 body:has(#location-hanoi:checked) .job-card:not(.location-hanoi),
 body:has(#location-danang:checked) .job-card:not(.location-danang),
@@ -431,6 +452,14 @@ body:has(#dark-toggle:checked) {
             color: #ff5268;
         }
 
+        .experience-meta {
+            border-left-color: #d92f44 !important;
+
+            .meta-label {
+                color: #d92f44;
+            }
+        }
+
         label>img {
             filter: brightness(0) invert(1);
         }
@@ -552,6 +581,10 @@ body:has(#dark-toggle:checked) {
 
         #job-filter form {
             padding: 2%;
+        }
+
+        #job-filter {
+            max-height: 55vh;
         }
 
         #job-filter fieldset {
