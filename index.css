@@ -1,11 +1,12 @@
-/*
-============================================================
-INDEX PAGE - T1 HEALTH & WELLNESS
-Author: Nguyen Thai Bao
-============================================================
-*/
+/* ==========================================================================
+   T1 HEALTH & WELLNESS — INDEX PAGE STYLES
+   AUTHOR: Nguyen Thai Bao
+   ========================================================================== */
 
-/** General settings */
+/* --------------------------------------------------------------------------
+   1. GENERAL PAGE SETTINGS
+   Base layout, typography and shared content containers.
+   -------------------------------------------------------------------------- */
 
 html {
   scroll-behavior: smooth;
@@ -54,9 +55,10 @@ body {
   line-height: 1.6;
 }
 
-/** ========================================*
-*                 HERO SECTION*
-*   ======================================== */
+/* --------------------------------------------------------------------------
+   2. HERO SECTION
+   Main introduction, call-to-action and team note.
+   -------------------------------------------------------------------------- */
 
 .hero {
   padding: 3.5rem 0;
@@ -137,9 +139,10 @@ body {
 }
 
 
-/** ========================================*
-*              SECTION LABELS*
-*   ======================================== */
+/* --------------------------------------------------------------------------
+   3. SECTION LABELS
+   Shared eyebrow labels used above section headings.
+   -------------------------------------------------------------------------- */
 
 .section-label {
   margin: 0 0 0.45rem;
@@ -150,13 +153,10 @@ body {
   text-transform: uppercase;
 }
 
-/** ========================================*
-
-*         SECTION 1: OUR SERVICES*
-
-*         AND OUR DIGITAL SOLUTIONS*
-
-*   ======================================== */
+/* --------------------------------------------------------------------------
+   4. SECTION 1 — OUR SERVICES AND DIGITAL SOLUTIONS
+   Service cards, solutions table and supporting content.
+   -------------------------------------------------------------------------- */
 
 #home-services {
   padding: 2.5rem 0;
@@ -180,7 +180,7 @@ body {
   margin-bottom: 1rem;
 }
 
-/** Three separate service cards */
+/* Service cards */
 
 .service-cards {
   display: grid;
@@ -229,7 +229,7 @@ body {
   color: #5f6b76;
 }
 
-/** Digital solutions table */
+/* Digital solutions table */
 
 .solutions-table-wrapper {
   width: 100%;
@@ -275,10 +275,10 @@ body {
   border-bottom: 0;
 }
 
-/** ========================================*
-*         SECTION 2: WHY CHOOSE T1*
-*         Separate background layer*
-*   ======================================== */
+/* --------------------------------------------------------------------------
+   5. SECTION 2 — WHY CHOOSE T1
+   Feature cards and the section's separate background layer.
+   -------------------------------------------------------------------------- */
 
 .why-t1 {
   padding: 2.5rem 0;
@@ -308,7 +308,7 @@ body {
   color: #5f6b76;
 }
 
-/** Each feature is its own card */
+/* Individual feature cards */
 
 .why-feature {
   min-width: 0;
@@ -339,9 +339,10 @@ body {
   color: #5f6b76;
 }
 
-/* ========================================
-   SECTION 3: CAREERS BANNER
-   ======================================== */
+/* --------------------------------------------------------------------------
+   6. SECTION 3 — CAREERS BANNER
+   Recruitment message, statistics, call-to-action and image panel.
+   -------------------------------------------------------------------------- */
 
 .careers-banner {
     padding: 0 0 36px;
@@ -356,7 +357,7 @@ body {
     border-radius: 12px;
 }
 
-/* Left content panel */
+/* Careers: left content panel */
 
 .careers-content {
     display: flex;
@@ -394,7 +395,7 @@ body {
     line-height: 1.65;
 }
 
-/* Two information cards */
+/* Careers: information cards */
 
 .careers-stats {
     display: grid;
@@ -429,7 +430,7 @@ body {
     font-weight: 600;
 }
 
-/* Red CTA button */
+/* Careers: call-to-action button */
 
 .careers-button {
     display: inline-flex;
@@ -452,7 +453,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Right image panel with diagonal edge */
+/* Careers: right image panel */
 
 .careers-image {
     min-width: 0;
@@ -482,9 +483,10 @@ body {
 
 
 
-/* ========================================
-   SECTION 4: HEALTHCARE SERVICES AND BOOKING
-   ======================================== */
+/* --------------------------------------------------------------------------
+   7. SECTION 4 — HEALTHCARE SERVICES AND BOOKING
+   Appointment information, booking controls and confirmation messages.
+   -------------------------------------------------------------------------- */
 .appointment-section {
   padding: 48px 0 56px;
   background: #f5f6f8;
@@ -625,7 +627,7 @@ body {
   text-align: center;
   border-bottom: 0;
 }
-/* Section 4 dark mode follows the site's existing checkbox toggle. */
+/* Booking section: dark mode styles controlled by the existing checkbox. */
 body:has(#dark-toggle:checked) .appointment-section {
   background: #111111;
   color: #eeeeee;
@@ -666,7 +668,7 @@ body:has(#dark-toggle:checked) .appointment-success {
   border-color: #286b4b;
   color: #b9f2d2;
 }
-/* Responsive layout for smaller screens. */
+/* Booking section: responsive layout for smaller screens. */
 @media (max-width: 768px) {
   .appointment-section { padding: 36px 0; }
   .appointment-container { width: 94%; }
@@ -680,314 +682,10 @@ body:has(#dark-toggle:checked) .appointment-success {
   .appointment-book-button { transition: none; }
 }
 
-/* ========================================
-   SITE FOOTER
-   Dark layout with T1 brand accents
-======================================== */
-
-.site-footer {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 0;
-  margin-top: 0;
-  padding: clamp(2.25rem, 4vw, 3.5rem) 4% 1.5rem;
-  background: #101112;
-  color: #f5f5f5;
-}
-
-/* Main footer content and back-to-top link */
-.footer-main {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #343538;
-}
-
-/* Company logo and brand name */
-.footer-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.footer-logo {
-  display: block;
-  width: 5.25rem;
-  height: auto;
-  object-fit: contain;
-}
-
-.footer-brand-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.footer-brand-text strong {
-  font-size: 2rem;
-  line-height: 1;
-}
-
-.footer-brand-text span {
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-}
-
-/* Footer tagline and description */
-.footer-heading {
-  margin: 1.5rem 0 0.45rem;
-  color: #ffffff;
-  font-size: clamp(1.4rem, 2vw, 1.85rem);
-  line-height: 1.3;
-}
-
-.footer-description {
-  max-width: 58rem;
-  margin: 0;
-  color: #bfc3cb;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-/* Back-to-top button */
-.footer-back-to-top {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
-  min-width: 13.5rem;
-  min-height: 3.5rem;
-  margin-top: 0.1rem;
-  padding: 1rem 1.5rem;
-  border: 1px solid #4b4d52;
-  border-radius: 0.65rem;
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-}
-
-.footer-back-to-top i {
-  color: #f04459;
-  transition: transform 0.2s ease;
-}
-
-.footer-back-to-top:hover,
-.footer-back-to-top:focus-visible {
-  border-color: #f04459;
-  background: #1b1c1e;
-}
-
-.footer-back-to-top:hover i {
-  transform: translateY(-3px);
-}
-
-/* Copyright and project resource links */
-.footer-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem 2rem;
-  padding-top: 1.35rem;
-}
-
-.footer-copy {
-  flex: 1 1 40%;
-  margin: 0;
-  color: #aeb4bf;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.footer-links {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex: 1 1 55%;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.footer-links a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  color: #f0f1f3;
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.footer-links a i {
-  color: #f04459;
-  font-size: 1rem;
-}
-
-.footer-links a:hover,
-.footer-links a:focus-visible {
-  color: #ff6879;
-  text-decoration: underline;
-  text-underline-offset: 0.25rem;
-}
-
-.footer-separator {
-  color: #858991;
-}
-
-/* Website standards and deployment information */
-.footer-status {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-  margin: 1rem 0 0;
-  color: #858991;
-  font-size: 0.85rem;
-  line-height: 1.6;
-}
-
-/* Visible keyboard focus for footer controls */
-.footer-brand:focus-visible,
-.footer-back-to-top:focus-visible,
-.footer-links a:focus-visible {
-  outline: 2px solid #ff6879;
-  outline-offset: 4px;
-}
-
-/* Responsive footer layout */
-@media (max-width: 900px) {
-  .site-footer {
-    padding: 2.5rem 5% 1.25rem;
-  }
-
-  .footer-main {
-    gap: 1.5rem;
-  }
-
-  .footer-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .footer-copy,
-  .footer-links {
-    flex-basis: auto;
-    width: 100%;
-  }
-
-  .footer-links {
-    justify-content: flex-start;
-  }
-
-  .footer-status {
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 600px) {
-  .site-footer {
-    min-height: auto;
-    padding: 2rem 6% 1.25rem;
-  }
-
-  .footer-main {
-    align-items: flex-start;
-    flex-direction: column;
-    padding-bottom: 2rem;
-  }
-
-  .footer-logo {
-    width: 4rem;
-  }
-
-  .footer-brand {
-    gap: 0.8rem;
-  }
-
-  .footer-brand-text strong {
-    font-size: 1.8rem;
-  }
-
-  .footer-brand-text span {
-    font-size: 0.8rem;
-  }
-
-  .footer-heading {
-    margin-top: 1.5rem;
-  }
-
-  .footer-back-to-top {
-    min-width: 0;
-    min-height: 3.5rem;
-    padding: 0.8rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  .footer-links {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-
-  .footer-separator {
-    display: none;
-  }
-
-  .footer-status {
-    justify-content: flex-start;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-  }
-}
-
-/* Respect reduced-motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .footer-back-to-top,
-  .footer-back-to-top i,
-  .footer-links a {
-    transition: none;
-  }
-}
-
-/* Remove the extra horizontal line in the footer */
-.site-footer hr,
-.site-footer .footer-bottom::before,
-.site-footer .footer-copy::before {
-  display: none;
-}
-
-.site-footer .footer-bottom {
-  border-top: none;
-}
-
-.site-footer .footer-copy {
-  border-top: none;
-}
-
-/* Apply hover effects to link text only */
-.footer-links a:hover span,
-.footer-links a:focus-visible span {
-  color: #ff6879;
-  text-decoration: underline;
-  text-underline-offset: 0.25rem;
-}
-
-.footer-links a:hover,
-.footer-links a:focus-visible {
-  text-decoration: none;
-}
-
-/** ========================================*
-*                 DARK MODE*
-*    Uses the existing checkbox in header*
-*   ======================================== */
+/* --------------------------------------------------------------------------
+   9. DARK MODE
+   Theme styles controlled by the existing header checkbox.
+   -------------------------------------------------------------------------- */
 
 body:has(#dark-toggle:checked) {
   background: #111111;
@@ -1096,9 +794,10 @@ body:has(#dark-toggle:checked) .careers-button:hover {
 }
 
 
-/** ========================================*
-*            RESPONSIVE DESIGN*
-*   ======================================== */
+/* --------------------------------------------------------------------------
+   10. RESPONSIVE LAYOUT — MAIN PAGE
+   Adjusts the page layout for tablet and mobile screen sizes.
+   -------------------------------------------------------------------------- */
 
 @media (max-width: 1000px) {
   #main-content .container,
@@ -1228,9 +927,10 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   }
 }
 
-/** ========================================*
-*         ONLINE HEALTHCARE ANIMATION
-*   ========================================*/
+/* --------------------------------------------------------------------------
+   11. ONLINE HEALTHCARE ANIMATION
+   CSS illustration of a video consultation interface.
+   -------------------------------------------------------------------------- */
 
 
 .health-animation {
@@ -1244,7 +944,7 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   justify-content: center;
 }
 
-/** Video call window */
+/* Animation: video call window */
 
 .video-window {
   position: relative;
@@ -1283,7 +983,7 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   animation: live-pulse 1.5s infinite;
 }
 
-/** Doctor background */
+/* Animation: doctor background */
 
 .doctor-area {
   position: relative;
@@ -1295,7 +995,7 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   background: linear-gradient(145deg, #dceff4, #f7e8e6);
 }
 
-/** Simple 2D doctor illustration */
+/* Animation: doctor illustration */
 
 .doctor-avatar {
   position: relative;
@@ -1432,7 +1132,7 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   color: #70a99d;
 }
 
-/** Call buttons */
+/* Animation: call controls */
 
 .call-controls {
   display: flex;
@@ -1458,7 +1158,7 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   transform: rotate(135deg);
 }
 
-/** Floating healthcare icons */
+/* Animation: floating healthcare icons */
 
 .float-icon {
   position: absolute;
@@ -1496,7 +1196,7 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   animation-delay: 1.3s;
 }
 
-/** Health status card */
+/* Animation: health status card */
 
 .health-status {
   position: absolute;
@@ -1540,7 +1240,7 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   margin-left: 4px;
 }
 
-/** Animated heartbeat */
+/* Animation: heartbeat line */
 
 .pulse-line {
   position: absolute;
@@ -1565,7 +1265,7 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   animation: heartbeat 3s linear infinite;
 }
 
-/** Motion */
+/* Animation: keyframes and motion */
 
 @keyframes window-float {
   0%,
@@ -1616,7 +1316,7 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   }
 }
 
-/** Mobile */
+/* Animation: mobile layout */
 
 @media (max-width: 700px) {
   .health-animation {
@@ -1653,7 +1353,7 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   }
 }
 
-/** Hero background */
+/* Hero: background layers and decorative elements */
 
 .hero {
   position: relative;
@@ -1742,7 +1442,10 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   }
 }
 
-/** ===== HERO LAYOUT ADJUSTMENT ===== */
+/* --------------------------------------------------------------------------
+   12. HERO LAYOUT REFINEMENTS
+   Additional positioning rules for the hero illustration.
+   -------------------------------------------------------------------------- */
 
 .hero {
   position: relative;
@@ -1773,7 +1476,7 @@ body:has(#dark-toggle:checked) .careers-button:hover {
   margin: 0 auto;
 }
 
-/** Keep the animation elements within their illustration */
+/* Hero: keep animation elements within the illustration area */
 
 .video-window {
   max-width: 100%;
@@ -1787,7 +1490,10 @@ body:has(#dark-toggle:checked) .careers-button:hover {
 .orb-two {
     display: none
 }
-/** ===== RESPONSIVE LAYOUT ===== */
+/* --------------------------------------------------------------------------
+   13. RESPONSIVE LAYOUT — HERO AND ANIMATION
+   Additional breakpoints for the hero section and illustration.
+   -------------------------------------------------------------------------- */
 
 @media (max-width: 1000px) {
   .hero-layout {
