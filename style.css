@@ -16,34 +16,6 @@
    1. Colour palette (taken from the design plan)
    Change a colour here and the whole site changes with it.
    -------------------------------------------------------------------------- */
-:root {
-  --black: #000000;
-  /* header and footer background */
-  --white: #ffffff;
-  /* cards and white sections */
-  --beige: #ecece7;
-  /* page / hero background */
-  --red: #d5333b;
-  /* buttons and tags (white text on top) */
-  --red-text: #d92f44;
-  /* red used for small TEXT on light backgrounds (easier to read) */
-  --ink: #111111;
-  /* main text colour */
-  --muted: #5f5f5a;
-  /* secondary, softer text */
-  --line: #dcdcd5;
-  /* thin borders */
-  --dark-grey: #262626;
-  /* search box in the header */
-
-  /* Page width: content grows with the screen instead of staying in a narrow strip */
-  --page-max: 112rem;
-  /* upper limit on very large screens */
-  --page-gutter: clamp(1.5rem, 5vw, 7.5rem);
-  /* space left and right of the content */
-}
-
-
 /* --------------------------------------------------------------------------
    2. Base reset
    -------------------------------------------------------------------------- */
@@ -64,8 +36,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--ink);
-  background: var(--beige);
+  color: #111111;
+  background: #ecece7;
 }
 
 a {
@@ -74,7 +46,7 @@ a {
 
 /* Visible keyboard focus for links, buttons and form fields */
 :focus-visible {
-  outline: 0.1875rem solid var(--red);
+  outline: 0.1875rem solid #d5333b;
   outline-offset: 0.1875rem;
 }
 
@@ -95,8 +67,8 @@ a {
   left: 1.25rem;
   z-index: 10;
   padding: 0.75rem 1.25rem;
-  background: var(--white);
-  color: var(--red-text);
+  background: #ffffff;
+  color: #d92f44;
 }
 
 .skip-link:focus {
@@ -109,8 +81,8 @@ a {
    Layout: logo on the left | menu in the middle | search + button on the right
    -------------------------------------------------------------------------- */
 .site-header {
-  background: var(--black);
-  color: var(--white);
+  background: #000000;
+  color: #ffffff;
 }
 
 .navbar {
@@ -119,9 +91,9 @@ a {
   /* 3 columns, the middle one sized by its content */
   align-items: center;
   gap: 1.5rem;
-  max-width: var(--page-max);
+  max-width: 112rem;
   margin: 0 auto;
-  padding: 0.875rem var(--page-gutter);
+  padding: 0.875rem clamp(1.5rem, 5vw, 7.5rem);
 }
 
 /* Logo + brand name */
@@ -168,13 +140,13 @@ a {
   font-weight: 700;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--white);
+  color: #ffffff;
 }
 
 .nav-links a:hover,
 .nav-links a[aria-current="page"] {
   /* hover or the page you are currently on */
-  color: var(--red);
+  color: #d5333b;
 }
 
 /* Search box + "Get started" button */
@@ -191,8 +163,8 @@ a {
   border: 0;
   border-radius: 999px;
   /* fully rounded = pill shape */
-  background: var(--dark-grey);
-  color: var(--white);
+  background: #262626;
+  color: #ffffff;
   font-size: 0.8125rem;
   text-transform: uppercase;
 }
@@ -204,8 +176,8 @@ a {
 .btn-pill {
   padding: 0.625rem 1.25rem;
   border-radius: 999px;
-  background: var(--red);
-  color: var(--white);
+  background: #d5333b;
+  color: #ffffff;
   font-size: 0.8125rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -214,7 +186,7 @@ a {
 }
 
 .btn-pill:hover {
-  background: var(--red-text);
+  background: #d92f44;
 }
 
 
@@ -222,8 +194,8 @@ a {
    4. Footer
    -------------------------------------------------------------------------- */
 .site-footer {
-  background: var(--black);
-  color: var(--white);
+  background: #000000;
+  color: #ffffff;
 }
 
 .footer-inner {
@@ -231,9 +203,9 @@ a {
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
-  max-width: var(--page-max);
+  max-width: 112rem;
   margin: 0 auto;
-  padding: 2.25rem var(--page-gutter) 1.75rem;
+  padding: 2.25rem clamp(1.5rem, 5vw, 7.5rem) 1.75rem;
 }
 
 .footer-brand {
@@ -259,13 +231,13 @@ a {
 }
 
 .footer-nav a:hover {
-  color: var(--red);
+  color: #d5333b;
 }
 
 .footer-copy {
-  max-width: var(--page-max);
+  max-width: 112rem;
   margin: 0 auto;
-  padding: 1.125rem var(--page-gutter) 1.75rem;
+  padding: 1.125rem clamp(1.5rem, 5vw, 7.5rem) 1.75rem;
   border-top: 1px solid #333333;
   font-size: 0.8125rem;
   color: #a8a8a8;
@@ -331,7 +303,7 @@ a {
     width: 2rem;
     height: 2rem;
     cursor: pointer;
-    color: var(--white);
+    color: #ffffff;
 
     &:hover .fa-gear {
       transform: rotate(90deg);
@@ -346,10 +318,10 @@ a {
     display: none;
     width: 15rem;
     padding: 1rem;
-    border: 1px solid var(--line);
+    border: 1px solid #dcdcd5;
     border-radius: 0.5rem;
-    background: var(--white);
-    color: var(--ink);
+    background: #ffffff;
+    color: #111111;
     box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.2);
   }
 
@@ -376,10 +348,10 @@ a {
     height: 1.8rem;
     padding: 0.2rem;
     overflow: hidden;
-    border: 1px solid var(--line);
+    border: 1px solid #dcdcd5;
     border-radius: 999px;
     background: #f4f4f0;
-    color: var(--muted);
+    color: #5f5f5a;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.16);
   }
 
@@ -404,14 +376,14 @@ a {
     margin: 0;
     padding: 0.75rem 0 0;
     border: 0;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid #dcdcd5;
   }
 
   .language-options {
     margin: 0 0 0.75rem;
     padding: 0 0 0.75rem;
     border: 0;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid #dcdcd5;
   }
 }
 
@@ -430,7 +402,7 @@ a {
 }
 
 #setting-toggle:focus-visible+#setting-container .setting-icon {
-  outline: 0.1875rem solid var(--red);
+  outline: 0.1875rem solid #d5333b;
   outline-offset: 0.1875rem;
 }
 
@@ -572,8 +544,8 @@ body {
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 0.75rem;
-  background: var(--dark-grey);
-  color: var(--white);
+  background: #262626;
+  color: #ffffff;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -581,7 +553,7 @@ body {
 /* The settings button turns red and the gear rotates on hover. */
 .site-header #setting-container .setting-icon:hover {
   background: #303030;
-  color: var(--red);
+  color: #d5333b;
 }
 
 .site-header #setting-container .setting-icon .fa-gear {
@@ -589,12 +561,12 @@ body {
 }
 
 .site-header #setting-container .setting-icon:hover .fa-gear {
-  color: var(--red);
+  color: #d5333b;
   transform: rotate(90deg);
 }
 
 .site-header #setting-toggle:checked + #setting-container .fa-gear {
-  color: var(--red);
+  color: #d5333b;
   transform: rotate(180deg);
 }
 
@@ -615,7 +587,7 @@ body {
   z-index: 1;
   display: block;
   transform: translateY(-50%);
-  color: var(--white);
+  color: #ffffff;
   font-size: 1.05rem;
   line-height: 1;
   pointer-events: none;
@@ -631,8 +603,8 @@ body {
   padding: 0.5625rem 1rem 0.5625rem 3rem;
   border: 1px solid transparent;
   border-radius: 999px;
-  background: var(--dark-grey);
-  color: var(--white);
+  background: #262626;
+  color: #ffffff;
   font-size: 0.8125rem;
   text-transform: uppercase;
   appearance: none;
@@ -729,7 +701,7 @@ body {
   min-height: 2.5rem;
   padding: 0.5rem 1.1rem;
   border-radius: 0.5rem;
-  color: var(--white);
+  color: #ffffff;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -740,7 +712,7 @@ body {
   left: 0;
   height: 0.25rem;
   border-radius: 999px;
-  background: var(--red);
+  background: #d5333b;
   content: "";
   opacity: 0;
   transform: scaleX(0.7);
@@ -751,7 +723,7 @@ body {
 .site-header .nav-links a:focus-visible,
 .site-header .nav-links a[aria-current="page"] {
   background: #303030;
-  color: var(--white);
+  color: #ffffff;
 }
 
 .site-header .nav-links a:hover::after,
@@ -774,7 +746,7 @@ body {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--white);
+  color: #ffffff;
   cursor: pointer;
   transform: translateY(-50%);
 }
@@ -786,7 +758,7 @@ body {
 
 .site-header .nav-search-submit:hover,
 .site-header .nav-search-submit:focus-visible {
-  color: var(--red);
+  color: #d5333b;
 }
 
 .site-header .nav-search input[type="search"] {
