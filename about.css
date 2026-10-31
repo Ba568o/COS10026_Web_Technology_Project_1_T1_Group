@@ -78,9 +78,7 @@ body:has(#lang-vi:checked) .nav-search.language-vi {
 .about-step-text > .language-en,
 .about-step-text > .lang-en,
 .about-mock-heading > .language-en,
-.about-mock-heading > .lang-en,
-.contribution-quote blockquote p.language-en,
-.contribution-quote blockquote p.lang-en {
+.about-mock-heading > .lang-en {
   display: block !important;
 }
 
@@ -89,14 +87,10 @@ body:has(#language-vi:checked) .about-step-text > .language-en,
 body:has(#language-vi:checked) .about-step-text > .lang-en,
 body:has(#language-vi:checked) .about-mock-heading > .language-en,
 body:has(#language-vi:checked) .about-mock-heading > .lang-en,
-body:has(#language-vi:checked) .contribution-quote blockquote p.language-en,
-body:has(#language-vi:checked) .contribution-quote blockquote p.lang-en,
 body:has(#lang-vi:checked) .about-step-text > .language-en,
 body:has(#lang-vi:checked) .about-step-text > .lang-en,
 body:has(#lang-vi:checked) .about-mock-heading > .language-en,
-body:has(#lang-vi:checked) .about-mock-heading > .lang-en,
-body:has(#lang-vi:checked) .contribution-quote blockquote p.language-en,
-body:has(#lang-vi:checked) .contribution-quote blockquote p.lang-en {
+body:has(#lang-vi:checked) .about-mock-heading > .lang-en {
   display: none !important;
 }
 
@@ -105,35 +99,11 @@ body:has(#language-vi:checked) .about-step-text > .language-vi,
 body:has(#language-vi:checked) .about-step-text > .lang-vi,
 body:has(#language-vi:checked) .about-mock-heading > .language-vi,
 body:has(#language-vi:checked) .about-mock-heading > .lang-vi,
-body:has(#language-vi:checked) .contribution-quote blockquote p.language-vi,
-body:has(#language-vi:checked) .contribution-quote blockquote p.lang-vi,
 body:has(#lang-vi:checked) .about-step-text > .language-vi,
 body:has(#lang-vi:checked) .about-step-text > .lang-vi,
 body:has(#lang-vi:checked) .about-mock-heading > .language-vi,
-body:has(#lang-vi:checked) .about-mock-heading > .lang-vi,
-body:has(#lang-vi:checked) .contribution-quote blockquote p.language-vi,
-body:has(#lang-vi:checked) .contribution-quote blockquote p.lang-vi {
+body:has(#lang-vi:checked) .about-mock-heading > .lang-vi {
   display: block !important;
-}
-
-/* Quote paragraph typography */
-.contribution-quote blockquote p.language-vi,
-.contribution-quote blockquote p.lang-vi,
-.contribution-quote blockquote p.language-en,
-.contribution-quote blockquote p.lang-en {
-  margin: 0;
-  color: #111827;
-  font-family: "Lora", "Merriweather", "Times New Roman", Georgia, serif;
-  font-size: 1rem;
-  font-style: italic;
-  line-height: 1.7;
-}
-
-body:has(#dark-toggle:checked) .contribution-quote blockquote p.language-en,
-body:has(#dark-toggle:checked) .contribution-quote blockquote p.lang-en,
-body:has(#dark-toggle:checked) .contribution-quote blockquote p.language-vi,
-body:has(#dark-toggle:checked) .contribution-quote blockquote p.lang-vi {
-  color: #f5f5f5;
 }
 
 /* Container — 80rem outer with 2.5rem side padding = 75rem (1200px) inner width,
@@ -1224,20 +1194,34 @@ body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] .about-step-
   border-left: 4px solid #e2231a;
   border-radius: 0 12px 12px 0;
   background: #fff5f5;
-}
-
-.contribution-quote blockquote p {
-  margin: 0 0 0.5rem;
-  color: #111827;
+  box-shadow: inset 0 0 0 1px #fde4e4;
   font-family: "Lora", "Merriweather", "Times New Roman", Georgia, serif;
-  font-size: 1rem;
   font-style: italic;
   line-height: 1.7;
 }
 
+/* Primary Vietnamese quote line */
+.contribution-quote blockquote p,
+.contribution-quote blockquote .contribution-quote-vi {
+  margin: 0;
+  color: #111827;
+  font-family: "Lora", "Merriweather", "Times New Roman", Georgia, serif;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+/* Translated English quote line placed right underneath */
 .contribution-quote blockquote .contribution-quote-en {
+  margin-top: 6px;
+  margin-bottom: 0;
   color: #4b5563;
+  font-family: "Lora", "Merriweather", "Times New Roman", Georgia, serif;
   font-size: 0.9375rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.65;
 }
 
 .contribution-quote-attr {
@@ -1453,7 +1437,8 @@ body:has(#dark-toggle:checked) .contribution-quote blockquote {
   box-shadow: none !important;
 }
 
-body:has(#dark-toggle:checked) .contribution-quote blockquote p {
+body:has(#dark-toggle:checked) .contribution-quote blockquote p,
+body:has(#dark-toggle:checked) .contribution-quote blockquote .contribution-quote-vi {
   color: #f5f5f5;
 }
 
