@@ -518,7 +518,15 @@ body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] .about-step-
   letter-spacing: 0.6px;
   line-height: 1.5;
   text-transform: uppercase;
+}
+
+.about-member-role {
   white-space: nowrap;
+}
+
+.contribution-role {
+  white-space: normal;
+  text-align: center;
 }
 
 .role-leader {
@@ -864,6 +872,12 @@ body:has(#dark-toggle:checked) .about-member-avatar,
 body:has(#dark-toggle:checked) .role-developer {
   background: #f5f5f5;
   color: #111111;
+}
+
+body:has(#dark-toggle:checked) .role-coordinator {
+  background: #451a03;
+  color: #fed7aa;
+  border-color: #78350f;
 }
 
 /* !important only to override the rubric-required inline background */
