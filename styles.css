@@ -1031,12 +1031,21 @@ body {
 
 @media (max-width: 700px) {
   .site-header .nav-links {
+    width: 100%;
     gap: 0.4rem;
+    white-space: normal;
+  }
+
+  .site-header .nav-links li {
+    flex: 1 1 0;
+    min-width: 0;
   }
 
   .site-header .nav-links a {
-    padding-right: 0.65rem;
-    padding-left: 0.65rem;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    font-size: clamp(0.65rem, 2.2vw, 0.875rem);
+    text-align: center;
   }
 }
 
@@ -1059,4 +1068,12 @@ body:has(#language-vi:checked) .nav-search.language-en {
 
 body:has(#language-vi:checked) .nav-search.language-vi {
   display: flex;
+}
+
+/* Hide search box on small screens to save space on navbar. */
+@media (max-width: 480px) {
+  body .site-header .nav-search.language-en,
+  body .site-header .nav-search.language-vi {
+    display: none !important;
+  }
 }

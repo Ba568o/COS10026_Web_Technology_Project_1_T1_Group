@@ -328,9 +328,11 @@ body:has(#job-type-content:checked) .job-card:not(.job-content) {
     display: none;
   }
 
+/* jobs.html requirements: <aside> floated right, 25% width, styled with margin, padding, and border */
   .sidebar {
     align-self: flex-end;
-    width: 100%;
+    width: 100%; 
+    /* 100% of the container, which is 25% of the page width */
     margin: 1rem 0 1rem auto;
     padding: 1rem;
     border: 1px solid #cccccc;
