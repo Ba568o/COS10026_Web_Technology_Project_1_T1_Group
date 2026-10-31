@@ -518,7 +518,6 @@ a {
 }
 
 
-
 /* ==========================================================================
    6. Settings menu
    Controls the settings dropdown, theme switch, language options, and
@@ -645,18 +644,22 @@ a {
 /* Theme switch icons
    Keeps the sun and moon icons aligned while the selected theme changes. */
 /* Theme icons share a fixed size so the control does not shift when toggled. */
+
+
 .sun,
 .moon {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
   width: 1.35rem;
   height: 1.35rem;
   flex: 0 0 1.35rem;
   border-radius: 50%;
-  line-height: 1.35rem;
+  line-height: 1;
   text-align: center;
 }
 
 .sun {
-  display: block !important;
   transform: translateX(0);
 }
 
@@ -732,7 +735,7 @@ body {
     }
 
     .theme-icons .moon {
-      display: block !important;
+      display: flex !important;
       transform: translateX(1.7rem);
     }
 
