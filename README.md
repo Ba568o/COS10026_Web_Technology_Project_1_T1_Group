@@ -22,6 +22,8 @@ Website for **COS10026 — Web Technology, Project 1** at Swinburne University o
 ## Features
 
 - HTML5 and CSS3 only (no JavaScript)
+- One consolidated `styles.css` file for shared and page-specific styling
+- Demonstrates external, embedded, and inline CSS
 - Shared header and footer across pages
 - English / Vietnamese language switch
 - Dark mode and font-size controls (CSS-only settings menu)
@@ -40,6 +42,20 @@ Website for **COS10026 — Web Technology, Project 1** at Swinburne University o
 
 ---
 
+## Stylesheet organisation
+
+The project uses a single external stylesheet, `styles.css`. It is organised into clearly labelled sections:
+
+1. Global styles shared across the website
+2. Index page styles — Nguyen Thai Bao
+3. Jobs page styles — Minh Hoang Bui
+4. Apply page styles — Sy Tho Nguyen
+5. About page styles — Duong Anh Vu
+
+The Index page also includes small examples of embedded CSS (inside a `<style>` element) and inline CSS (through an element's `style` attribute) as required for the project. These examples are intentionally limited to decorative details so they do not disrupt the page layout.
+
+---
+
 ## Project structure
 
 ```text
@@ -48,19 +64,11 @@ Website for **COS10026 — Web Technology, Project 1** at Swinburne University o
 ├── jobs.html               # Jobs page
 ├── apply.html              # Application page
 ├── about.html              # About page
-├── styles.css              # Shared styles (header, settings, language)
-├── index.css               # Home page styles
-├── jobs.css                # Jobs page styles
-├── apply.css               # Apply page styles (+ shared footer styles)
-├── css/pages/about/        # About page styles
+├── styles.css              # Combined stylesheet (shared + page-specific styles)
 ├── images/                 # Logos and media
-├── templates/              # Header and footer copy templates for the team
-│   ├── header.html
-│   └── footer.html
 ├── LICENSE
 └── README.md
 ```
-
 ---
 
 ## How to run locally
@@ -99,17 +107,22 @@ In VS Code / Cursor you can also use the **Live Server** extension.
 
 ## Working on a page
 
-1. Link shared styles first, then your page stylesheet:
+1. Link the combined stylesheet in the page's `<head>`:
 
-```html
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="your-page.css">
-```
+   ```html
+   <link rel="stylesheet" href="styles.css">
+   ```
 
-2. Copy `templates/header.html` after `<body>` and `templates/footer.html` before `</body>`.
-3. Move `aria-current="page"` to the nav link for your page.
-4. Keep bilingual text with `.language-en` and `.language-vi` spans so the language switch works.
+2. Keep page-specific CSS inside its matching section in `styles.css`. Each page uses a class on its `<body>` element to keep its styles separate:
+   - `index-page`
+   - `jobs-page`
+   - `apply-page`
+   - `about-page`
 
+3. Keep the shared header and footer consistent across all pages when making changes.
+4. Move `aria-current="page"` to the nav link for your page.
+5. Keep bilingual text with `.language-en` and `.language-vi` spans so the language switch works.
+6. Use the existing CSS comments and author headings when editing a page's styles. Avoid changing another page's section unless the change is intended to be shared.
 ---
 
 ## Links

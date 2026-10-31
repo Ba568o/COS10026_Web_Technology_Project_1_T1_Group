@@ -12,11 +12,9 @@
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 
   <!-- Shared site styles first, then page styles -->
-  <link rel="stylesheet" href="apply.css">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="about.css">
 
   <!-- Font Awesome -->
+    <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
     integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -86,7 +84,7 @@
   </style>
 </head>
 
-<body id="top">
+<body id="top" class="about-page">
 
   <!-- HEADER: brand, primary navigation, display settings, and search. -->
 
@@ -253,124 +251,96 @@
           </a>
         </div>
 
-        <!-- Right: light app mockup with floating satellite chips (style of jobs.html) -->
+        <!-- Right: animated team connection hub -->
         <div class="about-hero-visual">
+          <div class="about-hub-orbit about-hub-orbit-outer" aria-hidden="true"></div>
+          <div class="about-hub-orbit about-hub-orbit-inner" aria-hidden="true"></div>
 
-          <!-- Main mockup card -->
-          <div class="about-mock-card">
-            <div class="about-mock-header">
-              <span class="about-mock-icon">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-              </span>
-              <span class="about-mock-title">
-                <span class="language-en">ABOUT T1 TEAM</span>
-                <span class="language-vi">ĐỘI NGŨ T1</span>
-              </span>
-              <span class="about-mock-menu">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"
-                  focusable="false">
-                  <circle cx="5" cy="12" r="2" />
-                  <circle cx="12" cy="12" r="2" />
-                  <circle cx="19" cy="12" r="2" />
-                </svg>
-              </span>
-            </div>
+          <svg class="about-hub-lines" viewBox="0 0 520 440" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="about-line-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#d92f44" stop-opacity=".7" />
+                <stop offset="1" stop-color="#2f9e8f" stop-opacity=".65" />
+              </linearGradient>
+            </defs>
 
-            <div class="about-mock-body">
-              <div class="about-mock-copy">
-                <span class="about-mock-eyebrow">
-                  <span class="language-en">BUILDING TOGETHER</span>
-                  <span class="language-vi">CÙNG NHAU XÂY DỰNG</span>
-                </span>
-                <p class="about-mock-heading">
-                  <span class="language-en">Different strengths.<br><strong>One team.</strong></span>
-                  <span class="language-vi">Thế mạnh riêng biệt.<br><strong>Một tập thể gắn kết.</strong></span>
-                </p>
-                <p class="about-mock-text">
-                  <span class="language-en">Four members, one shared vision.</span>
-                  <span class="language-vi">Bốn thành viên, một tầm nhìn chung.</span>
-                </p>
-              </div>
+            <!-- Dashed connections -->
+            <path id="about-path-people" class="about-hub-line" d="M260 220 L125 105" />
+            <path id="about-path-growth" class="about-hub-line" d="M260 220 L395 105" />
+            <path id="about-path-trust" class="about-hub-line" d="M260 220 L125 335" />
+            <path id="about-path-impact" class="about-hub-line" d="M260 220 L395 335" />
 
-              <!-- CSS illustration: four team members -->
-              <div class="about-team-illustration" aria-hidden="true">
-                <span class="about-person about-person-one"></span>
-                <span class="about-person about-person-two"></span>
-                <span class="about-person about-person-three"></span>
-                <span class="about-person about-person-four"></span>
-              </div>
-            </div>
+            <!-- Moving dots: each dot follows its own dashed connection -->
+            <circle class="about-hub-line-dot" r="4">
+              <animateMotion dur="3.8s" repeatCount="indefinite" begin="0s" rotate="auto">
+                <mpath href="#about-path-people" />
+              </animateMotion>
+            </circle>
+            <circle class="about-hub-line-dot about-hub-dot-teal" r="4">
+              <animateMotion dur="3.8s" repeatCount="indefinite" begin=".95s" rotate="auto">
+                <mpath href="#about-path-growth" />
+              </animateMotion>
+            </circle>
+            <circle class="about-hub-line-dot" r="4">
+              <animateMotion dur="3.8s" repeatCount="indefinite" begin="1.9s" rotate="auto">
+                <mpath href="#about-path-trust" />
+              </animateMotion>
+            </circle>
+            <circle class="about-hub-line-dot about-hub-dot-teal" r="4">
+              <animateMotion dur="3.8s" repeatCount="indefinite" begin="2.85s" rotate="auto">
+                <mpath href="#about-path-impact" />
+              </animateMotion>
+            </circle>
+          </svg>
 
-            <div class="about-mock-footer">
-              <span class="about-status-dot" aria-hidden="true"></span>
-              <span>
-                <span class="language-en">4 Active Contributors</span>
-                <span class="language-vi">4 thành viên đóng góp</span>
-              </span>
-              <span class="about-mock-meta">
-                <span class="language-en">COS10026 &middot; Swinburne</span>
-                <span class="language-vi">COS10026 &middot; ĐH Swinburne</span>
-              </span>
-            </div>
+          <div class="about-hub-core">
+            <span class="about-hub-core-ring" aria-hidden="true"></span>
+            <span class="about-hub-core-mark">T1</span>
+            <span class="about-hub-core-caption">
+              <span class="language-en">ONE SHARED VISION</span>
+              <span class="language-vi">CHUNG MỘT TẦM NHÌN</span>
+            </span>
           </div>
 
-          <!-- Chip 1 (top-left): health & wellness -->
-          <div class="about-chip about-chip-health" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-              <path
-                d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z" />
-              <polyline points="3.5 12 8 12 10 9 13 15 15 12 20.5 12" />
-            </svg>
-          </div>
-
-          <!-- Chip 2 (top-right): growth -->
-          <div class="about-chip about-chip-growth" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-              <polyline points="16 7 22 7 22 13" />
-            </svg>
-          </div>
-
-          <!-- Chip 3 (bottom-right): horizontal pill -->
-          <div class="about-chip-pill" aria-hidden="true">
-            <span class="about-chip-pill-icon">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          <div class="about-hub-node about-hub-node-one">
+            <span class="about-hub-node-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="3.5"/><path d="M5 20v-1.5a7 7 0 0 1 14 0V20"/>
               </svg>
             </span>
-            <span class="about-chip-pill-copy">
-              <strong>
-                <span class="language-en">Together as One</span>
-                <span class="language-vi">Together as One</span>
-              </strong>
-              <small>
-                <span class="language-en">Built for excellence</span>
-                <span class="language-vi">Đồng lòng vì sự xuất sắc ✓</span>
-              </small>
-            </span>
-            <span class="about-chip-pill-check">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </span>
+            <span class="about-hub-node-label"><span class="language-en">People</span><span class="language-vi">Con người</span></span>
           </div>
 
-          <!-- Decorative particles -->
-          <span class="about-particle about-particle-one" aria-hidden="true"></span>
-          <span class="about-particle about-particle-two" aria-hidden="true"></span>
+          <div class="about-hub-node about-hub-node-two">
+            <span class="about-hub-node-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19V5m0 14h16"/><path d="m7 15 4-4 3 2 5-6"/><path d="M15 7h4v4"/>
+              </svg>
+            </span>
+            <span class="about-hub-node-label"><span class="language-en">Growth</span><span class="language-vi">Phát triển</span></span>
+          </div>
+
+          <div class="about-hub-node about-hub-node-three">
+            <span class="about-hub-node-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3 4.5 6v5.2c0 4.5 3.1 7.8 7.5 9.8 4.4-2 7.5-5.3 7.5-9.8V6L12 3Z"/><path d="m9 12 2 2 4-4"/>
+              </svg>
+            </span>
+            <span class="about-hub-node-label"><span class="language-en">Trust</span><span class="language-vi">Tin cậy</span></span>
+          </div>
+
+          <div class="about-hub-node about-hub-node-four">
+            <span class="about-hub-node-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/>
+              </svg>
+            </span>
+            <span class="about-hub-node-label"><span class="language-en">Impact</span><span class="language-vi">Tác động</span></span>
+          </div>
+
+          <span class="about-hub-spark about-hub-spark-one" aria-hidden="true"></span>
+          <span class="about-hub-spark about-hub-spark-two" aria-hidden="true"></span>
+          <span class="about-hub-spark about-hub-spark-three" aria-hidden="true"></span>
         </div>
 
       </div>
