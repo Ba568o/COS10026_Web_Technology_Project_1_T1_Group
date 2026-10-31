@@ -219,16 +219,16 @@
   <main id="main-content" tabindex="-1">
 
     <!-- ===== HERO BANNER ===== -->
-    <section class="about-hero hero" aria-labelledby="about-heading">
-      <!-- Decorative ambient glow synced with index.html and jobs.html -->
-      <div class="about-hero-bg hero-background" aria-hidden="true">
-        <div class="about-hero-glow hero-glow"></div>
+    <section class="about-hero" aria-labelledby="about-heading">
+      <!-- Decorative ambient glow (same layer as index.html / jobs.html) -->
+      <div class="about-hero-bg" aria-hidden="true">
+        <div class="about-hero-glow"></div>
       </div>
 
-      <div class="about-container about-hero-layout hero-layout">
+      <div class="about-hero-layout">
 
         <!-- Left: pill tag, H1 heading, description, and CTA -->
-        <div class="about-hero-content hero-content">
+        <div class="about-hero-content">
           <p class="about-tag">T1 GROUP ABOUT US</p>
           <h1 id="about-heading">Great things start<br>with our team.</h1>
           <p class="about-hero-text">
@@ -241,28 +241,71 @@
           </a>
         </div>
 
-        <!-- Right: proportional dark visual card -->
-        <div class="about-team-note about-hero-card hero-card">
-          <div class="about-team-note-top">
-            <div class="about-team-brand">
-              <img src="images/logo.png" alt="" class="about-team-logo">
-              <span class="about-team-brand-label">T1 GROUP</span>
+        <!-- Right: light app mockup with floating satellite chips (style of jobs.html) -->
+        <div class="about-hero-visual">
+
+          <!-- Main mockup card -->
+          <div class="about-mock-card">
+            <div class="about-mock-header">
+              <span class="about-mock-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </span>
+              <span class="about-mock-title">ABOUT T1 TEAM</span>
+              <span class="about-mock-menu">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+              </span>
             </div>
-            <span class="about-team-pill">4 MEMBERS</span>
+
+            <div class="about-mock-body">
+              <div class="about-mock-copy">
+                <span class="about-mock-eyebrow">BUILDING TOGETHER</span>
+                <p class="about-mock-heading">Different strengths.<br><strong>One team.</strong></p>
+                <p class="about-mock-text">Four members, one shared vision.</p>
+              </div>
+
+              <!-- CSS illustration: four team members -->
+              <div class="about-team-illustration" aria-hidden="true">
+                <span class="about-person about-person-one"></span>
+                <span class="about-person about-person-two"></span>
+                <span class="about-person about-person-three"></span>
+                <span class="about-person about-person-four"></span>
+              </div>
+            </div>
+
+            <div class="about-mock-footer">
+              <span class="about-status-dot" aria-hidden="true"></span>
+              <span>4 Active Contributors</span>
+              <span class="about-mock-meta">COS10026 &middot; Swinburne</span>
+            </div>
           </div>
 
-          <div class="about-team-note-body">
-            <span class="about-team-accent" aria-hidden="true"></span>
-            <p class="about-team-quote">Different strengths.<br><strong>One team.</strong></p>
-            <p class="about-team-caption">That&rsquo;s the T1 spirit &mdash; uniting engineering, design, and accessibility.</p>
+          <!-- Chip 1 (top-left): health & wellness -->
+          <div class="about-chip about-chip-health" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/><polyline points="3.5 12 8 12 10 9 13 15 15 12 20.5 12"/></svg>
           </div>
 
-          <div class="about-team-note-footer">
-            <span>COS10026 &middot; Web Technology</span>
-            <span class="about-team-status">
-              <span class="about-status-dot" aria-hidden="true"></span>Swinburne
+          <!-- Chip 2 (top-right): growth -->
+          <div class="about-chip about-chip-growth" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+
+          <!-- Chip 3 (bottom-right): horizontal pill -->
+          <div class="about-chip-pill" aria-hidden="true">
+            <span class="about-chip-pill-icon">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            <span class="about-chip-pill-copy">
+              <strong>Together as One</strong>
+              <small>Built for excellence</small>
+            </span>
+            <span class="about-chip-pill-check">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"/></svg>
             </span>
           </div>
+
+          <!-- Decorative particles -->
+          <span class="about-particle about-particle-one" aria-hidden="true"></span>
+          <span class="about-particle about-particle-two" aria-hidden="true"></span>
         </div>
 
       </div>
