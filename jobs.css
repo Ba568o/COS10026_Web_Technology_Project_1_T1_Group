@@ -609,9 +609,9 @@ body:has(#dark-toggle:checked) {
     }
 }
 
-/* ========================================
+/* 
    JOBS HERO ANIMATION 
-======================================== */
+ */
 
 .jobs-hero-animation {
     position: relative;
