@@ -11,18 +11,31 @@
 
   <title>T1 Group - Health &amp; Wellness</title>
 
-  <link rel="stylesheet" href="jobs.css">
-  <link rel="stylesheet" href="apply.css">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="index.css">
-
   <!-- Font Awesome -->
+    <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
     integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- EMBEDDED CSS EXAMPLE -->
+  <style>
+    body.index-page #home-services .service-card:first-child {
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.index-page #home-services .service-card:first-child::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #d92f44;
+    }
+  </style>
 </head>
 
-<body id="top">
+<body id="top" class="index-page">
 
   <!-- HEADER: brand, primary navigation, display settings, and search. -->
 
@@ -316,8 +329,9 @@
           <div class="service-cards">
 
             <article class="service-card">
-
-              <div class="service-icon" aria-hidden="true">
+              
+    <!-- INLINE CSS EXAMPLE -->
+              <div class="service-icon" aria-hidden="true" style="background-color: #d92f44; color: #ffffff;">
                 <i class="fa-solid fa-laptop-medical"></i>
               </div>
 
