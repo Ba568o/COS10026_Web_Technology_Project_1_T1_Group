@@ -1,172 +1,368 @@
-/* ==========================================
+/* ==========================================================================
    about.css — About Us Page Styles
-   ========================================== */
+   Design language mirrors index.html / jobs.html:
+   - T1 red accent #e2231a (decorative) / #b4232a (red text, WCAG AA)
+   - Primary text #111827, muted text #4b5563 / #5f5f5a
+   - Soft borders #f0f0f0 / #e5e7eb, cards 16px radius, ultra-light shadows
+   Plain hex colour values only (no CSS variables). HTML + CSS only.
 
-/* Accessibility — Skip link keyboard navigation */
+   Card 03 photo styles live in the embedded <style> of about.html and the
+   Anh Vu quote uses inline CSS — both are required by the assignment rubric.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Page-level helpers
+   -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Accessibility — skip link keyboard navigation */
 .skip-link:focus {
   top: 0.625rem;
-  outline: 2px solid #d5333b;
+  outline: 2px solid #e2231a;
   outline-offset: 2px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   font-weight: 700;
   z-index: 9999;
 }
 
-/* --- Container --- */
+/* Container — 80rem outer with 2.5rem side padding = 75rem (1200px) inner width,
+   matching #main-content .container (max-width: 1200px) in index.css */
 .about-container {
-  max-width: 112rem;
+  width: 100%;
+  max-width: 80rem;
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 5vw, 7.5rem);
+  padding: 0 clamp(1.25rem, 4vw, 2.5rem);
 }
 
-/* --- Hero Banner --- */
-.about-hero {
-  padding: 4.5rem 0 5rem;
-  background: #f4f4f2;
+
+/* ==========================================================================
+   1. Hero Banner (Balanced proportions synced with index.html)
+   ========================================================================== */
+.about-hero,
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  background: #f0f1ed;
 }
 
-.about-hero-layout {
-  display: grid;
-  grid-template-columns: 1fr 21.25rem;
+.about-hero-bg,
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.about-hero-glow,
+.hero-glow {
+  position: absolute;
+  top: -9.375rem;
+  right: 5%;
+  width: 26.25rem;
+  height: 26.25rem;
+  border-radius: 50%;
+  background: rgba(117, 174, 188, 0.14);
+  filter: blur(60px);
+}
+
+/* 1. Khung chứa Hero (.about-hero-layout / .hero-layout / .about-container)
+   Max-width 1200px, căn giữa bằng margin: 0 auto, display: flex cân bằng trục dọc */
+.about-hero-layout,
+.about-hero .about-container,
+.hero-layout {
+  display: flex;
   align-items: center;
-  gap: 3rem;
+  justify-content: space-between;
+  gap: 3.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
 }
 
+/* 2. Cụm nội dung bên trái (.about-hero-content / .hero-content) */
+.about-hero-content,
+.hero-content {
+  flex: 1 1 55%;
+  max-width: 620px;
+  min-width: 0;
+}
+
+/* Pill tag synced with "DIGITAL HEALTHCARE" in index.html (#d92f44 / #ffffff = 4.73:1 AA) */
 .about-tag {
   display: inline-block;
   margin: 0 0 1.125rem;
-  padding: 0.375rem 0.75rem;
-  background: #d5333b;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.25rem;
+  background: #d92f44;
   color: #ffffff;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
 .about-hero h1 {
   margin: 0 0 1.25rem;
-  font-size: 4rem;
+  color: #151515;
+  font-size: clamp(2.375rem, 4.2vw, 3.875rem);
+  font-weight: 800;
   line-height: 1.08;
-  color: #111111;
+  letter-spacing: -0.025em;
 }
 
 .about-hero-text {
-  max-width: 32.5rem;
+  max-width: 33.5rem;
   margin: 0 0 2rem;
-  color: #5f5f5a;
+  color: #4b5563;
   font-size: 1.125rem;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
+/* CTA button synced with "EXPLORE OUR SERVICE ->" in index.html */
 .about-btn {
-  display: inline-block;
-  padding: 0.875rem 1.75rem;
-  background: #d5333b;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 2.875rem;
+  padding: 0.85rem 1.625rem;
+  border-radius: 0.25rem;
+  background: #d92f44;
   color: #ffffff;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 700;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   text-decoration: none;
-  border-radius: 0.25rem;
-  letter-spacing: 0.5px;
-  transition: background 0.2s ease;
+  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.about-btn:hover {
-  background: #d92f44;
+.about-btn-arrow {
+  font-size: 0.9375rem;
+  transition: transform 0.25s ease;
 }
 
-/* --- Team Note Card --- */
-.about-team-note {
-  padding: 2.25rem;
-  border-radius: 0.375rem;
-  background: #000000;
+.about-btn:hover,
+.about-btn:focus-visible {
+  background: #0f0f0f;
   color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 15, 15, 0.16);
+}
+
+.about-btn:hover .about-btn-arrow,
+.about-btn:focus-visible .about-btn-arrow {
+  transform: translateX(5px);
+}
+
+/* 3. Khối Visual Card màu đen bên phải (.about-team-note / .about-hero-card / .hero-card)
+   flex: 0 0 420px, padding 32px 28px, border 1px solid rgba(255,255,255,0.12),
+   box-shadow 0 20px 40px rgba(0,0,0,0.18), border-radius 20px */
+.about-team-note,
+.about-hero-card,
+.hero-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex: 0 0 420px;
+  width: 420px;
+  max-width: 100%;
+  min-height: 19.75rem;
+  padding: 32px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  background: #0f0f0f;
+  color: #ffffff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+}
+
+.about-team-note::before {
+  content: "";
+  position: absolute;
+  top: -4.5rem;
+  right: -4.5rem;
+  width: 13rem;
+  height: 13rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 47, 68, 0.2) 0%, rgba(217, 47, 68, 0) 70%);
+  pointer-events: none;
+}
+
+.about-team-note-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.about-team-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
 }
 
 .about-team-logo {
   display: block;
-  height: 2.5rem;
   width: auto;
+  height: 2.125rem;
 }
 
-.about-team-note p {
-  margin: 1.75rem 0 0.625rem;
-  font-size: 1.75rem;
+.about-team-brand-label {
+  color: #e5e7eb;
+  font-size: 0.75rem;
   font-weight: 700;
-  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.about-team-note strong {
-  color: #d5333b;
+.about-team-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.6875rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e5e7eb;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-team-note-body {
+  position: relative;
+  z-index: 1;
+}
+
+.about-team-accent {
+  display: block;
+  width: 2.25rem;
+  height: 0.1875rem;
+  margin-bottom: 0.9375rem;
+  border-radius: 999px;
+  background: #d92f44;
+}
+
+.about-team-quote {
+  margin: 0 0 0.625rem;
+  color: #ffffff;
+  font-size: clamp(1.625rem, 2.2vw, 1.95rem);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.about-team-quote strong {
+  color: #ff5c6a;
 }
 
 .about-team-caption {
+  margin: 0;
+  color: #cbd5e1;
   font-size: 0.9375rem;
-  color: #bdbdbd;
+  line-height: 1.55;
 }
 
+.about-team-note-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #a3a3a3;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
 
+.about-team-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.about-status-dot {
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  background: #35b779;
+  box-shadow: 0 0 0 3px rgba(53, 183, 121, 0.18);
+}
 
 
 /* ==========================================================================
-   2. Main Content — Split Layout
+   2. Main Content — split layout (sticky sidebar + cards)
    ========================================================================== */
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* White section background, mirrors .application-section in apply.css */
 .about-content-section {
   padding: 4rem 0 6rem;
   background: #ffffff;
 }
 
-/* Two-column grid: fixed sidebar left, flexible content area right */
 .about-split-layout {
   display: grid;
-  grid-template-columns: 17.5rem 1fr;
+  grid-template-columns: 17.5rem minmax(0, 1fr);
   align-items: start;
   gap: 3.5rem;
 }
 
 
 /* --------------------------------------------------------------------------
-   2a. Sidebar
+   2a. Sidebar "In This Page" — sticky, red slide-in bar on hover / active
+   The <aside> itself is the grid item, so it can stick inside the grid.
    -------------------------------------------------------------------------- */
-
-.about-sidebar-content {
+.about-sidebar {
   position: sticky;
-  top: 1.5rem;
-  padding-top: 1.75rem;
+  top: 110px;
+  align-self: start;
 }
 
-/* Small red uppercase label */
+.about-sidebar-content {
+  padding-top: 0.5rem;
+}
+
 .about-eyebrow {
   margin: 0;
+  color: #b4232a;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #d92f44;
 }
 
 .about-sidebar-content h2 {
   margin: 0.625rem 0 0.75rem;
+  color: #111827;
   font-size: 1.5rem;
   line-height: 1.25;
-  color: #111111;
 }
 
 .about-sidebar-desc {
   margin: 0;
+  color: #4b5563;
   font-size: 0.9375rem;
-  color: #5f5f5a;
 }
 
-/* Numbered section index, mirrors .section-nav in apply.css */
 .about-section-nav {
   margin: 1.75rem 0 0;
 }
@@ -177,49 +373,102 @@ html {
   list-style: none;
 }
 
-.about-section-nav li + li {
-  border-top: 1px solid #dcdcd5;
+.about-section-nav li+li {
+  border-top: 1px solid #f0f0f0;
 }
 
 .about-section-nav a {
+  position: relative;
   display: flex;
   align-items: baseline;
   gap: 0.875rem;
-  padding: 1rem 0;
+  padding: 0.95rem 0.875rem 0.95rem 1.125rem;
+  border-radius: 0 10px 10px 0;
+  color: #111827;
   text-decoration: none;
-  color: #111111;
+  transition: color 0.25s ease, background-color 0.25s ease;
 }
 
-.about-section-nav a:hover .about-step-text {
-  color: #d92f44;
+/* Red vertical bar that slides in from the centre */
+.about-section-nav a::before {
+  position: absolute;
+  top: 0.55rem;
+  bottom: 0.55rem;
+  left: 0;
+  width: 3px;
+  border-radius: 999px;
+  background: #e2231a;
+  content: "";
+  transform: scaleY(0);
+  transition: transform 0.25s ease;
 }
 
 .about-step-number {
   flex: 0 0 1.75rem;
+  color: #9ca3af;
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1.5;
-  color: #d92f44;
+  transition: color 0.25s ease;
 }
 
 .about-step-text {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.5;
+  transition: color 0.25s ease;
 }
 
 .about-section-nav small {
   display: block;
+  color: #5f5f5a;
   font-size: 0.875rem;
   font-weight: 400;
-  color: #5f5f5a;
+}
+
+/* Hover / keyboard focus / active (:target via :has — no JavaScript) */
+.about-section-nav a:hover,
+.about-section-nav a:focus-visible,
+body:has(#group-info:target) .about-section-nav a[href="#group-info"],
+body:has(#contributions:target) .about-section-nav a[href="#contributions"],
+body:has(#our-team-cards:target) .about-section-nav a[href="#our-team-cards"],
+body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] {
+  background: #fef2f2;
+}
+
+.about-section-nav a:hover::before,
+.about-section-nav a:focus-visible::before,
+body:has(#group-info:target) .about-section-nav a[href="#group-info"]::before,
+body:has(#contributions:target) .about-section-nav a[href="#contributions"]::before,
+body:has(#our-team-cards:target) .about-section-nav a[href="#our-team-cards"]::before,
+body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"]::before {
+  transform: scaleY(1);
+}
+
+.about-section-nav a:hover .about-step-text,
+.about-section-nav a:hover .about-step-number,
+.about-section-nav a:focus-visible .about-step-text,
+.about-section-nav a:focus-visible .about-step-number,
+body:has(#group-info:target) .about-section-nav a[href="#group-info"] .about-step-text,
+body:has(#group-info:target) .about-section-nav a[href="#group-info"] .about-step-number,
+body:has(#contributions:target) .about-section-nav a[href="#contributions"] .about-step-text,
+body:has(#contributions:target) .about-section-nav a[href="#contributions"] .about-step-number,
+body:has(#our-team-cards:target) .about-section-nav a[href="#our-team-cards"] .about-step-text,
+body:has(#our-team-cards:target) .about-section-nav a[href="#our-team-cards"] .about-step-number,
+body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] .about-step-text,
+body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] .about-step-number {
+  color: #b4232a;
+}
+
+.about-section-nav a:focus-visible {
+  outline: 3px solid #e2231a;
+  outline-offset: 2px;
 }
 
 
 /* --------------------------------------------------------------------------
-   2b. Content Cards — shared card shell
+   2b. Card shell (shared by Cards 01 – 04)
    -------------------------------------------------------------------------- */
-
 .about-cards-area {
   display: flex;
   flex-direction: column;
@@ -228,63 +477,74 @@ html {
 }
 
 .about-card {
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
-  border-radius: 0.75rem;            /* 12px */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  scroll-margin-top: 1.5rem;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  scroll-margin-top: 110px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* Card header: red badge + title */
+.about-card:hover {
+  border-color: #ebebeb;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+}
+
+/* Highlight the card the user just jumped to */
+.about-card:target {
+  border-color: #f6c9cc;
+  box-shadow: 0 0 0 4px #fde8e8, 0 10px 30px rgba(0, 0, 0, 0.07);
+}
+
 .about-card-header {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #f3f4f6;
 }
 
-/* Red square badge mirroring .section-number in apply.css */
 .about-card-badge {
-  flex: 0 0 2rem;
-  height: 2rem;
   display: flex;
+  flex: 0 0 2.25rem;
   align-items: center;
   justify-content: center;
-  border-radius: 0.25rem;
-  background: #d5333b;
+  height: 2.25rem;
+  border-radius: 10px;
+  background: #e2231a;
   color: #ffffff;
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1;
+  box-shadow: 0 6px 14px rgba(226, 35, 26, 0.25);
 }
 
 .about-card-header h2 {
   margin: 0;
+  color: #111827;
   font-size: 1.375rem;
   font-weight: 700;
-  color: #111111;
+  letter-spacing: -0.01em;
 }
 
 .about-card-body {
-  padding: 1.75rem 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  padding: 1.75rem 2rem 2rem;
 }
 
 
-/* --------------------------------------------------------------------------
-   2c. Info Blocks (label + value rows inside a card)
-   -------------------------------------------------------------------------- */
-
+/* ==========================================================================
+   3. Card 01 — Group Information
+   ========================================================================== */
 .about-info-block {
   display: grid;
-  grid-template-columns: 10rem 1fr;
+  grid-template-columns: 11rem minmax(0, 1fr);
   gap: 0.5rem 1.5rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f3f4f6;
 }
 
 .about-info-block:last-child {
@@ -293,92 +553,182 @@ html {
 }
 
 .about-info-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   margin: 0;
   padding-top: 0.125rem;
+  color: #4b5563;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: #5f5f5a;
+  align-self: start;
+}
+
+/* Minimal stroke SVG icon inside a soft red circle */
+.about-info-icon {
+  flex: 0 0 auto;
+  box-sizing: content-box;
+  width: 1rem;
+  height: 1rem;
+  padding: 0.45rem;
+  border-radius: 50%;
+  background: #fdecec;
+  fill: none;
+  stroke: #b4232a;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .about-info-value {
   margin: 0;
+  color: #111827;
   font-size: 1rem;
   line-height: 1.6;
-  color: #111111;
 }
 
 .about-uni {
+  color: #4b5563;
   font-size: 0.875rem;
-  color: #5f5f5a;
 }
 
-
-/* --------------------------------------------------------------------------
-   2d. Nested schedule list
-   -------------------------------------------------------------------------- */
-
+/* Nested schedule list */
 .about-schedule-list {
   margin: 0;
-  padding-left: 1.125rem;
-  list-style: disc;
-  color: #111111;
+  padding: 0;
+  list-style: none;
+  color: #111827;
   font-size: 1rem;
   line-height: 1.7;
 }
 
-.about-schedule-list > li {
-  margin-bottom: 0.375rem;
+.about-schedule-list>li {
+  padding: 0.75rem 1rem;
+  border: 1px solid #f0f0f0;
+  border-left: 3px solid #e2231a;
+  border-radius: 0 10px 10px 0;
+  background: #fcfcfd;
 }
 
-.about-schedule-list > li > ul {
+.about-schedule-list ul {
   margin: 0.25rem 0 0;
   padding-left: 1.25rem;
   list-style: circle;
-  font-weight: 400;
-  color: #5f5f5a;
+  color: #4b5563;
 }
 
-
-/* --------------------------------------------------------------------------
-   2e. Member list with styled student-ID badges
-   -------------------------------------------------------------------------- */
-
+/* Member list — micro-cards with lift on hover */
 .about-member-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
   margin: 0;
   padding: 0;
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
 }
 
-.about-member-list li {
+.about-member-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.625rem 0.875rem;
-  border-radius: 0.375rem;
-  background: #f9f9f7;
-  border: 1px solid #ebebeb;
+  gap: 0.875rem;
+  min-width: 0;
+  padding: 0.875rem 1rem;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.about-member-card:hover {
+  border-color: #f6c9cc;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+.about-member-avatar {
+  display: flex;
+  flex: 0 0 2.5rem;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #111827;
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.about-member-info {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
 }
 
 .about-member-name {
+  color: #111827;
   font-size: 0.9375rem;
-  font-weight: 600;
-  color: #111111;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
-/* Student ID badge — styled inline chip */
-.member-id {
+/* Role badges (shared by Card 01 and Card 02) */
+.about-member-role,
+.contribution-role {
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.625rem;
-  border-radius: 999px;          /* pill shape */
-  background: #d5333b;
+  align-self: flex-start;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.about-member-role {
+  white-space: nowrap;
+}
+
+.contribution-role {
+  white-space: normal;
+  text-align: center;
+}
+
+.role-leader {
+  background: #e2231a;
   color: #ffffff;
+}
+
+.role-coordinator {
+  border-color: #fed7aa;
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.role-developer {
+  background: #111827;
+  color: #ffffff;
+}
+
+/* Student ID pill — light red background, dark red text (contrast 5.7:1) */
+.member-id {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid #f9d0d2;
+  border-radius: 999px;
+  background: #fdecec;
+  color: #b4232a;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -387,445 +737,639 @@ html {
 
 
 /* ==========================================================================
-   Card 02 — Member Contributions
+   4. Card 02 — Member Contributions
    ========================================================================== */
-
-/* The description list has no default margins or bullet padding */
 .contributions-list {
+  display: grid;
+  gap: 1.25rem;
   margin: 0;
   padding: 0;
 }
 
-/* Each member block — visually separated card within the card */
+/* Each member is its own card */
 .contribution-item {
-  padding: 1.5rem 0;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 1.5rem;
+  border: 1px solid #f0f0f0;
+  border-radius: 14px;
+  background: #fcfcfd;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.contribution-item:first-child {
-  padding-top: 0;
+.contribution-item:hover {
+  border-color: #f6c9cc;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
 }
 
-.contribution-item:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
+/* Leader card gets a red top accent to show hierarchy */
+.contribution-item:has(.role-leader) {
+  border-top: 3px solid #e2231a;
 }
 
-/* dt — member header row: name chip, ID badge, role badge */
 .contribution-member {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.625rem;
-  margin: 0 0 1rem;
+  margin: 0 0 1.125rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #e5e7eb;
 }
 
 .contribution-name {
-  font-size: 1.0625rem;
+  margin-right: auto;
+  color: #111827;
+  font-size: 1.125rem;
   font-weight: 700;
-  color: #111111;
 }
 
-/* Role badge: black pill */
-.contribution-role {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.2rem 0.625rem;
-  border-radius: 999px;
-  background: #111111;
-  color: #ffffff;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-}
-
-/* dd — generic reset */
 .contributions-list dd {
-  margin: 0 0 0.875rem;
+  margin: 0 0 1rem;
 }
 
 .contributions-list dd:last-child {
   margin-bottom: 0;
 }
 
-/* Assigned page row */
 .contribution-page {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   gap: 0.5rem;
-  flex-wrap: wrap;
 }
 
-/* Contributions row */
 .contribution-details {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-/* Small muted label above a value (shared) */
 .contribution-label {
+  color: #4b5563;
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: #5f5f5a;
 }
 
-/* Inline filename in monospace */
-.contribution-file {
+.contribution-file,
+.contribution-tasks code {
+  padding: 0.125rem 0.4rem;
+  border-radius: 0.3rem;
+  background: #fdecec;
+  color: #b4232a;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: #d92f44;
-  background: #fff0f1;
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
 }
 
-/* Bullet list of tasks */
 .contribution-tasks {
-  margin: 0;
-  padding-left: 1.25rem;
-  list-style: disc;
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
-  color: #111111;
+  gap: 0.4rem;
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #1f2937;
   font-size: 0.9375rem;
   line-height: 1.6;
 }
 
-.contribution-tasks code {
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 0.8125rem;
-  color: #d92f44;
-  background: #fff0f1;
-  padding: 0.1rem 0.3rem;
-  border-radius: 0.2rem;
+.contribution-tasks li::marker {
+  color: #e2231a;
 }
 
-/* Quote block */
+/* Quote callout — red left bar, very light red background, serif italic */
 .contribution-quote {
-  margin-top: 0.25rem !important;
+  margin-top: 0.25rem;
 }
 
 .contribution-quote blockquote {
+  position: relative;
   margin: 0;
-  padding: 1rem 1.25rem;
-  border-left: 3px solid #d5333b;
-  background: #fafaf8;
-  border-radius: 0 0.375rem 0.375rem 0;
+  padding: 1.125rem 1.375rem;
+  border-left: 4px solid #e2231a;
+  border-radius: 0 12px 12px 0;
+  background: #fff5f5;
 }
 
 .contribution-quote blockquote p {
   margin: 0 0 0.5rem;
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  color: #111111;
+  color: #111827;
+  font-family: "Lora", "Merriweather", "Times New Roman", Georgia, serif;
+  font-size: 1rem;
   font-style: italic;
+  line-height: 1.7;
 }
 
-.contribution-quote blockquote p:last-of-type {
-  margin-bottom: 0.375rem;
+.contribution-quote blockquote .contribution-quote-en {
+  color: #4b5563;
+  font-size: 0.9375rem;
 }
 
-/* English translation — slightly muted */
-.contribution-quote-en {
-  color: #5f5f5a !important;
-  font-size: 0.875rem !important;
-}
-
-/* Attribution line */
 .contribution-quote-attr {
-  margin: 0.5rem 0 0;
+  margin: 0.625rem 0 0;
+  color: #b4232a;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 0.8125rem;
-  font-weight: 700;
   font-style: normal;
-  color: #5f5f5a;
-}
-
-/* --------------------------------------------------------------------------
-   2d. Card 03 — Team Photo
-   -------------------------------------------------------------------------- */
-
-.team-photo-wrapper {
-  border: 2px solid #e5e5e5;
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 1.5rem 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  max-width: 100%;
-}
-
-.team-photo-wrapper img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.team-photo-wrapper figcaption {
-  padding: 0.75rem 1rem;
-  font-size: 0.875rem;
-  color: #5f5f5a;
-  text-align: center;
-  background: #fafaf8;
-  border-top: 1px solid #e5e5e5;
-}
-
-/* --------------------------------------------------------------------------
-   2e. Card 04 — Fun Facts Table
-   -------------------------------------------------------------------------- */
-
-.table-responsive,
-.about-table-container {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin: 0.5rem 0 0;
-  border: 1px solid #e5e5e5;
-  border-radius: 0.5rem;
-  width: 100%;
-}
-
-/* 1. Styling Bảng (.about-card table) */
-.about-card table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-}
-
-.about-card table caption {
-  text-align: left;
   font-weight: 700;
-  color: #5f5f5a;
-  padding: 0.75rem 1rem;
-}
-
-/* 2. Table Header (thead th) */
-thead th {
-  background-color: #0f0f0f;
-  color: #ffffff;
-  padding: 0.75rem 1rem;
-  text-align: left;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-}
-
-/* 3. Cells & Border (tbody td) */
-tbody td {
-  padding: 0.875rem 1rem;
-  border-bottom: 1px solid #e5e5e5;
-  font-size: 0.9375rem;
-  color: #111111;
-}
-
-/* 4. Hiệu ứng Hover (BẮT BUỘC theo Rubric) */
-tbody tr:hover {
-  background-color: #f8f9fa;
-  transition: background 0.2s ease;
-}
-
-/* 5. Table Footer (tfoot td) */
-tfoot td {
-  background-color: #f4f4f2;
-  font-style: italic;
-  color: #5f5f5a;
-  padding: 0.875rem 1rem;
+  letter-spacing: 0.3px;
 }
 
 
 /* ==========================================================================
-   3. Responsive Media Queries (Tablet & Mobile)
+   5. Card 03 — Team Photo
+   Visual styles: embedded <style> in about.html (rubric requirement).
+   ========================================================================== */
+
+
+/* ==========================================================================
+   6. Card 04 — Fun Facts Table (matches the index.html data tables)
+   ========================================================================== */
+.about-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 28px rgba(20, 30, 45, 0.06);
+}
+
+.about-fun-facts-table {
+  width: 100%;
+  min-width: 40rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  text-align: left;
+}
+
+.about-fun-facts-table caption {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+  color: #111827;
+  font-weight: 700;
+  text-align: left;
+}
+
+.about-fun-facts-table th,
+.about-fun-facts-table td {
+  padding: 0.95rem 1.25rem;
+  border-bottom: 1px solid #eef0f3;
+  vertical-align: middle;
+}
+
+.about-fun-facts-table thead th {
+  background: #171717;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.about-fun-facts-table tbody th {
+  color: #111827;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-fun-facts-table tbody td {
+  color: #1f2937;
+}
+
+.about-fun-facts-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.about-fun-facts-table tbody tr:nth-child(even) {
+  background: #f8f9fb;
+}
+
+.about-fun-facts-table tbody tr:hover {
+  background: #fff0f2;
+}
+
+.about-fun-facts-table tbody tr:hover th {
+  color: #b4232a;
+  box-shadow: inset 3px 0 0 #e2231a;
+}
+
+.about-fun-facts-table tfoot td {
+  padding: 1rem;
+  border-bottom: 0;
+  background: #f0f2f5;
+  color: #4b5563;
+  font-size: 0.8125rem;
+  font-style: italic;
+  text-align: center;
+}
+
+
+/* ==========================================================================
+   7. Dark mode (driven by the shared #dark-toggle checkbox in the header)
+   ========================================================================== */
+body:has(#dark-toggle:checked) {
+  background: #0f0f0f;
+  color: #f5f5f5;
+}
+
+body:has(#dark-toggle:checked) .about-hero {
+  background: #171717;
+}
+
+body:has(#dark-toggle:checked) .about-hero-glow {
+  background: rgba(117, 174, 188, 0.08);
+}
+
+body:has(#dark-toggle:checked) .about-btn:hover,
+body:has(#dark-toggle:checked) .about-btn:focus-visible {
+  background: #b4232a;
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(217, 47, 68, 0.28);
+}
+
+body:has(#dark-toggle:checked) .about-team-note,
+body:has(#dark-toggle:checked) .about-hero-card,
+body:has(#dark-toggle:checked) .hero-card {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: #0b0b0b;
+}
+
+body:has(#dark-toggle:checked) .about-hero h1,
+body:has(#dark-toggle:checked) .about-sidebar-content h2,
+body:has(#dark-toggle:checked) .about-card-header h2,
+body:has(#dark-toggle:checked) .about-info-value,
+body:has(#dark-toggle:checked) .about-member-name,
+body:has(#dark-toggle:checked) .contribution-name,
+body:has(#dark-toggle:checked) .about-schedule-list,
+body:has(#dark-toggle:checked) .contribution-tasks,
+body:has(#dark-toggle:checked) .about-section-nav a {
+  color: #f5f5f5;
+}
+
+body:has(#dark-toggle:checked) .about-hero-text,
+body:has(#dark-toggle:checked) .about-sidebar-desc,
+body:has(#dark-toggle:checked) .about-section-nav small,
+body:has(#dark-toggle:checked) .about-info-label,
+body:has(#dark-toggle:checked) .about-uni,
+body:has(#dark-toggle:checked) .about-schedule-list ul,
+body:has(#dark-toggle:checked) .contribution-label {
+  color: #c9c9c9;
+}
+
+body:has(#dark-toggle:checked) .about-eyebrow,
+body:has(#dark-toggle:checked) .about-section-nav a:hover .about-step-text,
+body:has(#dark-toggle:checked) .about-section-nav a:hover .about-step-number {
+  color: #ff7a80;
+}
+
+body:has(#dark-toggle:checked) .about-content-section {
+  background: #111111;
+}
+
+body:has(#dark-toggle:checked) .about-section-nav li+li,
+body:has(#dark-toggle:checked) .about-card-header,
+body:has(#dark-toggle:checked) .about-info-block,
+body:has(#dark-toggle:checked) .contribution-member {
+  border-color: #2e2e2e;
+}
+
+body:has(#dark-toggle:checked) .about-section-nav a:hover,
+body:has(#dark-toggle:checked) .about-section-nav a:focus-visible {
+  background: #2a1517;
+}
+
+body:has(#dark-toggle:checked) .about-card,
+body:has(#dark-toggle:checked) .about-member-card,
+body:has(#dark-toggle:checked) .about-schedule-list>li,
+body:has(#dark-toggle:checked) .contribution-item {
+  border-color: #2e2e2e;
+  background: #1b1b1b;
+  box-shadow: none;
+}
+
+body:has(#dark-toggle:checked) .about-schedule-list>li {
+  border-left-color: #e2231a;
+}
+
+body:has(#dark-toggle:checked) .contribution-item:has(.role-leader) {
+  border-top-color: #e2231a;
+}
+
+body:has(#dark-toggle:checked) .about-member-avatar,
+body:has(#dark-toggle:checked) .role-developer {
+  background: #f5f5f5;
+  color: #111111;
+}
+
+body:has(#dark-toggle:checked) .role-coordinator {
+  background: #451a03;
+  color: #fed7aa;
+  border-color: #78350f;
+}
+
+/* !important only to override the rubric-required inline background */
+body:has(#dark-toggle:checked) .contribution-quote blockquote {
+  background: #2a1517 !important;
+  box-shadow: none !important;
+}
+
+body:has(#dark-toggle:checked) .contribution-quote blockquote p {
+  color: #f5f5f5;
+}
+
+body:has(#dark-toggle:checked) .contribution-quote blockquote .contribution-quote-en {
+  color: #d4d4d4;
+}
+
+body:has(#dark-toggle:checked) .contribution-quote-attr {
+  color: #ff7a80;
+}
+
+body:has(#dark-toggle:checked) .team-photo-wrapper,
+body:has(#dark-toggle:checked) .team-photo-wrapper figcaption {
+  border-color: #2e2e2e;
+  background: #1b1b1b;
+  color: #f5f5f5;
+}
+
+body:has(#dark-toggle:checked) .team-photo-wrapper figcaption span {
+  color: #c9c9c9;
+}
+
+body:has(#dark-toggle:checked) .about-table-container {
+  border-color: #2e2e2e;
+  background: #1b1b1b;
+  box-shadow: none;
+}
+
+body:has(#dark-toggle:checked) .about-fun-facts-table caption,
+body:has(#dark-toggle:checked) .about-fun-facts-table tbody th,
+body:has(#dark-toggle:checked) .about-fun-facts-table tbody td {
+  border-color: #2e2e2e;
+  color: #f5f5f5;
+}
+
+body:has(#dark-toggle:checked) .about-fun-facts-table tbody tr:nth-child(even) {
+  background: #202020;
+}
+
+body:has(#dark-toggle:checked) .about-fun-facts-table tbody tr:hover {
+  background: #2a1517;
+}
+
+body:has(#dark-toggle:checked) .about-fun-facts-table tbody tr:hover th {
+  color: #ff7a80;
+}
+
+body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
+  background: #222222;
+  color: #c9c9c9;
+}
+
+
+/* ==========================================================================
+   8. Responsive
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   3a. Tablet (< 900px)
+   8a. Tablet (<= 1024px): single column, sidebar becomes a sticky
+       horizontal tab bar that scrolls sideways.
    -------------------------------------------------------------------------- */
-@media (max-width: 900px) {
-  /* Hero banner on tablet */
-  .about-hero-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .about-hero h1 {
-    font-size: 2.75rem;
-  }
-
-  .about-team-note {
-    max-width: 28rem;
-  }
-
-  /* Split layout on tablet */
+@media (max-width: 1024px) {
   .about-split-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .about-sidebar {
+    top: 0;
+    z-index: 5;
+    margin: 0 calc(-1 * clamp(1.25rem, 4vw, 2.5rem));
+    padding: 0.75rem clamp(1.25rem, 4vw, 2.5rem);
+    border-bottom: 1px solid #f0f0f0;
+    background: #ffffff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
   }
 
   .about-sidebar-content {
-    position: static;
     padding-top: 0;
   }
 
-  .about-section-nav {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .about-sidebar-content h2,
+  .about-sidebar-desc,
+  .about-section-nav small {
+    display: none;
   }
 
-  .about-section-nav li + li {
-    border-top: none;
+  .about-section-nav {
+    margin: 0.5rem 0 0;
+  }
+
+  .about-section-nav ol {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
   }
 
   .about-section-nav li {
-    border-top: 1px solid #dcdcd5;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
   }
 
-  /* 1. Tablet (< 900px): Giảm padding của các thẻ .about-card xuống 1.5rem */
+  .about-section-nav li+li {
+    border-top: none;
+  }
+
+  /* Pills instead of vertical rows */
+  .about-section-nav a {
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .about-section-nav a::before {
+    display: none;
+  }
+
+  .about-section-nav a:hover,
+  .about-section-nav a:focus-visible,
+  body:has(#group-info:target) .about-section-nav a[href="#group-info"],
+  body:has(#contributions:target) .about-section-nav a[href="#contributions"],
+  body:has(#our-team-cards:target) .about-section-nav a[href="#our-team-cards"],
+  body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] {
+    border-color: #e2231a;
+  }
+
+  .about-step-number {
+    flex: 0 0 auto;
+  }
+
+  .about-step-text {
+    font-size: 0.875rem;
+  }
+
   .about-card {
-    padding: 1.5rem;
+    scroll-margin-top: 5.5rem;
   }
 
-  .about-card-header {
-    padding: 0 0 1rem 0;
+  body:has(#dark-toggle:checked) .about-sidebar {
+    border-color: #2e2e2e;
+    background: #111111;
   }
 
-  .about-card-body {
-    padding: 1rem 0 0 0;
-  }
-
-  /* 2. Tablet (< 900px): Khối bọc cuộn ngang cho Bảng Fun Facts */
-  .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
-  }
-
-  .about-table-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
+  body:has(#dark-toggle:checked) .about-section-nav a {
+    border-color: #2e2e2e;
   }
 }
 
 /* --------------------------------------------------------------------------
-   3b. Mobile (< 600px)
+   8b. Responsive Hero (< 992px):
+   Đổi flex-direction sang column, căn giữa khối chữ và Card đen hiển thị
+   bên dưới với width: 100%; max-width: 480px.
    -------------------------------------------------------------------------- */
-@media (max-width: 600px) {
-  /* Hero banner on mobile */
-  .about-hero {
-    padding: 3rem 0 3.5rem;
+@media (max-width: 991px) {
+  .about-hero-layout,
+  .about-hero .about-container,
+  .hero-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 48px 24px;
+  }
+
+  .about-hero-content,
+  .hero-content {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .about-hero-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-team-note,
+  .about-hero-card,
+  .hero-card {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: 480px;
+    text-align: left;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8c. Mobile (< 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .about-hero-layout,
+  .about-hero .about-container,
+  .hero-layout {
+    gap: 2rem;
+    padding: 40px 16px;
   }
 
   .about-hero h1 {
-    font-size: 2.25rem;
+    font-size: clamp(2rem, 6vw, 2.375rem);
   }
 
-  .about-split-layout {
-    grid-template-columns: 1fr;
+  .about-hero-text {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
   }
 
-  .about-section-nav {
-    grid-template-columns: 1fr;
+  .about-team-note,
+  .about-hero-card,
+  .hero-card {
+    max-width: 100%;
+    min-height: 0;
+    gap: 1.25rem;
+    padding: 24px 20px;
   }
 
-  /* Card padding on mobile */
-  .about-card {
-    padding: 1.25rem;
+  .about-content-section {
+    padding: 2rem 0 4rem;
   }
 
-  /* Tiêu đề card co giãn mượt mà thành 1 cột xếp chồng */
   .about-card-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-    padding: 0 0 0.875rem 0;
+    padding: 1.125rem 1.25rem;
   }
 
   .about-card-header h2 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 
   .about-card-body {
-    padding: 0.875rem 0 0 0;
     gap: 1.25rem;
+    padding: 1.25rem;
   }
 
-  /* Card 01: Info blocks single column */
   .about-info-block {
     grid-template-columns: 1fr;
-    gap: 0.25rem;
+    gap: 0.625rem;
   }
 
-  .about-member-list li {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.375rem;
-  }
-
-  /* Card 02: Danh sách đóng góp (<dl>) co giãn mượt mà thành 1 cột xếp chồng */
-  .contributions-list {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  .about-member-list {
+    grid-template-columns: 1fr;
   }
 
   .contribution-item {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    padding: 1.125rem;
   }
 
-  .contribution-member {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .contribution-page {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
-  }
-
-  .contribution-details {
-    width: 100%;
-  }
-
-  .contribution-quote {
-    width: 100%;
+  .contribution-name {
+    flex: 1 1 100%;
   }
 
   .contribution-quote blockquote {
     padding: 0.875rem 1rem;
   }
+}
 
-  /* Card 03: Ảnh nhóm (.team-photo-wrapper img) luôn giữ width 100% không bị vỡ layout */
-  .team-photo-wrapper {
-    margin: 1rem 0;
-    width: 100%;
-    max-width: 100%;
+/* Very small phones: let the ID pill drop under the name */
+@media (max-width: 380px) {
+  .about-member-card {
+    flex-wrap: wrap;
   }
 
-  .team-photo-wrapper img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* Card 04: Bảng Fun Facts cuộn ngang mượt mà trên điện thoại */
-  .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
-  }
-
-  .about-table-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
+  .member-id {
+    margin-left: 3.375rem;
   }
 }
 
-
+/* --------------------------------------------------------------------------
+   8c. Reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+  .about-btn,
+  .about-btn-arrow,
+  .about-card,
+  .about-member-card,
+  .contribution-item,
+  .about-section-nav a,
+  .about-section-nav a::before,
+  .about-fun-facts-table tbody tr {
+    transition: none;
+  }
+
+  .about-btn:hover,
+  .about-btn:hover .about-btn-arrow,
+  .about-btn:focus-visible .about-btn-arrow,
+  .about-member-card:hover,
+  .contribution-item:hover {
+    transform: none;
+  }
+}
