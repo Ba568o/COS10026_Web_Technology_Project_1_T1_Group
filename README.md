@@ -21,7 +21,7 @@ Website for **COS10026 — Web Technology, Project 1** at Swinburne University o
 
 ## Features
 
-- HTML5 and CSS3 only (no JavaScript)
+- HTML5 and CSS3 only 
 - One consolidated `styles.css` file for shared and page-specific styling
 - Demonstrates external, embedded, and inline CSS
 - Shared header and footer across pages
