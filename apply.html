@@ -151,16 +151,44 @@
           </a>
         </div>
 
-        <div class="team-note">
-          <img src="images/logo.png" alt="" class="team-logo">
-          <p>
-            <span class="language-en">Different strengths.<br><strong>One team.</strong></span>
-            <span class="language-vi">Khác biệt về thế mạnh.<br><strong>Một đội ngũ.</strong></span>
-          </p>
-          <span class="team-caption">
-            <span class="language-en">That&rsquo;s the T1 spirit.</span>
-            <span class="language-vi">Đó chính là tinh thần T1.</span>
-          </span>
+        <div class="team-animation apply-team-animation" aria-label="T1 team collaboration illustration">
+          <div class="team-orbit team-orbit-one" aria-hidden="true"></div>
+          <div class="team-orbit team-orbit-two" aria-hidden="true"></div>
+
+          <div class="team-member team-member-one" aria-hidden="true">
+            <span class="member-head"></span>
+            <span class="member-body"></span>
+          </div>
+          <div class="team-member team-member-two" aria-hidden="true">
+            <span class="member-head"></span>
+            <span class="member-body"></span>
+          </div>
+          <div class="team-member team-member-three" aria-hidden="true">
+            <span class="member-head"></span>
+            <span class="member-body"></span>
+          </div>
+
+          <div class="team-message-card">
+            <img src="images/logo.png" alt="" class="team-logo">
+            <p>
+              <span class="language-en">Different strengths.<br><strong>One team.</strong></span>
+              <span class="language-vi">Khác biệt về thế mạnh.<br><strong>Một đội ngũ.</strong></span>
+            </p>
+            <span class="team-caption">
+              <span class="language-en">That&rsquo;s the T1 spirit.</span>
+              <span class="language-vi">Đó chính là tinh thần T1.</span>
+            </span>
+          </div>
+
+          <div class="team-floating-note team-note-one" aria-hidden="true">
+            <i class="fa-solid fa-heart-pulse"></i>
+          </div>
+          <div class="team-floating-note team-note-two" aria-hidden="true">
+            <i class="fa-solid fa-handshake"></i>
+          </div>
+          <span class="team-spark team-spark-one" aria-hidden="true"></span>
+          <span class="team-spark team-spark-two" aria-hidden="true"></span>
+          <span class="team-spark team-spark-three" aria-hidden="true"></span>
         </div>
       </div>
     </section>
@@ -283,9 +311,13 @@
                       <span class="language-vi">Tên</span>
                       <span class="required">*</span>
                     </label>
-                    <input type="text" id="first-name" autocomplete="given-name" name="first_name" placeholder="e.g. Sy Tho"
+                    <span class="placeholder-field">
+                      <input type="text" id="first-name" autocomplete="given-name" name="first_name" placeholder=" "
                       pattern="[A-Za-z\s]{2,50}" title="Only letters and spaces, 2-50 characters" maxlength="50" required
                       aria-required="true">
+                      <span class="input-placeholder language-en" aria-hidden="true">e.g. Sy Tho</span>
+                      <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Sỹ Thọ</span>
+                    </span>
                   </div>
                   <div class="form-group">
                     <label for="last-name">
@@ -293,9 +325,13 @@
                       <span class="language-vi">Họ</span>
                       <span class="required">*</span>
                     </label>
-                    <input type="text" id="last-name" autocomplete="family-name" name="last_name" placeholder="e.g. Nguyen"
+                    <span class="placeholder-field">
+                      <input type="text" id="last-name" autocomplete="family-name" name="last_name" placeholder=" "
                       pattern="[A-Za-z\s]{2,50}" title="Only letters and spaces, 2-50 characters" maxlength="50" required
                       aria-required="true">
+                      <span class="input-placeholder language-en" aria-hidden="true">e.g. Nguyen</span>
+                      <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Nguyễn</span>
+                    </span>
                   </div>
                 </div>
 
@@ -341,8 +377,12 @@
                       <span class="language-vi">Địa chỉ email</span>
                       <span class="required">*</span>
                     </label>
-                    <input type="email" id="email" autocomplete="email" name="email" placeholder="e.g. example@email.com"
+                    <span class="placeholder-field">
+                      <input type="email" id="email" autocomplete="email" name="email" placeholder=" "
                       required aria-required="true">
+                      <span class="input-placeholder language-en" aria-hidden="true">e.g. example@email.com</span>
+                      <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: tên_mẫu@email.com</span>
+                    </span>
                   </div>
                   <div class="form-group">
                     <label for="phone">
@@ -350,8 +390,12 @@
                       <span class="language-vi">Số điện thoại</span>
                       <span class="required">*</span>
                     </label>
-                    <input type="tel" id="phone" autocomplete="tel" name="phone" placeholder="e.g. 0412 345 678"
+                    <span class="placeholder-field">
+                      <input type="tel" id="phone" autocomplete="tel" name="phone" placeholder=" "
                       pattern="[0-9\s\+\-]{8,15}" title="8-15 digits, spaces, + or - allowed" required aria-required="true">
+                      <span class="input-placeholder language-en" aria-hidden="true">e.g. 0412 345 678</span>
+                      <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 0412 345 678</span>
+                    </span>
                   </div>
                 </div>
               </fieldset>
@@ -373,8 +417,12 @@
                     <span class="language-vi">Địa chỉ đường</span>
                     <span class="required">*</span>
                   </label>
-                  <input type="text" id="street" autocomplete="street-address" name="street_address"
-                    placeholder="e.g. 123 Burwood Road" maxlength="100" required aria-required="true">
+                  <span class="placeholder-field">
+                    <input type="text" id="street" autocomplete="street-address" name="street_address"
+                    placeholder=" " maxlength="100" required aria-required="true">
+                    <span class="input-placeholder language-en" aria-hidden="true">e.g. 123 Burwood Road</span>
+                    <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 123 đường Burwood</span>
+                  </span>
                 </div>
 
                 <div class="form-row">
@@ -384,16 +432,20 @@
                       <span class="language-vi">Quận/Thành phố</span>
                       <span class="required">*</span>
                     </label>
-                    <input type="text" id="suburb" autocomplete="address-level2" name="suburb" placeholder="e.g. Hawthorn"
+                    <span class="placeholder-field">
+                      <input type="text" id="suburb" autocomplete="address-level2" name="suburb" placeholder=" "
                       pattern="[A-Za-z\s\-]{2,50}" title="Only letters, spaces and hyphens" required aria-required="true">
+                      <span class="input-placeholder language-en" aria-hidden="true">e.g. Hawthorn</span>
+                      <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Thành phố Hawthorn</span>
+                    </span>
                   </div>
                   <div class="form-group">
-                    <label for="state">
+                    <label id="state-label">
                       <span class="language-en">State</span>
                       <span class="language-vi">Bang/Tỉnh</span>
                       <span class="required">*</span>
                     </label>
-                    <select id="state" autocomplete="address-level1" name="state" required aria-required="true">
+                    <select id="state-en" class="language-en" aria-labelledby="state-label" autocomplete="address-level1" name="state">
                       <option value="" disabled selected>-- Select State --</option>
                       <option value="VIC">VIC</option>
                       <option value="NSW">NSW</option>
@@ -404,6 +456,17 @@
                       <option value="NT">NT</option>
                       <option value="ACT">ACT</option>
                     </select>
+                    <select id="state-vi" class="language-vi" aria-labelledby="state-label" autocomplete="address-level1" name="state">
+                      <option value="" disabled selected>-- Chọn Bang/Tỉnh --</option>
+                      <option value="VIC">Bang VIC</option>
+                      <option value="NSW">Bang NSW</option>
+                      <option value="QLD">Bang QLD</option>
+                      <option value="SA">Bang SA</option>
+                      <option value="WA">Bang WA</option>
+                      <option value="TAS">Bang TAS</option>
+                      <option value="NT">Bang NT</option>
+                      <option value="ACT">Bang ACT</option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="postcode">
@@ -411,9 +474,13 @@
                       <span class="language-vi">Mã bưu chính</span>
                       <span class="required">*</span>
                     </label>
-                    <input type="text" id="postcode" inputmode="numeric" autocomplete="postal-code" name="postcode"
-                      placeholder="e.g. 3122" pattern="[0-9]{4}" title="Australian postcode must be exactly 4 digits"
+                    <span class="placeholder-field">
+                      <input type="text" id="postcode" inputmode="numeric" autocomplete="postal-code" name="postcode"
+                      placeholder=" " pattern="[0-9]{4}" title="Australian postcode must be exactly 4 digits"
                       maxlength="4" required aria-required="true">
+                      <span class="input-placeholder language-en" aria-hidden="true">e.g. 3122</span>
+                      <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 3122</span>
+                    </span>
                   </div>
                 </div>
               </fieldset>
@@ -426,7 +493,7 @@
                 </legend>
                 <p class="section-description">
                   <span class="language-en">Choose your role, the skills you&rsquo;d bring to T1, and upload your CV.</span>
-                  <span class="language-vi">Chọn vị trí, kỹ năng bạn mang đến T1, và tải lên CV của bạn.</span>
+                  <span class="language-vi">Chọn vị trí, kỹ năng bạn mang đến T1, và tải lên sơ yếu lý lịch của bạn.</span>
                 </p>
 
                 <div class="form-row">
@@ -436,22 +503,34 @@
                       <span class="language-vi">Mã tham chiếu công việc</span>
                       <span class="required">*</span>
                     </label>
-                    <input type="text" id="job-ref" name="job_reference" placeholder="e.g. AB123" pattern="[A-Za-z0-9]{5}"
+                    <span class="placeholder-field">
+                      <input type="text" id="job-ref" name="job_reference" placeholder=" " pattern="[A-Za-z0-9]{5}"
                       title="Exactly 5 alphanumeric characters (e.g. AB123)" maxlength="5" required aria-required="true">
+                      <span class="input-placeholder language-en" aria-hidden="true">e.g. AB123</span>
+                      <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: AB123</span>
+                    </span>
                   </div>
                   <div class="form-group">
-                    <label for="position">
+                    <label id="position-label">
                       <span class="language-en">Preferred Position</span>
                       <span class="language-vi">Vị trí mong muốn</span>
                       <span class="required">*</span>
                     </label>
-                    <select id="position" name="position" required aria-required="true">
+                    <select id="position-en" class="language-en" aria-labelledby="position-label" name="position">
                       <option value="" disabled selected>-- Select Position --</option>
                       <option value="president">President</option>
                       <option value="vice-president">Vice President</option>
                       <option value="manager">Manager</option>
                       <option value="developer">Developer</option>
                       <option value="designer">Designer</option>
+                    </select>
+                    <select id="position-vi" class="language-vi" aria-labelledby="position-label" name="position">
+                      <option value="" disabled selected>-- Chọn vị trí --</option>
+                      <option value="president">Chủ tịch</option>
+                      <option value="vice-president">Phó Chủ tịch</option>
+                      <option value="manager">Quản lý</option>
+                      <option value="developer">Lập trình viên</option>
+                      <option value="designer">Nhà thiết kế</option>
                     </select>
                   </div>
                 </div>
@@ -494,9 +573,13 @@
                     <span class="language-en">Other Skills &amp; Qualifications</span>
                     <span class="language-vi">Kỹ năng &amp; bằng cấp khác</span>
                   </label>
-                  <textarea id="other-skills" name="other_skills" rows="5"
-                    placeholder="Describe any additional skills, certifications, or relevant experience..." maxlength="500"
+                  <span class="placeholder-field">
+                    <textarea id="other-skills" name="other_skills" rows="5"
+                    placeholder=" " maxlength="500"
                     aria-describedby="other-skills-help"></textarea>
+                    <span class="input-placeholder language-en" aria-hidden="true">Describe any additional skills, certifications, or relevant experience...</span>
+                    <span class="input-placeholder language-vi" aria-hidden="true">Mô tả kỹ năng, chứng chỉ hoặc kinh nghiệm liên quan khác...</span>
+                  </span>
                   <small id="other-skills-help" class="form-help">
                     <span class="language-en">Maximum 500 characters</span>
                     <span class="language-vi">Tối đa 500 ký tự</span>
@@ -506,12 +589,21 @@
                 <div class="form-group form-group-full">
                   <label for="cv">
                     <span class="language-en">Upload CV</span>
-                    <span class="language-vi">Tải lên CV</span>
+                    <span class="language-vi">Tải lên sơ yếu lí lịch</span>
                     <span class="required">*</span>
                   </label>
-                  <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required aria-required="true"
-                    aria-describedby="cv-help">
-                  <small id="cv-help" class="form-help file-note">PDF, DOC or DOCX</small>
+                  <span class="file-input-wrap">
+                    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required aria-required="true"
+                      aria-describedby="cv-help">
+                    <label class="file-button-label" for="cv" aria-hidden="true">
+                      <span class="language-en">Choose File</span>
+                      <span class="language-vi">Chọn tệp</span>
+                    </label>
+                  </span>
+                  <small id="cv-help" class="form-help file-note">
+                    <span class="language-en">PDF, DOC or DOCX</span>
+                    <span class="language-vi">PDF, DOC hoặc DOCX</span>
+                  </small>
                 </div>
               </fieldset>
 
@@ -551,7 +643,7 @@
                 <div class="form-buttons">
                   <button type="reset" class="btn btn-reset">
                     <span class="language-en">Reset Form</span>
-                    <span class="language-vi">Xóa form</span>
+                    <span class="language-vi">Đặt lại biểu mẫu</span>
                   </button>
                   <button type="submit" class="btn btn-submit">
                     <span class="language-en">Submit Application</span>
@@ -583,7 +675,7 @@
         </h2>
         <p class="footer-description">
           <span class="language-en">Accessible digital healthcare and wellness services, designed around you.</span>
-          <span class="language-vi">Dịch vụ chăm sóc sức khỏe số và wellness dễ tiếp cận, thiết kế xoay quanh bạn.</span>
+          <span class="language-vi">Dịch vụ chăm sóc sức khỏe số và thể chất số dễ tiếp cận, thiết kế xoay quanh bạn.</span>
         </p>
       </div>
 
