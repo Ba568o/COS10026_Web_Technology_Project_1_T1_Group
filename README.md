@@ -2,7 +2,7 @@
 
 Website for **COS10026 — Web Technology, Project 1** at Swinburne University of Technology.
 
-**T1** stands for **TeamOne**. The site presents a fictional digital healthcare brand with job listings, an application form, and an about page for the group.
+**T1** stands for **Together as one**. The site presents a fictional digital healthcare brand with job listings, an application form, and an about page for the group.
 
 **Live site:** [ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group](https://ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group/)
 
@@ -21,7 +21,7 @@ Website for **COS10026 — Web Technology, Project 1** at Swinburne University o
 
 ## Features
 
-- HTML5 and CSS3 only (no JavaScript)
+- HTML5 and CSS3 only 
 - One consolidated `styles.css` file for shared and page-specific styling
 - Demonstrates external, embedded, and inline CSS
 - Shared header and footer across pages
