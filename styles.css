@@ -1,3 +1,7 @@
+/* ==========================================================================
+   1. Base document sizing
+   Sets the default root font size used by rem-based measurements.
+   ========================================================================== */
 html {
   font-size: clamp(16px, 1vw, 24px);
 }
@@ -7,6 +11,10 @@ html {
   /* width includes padding and border */
 }
 
+/* ==========================================================================
+   2. Global page defaults
+   Defines the shared typography, text colour, and page background.
+   ========================================================================== */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -16,6 +24,7 @@ body {
   background: #ecece7;
 }
 
+/* Default link colour inherits from its surrounding text. */
 a {
   color: inherit;
 }
@@ -52,6 +61,10 @@ a {
 }
 
 
+/* ==========================================================================
+   3. Header and navigation
+   Styles the shared site header, brand, navigation links, and search area.
+   ========================================================================== */
 /* --------------------------------------------------------------------------
    3. Header / navbar
    Layout: logo on the left | menu in the middle | search + button on the right
@@ -166,6 +179,10 @@ a {
 }
 
 
+/* ==========================================================================
+   4. Footer
+   Styles the shared footer layout, navigation links, and copyright area.
+   ========================================================================== */
 /* --------------------------------------------------------------------------
    4. Footer
    -------------------------------------------------------------------------- */
@@ -220,6 +237,10 @@ a {
 }
 
 
+/* ==========================================================================
+   5. Responsive layout
+   Adjusts the shared header and footer for tablet and mobile screen widths.
+   ========================================================================== */
 /* --------------------------------------------------------------------------
    5. Responsive (tablet and phone)
    -------------------------------------------------------------------------- */
@@ -266,6 +287,11 @@ a {
 
 
 
+/* ==========================================================================
+   6. Settings menu
+   Controls the settings dropdown, theme switch, language options, and
+   font-size options. The related HTML controls determine the active state.
+   ========================================================================== */
 /*
   6. Settings menu: dark-mode control, language control, and font sizes.
  */
@@ -364,6 +390,8 @@ a {
 }
 
 
+/* Settings dropdown visibility and active gear state.
+   The checkbox state opens the dropdown without JavaScript. */
 /* Open the settings menu and rotate the gear while it is active. */
 #setting-toggle {
   &:checked+#setting-container {
@@ -382,6 +410,8 @@ a {
   outline-offset: 0.1875rem;
 }
 
+/* Theme switch icons
+   Keeps the sun and moon icons aligned while the selected theme changes. */
 /* Theme icons share a fixed size so the control does not shift when toggled. */
 .sun,
 .moon {
@@ -402,6 +432,8 @@ a {
   display: none !important;
 }
 
+/* Font-size controls
+   Each radio option updates the root font size through the checked state. */
 /* Font-size choices controlled by the radio buttons in the settings menu. */
 html {
   &:has(#font-super-small:checked) {
@@ -425,6 +457,9 @@ html {
   }
 }
 
+/* Language visibility
+   English is shown by default. Selecting Vietnamese hides English text and
+   reveals the matching Vietnamese text spans. */
 /* Language switching: English is the default; Vietnamese appears when selected. */
 body {
   .language-vi {
@@ -475,6 +510,11 @@ body {
     }
   }
 }
+/* ==========================================================================
+   7. Header layout refinements
+   Fine-tunes the navbar grid, brand divider, and alignment of header actions.
+   These rules intentionally override earlier shared header defaults.
+   ========================================================================== */
 /* Header-only adjustment: match the requested navbar layout. */
 .site-header .navbar {
   display: grid;
@@ -526,6 +566,8 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Settings button interaction
+   Highlights the gear button on hover and rotates the icon when active. */
 /* The settings button turns red and the gear rotates on hover. */
 .site-header #setting-container .setting-icon:hover {
   background: #303030;
@@ -668,6 +710,10 @@ body {
 }
 
 
+/* ==========================================================================
+   8. Navigation hover and search button
+   Adds the active/hover underline effect and positions the search submit icon.
+   ========================================================================== */
 /* Navbar hover states and clickable search icon. */
 .site-header .nav-links a {
   position: relative;
@@ -750,4 +796,25 @@ body {
     padding-right: 0.65rem;
     padding-left: 0.65rem;
   }
+}
+
+
+/* --------------------------------------------------------------------------
+   Language-specific search forms
+   Show only the search form that matches the selected language.
+   -------------------------------------------------------------------------- */
+body .nav-search.language-en {
+  display: flex;
+}
+
+body .nav-search.language-vi {
+  display: none;
+}
+
+body:has(#language-vi:checked) .nav-search.language-en {
+  display: none;
+}
+
+body:has(#language-vi:checked) .nav-search.language-vi {
+  display: flex;
 }
