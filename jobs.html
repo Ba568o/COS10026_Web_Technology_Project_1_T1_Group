@@ -1,1353 +1,1415 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="google-site-verification" content="KamfaQ0k0vBLnnJTvuiAl6BYDqPvM8UuqhwmHeVXWhk" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/images/logo.png" type="image/png" />
+    <title>T1 group - Jobs description</title>
 
-<head>
-        <meta charset="UTF-8">
-        <meta name="google-site-verification" content="KamfaQ0k0vBLnnJTvuiAl6BYDqPvM8UuqhwmHeVXWhk" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="/images/logo.png" type="image/png">
-        <title>T1 group - Jobs description</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="apply.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="jobs.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Link to Font Awesome for icons through CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+      integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-        <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-        <link rel="stylesheet" href="apply.css">
-        <link rel="stylesheet" href="index.css">
-        <link rel="stylesheet" href="jobs.css">
-        <link rel="stylesheet" href="styles.css">
-        <!-- Link to Font Awesome for icons through CDN -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
-                integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
-                crossorigin="anonymous" referrerpolicy="no-referrer">
-</head>
+  <body id="top">
+    <!-- HEADER: brand, primary navigation, display settings, and language-specific search. -->
 
-<body id="top">
-        <!-- HEADER: brand, primary navigation, display settings, and language-specific search. -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
 
-        <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Main navigation">
+        <!-- Brand links to the home page. -->
+        <a href="index.html" class="brand" aria-label="T1 Health &amp; Wellness - home">
+          <img src="images/logo.png" alt="" class="brand-logo" />
+          <span class="brand-text">
+            <strong>T1</strong>
+            <span>HEALTH &amp; WELLNESS</span>
+          </span>
+        </a>
 
-        <header class="site-header">
-                <nav class="navbar" aria-label="Main navigation">
-                        <!-- Brand links to the home page. -->
-                        <a href="index.html" class="brand" aria-label="T1 Health &amp; Wellness - home">
-                                <img src="images/logo.png" alt="" class="brand-logo">
-                                <span class="brand-text">
-                                        <strong>T1</strong>
-                                        <span>HEALTH &amp; WELLNESS</span>
-                                </span>
-                        </a>
+        <!-- Primary navigation; the brand provides the link to Home. -->
+        <ul class="nav-links">
+          <li>
+            <a href="index.html">
+              <span class="language-en">Home</span>
+              <span class="language-vi">Trang chủ</span>
+            </a>
+          </li>
+          <li>
+            <a href="jobs.html">
+              <span class="language-en">Jobs</span>
+              <span class="language-vi">Tuyển dụng</span>
+            </a>
+          </li>
+          <li>
+            <a href="apply.html">
+              <span class="language-en">Apply</span>
+              <span class="language-vi">Ứng tuyển</span>
+            </a>
+          </li>
+          <li>
+            <a href="about.html">
+              <span class="language-en">About</span>
+              <span class="language-vi">Giới thiệu</span>
+            </a>
+          </li>
+        </ul>
 
-                        <!-- Primary navigation; the brand provides the link to Home. -->
-                        <ul class="nav-links">
-                                <li><a href="index.html"><span class="language-en">Home</span><span class="language-vi">Trang chủ</span></a></li>
-                                <li><a href="jobs.html"><span class="language-en">Jobs</span><span class="language-vi">Tuyển dụng</span></a></li>
-                                <li><a href="apply.html"><span class="language-en">Apply</span><span class="language-vi">Ứng tuyển</span></a></li>
-                                <li><a href="about.html"><span class="language-en">About</span><span class="language-vi">Giới thiệu</span></a></li>
-                        </ul>
+        <!-- Display settings, site search, and the primary call to action. -->
+        <div class="nav-actions">
+          <input class="visually-hidden" type="checkbox" id="setting-toggle" />
+          <div id="setting-container">
+            <!-- Hidden checkbox to toggle dark mode -->
+            <input class="visually-hidden" type="checkbox" id="dark-toggle" aria-label="Toggle dark mode" />
+            <label for="setting-toggle" class="setting-icon">
+              <i class="fa-solid fa-gear"></i>
+            </label>
+            <div class="settings-dropdown">
+              <p class="settings-title">
+                <span class="language-en">Display settings</span>
+                <span class="language-vi">Cài đặt hiển thị</span>
+              </p>
+              <fieldset class="language-options">
+                <legend>
+                  <span class="language-en">Language</span>
+                  <span class="language-vi">Ngôn ngữ</span>
+                </legend>
+                <label>
+                  <input type="radio" name="language" id="language-en" checked />
+                  English
+                </label>
+                <label>
+                  <input type="radio" name="language" id="language-vi" />
+                  Tiếng Việt
+                </label>
+              </fieldset>
+              <label for="dark-toggle" class="darkmode-toggle">
+                <span>
+                  <span class="language-en">Dark mode</span>
+                  <span class="language-vi">Chế độ tối</span>
+                </span>
+                <span class="theme-icons" aria-hidden="true">
+                  <i class="fa-solid fa-sun sun"></i>
+                  <i class="fa-solid fa-moon moon"></i>
+                </span>
+              </label>
+              <fieldset class="font-size-options">
+                <legend>
+                  <span class="language-en">Font size</span>
+                  <span class="language-vi">Cỡ chữ</span>
+                </legend>
+                <label>
+                  <input type="radio" name="font-size" id="font-super-small" />
+                  <span class="language-en">Super small</span>
+                  <span class="language-vi">Rất nhỏ</span>
+                </label>
+                <label>
+                  <input type="radio" name="font-size" id="font-small" />
+                  <span class="language-en">Small</span>
+                  <span class="language-vi">Nhỏ</span>
+                </label>
+                <label>
+                  <input type="radio" name="font-size" id="font-normal" checked />
+                  <span class="language-en">Normal</span>
+                  <span class="language-vi">Bình thường</span>
+                </label>
+                <label>
+                  <input type="radio" name="font-size" id="font-large" />
+                  <span class="language-en">Large</span>
+                  <span class="language-vi">Lớn</span>
+                </label>
+                <label>
+                  <input type="radio" name="font-size" id="font-super-large" />
+                  <span class="language-en">Super large</span>
+                  <span class="language-vi">Rất lớn</span>
+                </label>
+              </fieldset>
+            </div>
+          </div>
 
-                        <!-- Display settings, site search, and the primary call to action. -->
-                        <div class="nav-actions">
-                                <input class="visually-hidden" type="checkbox" id="setting-toggle">
-                                <div id="setting-container">
-                                        <!-- Hidden checkbox to toggle dark mode -->
-                                        <input class="visually-hidden" type="checkbox" id="dark-toggle"
-                                                aria-label="Toggle dark mode">
-                                        <label for="setting-toggle" class="setting-icon">
-                                                <i class="fa-solid fa-gear"></i>
-                                        </label>
-                                        <div class="settings-dropdown">
-                                                <p class="settings-title"><span class="language-en">Display
-                                                                settings</span><span class="language-vi">Cài đặt
-                                                                hiển thị</span></p>
-                                                <fieldset class="language-options">
-                                                        <legend><span class="language-en">Language</span><span
-                                                                        class="language-vi">Ngôn ngữ</span>
-                                                        </legend>
-                                                        <label><input type="radio" name="language" id="language-en"
-                                                                        checked> English</label>
-                                                        <label><input type="radio" name="language" id="language-vi">
-                                                                Tiếng Việt</label>
-                                                </fieldset>
-                                                <label for="dark-toggle" class="darkmode-toggle">
-                                                        <span><span class="language-en">Dark mode</span><span
-                                                                        class="language-vi">Chế độ
-                                                                        tối</span></span>
-                                                        <span class="theme-icons" aria-hidden="true">
-                                                                <i class="fa-solid fa-sun sun"></i>
-                                                                <i class="fa-solid fa-moon moon"></i>
-                                                        </span>
-                                                </label>
-                                                <fieldset class="font-size-options">
-                                                        <legend><span class="language-en">Font size</span><span
-                                                                        class="language-vi">Cỡ chữ</span>
-                                                        </legend>
-                                                        <label><input type="radio" name="font-size"
-                                                                        id="font-super-small"> <span
-                                                                        class="language-en">Super
-                                                                        small</span><span class="language-vi">Rất
-                                                                        nhỏ</span></label>
-                                                        <label><input type="radio" name="font-size" id="font-small">
-                                                                <span class="language-en">Small</span><span
-                                                                        class="language-vi">Nhỏ</span></label>
-                                                        <label><input type="radio" name="font-size" id="font-normal"
-                                                                        checked> <span
-                                                                        class="language-en">Normal</span><span
-                                                                        class="language-vi">Bình
-                                                                        thường</span></label>
-                                                        <label><input type="radio" name="font-size" id="font-large">
-                                                                <span class="language-en">Large</span><span
-                                                                        class="language-vi">Lớn</span></label>
-                                                        <label><input type="radio" name="font-size"
-                                                                        id="font-super-large"> <span
-                                                                        class="language-en">Super
-                                                                        large</span><span class="language-vi">Rất
-                                                                        lớn</span></label>
-                                                </fieldset>
-                                        </div>
-                                </div>
+          <!-- English search form; visibility is controlled by the language setting. -->
+          <form class="nav-search language-en" action="https://www.google.com/search" method="GET" role="search" target="_blank">
+            <label class="visually-hidden" for="site-search-en">Search</label>
+            <button type="submit" class="nav-search-submit" aria-label="Submit search">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            </button>
+            <input type="search" id="site-search-en" name="q" placeholder="SEARCH" required />
+            <input type="hidden" name="as_sitesearch" value="ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group" />
+          </form>
 
-                                <!-- English search form; visibility is controlled by the language setting. -->
-                                <form class="nav-search language-en" action="https://www.google.com/search" method="GET"
-                                        role="search" target="_blank">
-                                        <label class="visually-hidden" for="site-search-en">Search</label>
-                                        <button type="submit" class="nav-search-submit" aria-label="Submit search">
-                                                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                                        </button>
-                                        <input type="search" id="site-search-en" name="q" placeholder="SEARCH" required>
-                                        <input type="hidden" name="as_sitesearch"
-                                                value="ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group">
-                                </form>
+          <!-- Vietnamese search form; visibility is controlled by the language setting. -->
+          <form class="nav-search language-vi" action="https://www.google.com/search" method="GET" role="search" target="_blank">
+            <label class="visually-hidden" for="site-search-vi">Tìm kiếm</label>
+            <button type="submit" class="nav-search-submit" aria-label="Gửi tìm kiếm">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            </button>
+            <input type="search" id="site-search-vi" name="q" placeholder="TÌM KIẾM" required />
+            <input type="hidden" name="as_sitesearch" value="ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group" />
+          </form>
 
-                                <!-- Vietnamese search form; visibility is controlled by the language setting. -->
-                                <form class="nav-search language-vi" action="https://www.google.com/search" method="GET"
-                                        role="search" target="_blank">
-                                        <label class="visually-hidden" for="site-search-vi">Tìm kiếm</label>
-                                        <button type="submit" class="nav-search-submit" aria-label="Gửi tìm kiếm">
-                                                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                                        </button>
-                                        <input type="search" id="site-search-vi" name="q" placeholder="TÌM KIẾM" required>
-                                        <input type="hidden" name="as_sitesearch"
-                                                value="ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group">
-                                </form>
+          <a class="btn-pill" href="apply.html">
+            <span class="language-en">Get started</span>
+            <span class="language-vi">Bắt đầu</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main id="main-content">
+      <!-- HERO: page introduction and online healthcare illustration. -->
+      <section class="hero" aria-labelledby="apply-heading">
+        <!-- Background animation -->
+        <div class="hero-background" aria-hidden="true">
+          <div class="hero-glow"></div>
+          <div class="hero-orb orb-one"></div>
+          <div class="hero-orb orb-two"></div>
+        </div>
 
-                                <a class="btn-pill" href="apply.html">
-                                        <span class="language-en">Get started</span>
-                                <span class="language-vi">Bắt đầu</span></a>
-                        </div>
-                </nav>
-        </header>
-        <main id="main-content">
+        <div class="container hero-layout">
+          <!-- Left content -->
+          <div class="hero-content">
+            <p class="tag">
+              <span class="language-en">DIGITAL HEALTHCARE</span>
+              <span class="language-vi">CHĂM SÓC SỨC KHỎE SỐ</span>
+            </p>
 
-                <!-- HERO: page introduction and online healthcare illustration. -->
-                <section class="hero" aria-labelledby="apply-heading">
+            <h1 id="apply-heading">
+              <span class="language-en">
+                Better Health
+                <br />
+                Smarter Care
+              </span>
+              <span class="language-vi">
+                Sức khỏe tốt hơn
+                <br />
+                Chăm sóc thông minh hơn
+              </span>
+            </h1>
 
-                        <!-- Background animation -->
-                        <div class="hero-background" aria-hidden="true">
-                                <div class="hero-glow"></div>
-                                <div class="hero-orb orb-one"></div>
-                                <div class="hero-orb orb-two"></div>
-                        </div>
+            <p class="hero-text">
+              <span class="language-en">
+                T1 is a digital health and wellness provider delivering accessible online health information, convenient appointment booking
+                and patient-focused digital services.
+              </span>
+              <span class="language-vi">
+                T1 là đơn vị cung cấp dịch vụ sức khỏe và chăm sóc sức khỏe số, mang đến thông tin y tế trực tuyến dễ tiếp cận, đặt lịch hẹn
+                thuận tiện và các dịch vụ số lấy bệnh nhân làm trung tâm.
+              </span>
+            </p>
 
-                        <div class="container hero-layout">
+            <a class="btn btn-submit" href="apply.css">
+              <span class="language-en">APPLY NOW</span>
+              <span class="language-vi">ỨNG TUYỂN NGAY</span>
+              <span aria-hidden="true"><i class="fa-solid fa-arrow-right-long"></i></span>
+            </a>
+          </div>
 
-                                <!-- Left content -->
-                                <div class="hero-content">
+          <!-- Right: Shared digital-health animation for Jobs, Apply, and About pages. -->
+          <div class="page-hero-animation jobs-hero-animation" aria-label="Digital healthcare careers illustration">
+            <!-- Main floating interface card -->
+            <div class="animation-card career-main-card">
+              <div class="career-card-header">
+                <span class="career-card-icon" aria-hidden="true">
+                  <i class="fa-solid fa-briefcase-medical"></i>
+                </span>
+                <span class="career-card-heading">
+                  <span class="language-en">CAREER OPPORTUNITIES</span>
+                  <span class="language-vi">CƠ HỘI NGHỀ NGHIỆP</span>
+                </span>
+                <span class="career-card-menu" aria-hidden="true">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </span>
+              </div>
 
-                                        <p class="tag"><span class="language-en">DIGITAL HEALTHCARE</span><span class="language-vi">CHĂM SÓC SỨC KHỎE SỐ</span></p>
-
-                                        <h1 id="apply-heading">
-                                                <span class="language-en">Better Health <br> Smarter Care</span>
-                                                <span class="language-vi">Sức khỏe tốt hơn <br> Chăm sóc thông minh hơn</span>
-                                        </h1>
-
-                                        <p class="hero-text">
-                                                <span class="language-en">T1 is a digital health and wellness provider delivering accessible online health information, convenient appointment booking and patient-focused digital services.</span>
-                                                <span class="language-vi">T1 là đơn vị cung cấp dịch vụ sức khỏe và chăm sóc sức khỏe số, mang đến thông tin y tế trực tuyến dễ tiếp cận, đặt lịch hẹn thuận tiện và các dịch vụ số lấy bệnh nhân làm trung tâm.</span>
-                                        </p>
-
-                                        <a class="btn btn-submit" href="apply.css">
-                                                <span class="language-en">APPLY NOW</span>
-                                                <span class="language-vi">ỨNG TUYỂN NGAY</span>
-                                                <span aria-hidden="true"><i class="fa-solid fa-arrow-right-long"></i></span>
-                                        </a>
-
-                                </div>
-
-                                <!-- Right: Shared digital-health animation for Jobs, Apply, and About pages. -->
-                                <div class="page-hero-animation jobs-hero-animation" aria-label="Digital healthcare careers illustration">
-
-                                        <!-- Main floating interface card -->
-                                        <div class="animation-card career-main-card">
-
-                                                <div class="career-card-header">
-                                                        <span class="career-card-icon" aria-hidden="true">
-                                                                <i class="fa-solid fa-briefcase-medical"></i>
-                                                        </span>
-                                                        <span class="career-card-heading">
-                                                                <span class="language-en">CAREER OPPORTUNITIES</span>
-                                                                <span class="language-vi">CƠ HỘI NGHỀ NGHIỆP</span>
-                                                        </span>
-                                                        <span class="career-card-menu" aria-hidden="true">
-                                                                <i class="fa-solid fa-ellipsis"></i>
-                                                        </span>
-                                                </div>
-
-                                                <div class="career-card-content">
-                                                        <div class="career-card-copy">
-                                                                <span class="career-eyebrow">
-                                                                        <span class="language-en">BUILD YOUR FUTURE</span>
-                                                                        <span class="language-vi">XÂY DỰNG TƯƠNG LAI</span>
-                                                                </span>
-                                                                <strong>
-                                                                        <span class="language-en">Make an impact with T1</span>
-                                                                        <span class="language-vi">Cùng T1 tạo nên khác biệt</span>
-                                                                </strong>
-                                                                <p>
-                                                                        <span class="language-en">Grow your skills in digital healthcare.</span>
-                                                                        <span class="language-vi">Phát triển kỹ năng trong lĩnh vực chăm sóc sức khỏe số.</span>
-                                                                </p>
-                                                        </div>
-
-                                                        <div class="career-team-illustration" aria-hidden="true">
-                                                                <span class="team-person person-one"></span>
-                                                                <span class="team-person person-two"></span>
-                                                                <span class="team-person person-three"></span>
-                                                        </div>
-                                                </div>
-
-                                                <div class="career-card-footer">
-                                                        <span class="career-status-dot"></span>
-                                                        <span>
-                                                                <span class="language-en">Opportunities at T1</span>
-                                                                <span class="language-vi">Cơ hội tại T1</span>
-                                                        </span>
-                                                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                                                </div>
-
-                                        </div>
-
-                                        <!-- Floating job notification -->
-                                        <div class="animation-card career-notification-card">
-                                                <span class="notification-icon" aria-hidden="true">
-                                                        <i class="fa-solid fa-user-plus"></i>
-                                                </span>
-                                                <span class="notification-copy">
-                                                        <strong>
-                                                                <span class="language-en">Join our team</span>
-                                                                <span class="language-vi">Gia nhập đội ngũ</span>
-                                                        </strong>
-                                                        <small>
-                                                                <span class="language-en">Your next step starts here</span>
-                                                                <span class="language-vi">Hành trình mới bắt đầu tại đây</span>
-                                                        </small>
-                                                </span>
-                                                <i class="fa-solid fa-check notification-check" aria-hidden="true"></i>
-                                        </div>
-
-                                        <!-- Floating digital-health symbol -->
-                                        <div class="animation-orbit-icon orbit-health" aria-hidden="true">
-                                                <i class="fa-solid fa-heart-pulse"></i>
-                                        </div>
-
-                                        <!-- Floating growth symbol -->
-                                        <div class="animation-orbit-icon orbit-growth" aria-hidden="true">
-                                                <i class="fa-solid fa-chart-line"></i>
-                                        </div>
-
-                                        <!-- Decorative connection points for the CSS animation -->
-                                        <span class="animation-particle particle-one" aria-hidden="true"></span>
-                                        <span class="animation-particle particle-two" aria-hidden="true"></span>
-                                        <span class="animation-particle particle-three" aria-hidden="true"></span>
-
-                                </div>
-
-                        </div>
-                </section>
-
-
-                <section class="job-layout" aria-label="Job opportunities">
-                        <div id="job-list">
-                                <div class="job-card salary-under-30 salary-10-20 location-hcm job-support experience-none">
-                                        <div class="ref-code">
-                                                <p><span class="language-en">Job ID:</span><span class="language-vi">Mã
-                                                                việc làm:</span> <span
-                                                                class="ref-code-value"><strong>DHS02</strong></span></p>
-                                        </div>
-                                        <h2><span class="language-en">Digital Health Support Specialist</span><span
-                                                        class="language-vi">Chuyên viên hỗ
-                                                        trợ sức khỏe số</span></h2>
-                                        <p class="company-name"><span class="language-en">T1 Health &amp;
-                                                        Wellness</span><span class="language-vi">T1
-                                                        Sức khỏe &amp; Wellness</span></p>
-                                        <h3><span class="language-en">Customer Support | Full-time</span><span
-                                                        class="language-vi">Hỗ trợ
-                                                        khách hàng |
-                                                        Toàn thời gian</span></h3>
-                                        <p><span class="language-en">Assist users with online patient platforms and
-                                                        appointment booking
-                                                        systems,
-                                                        resolving common technical or account-related
-                                                        issues.</span><span class="language-vi">Hỗ trợ
-                                                        người dùng
-                                                        các nền tảng bệnh nhân trực tuyến và hệ thống đặt lịch, giải
-                                                        quyết các vấn đề kỹ thuật hoặc
-                                                        tài khoản
-                                                        thường gặp.</span></p>
-                                        <div class="job-meta">
-                                                <p><span class="meta-label"><span class="language-en">Salary</span><span
-                                                                        class="language-vi">Lương</span></span><span
-                                                                class="language-en">18 - 28 million VND
-                                                                /
-                                                                month</span><span class="language-vi">18 - 28 triệu VND
-                                                                / tháng</span></p>
-                                                <p><span class="meta-label"><span
-                                                                        class="language-en">Location</span><span
-                                                                        class="language-vi">Địa
-                                                                        điểm</span></span><span class="language-en">Ho
-                                                                Chi Minh City, Vietnam</span><span
-                                                                class="language-vi">Thành phố Hồ Chí Minh, Việt
-                                                                Nam</span></p>
-                                                <p class="experience-meta"><span class="meta-label"><span
-                                                                        class="language-en">Experience</span><span
-                                                                        class="language-vi">Kinh nghiệm</span></span><span
-                                                                class="language-en">No experience</span><span
-                                                                class="language-vi">Không yêu cầu kinh nghiệm</span></p>
-                                        </div>
-                                        <div class="job-details">
-                                                <h3><span class="language-en">Key Responsibilities</span><span
-                                                                class="language-vi">Trách nhiệm
-                                                                chính</span>
-                                                </h3>
-                                                <ul>
-                                                        <li><span class="language-en">Assist users with accessing and
-                                                                        navigating online
-                                                                        platforms.</span><span class="language-vi">Hỗ
-                                                                        trợ người dùng truy cập và sử dụng các
-                                                                        nền tảng trực tuyến.</span></li>
-                                                        <li><span class="language-en">Guide users through appointment
-                                                                        booking and account
-                                                                        management.</span><span
-                                                                        class="language-vi">Hướng dẫn người dùng đặt
-                                                                        lịch và quản lý
-                                                                        tài khoản.</span></li>
-                                                        <li><span class="language-en">Respond to enquiries and
-                                                                        coordinate reported issues with
-                                                                        technical
-                                                                        teams.</span><span class="language-vi">Phản hồi
-                                                                        thắc mắc và phối hợp vấn đề với đội
-                                                                        ngũ kỹ
-                                                                        thuật.</span></li>
-                                                        <li><span class="language-en">Maintain professional and helpful
-                                                                        communication.</span><span
-                                                                        class="language-vi">Duy trì giao tiếp chuyên
-                                                                        nghiệp và hữu ích.</span></li>
-                                                </ul>
-                                                <h3><span class="language-en">Requirements</span><span
-                                                                class="language-vi">Yêu cầu</span></h3>
-                                                <ul>
-                                                        <li><span class="language-en">Strong communication and
-                                                                        problem-solving skills.</span><span
-                                                                        class="language-vi">Kỹ năng giao tiếp và giải
-                                                                        quyết vấn đề tốt.</span></li>
-                                                        <li><span class="language-en">Basic computer and digital
-                                                                        platform skills.</span><span
-                                                                        class="language-vi">Kỹ năng máy tính và nền tảng
-                                                                        số cơ bản.</span></li>
-                                                        <li><span class="language-en">Patience and a customer-focused
-                                                                        attitude.</span><span class="language-vi">Kiên
-                                                                        nhẫn và thái độ hướng đến khách hàng.</span>
-                                                        </li>
-                                                        <li><span class="language-en">Ability to explain technical steps
-                                                                        clearly.</span><span class="language-vi">Có khả
-                                                                        năng giải thích rõ ràng các bước kỹ
-                                                                        thuật.</span></li>
-                                                        <li><span class="language-en">Previous customer support
-                                                                        experience is desirable.</span><span
-                                                                        class="language-vi">Ưu tiên có kinh nghiệm hỗ
-                                                                        trợ khách hàng.</span></li>
-                                                </ul>
-                                        </div>
-                                        <input type="checkbox" id="show_details_dhs02"
-                                                class="show-details-checkbox visually-hidden">
-                                        <label for="show_details_dhs02" class="details-toggle-label">
-                                                <span class="visually-hidden"><span class="language-en">Toggle job
-                                                                details for Digital Health
-                                                                Support
-                                                                Specialist</span><span class="language-vi">Mở hoặc đóng
-                                                                thông tin công việc cho Chuyên
-                                                                viên hỗ trợ sức
-                                                                khỏe số</span></span>
-                                                <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
-                                        </label>
-                                        <a class="job-apply-button" href="apply.html#skip-to-application"><span
-                                                        class="language-en">Apply
-                                                        for this
-                                                        job</span><span class="language-vi">Ứng tuyển công việc
-                                                        này</span></a>
-                                </div>
-
-                                <div class="job-card salary-30-50 location-hanoi job-design experience-2-years">
-                                        <div class="ref-code">
-                                                <p><span class="language-en">Job ID:</span><span class="language-vi">Mã
-                                                                việc làm:</span> <span
-                                                                class="ref-code-value"><strong>UXD04</strong></span></p>
-                                        </div>
-                                        <h2><span class="language-en">Healthcare UX/UI Designer</span><span
-                                                        class="language-vi">Nhà thiết kế
-                                                        UX/UI
-                                                        chăm sóc sức khỏe</span></h2>
-                                        <p class="company-name"><span class="language-en">Vinmec Digital
-                                                        Health</span><span class="language-vi">Vinmec
-                                                        Sức khỏe số</span></p>
-                                        <h3><span class="language-en">Product Design | Full-time</span><span
-                                                        class="language-vi">Thiết kế
-                                                        sản phẩm |
-                                                        Toàn thời gian</span></h3>
-                                        <p><span class="language-en">Create intuitive and accessible interfaces that
-                                                        help patients find
-                                                        health
-                                                        information and manage appointments with ease.</span><span
-                                                        class="language-vi">Tạo giao diện
-                                                        trực quan và
-                                                        dễ tiếp cận giúp bệnh nhân tìm thông tin sức khỏe và quản lý
-                                                        lịch hẹn dễ dàng.</span></p>
-                                        <div class="job-meta">
-                                                <p><span class="meta-label"><span class="language-en">Salary</span><span
-                                                                        class="language-vi">Lương</span></span><span
-                                                                class="language-en">30 - 50 million VND
-                                                                /
-                                                                month</span><span class="language-vi">30 - 50 triệu VND
-                                                                / tháng</span></p>
-                                                <p><span class="meta-label"><span
-                                                                        class="language-en">Location</span><span
-                                                                        class="language-vi">Địa
-                                                                        điểm</span></span><span
-                                                                class="language-en">Hanoi, Vietnam</span><span
-                                                                class="language-vi">Hà Nội,
-                                                                Việt Nam</span></p>
-                                                <p class="experience-meta"><span class="meta-label"><span
-                                                                        class="language-en">Experience</span><span
-                                                                        class="language-vi">Kinh nghiệm</span></span><span
-                                                                class="language-en">2 years</span><span
-                                                                class="language-vi">2 năm</span></p>
-                                        </div>
-                                        <div class="job-details">
-                                                <h3><span class="language-en">Key Responsibilities</span><span
-                                                                class="language-vi">Trách nhiệm
-                                                                chính</span>
-                                                </h3>
-                                                <ul>
-                                                        <li><span class="language-en">Design interfaces for patient
-                                                                        platforms and booking
-                                                                        systems.</span><span class="language-vi">Thiết
-                                                                        kế giao diện cho nền tảng bệnh nhân
-                                                                        và hệ thống đặt lịch.</span></li>
-                                                        <li><span class="language-en">Create wireframes, prototypes and
-                                                                        user journey
-                                                                        maps.</span><span class="language-vi">Tạo
-                                                                        wireframe, nguyên mẫu và bản đồ hành trình
-                                                                        người dùng.</span></li>
-                                                        <li><span class="language-en">Conduct user research and
-                                                                        collaborate with product
-                                                                        teams.</span><span class="language-vi">Nghiên
-                                                                        cứu người dùng và phối hợp với các đội
-                                                                        ngũ sản phẩm.</span></li>
-                                                        <li><span class="language-en">Ensure designs are consistent,
-                                                                        accessible and
-                                                                        user-friendly.</span><span
-                                                                        class="language-vi">Đảm bảo thiết kế nhất quán,
-                                                                        dễ tiếp
-                                                                        cận và thân thiện.</span></li>
-                                                </ul>
-                                                <h3><span class="language-en">Requirements</span><span
-                                                                class="language-vi">Yêu cầu</span></h3>
-                                                <ul>
-                                                        <li><span class="language-en">Knowledge of UI/UX design
-                                                                        principles.</span><span class="language-vi">Kiến
-                                                                        thức về nguyên tắc thiết kế UI/UX.</span></li>
-                                                        <li><span class="language-en">Familiarity with tools such as
-                                                                        Figma.</span><span class="language-vi">Quen
-                                                                        thuộc với các công cụ như Figma.</span></li>
-                                                        <li><span class="language-en">Understanding of responsive web
-                                                                        design and
-                                                                        accessibility.</span><span
-                                                                        class="language-vi">Hiểu về thiết kế web đáp ứng
-                                                                        và khả
-                                                                        năng tiếp cận.</span></li>
-                                                        <li><span class="language-en">Strong visual communication and
-                                                                        problem-solving
-                                                                        skills.</span><span class="language-vi">Kỹ năng
-                                                                        giao tiếp trực quan và giải quyết
-                                                                        vấn đề tốt.</span></li>
-                                                        <li><span class="language-en">A portfolio is
-                                                                        desirable.</span><span class="language-vi">Ưu
-                                                                        tiên có hồ sơ
-                                                                        năng lực.</span></li>
-                                                </ul>
-                                        </div>
-                                        <input type="checkbox" id="show_details_uxd04"
-                                                class="show-details-checkbox visually-hidden">
-                                        <label for="show_details_uxd04" class="details-toggle-label">
-                                                <span class="visually-hidden"><span class="language-en">Toggle job
-                                                                details for Healthcare UX/UI
-                                                                Designer</span><span class="language-vi">Mở hoặc đóng
-                                                                thông tin công việc cho Nhà thiết
-                                                                kế UX/UI chăm
-                                                                sóc sức khỏe</span></span>
-                                                <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
-                                        </label>
-                                        <a class="job-apply-button" href="apply.html#skip-to-application"><span
-                                                        class="language-en">Apply
-                                                        for this
-                                                        job</span><span class="language-vi">Ứng tuyển công việc
-                                                        này</span></a>
-                                </div>
-
-                                <div class="job-card salary-over-50 location-danang job-development experience-8-years">
-                                        <div class="ref-code">
-                                                <p><span class="language-en">Job ID:</span><span class="language-vi">Mã
-                                                                việc làm:</span> <span
-                                                                class="ref-code-value"><strong>DHD05</strong></span></p>
-                                        </div>
-                                        <h2><span class="language-en">Digital Health Software Developer</span><span
-                                                        class="language-vi">Lập
-                                                        trình viên
-                                                        phần mềm sức khỏe số</span></h2>
-                                        <p class="company-name"><span class="language-en">FPT Smart
-                                                        Healthcare</span><span class="language-vi">FPT
-                                                        Chăm sóc sức khỏe thông minh</span></p>
-                                        <h3><span class="language-en">Software Development | Full-time</span><span
-                                                        class="language-vi">Phát
-                                                        triển phần
-                                                        mềm | Toàn thời gian</span></h3>
-                                        <p><span class="language-en">Build and maintain reliable, user-friendly software
-                                                        for patient
-                                                        platforms,
-                                                        appointment systems and health information websites.</span><span
-                                                        class="language-vi">Xây
-                                                        dựng và duy trì
-                                                        phần mềm đáng tin cậy, thân thiện cho nền tảng bệnh nhân, hệ
-                                                        thống đặt lịch và website thông
-                                                        tin sức
-                                                        khỏe.</span></p>
-                                        <div class="job-meta">
-                                                <p><span class="meta-label"><span class="language-en">Salary</span><span
-                                                                        class="language-vi">Lương</span></span><span
-                                                                class="language-en">45 - 75 million VND
-                                                                /
-                                                                month</span><span class="language-vi">45 - 75 triệu VND
-                                                                / tháng</span></p>
-                                                <p><span class="meta-label"><span
-                                                                        class="language-en">Location</span><span
-                                                                        class="language-vi">Địa
-                                                                        điểm</span></span><span class="language-en">Da
-                                                                Nang, Vietnam</span><span class="language-vi">Đà Nẵng,
-                                                                Việt Nam</span></p>
-                                                <p class="experience-meta"><span class="meta-label"><span
-                                                                        class="language-en">Experience</span><span
-                                                                        class="language-vi">Kinh nghiệm</span></span><span
-                                                                class="language-en">8 years</span><span
-                                                                class="language-vi">8 năm</span></p>
-                                        </div>
-                                        <div class="job-details">
-                                                <h3><span class="language-en">Key Responsibilities</span><span
-                                                                class="language-vi">Trách nhiệm
-                                                                chính</span>
-                                                </h3>
-                                                <ul>
-                                                        <li><span class="language-en">Develop and maintain digital
-                                                                        healthcare platform
-                                                                        features.</span><span class="language-vi">Phát
-                                                                        triển và duy trì các tính năng nền
-                                                                        tảng chăm sóc sức khỏe số.</span></li>
-                                                        <li><span class="language-en">Write clean, maintainable and
-                                                                        well-tested code.</span><span
-                                                                        class="language-vi">Viết mã sạch, dễ bảo trì và
-                                                                        được kiểm thử kỹ.</span></li>
-                                                        <li><span class="language-en">Collaborate with designers,
-                                                                        analysts and
-                                                                        developers.</span><span class="language-vi">Phối
-                                                                        hợp với nhà thiết kế, chuyên viên
-                                                                        phân tích và lập trình viên.</span></li>
-                                                        <li><span class="language-en">Resolve bugs and follow security
-                                                                        and data protection
-                                                                        practices.</span><span class="language-vi">Khắc
-                                                                        phục lỗi và tuân thủ các quy trình
-                                                                        bảo mật, bảo vệ dữ liệu.</span></li>
-                                                </ul>
-                                                <h3><span class="language-en">Requirements</span><span
-                                                                class="language-vi">Yêu cầu</span></h3>
-                                                <ul>
-                                                        <li><span class="language-en">Knowledge of JavaScript, Python or
-                                                                        Java.</span><span class="language-vi">Kiến thức
-                                                                        về JavaScript, Python hoặc Java.</span></li>
-                                                        <li><span class="language-en">Understanding of web development
-                                                                        fundamentals.</span><span
-                                                                        class="language-vi">Hiểu các nền tảng phát triển
-                                                                        web.</span></li>
-                                                        <li><span class="language-en">Familiarity with databases and
-                                                                        APIs is an
-                                                                        advantage.</span><span class="language-vi">Biết
-                                                                        về cơ sở dữ liệu và API là một lợi
-                                                                        thế.</span></li>
-                                                        <li><span class="language-en">Strong logical thinking and
-                                                                        problem-solving
-                                                                        skills.</span><span class="language-vi">Tư duy
-                                                                        logic và kỹ năng giải quyết vấn đề
-                                                                        tốt.</span></li>
-                                                        <li><span class="language-en">Ability to learn new
-                                                                        technologies.</span><span class="language-vi">Có
-                                                                        khả
-                                                                        năng học công nghệ mới.</span></li>
-                                                </ul>
-                                        </div>
-                                        <input type="checkbox" id="show_details_dhd05"
-                                                class="show-details-checkbox visually-hidden">
-                                        <label for="show_details_dhd05" class="details-toggle-label">
-                                                <span class="visually-hidden"><span class="language-en">Toggle job
-                                                                details for Digital Health
-                                                                Software
-                                                                Developer</span><span class="language-vi">Mở hoặc đóng
-                                                                thông tin công việc cho Lập trình
-                                                                viên phần mềm
-                                                                sức khỏe số</span></span>
-                                                <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
-                                        </label>
-                                        <a class="job-apply-button" href="apply.html#skip-to-application"><span
-                                                        class="language-en">Apply
-                                                        for this
-                                                        job</span><span class="language-vi">Ứng tuyển công việc
-                                                        này</span></a>
-                                </div>
-
-                                <div class="job-card salary-under-30 salary-20-under-30 location-hanoi job-qa experience-1-year">
-                                        <div class="ref-code">
-                                                <p><span class="language-en">Job ID:</span><span class="language-vi">Mã
-                                                                việc làm:</span> <span
-                                                                class="ref-code-value"><strong>QAT06</strong></span></p>
-                                        </div>
-                                        <h2><span class="language-en">Healthcare Quality Assurance Tester</span><span
-                                                        class="language-vi">Kiểm thử đảm
-                                                        bảo chất lượng chăm sóc sức khỏe</span></h2>
-                                        <p class="company-name"><span class="language-en">Medlatec Digital</span><span
-                                                        class="language-vi">Medlatec
-                                                        Số</span></p>
-                                        <h3><span class="language-en">Quality Assurance | Full-time</span><span
-                                                        class="language-vi">Đảm bảo
-                                                        chất lượng
-                                                        | Toàn thời gian</span></h3>
-                                        <p><span class="language-en">Test digital healthcare services and appointment
-                                                        workflows to identify
-                                                        issues
-                                                        before release and provide a reliable user
-                                                        experience.</span><span class="language-vi">Kiểm
-                                                        thử dịch vụ
-                                                        chăm sóc sức khỏe số và quy trình đặt lịch để phát hiện lỗi
-                                                        trước khi phát hành.</span></p>
-                                        <div class="job-meta">
-                                                <p><span class="meta-label"><span class="language-en">Salary</span><span
-                                                                        class="language-vi">Lương</span></span><span
-                                                                class="language-en">22 - 38 million VND
-                                                                /
-                                                                month</span><span class="language-vi">22 - 38 triệu VND
-                                                                / tháng</span></p>
-                                                <p><span class="meta-label"><span
-                                                                        class="language-en">Location</span><span
-                                                                        class="language-vi">Địa
-                                                                        điểm</span></span><span
-                                                                class="language-en">Hanoi, Vietnam</span><span
-                                                                class="language-vi">Hà Nội,
-                                                                Việt Nam</span></p>
-                                                <p class="experience-meta"><span class="meta-label"><span
-                                                                        class="language-en">Experience</span><span
-                                                                        class="language-vi">Kinh nghiệm</span></span><span
-                                                                class="language-en">1 year</span><span
-                                                                class="language-vi">1 năm</span></p>
-                                        </div>
-                                        <div class="job-details">
-                                                <h3><span class="language-en">Key Responsibilities</span><span
-                                                                class="language-vi">Trách nhiệm
-                                                                chính</span>
-                                                </h3>
-                                                <ul>
-                                                        <li><span class="language-en">Test website features and
-                                                                        healthcare workflows.</span><span
-                                                                        class="language-vi">Kiểm thử tính năng website
-                                                                        và quy trình chăm sóc sức
-                                                                        khỏe.</span></li>
-                                                        <li><span class="language-en">Create and execute test cases from
-                                                                        requirements.</span><span
-                                                                        class="language-vi">Tạo và thực hiện các trường
-                                                                        hợp kiểm thử từ yêu cầu.</span></li>
-                                                        <li><span class="language-en">Document defects and perform
-                                                                        regression testing.</span><span
-                                                                        class="language-vi">Ghi nhận lỗi và thực hiện
-                                                                        kiểm thử hồi quy.</span></li>
-                                                        <li><span class="language-en">Work with developers to verify
-                                                                        fixes.</span><span class="language-vi">Phối
-                                                                        hợp với lập trình viên để xác nhận bản sửa
-                                                                        lỗi.</span></li>
-                                                </ul>
-                                                <h3><span class="language-en">Requirements</span><span
-                                                                class="language-vi">Yêu cầu</span></h3>
-                                                <ul>
-                                                        <li><span class="language-en">Understanding of software testing
-                                                                        fundamentals.</span><span
-                                                                        class="language-vi">Hiểu các nền tảng kiểm thử
-                                                                        phần mềm.</span></li>
-                                                        <li><span class="language-en">Ability to follow procedures and
-                                                                        document results.</span><span
-                                                                        class="language-vi">Có khả năng tuân thủ quy
-                                                                        trình và ghi nhận kết quả.</span></li>
-                                                        <li><span class="language-en">Strong attention to detail and
-                                                                        analytical skills.</span><span
-                                                                        class="language-vi">Chú ý đến chi tiết và kỹ
-                                                                        năng phân tích tốt.</span></li>
-                                                        <li><span class="language-en">Bug-tracking experience is an
-                                                                        advantage.</span><span class="language-vi">Có
-                                                                        kinh nghiệm theo dõi lỗi là một lợi thế.</span>
-                                                        </li>
-                                                        <li><span class="language-en">Basic knowledge of web
-                                                                        applications.</span><span
-                                                                        class="language-vi">Kiến
-                                                                        thức cơ bản về ứng dụng web.</span></li>
-                                                </ul>
-                                        </div>
-                                        <input type="checkbox" id="show_details_qat06"
-                                                class="show-details-checkbox visually-hidden">
-                                        <label for="show_details_qat06" class="details-toggle-label">
-                                                <span class="visually-hidden"><span class="language-en">Toggle job
-                                                                details for Healthcare
-                                                                Quality Assurance
-                                                                Tester</span><span class="language-vi">Mở hoặc đóng
-                                                                thông tin công việc cho Kiểm thử đảm
-                                                                bảo chất lượng
-                                                                chăm sóc sức khỏe</span></span>
-                                                <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
-                                        </label>
-                                        <a class="job-apply-button" href="apply.html#skip-to-application"><span
-                                                        class="language-en">Apply
-                                                        for this
-                                                        job</span><span class="language-vi">Ứng tuyển công việc
-                                                        này</span></a>
-                                </div>
-
-                                <div class="job-card salary-over-50 location-hcm job-analytics experience-5-years">
-                                        <div class="ref-code">
-                                                <p><span class="language-en">Job ID:</span><span class="language-vi">Mã
-                                                                việc làm:</span> <span
-                                                                class="ref-code-value"><strong>HDA03</strong></span></p>
-                                        </div>
-                                        <h2><span class="language-en">Health Data Analyst</span><span
-                                                        class="language-vi">Chuyên viên phân
-                                                        tích dữ
-                                                        liệu sức khỏe</span></h2>
-                                        <p class="company-name"><span class="language-en">VNG HealthTech</span><span
-                                                        class="language-vi">VNG
-                                                        HealthTech</span></p>
-                                        <h3><span class="language-en">Data Analytics | Full-time</span><span
-                                                        class="language-vi">Phân tích
-                                                        dữ liệu |
-                                                        Toàn thời gian</span></h3>
-                                        <p><span class="language-en">Analyse digital healthcare data to identify trends,
-                                                        evaluate service
-                                                        performance
-                                                        and support data-driven decisions responsibly.</span><span
-                                                        class="language-vi">Phân tích dữ
-                                                        liệu chăm sóc
-                                                        sức khỏe số để nhận diện xu hướng, đánh giá hiệu quả dịch vụ và
-                                                        hỗ trợ quyết định dựa trên
-                                                        dữ liệu.</span>
-                                        </p>
-                                        <div class="job-meta">
-                                                <p><span class="meta-label"><span class="language-en">Salary</span><span
-                                                                        class="language-vi">Lương</span></span><span
-                                                                class="language-en">35 - 60 million VND
-                                                                /
-                                                                month</span><span class="language-vi">35 - 60 triệu VND
-                                                                / tháng</span></p>
-                                                <p><span class="meta-label"><span
-                                                                        class="language-en">Location</span><span
-                                                                        class="language-vi">Địa
-                                                                        điểm</span></span><span class="language-en">Ho
-                                                                Chi Minh City, Vietnam</span><span
-                                                                class="language-vi">Thành phố Hồ Chí Minh, Việt
-                                                                Nam</span></p>
-                                                <p class="experience-meta"><span class="meta-label"><span
-                                                                        class="language-en">Experience</span><span
-                                                                        class="language-vi">Kinh nghiệm</span></span><span
-                                                                class="language-en">5 years</span><span
-                                                                class="language-vi">5 năm</span></p>
-                                        </div>
-                                        <div class="job-details">
-                                                <h3><span class="language-en">Key Responsibilities</span><span
-                                                                class="language-vi">Trách nhiệm
-                                                                chính</span>
-                                                </h3>
-                                                <ul>
-                                                        <li><span class="language-en">Analyse platform usage and
-                                                                        appointment booking
-                                                                        records.</span><span class="language-vi">Phân
-                                                                        tích việc sử dụng nền tảng và hồ sơ
-                                                                        đặt lịch.</span></li>
-                                                        <li><span class="language-en">Prepare reports, dashboards and
-                                                                        visualisations.</span><span
-                                                                        class="language-vi">Chuẩn bị báo cáo, bảng điều
-                                                                        khiển và hình ảnh trực quan.</span>
-                                                        </li>
-                                                        <li><span class="language-en">Monitor performance and identify
-                                                                        opportunities for
-                                                                        improvement.</span><span
-                                                                        class="language-vi">Theo dõi hiệu suất và xác
-                                                                        định cơ hội
-                                                                        cải thiện.</span></li>
-                                                        <li><span class="language-en">Check data quality and follow
-                                                                        privacy
-                                                                        requirements.</span><span
-                                                                        class="language-vi">Kiểm tra chất lượng dữ liệu
-                                                                        và tuân
-                                                                        thủ yêu cầu về quyền riêng tư.</span></li>
-                                                </ul>
-                                                <h3><span class="language-en">Requirements</span><span
-                                                                class="language-vi">Yêu cầu</span></h3>
-                                                <ul>
-                                                        <li><span class="language-en">Basic knowledge of data analysis
-                                                                        and statistics.</span><span
-                                                                        class="language-vi">Kiến thức cơ bản về phân
-                                                                        tích dữ liệu và thống kê.</span></li>
-                                                        <li><span class="language-en">Microsoft Excel experience; SQL or
-                                                                        visualisation tools are an
-                                                                        advantage.</span><span class="language-vi">Kinh
-                                                                        nghiệm Microsoft Excel; biết SQL
-                                                                        hoặc công cụ trực
-                                                                        quan hóa là một lợi thế.</span></li>
-                                                        <li><span class="language-en">Strong analytical thinking and
-                                                                        attention to
-                                                                        detail.</span><span class="language-vi">Tư duy
-                                                                        phân tích và chú ý đến chi tiết
-                                                                        tốt.</span></li>
-                                                        <li><span class="language-en">Ability to communicate findings
-                                                                        clearly.</span><span class="language-vi">Có
-                                                                        khả năng trình bày phát hiện rõ ràng.</span>
-                                                        </li>
-                                                        <li><span class="language-en">Understanding of data privacy is
-                                                                        desirable.</span><span class="language-vi">Ưu
-                                                                        tiên hiểu về quyền riêng tư dữ liệu.</span></li>
-                                                </ul>
-                                        </div>
-                                        <input type="checkbox" id="show_details_hda003"
-                                                class="show-details-checkbox visually-hidden">
-                                        <label for="show_details_hda003" class="details-toggle-label">
-                                                <span class="visually-hidden"><span class="language-en">Toggle job
-                                                                details for Health Data
-                                                                Analyst</span><span class="language-vi">Mở hoặc đóng
-                                                                thông tin công việc cho Chuyên viên
-                                                                phân tích dữ
-                                                                liệu sức khỏe</span></span>
-                                                <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
-                                        </label>
-                                        <a class="job-apply-button" href="apply.html#skip-to-application"><span
-                                                        class="language-en">Apply
-                                                        for this
-                                                        job</span><span class="language-vi">Ứng tuyển công việc
-                                                        này</span></a>
-                                </div>
-
-                                <div class="job-card salary-negotiable location-cantho job-content experience-3-years">
-                                        <div class="ref-code">
-                                                <p><span class="language-en">Job ID:</span><span class="language-vi">Mã
-                                                                việc làm:</span> <span
-                                                                class="ref-code-value"><strong>HCW01</strong></span></p>
-                                        </div>
-                                        <h2><span class="language-en">Healthcare Content Writer</span><span
-                                                        class="language-vi">Biên tập
-                                                        viên nội dung
-                                                        chăm sóc sức khỏe</span></h2>
-                                        <p class="company-name"><span class="language-en">eDoctor Vietnam</span><span
-                                                        class="language-vi">eDoctor Việt
-                                                        Nam</span></p>
-                                        <h3><span class="language-en">Description</span><span class="language-vi">Mô
-                                                        tả</span></h3>
-                                        <p><span class="language-en">We are looking for a Healthcare Content Writer to
-                                                        create clear,
-                                                        engaging and
-                                                        reliable health-related content for our digital health
-                                                        information websites. The successful
-                                                        candidate will
-                                                        help users understand health topics through accessible and
-                                                        well-organised digital
-                                                        content.</span><span class="language-vi">Chúng tôi tìm kiếm biên
-                                                        tập viên nội dung chăm sóc
-                                                        sức khỏe để tạo nội dung rõ ràng,
-                                                        hấp dẫn và đáng tin cậy cho các website thông tin sức khỏe
-                                                        số.</span></p>
-                                        <div class="job-meta">
-                                                <p><span class="meta-label"><span class="language-en">Salary</span><span
-                                                                        class="language-vi">Lương</span></span><span
-                                                                class="language-en">Negotiable</span><span
-                                                                class="language-vi">Thỏa thuận</span></p>
-                                                <p><span class="meta-label"><span
-                                                                        class="language-en">Location</span><span
-                                                                        class="language-vi">Địa
-                                                                        điểm</span></span><span class="language-en">Can
-                                                                Tho, Vietnam</span><span class="language-vi">Cần Thơ,
-                                                                Việt Nam</span></p>
-                                                <p class="experience-meta"><span class="meta-label"><span
-                                                                        class="language-en">Experience</span><span
-                                                                        class="language-vi">Kinh nghiệm</span></span><span
-                                                                class="language-en">3 years</span><span
-                                                                class="language-vi">3 năm</span></p>
-                                        </div>
-                                        <div class="job-details">
-                                                <h3><span class="language-en">Key Responsibilities:</span><span
-                                                                class="language-vi">Trách nhiệm
-                                                                chính:</span></h3>
-                                                <ul>
-                                                        <li><span class="language-en">Research and write health-related
-                                                                        articles and educational
-                                                                        content.</span><span class="language-vi">Nghiên
-                                                                        cứu và viết bài báo sức khỏe cùng
-                                                                        nội dung giáo
-                                                                        dục.</span></li>
-                                                        <li><span class="language-en">Review content for clarity,
-                                                                        accuracy and
-                                                                        readability.</span><span
-                                                                        class="language-vi">Kiểm tra nội dung về tính rõ
-                                                                        ràng,
-                                                                        chính xác và dễ đọc.</span></li>
-                                                        <li><span class="language-en">Collaborate with healthcare
-                                                                        professionals and the digital
-                                                                        content
-                                                                        team.</span><span class="language-vi">Phối hợp
-                                                                        với chuyên gia chăm sóc sức khỏe và
-                                                                        đội ngũ nội dung
-                                                                        số.</span></li>
-                                                        <li><span class="language-en">Update existing website content
-                                                                        when information needs
-                                                                        revision.</span><span class="language-vi">Cập
-                                                                        nhật nội dung website khi thông tin
-                                                                        cần chỉnh sửa.</span></li>
-                                                        <li><span class="language-en">Follow content guidelines and
-                                                                        maintain consistent writing
-                                                                        standards.</span><span class="language-vi">Tuân
-                                                                        thủ hướng dẫn nội dung và duy trì
-                                                                        tiêu chuẩn viết nhất
-                                                                        quán.</span></li>
-                                                </ul>
-                                                <h3><span class="language-en">Requirements:</span><span
-                                                                class="language-vi">Yêu cầu:</span></h3>
-                                                <ul>
-                                                        <li><span class="language-en">Strong written communication and
-                                                                        research skills.</span><span
-                                                                        class="language-vi">Kỹ năng viết và nghiên cứu
-                                                                        tốt.</span></li>
-                                                        <li><span class="language-en">Excellent attention to
-                                                                        detail.</span><span class="language-vi">Chú ý
-                                                                        xuất
-                                                                        sắc đến chi tiết.</span></li>
-                                                        <li><span class="language-en">Ability to explain complex
-                                                                        information in simple
-                                                                        language.</span><span class="language-vi">Có khả
-                                                                        năng giải thích thông tin phức tạp
-                                                                        bằng ngôn ngữ đơn giản.</span></li>
-                                                        <li><span class="language-en">Understanding of health and
-                                                                        wellness topics.</span><span
-                                                                        class="language-vi">Hiểu về các chủ đề sức khỏe
-                                                                        và thể chất.</span></li>
-                                                        <li><span class="language-en">Experience in content writing or
-                                                                        health communication is an
-                                                                        advantage.</span><span class="language-vi">Có
-                                                                        kinh nghiệm viết nội dung hoặc truyền
-                                                                        thông sức khỏe là
-                                                                        một lợi thế.</span></li>
-                                                </ul>
-                                                <h3><span class="language-en">Benefits</span><span
-                                                                class="language-vi">Phúc lợi</span></h3>
-                                                <ul>
-                                                        <li><span class="language-en">Health, dental, and vision
-                                                                        insurance</span><span class="language-vi">Bảo
-                                                                        hiểm sức khỏe, nha khoa và thị lực</span></li>
-                                                        <li><span class="language-en">Retirement savings
-                                                                        plan</span><span class="language-vi">Kế
-                                                                        hoạch tiết kiệm
-                                                                        hưu trí</span></li>
-                                                        <li><span class="language-en">Paid time off and
-                                                                        holidays</span><span class="language-vi">Nghỉ
-                                                                        phép và ngày
-                                                                        lễ có lương</span></li>
-                                                        <li><span class="language-en">Professional development
-                                                                        opportunities</span><span class="language-vi">Cơ
-                                                                        hội phát triển chuyên môn</span></li>
-                                                        <li><span class="language-en">Flexible work
-                                                                        arrangements</span><span
-                                                                        class="language-vi">Thỏa thuận làm
-                                                                        việc linh hoạt</span></li>
-                                                </ul>
-                                        </div>
-                                        <input type="checkbox" id="show_details_hcw01"
-                                                class="show-details-checkbox visually-hidden">
-                                        <label for="show_details_hcw01" class="details-toggle-label">
-                                                <span class="visually-hidden"><span class="language-en">Toggle job
-                                                                details for Healthcare
-                                                                Content
-                                                                Writer</span><span class="language-vi">Mở hoặc đóng
-                                                                thông tin công việc cho Biên tập
-                                                                viên nội dung chăm
-                                                                sóc sức khỏe</span></span>
-                                                <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
-                                        </label>
-                                        <a class="job-apply-button" href="apply.html#skip-to-application"><span
-                                                        class="language-en">Apply
-                                                        for this
-                                                        job</span><span class="language-vi">Ứng tuyển công việc
-                                                        này</span></a>
-                                </div>
-                        </div>
-                        <div class="FilterSidebar-Container">
-                                <input class="filter-toggle visually-hidden" type="checkbox" id="filter-toggle">
-                                <label class="filter-toggle-label" for="filter-toggle">
-                                        <span><span class="language-en">Filter jobs</span><span class="language-vi">Lọc
-                                                        việc làm</span></span>
-                                        <i class="fa-solid fa-sliders" aria-hidden="true"></i>
-                                </label>
-                                <div id="job-filter">
-                                        <form>
-                                                <fieldset>
-                                                        <legend class="filter-main-title"><span
-                                                                        class="language-en">Filter</span><span
-                                                                        class="language-vi">Bộ
-                                                                        lọc</span></legend>
-
-                                                        <fieldset class="filter-group">
-                                                                <legend><span class="language-en">Salary</span><span
-                                                                                class="language-vi">Lương</span>
-                                                                </legend>
-                                                                <label><input type="radio" name="salary" id="salary-all"
-                                                                                checked> <span class="language-en">All
-                                                                                salaries</span><span
-                                                                                class="language-vi">Tất cả mức
-                                                                                lương</span></label>
-                                                                <label><input type="radio" name="salary"
-                                                                                id="salary-under-30"> <span
-                                                                                class="language-en">Under 30M
-                                                                                VND</span><span class="language-vi">Dưới
-                                                                                30 triệu VND</span></label>
-                                                                <label><input type="radio" name="salary"
-                                                                                id="salary-10-20"> <span
-                                                                                class="language-en">10M - 20M
-                                                                                VND</span><span class="language-vi">10 - 20
-                                                                                triệu VND</span></label>
-                                                                <label><input type="radio" name="salary"
-                                                                                id="salary-20-under-30"> <span
-                                                                                class="language-en">20M - under 30M
-                                                                                VND</span><span class="language-vi">20 - dưới
-                                                                                30 triệu VND</span></label>
-                                                                <label><input type="radio" name="salary"
-                                                                                id="salary-30-50"> <span
-                                                                                class="language-en">30M - 50M
-                                                                                VND</span><span class="language-vi">30 -
-                                                                                50 triệu VND</span></label>
-                                                                <label><input type="radio" name="salary"
-                                                                                id="salary-over-50"> <span
-                                                                                class="language-en">Over 50M
-                                                                                VND</span><span class="language-vi">Trên
-                                                                                50 triệu VND</span></label>
-                                                                <label><input type="radio" name="salary"
-                                                                                id="salary-negotiable"> <span
-                                                                                class="language-en">Negotiable</span><span
-                                                                                class="language-vi">Thỏa
-                                                                                thuận</span></label>
-                                                        </fieldset>
-
-                                                        <fieldset class="filter-group">
-                                                                <legend><span class="language-en">Experience</span><span
-                                                                                class="language-vi">Kinh nghiệm</span>
-                                                                </legend>
-                                                                <label><input type="radio" name="experience"
-                                                                                id="experience-all" checked> <span
-                                                                                class="language-en">All experience levels</span><span
-                                                                                class="language-vi">Tất cả mức kinh nghiệm</span></label>
-                                                                <label><input type="radio" name="experience"
-                                                                                id="experience-none"> <span
-                                                                                class="language-en">No experience</span><span
-                                                                                class="language-vi">Không yêu cầu kinh nghiệm</span></label>
-                                                                <label><input type="radio" name="experience"
-                                                                                id="experience-1-year"> <span
-                                                                                class="language-en">1 year</span><span
-                                                                                class="language-vi">1 năm</span></label>
-                                                                <label><input type="radio" name="experience"
-                                                                                id="experience-2-years"> <span
-                                                                                class="language-en">2 years</span><span
-                                                                                class="language-vi">2 năm</span></label>
-                                                                <label><input type="radio" name="experience"
-                                                                                id="experience-3-years"> <span
-                                                                                class="language-en">3 years</span><span
-                                                                                class="language-vi">3 năm</span></label>
-                                                                <label><input type="radio" name="experience"
-                                                                                id="experience-5-years"> <span
-                                                                                class="language-en">5 years</span><span
-                                                                                class="language-vi">5 năm</span></label>
-                                                                <label><input type="radio" name="experience"
-                                                                                id="experience-8-years"> <span
-                                                                                class="language-en">8 years</span><span
-                                                                                class="language-vi">8 năm</span></label>
-                                                        </fieldset>
-
-                                                        <fieldset class="filter-group">
-                                                                <legend><span class="language-en">Location</span><span
-                                                                                class="language-vi">Địa
-                                                                                điểm</span></legend>
-                                                                <label><input type="radio" name="location"
-                                                                                id="location-all" checked> <span
-                                                                                class="language-en">All
-                                                                                locations</span><span
-                                                                                class="language-vi">Tất cả địa
-                                                                                điểm</span></label>
-                                                                <label><input type="radio" name="location"
-                                                                                id="location-hcm"> <span
-                                                                                class="language-en">Ho Chi Minh
-                                                                                City</span><span
-                                                                                class="language-vi">Thành phố Hồ Chí
-                                                                                Minh</span></label>
-                                                                <label><input type="radio" name="location"
-                                                                                id="location-hanoi"> <span
-                                                                                class="language-en">Hanoi</span><span
-                                                                                class="language-vi">Hà
-                                                                                Nội</span></label>
-                                                                <label><input type="radio" name="location"
-                                                                                id="location-danang"> <span
-                                                                                class="language-en">Da
-                                                                                Nang</span><span class="language-vi">Đà
-                                                                                Nẵng</span></label>
-                                                                <label><input type="radio" name="location"
-                                                                                id="location-cantho"> <span
-                                                                                class="language-en">Can
-                                                                                Tho</span><span class="language-vi">Cần
-                                                                                Thơ</span></label>
-                                                        </fieldset>
-
-                                                        <fieldset class="filter-group">
-                                                                <legend><span class="language-en">Job type</span><span
-                                                                                class="language-vi">Loại công
-                                                                                việc</span>
-                                                                </legend>
-                                                                <label><input type="radio" name="job-type"
-                                                                                id="job-type-all" checked> <span
-                                                                                class="language-en">All job
-                                                                                types</span><span
-                                                                                class="language-vi">Tất cả loại công
-                                                                                việc</span></label>
-                                                                <label><input type="radio" name="job-type"
-                                                                                id="job-type-support"> <span
-                                                                                class="language-en">Customer
-                                                                                support</span><span
-                                                                                class="language-vi">Hỗ trợ khách
-                                                                                hàng</span></label>
-                                                                <label><input type="radio" name="job-type"
-                                                                                id="job-type-design"> <span
-                                                                                class="language-en">Product
-                                                                                design</span><span
-                                                                                class="language-vi">Thiết kế sản
-                                                                                phẩm</span></label>
-                                                                <label><input type="radio" name="job-type"
-                                                                                id="job-type-development"> <span
-                                                                                class="language-en">Software
-                                                                                development</span><span
-                                                                                class="language-vi">Phát triển phần
-                                                                                mềm</span></label>
-                                                                <label><input type="radio" name="job-type"
-                                                                                id="job-type-qa"> <span
-                                                                                class="language-en">Quality
-                                                                                assurance</span><span
-                                                                                class="language-vi">Đảm bảo chất
-                                                                                lượng</span></label>
-                                                                <label><input type="radio" name="job-type"
-                                                                                id="job-type-analytics"> <span
-                                                                                class="language-en">Data
-                                                                                analytics</span><span
-                                                                                class="language-vi">Phân tích dữ
-                                                                                liệu</span></label>
-                                                                <label><input type="radio" name="job-type"
-                                                                                id="job-type-content"> <span
-                                                                                class="language-en">Content
-                                                                                writing</span><span
-                                                                                class="language-vi">Viết nội
-                                                                                dung</span></label>
-                                                        </fieldset>
-                                                        <button type="reset" class="clear-filters"><span
-                                                                        class="language-en">Clear
-                                                                        filters</span><span class="language-vi">Xóa bộ
-                                                                        lọc</span></button>
-                                                </fieldset>
-                                        </form>
-                                </div>
-
-                                <aside class="sidebar">
-
-                                        <section class="tips-box">
-                                                <h3><span class="language-en">Application Tips</span><span
-                                                                class="language-vi">Mẹo ứng
-                                                                tuyển</span></h3>
-                                                <ol>
-                                                        <li><span class="language-en">Read the job description carefully
-                                                                        to understand the role and
-                                                                        requirements.</span><span
-                                                                        class="language-vi">Đọc kỹ mô tả công việc để
-                                                                        hiểu vai trò
-                                                                        và yêu
-                                                                        cầu.</span></li>
-                                                        <li><span class="language-en">Prepare your resume and cover
-                                                                        letter tailored to the specific
-                                                                        job.</span><span class="language-vi">Chuẩn bị CV
-                                                                        và thư xin việc phù hợp với công
-                                                                        việc cụ thể.</span>
-                                                        </li>
-                                                        <li><span class="language-en">Highlight relevant skills,
-                                                                        experiences, and
-                                                                        achievements.</span><span
-                                                                        class="language-vi">Làm nổi bật kỹ năng, kinh
-                                                                        nghiệm và
-                                                                        thành tích liên quan.</span></li>
-                                                        <li><span class="language-en">Follow the application
-                                                                        instructions provided in the job
-                                                                        listing.</span><span class="language-vi">Thực
-                                                                        hiện hướng dẫn ứng tuyển trong tin
-                                                                        tuyển dụng.</span></li>
-                                                        <li><span class="language-en">Submit your application before the
-                                                                        deadline.</span><span class="language-vi">Nộp
-                                                                        đơn trước thời hạn.</span></li>
-                                                </ol>
-                                        </section>
-                                        <section class="disclaimer-box">
-                                                <h3><span class="language-en">Disclaimer</span><span
-                                                                class="language-vi">Tuyên bố miễn
-                                                                trừ</span></h3>
-                                                <p><span class="language-en">All job listings are subject to change and
-                                                                may be filled or removed
-                                                                at any
-                                                                time. T1 Health &amp; Wellness is not responsible for
-                                                                any discrepancies or inaccuracies
-                                                                in the job
-                                                                postings.</span><span class="language-vi">Tất cả tin
-                                                                tuyển dụng có thể thay đổi, được
-                                                                tuyển đủ hoặc gỡ
-                                                                bỏ bất cứ lúc nào. T1 Health &amp; Wellness không chịu
-                                                                trách nhiệm về bất kỳ sai lệch
-                                                                hoặc thiếu chính
-                                                                xác nào trong tin tuyển dụng.</span></p>
-                                        </section>
-                                        <section class="ref-code-box">
-                                                <h3><span class="language-en">Job Reference Code</span><span
-                                                                class="language-vi">Mã tham chiếu
-                                                                công
-                                                                việc</span></h3>
-                                                <p><span class="language-en">Double-check your <strong>Job Reference
-                                                                        Code</strong> before
-                                                                submitting the
-                                                                application form!</span><span class="language-vi">Hãy
-                                                                kiểm tra kỹ <strong>Mã tham chiếu
-                                                                        công
-                                                                        việc</strong> trước khi gửi đơn ứng
-                                                                tuyển!</span></p>
-                                        </section>
-
-                                        <section class="help-box">
-                                                <h3><span class="language-en">Need Help?</span><span
-                                                                class="language-vi">Cần trợ giúp?</span>
-                                                </h3>
-                                                <p><span class="language-en">Contact our HR team at <a
-                                                                        href="mailto:106208127@student.swin.edu.au">106208127@student.swin.edu.au</a></span><span
-                                                                class="language-vi">Liên hệ đội ngũ nhân sự qua <a
-                                                                        href="mailto:106208127@student.swin.edu.au">106208127@student.swin.edu.au</a></span>
-                                                </p>
-                                        </section>
-                                </aside>
-                        </div>
-                </section>
-        </main>
-
-        <!-- FOOTER: company branding, project resources, and website information. -->
-        <footer class="site-footer">
-                <div class="footer-main">
-                        <!-- Company branding -->
-                        <div class="footer-brand-content">
-                                <a href="index.html" class="footer-brand" aria-label="T1 Health &amp; Wellness home">
-                                        <img src="images/logo.png" alt="" class="footer-logo">
-                                        <span class="footer-brand-text">
-                                                <strong>T1</strong>
-                                                <span>HEALTH &amp; WELLNESS</span>
-                                        </span>
-                                </a>
-                                <h2 class="footer-heading"><span class="language-en">Better health. Smarter
-                                                care.</span><span class="language-vi">Sức khỏe tốt hơn. Chăm sóc thông
-                                                minh hơn.</span></h2>
-                                <p class="footer-description"><span class="language-en">Accessible digital healthcare
-                                                and wellness
-                                                services,
-                                                designed around you.</span><span class="language-vi">Dịch vụ chăm sóc
-                                                sức khỏe số và thể chất dễ
-                                                tiếp cận,
-                                                được thiết kế dành cho bạn.</span></p>
-                        </div>
-
-                        <!-- Back-to-top link -->
-                        <a class="footer-back-to-top" href="#top">
-                                <span><span class="language-en">TO THE SURFACE</span><span class="language-vi">LÊN ĐẦU
-                                                TRANG</span></span>
-                                <i class="fa-solid fa-caret-up" aria-hidden="true"></i>
-                        </a>
+              <div class="career-card-content">
+                <div class="career-card-copy">
+                  <span class="career-eyebrow">
+                    <span class="language-en">BUILD YOUR FUTURE</span>
+                    <span class="language-vi">XÂY DỰNG TƯƠNG LAI</span>
+                  </span>
+                  <strong>
+                    <span class="language-en">Make an impact with T1</span>
+                    <span class="language-vi">Cùng T1 tạo nên khác biệt</span>
+                  </strong>
+                  <p>
+                    <span class="language-en">Grow your skills in digital healthcare.</span>
+                    <span class="language-vi">Phát triển kỹ năng trong lĩnh vực chăm sóc sức khỏe số.</span>
+                  </p>
                 </div>
 
-                <!-- Copyright and project resources -->
-                <div class="footer-bottom">
-                        <p class="footer-copy"><span class="language-en">&copy; 2026 T1 Health &amp; Wellness. All
-                                        rights
-                                        reserved.</span><span class="language-vi">&copy; 2026 T1 Health &amp; Wellness.
-                                        Đã đăng ký bản
-                                        quyền.</span>
-                        </p>
-                        <nav class="footer-links" aria-label="Footer resources">
-                                <a href="mailto:104848806@student.swin.edu.au" title="T1W&H@mail.com">
-                                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                                        <span><span class="language-en">Email us</span><span class="language-vi">Email
-                                                        cho chúng
-                                                        tôi</span></span>
-                                </a>
-                                <span class="footer-separator" aria-hidden="true">·</span>
-                                <a href="https://github.com/Ba568o/COS10026_Web_Technology_Project_1_T1_Group"
-                                        title="T1 Health & Wellness - GitHub Repository" target="_blank"
-                                        rel="noopener noreferrer">
-                                        <i class="fa-brands fa-github" aria-hidden="true"></i>
-                                        <span><span class="language-en">GitHub Repository</span><span
-                                                        class="language-vi">Kho lưu trữ
-                                                        GitHub</span></span>
-                                </a>
-                                <span class="footer-separator" aria-hidden="true">·</span>
-                                <a href="https://104848806.atlassian.net/jira/software/projects/T123/summary"
-                                        title="T1 Health & Wellness - Jira Project" target="_blank"
-                                        rel="noopener noreferrer">
-                                        <i class="fa-brands fa-jira" aria-hidden="true"></i>
-                                        <span><span class="language-en">Jira Project</span><span class="language-vi">Dự
-                                                        án
-                                                        Jira</span></span>
-                                </a>
-                        </nav>
+                <div class="career-team-illustration" aria-hidden="true">
+                  <span class="team-person person-one"></span>
+                  <span class="team-person person-two"></span>
+                  <span class="team-person person-three"></span>
                 </div>
+              </div>
 
-                <!-- Website standards and deployment status -->
-                <p class="footer-status">
-                        <span><span class="language-en">Valid HTML5 &amp; CSS3</span><span class="language-vi">HTML5
-                                        &amp; CSS3 hợp
-                                        lệ</span></span>
-                        <span aria-hidden="true">·</span>
-                        <span><span class="language-en">WCAG 2.1 AA</span><span class="language-vi">Đạt chuẩn tiếp cận web WCAG 2.1
-                                        AA</span></span>
-                        <span aria-hidden="true">·</span>
-                        <span><span class="language-en">GitHub Pages Deployed</span><span class="language-vi">Đã triển
-                                        khai trên
-                                        GitHub
-                                        Pages</span></span>
-                </p>
-        </footer>
+              <div class="career-card-footer">
+                <span class="career-status-dot"></span>
+                <span>
+                  <span class="language-en">Opportunities at T1</span>
+                  <span class="language-vi">Cơ hội tại T1</span>
+                </span>
+                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+              </div>
+            </div>
 
-</body>
+            <!-- Floating job notification -->
+            <div class="animation-card career-notification-card">
+              <span class="notification-icon" aria-hidden="true">
+                <i class="fa-solid fa-user-plus"></i>
+              </span>
+              <span class="notification-copy">
+                <strong>
+                  <span class="language-en">Join our team</span>
+                  <span class="language-vi">Gia nhập đội ngũ</span>
+                </strong>
+                <small>
+                  <span class="language-en">Your next step starts here</span>
+                  <span class="language-vi">Hành trình mới bắt đầu tại đây</span>
+                </small>
+              </span>
+              <i class="fa-solid fa-check notification-check" aria-hidden="true"></i>
+            </div>
 
+            <!-- Floating digital-health symbol -->
+            <div class="animation-orbit-icon orbit-health" aria-hidden="true">
+              <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+
+            <!-- Floating growth symbol -->
+            <div class="animation-orbit-icon orbit-growth" aria-hidden="true">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <!-- Decorative connection points for the CSS animation -->
+            <span class="animation-particle particle-one" aria-hidden="true"></span>
+            <span class="animation-particle particle-two" aria-hidden="true"></span>
+            <span class="animation-particle particle-three" aria-hidden="true"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="job-layout" aria-label="Job opportunities">
+        <div id="job-list">
+          <div class="job-card salary-under-30 salary-10-20 location-hcm job-support experience-none">
+            <div class="ref-code">
+              <p>
+                <span class="language-en">Job ID:</span>
+                <span class="language-vi">Mã việc làm:</span>
+                <span class="ref-code-value"><strong>DHS02</strong></span>
+              </p>
+            </div>
+            <h2>
+              <span class="language-en">Digital Health Support Specialist</span>
+              <span class="language-vi">Chuyên viên hỗ trợ sức khỏe số</span>
+            </h2>
+            <p class="company-name">
+              <span class="language-en">T1 Health &amp; Wellness</span>
+              <span class="language-vi">T1 Sức khỏe &amp; Wellness</span>
+            </p>
+            <h3>
+              <span class="language-en">Customer Support | Full-time</span>
+              <span class="language-vi">Hỗ trợ khách hàng | Toàn thời gian</span>
+            </h3>
+            <p>
+              <span class="language-en">
+                Assist users with online patient platforms and appointment booking systems, resolving common technical or account-related
+                issues.
+              </span>
+              <span class="language-vi">
+                Hỗ trợ người dùng các nền tảng bệnh nhân trực tuyến và hệ thống đặt lịch, giải quyết các vấn đề kỹ thuật hoặc tài khoản
+                thường gặp.
+              </span>
+            </p>
+            <div class="job-meta">
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Salary</span>
+                  <span class="language-vi">Lương</span>
+                </span>
+                <span class="language-en">18 - 28 million VND / month</span>
+                <span class="language-vi">18 - 28 triệu VND / tháng</span>
+              </p>
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Location</span>
+                  <span class="language-vi">Địa điểm</span>
+                </span>
+                <span class="language-en">Ho Chi Minh City, Vietnam</span>
+                <span class="language-vi">Thành phố Hồ Chí Minh, Việt Nam</span>
+              </p>
+              <p class="experience-meta">
+                <span class="meta-label">
+                  <span class="language-en">Experience</span>
+                  <span class="language-vi">Kinh nghiệm</span>
+                </span>
+                <span class="language-en">No experience</span>
+                <span class="language-vi">Không yêu cầu kinh nghiệm</span>
+              </p>
+            </div>
+            <div class="job-details">
+              <h3>
+                <span class="language-en">Key Responsibilities</span>
+                <span class="language-vi">Trách nhiệm chính</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Assist users with accessing and navigating online platforms.</span>
+                  <span class="language-vi">Hỗ trợ người dùng truy cập và sử dụng các nền tảng trực tuyến.</span>
+                </li>
+                <li>
+                  <span class="language-en">Guide users through appointment booking and account management.</span>
+                  <span class="language-vi">Hướng dẫn người dùng đặt lịch và quản lý tài khoản.</span>
+                </li>
+                <li>
+                  <span class="language-en">Respond to enquiries and coordinate reported issues with technical teams.</span>
+                  <span class="language-vi">Phản hồi thắc mắc và phối hợp vấn đề với đội ngũ kỹ thuật.</span>
+                </li>
+                <li>
+                  <span class="language-en">Maintain professional and helpful communication.</span>
+                  <span class="language-vi">Duy trì giao tiếp chuyên nghiệp và hữu ích.</span>
+                </li>
+              </ul>
+              <h3>
+                <span class="language-en">Requirements</span>
+                <span class="language-vi">Yêu cầu</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Strong communication and problem-solving skills.</span>
+                  <span class="language-vi">Kỹ năng giao tiếp và giải quyết vấn đề tốt.</span>
+                </li>
+                <li>
+                  <span class="language-en">Basic computer and digital platform skills.</span>
+                  <span class="language-vi">Kỹ năng máy tính và nền tảng số cơ bản.</span>
+                </li>
+                <li>
+                  <span class="language-en">Patience and a customer-focused attitude.</span>
+                  <span class="language-vi">Kiên nhẫn và thái độ hướng đến khách hàng.</span>
+                </li>
+                <li>
+                  <span class="language-en">Ability to explain technical steps clearly.</span>
+                  <span class="language-vi">Có khả năng giải thích rõ ràng các bước kỹ thuật.</span>
+                </li>
+                <li>
+                  <span class="language-en">Previous customer support experience is desirable.</span>
+                  <span class="language-vi">Ưu tiên có kinh nghiệm hỗ trợ khách hàng.</span>
+                </li>
+              </ul>
+            </div>
+            <input type="checkbox" id="show_details_dhs02" class="show-details-checkbox visually-hidden" />
+            <label for="show_details_dhs02" class="details-toggle-label">
+              <span class="visually-hidden">
+                <span class="language-en">Toggle job details for Digital Health Support Specialist</span>
+                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Chuyên viên hỗ trợ sức khỏe số</span>
+              </span>
+              <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+            </label>
+            <a class="job-apply-button" href="apply.html#skip-to-application">
+              <span class="language-en">Apply for this job</span>
+              <span class="language-vi">Ứng tuyển công việc này</span>
+            </a>
+          </div>
+
+          <div class="job-card salary-30-50 location-hanoi job-design experience-2-years">
+            <div class="ref-code">
+              <p>
+                <span class="language-en">Job ID:</span>
+                <span class="language-vi">Mã việc làm:</span>
+                <span class="ref-code-value"><strong>UXD04</strong></span>
+              </p>
+            </div>
+            <h2>
+              <span class="language-en">Healthcare UX/UI Designer</span>
+              <span class="language-vi">Nhà thiết kế UX/UI chăm sóc sức khỏe</span>
+            </h2>
+            <p class="company-name">
+              <span class="language-en">Vinmec Digital Health</span>
+              <span class="language-vi">Vinmec Sức khỏe số</span>
+            </p>
+            <h3>
+              <span class="language-en">Product Design | Full-time</span>
+              <span class="language-vi">Thiết kế sản phẩm | Toàn thời gian</span>
+            </h3>
+            <p>
+              <span class="language-en">
+                Create intuitive and accessible interfaces that help patients find health information and manage appointments with ease.
+              </span>
+              <span class="language-vi">
+                Tạo giao diện trực quan và dễ tiếp cận giúp bệnh nhân tìm thông tin sức khỏe và quản lý lịch hẹn dễ dàng.
+              </span>
+            </p>
+            <div class="job-meta">
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Salary</span>
+                  <span class="language-vi">Lương</span>
+                </span>
+                <span class="language-en">30 - 50 million VND / month</span>
+                <span class="language-vi">30 - 50 triệu VND / tháng</span>
+              </p>
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Location</span>
+                  <span class="language-vi">Địa điểm</span>
+                </span>
+                <span class="language-en">Hanoi, Vietnam</span>
+                <span class="language-vi">Hà Nội, Việt Nam</span>
+              </p>
+              <p class="experience-meta">
+                <span class="meta-label">
+                  <span class="language-en">Experience</span>
+                  <span class="language-vi">Kinh nghiệm</span>
+                </span>
+                <span class="language-en">2 years</span>
+                <span class="language-vi">2 năm</span>
+              </p>
+            </div>
+            <div class="job-details">
+              <h3>
+                <span class="language-en">Key Responsibilities</span>
+                <span class="language-vi">Trách nhiệm chính</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Design interfaces for patient platforms and booking systems.</span>
+                  <span class="language-vi">Thiết kế giao diện cho nền tảng bệnh nhân và hệ thống đặt lịch.</span>
+                </li>
+                <li>
+                  <span class="language-en">Create wireframes, prototypes and user journey maps.</span>
+                  <span class="language-vi">Tạo wireframe, nguyên mẫu và bản đồ hành trình người dùng.</span>
+                </li>
+                <li>
+                  <span class="language-en">Conduct user research and collaborate with product teams.</span>
+                  <span class="language-vi">Nghiên cứu người dùng và phối hợp với các đội ngũ sản phẩm.</span>
+                </li>
+                <li>
+                  <span class="language-en">Ensure designs are consistent, accessible and user-friendly.</span>
+                  <span class="language-vi">Đảm bảo thiết kế nhất quán, dễ tiếp cận và thân thiện.</span>
+                </li>
+              </ul>
+              <h3>
+                <span class="language-en">Requirements</span>
+                <span class="language-vi">Yêu cầu</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Knowledge of UI/UX design principles.</span>
+                  <span class="language-vi">Kiến thức về nguyên tắc thiết kế UI/UX.</span>
+                </li>
+                <li>
+                  <span class="language-en">Familiarity with tools such as Figma.</span>
+                  <span class="language-vi">Quen thuộc với các công cụ như Figma.</span>
+                </li>
+                <li>
+                  <span class="language-en">Understanding of responsive web design and accessibility.</span>
+                  <span class="language-vi">Hiểu về thiết kế web đáp ứng và khả năng tiếp cận.</span>
+                </li>
+                <li>
+                  <span class="language-en">Strong visual communication and problem-solving skills.</span>
+                  <span class="language-vi">Kỹ năng giao tiếp trực quan và giải quyết vấn đề tốt.</span>
+                </li>
+                <li>
+                  <span class="language-en">A portfolio is desirable.</span>
+                  <span class="language-vi">Ưu tiên có hồ sơ năng lực.</span>
+                </li>
+              </ul>
+            </div>
+            <input type="checkbox" id="show_details_uxd04" class="show-details-checkbox visually-hidden" />
+            <label for="show_details_uxd04" class="details-toggle-label">
+              <span class="visually-hidden">
+                <span class="language-en">Toggle job details for Healthcare UX/UI Designer</span>
+                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Nhà thiết kế UX/UI chăm sóc sức khỏe</span>
+              </span>
+              <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+            </label>
+            <a class="job-apply-button" href="apply.html#skip-to-application">
+              <span class="language-en">Apply for this job</span>
+              <span class="language-vi">Ứng tuyển công việc này</span>
+            </a>
+          </div>
+
+          <div class="job-card salary-over-50 location-danang job-development experience-8-years">
+            <div class="ref-code">
+              <p>
+                <span class="language-en">Job ID:</span>
+                <span class="language-vi">Mã việc làm:</span>
+                <span class="ref-code-value"><strong>DHD05</strong></span>
+              </p>
+            </div>
+            <h2>
+              <span class="language-en">Digital Health Software Developer</span>
+              <span class="language-vi">Lập trình viên phần mềm sức khỏe số</span>
+            </h2>
+            <p class="company-name">
+              <span class="language-en">FPT Smart Healthcare</span>
+              <span class="language-vi">FPT Chăm sóc sức khỏe thông minh</span>
+            </p>
+            <h3>
+              <span class="language-en">Software Development | Full-time</span>
+              <span class="language-vi">Phát triển phần mềm | Toàn thời gian</span>
+            </h3>
+            <p>
+              <span class="language-en">
+                Build and maintain reliable, user-friendly software for patient platforms, appointment systems and health information
+                websites.
+              </span>
+              <span class="language-vi">
+                Xây dựng và duy trì phần mềm đáng tin cậy, thân thiện cho nền tảng bệnh nhân, hệ thống đặt lịch và website thông tin sức
+                khỏe.
+              </span>
+            </p>
+            <div class="job-meta">
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Salary</span>
+                  <span class="language-vi">Lương</span>
+                </span>
+                <span class="language-en">45 - 75 million VND / month</span>
+                <span class="language-vi">45 - 75 triệu VND / tháng</span>
+              </p>
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Location</span>
+                  <span class="language-vi">Địa điểm</span>
+                </span>
+                <span class="language-en">Da Nang, Vietnam</span>
+                <span class="language-vi">Đà Nẵng, Việt Nam</span>
+              </p>
+              <p class="experience-meta">
+                <span class="meta-label">
+                  <span class="language-en">Experience</span>
+                  <span class="language-vi">Kinh nghiệm</span>
+                </span>
+                <span class="language-en">8 years</span>
+                <span class="language-vi">8 năm</span>
+              </p>
+            </div>
+            <div class="job-details">
+              <h3>
+                <span class="language-en">Key Responsibilities</span>
+                <span class="language-vi">Trách nhiệm chính</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Develop and maintain digital healthcare platform features.</span>
+                  <span class="language-vi">Phát triển và duy trì các tính năng nền tảng chăm sóc sức khỏe số.</span>
+                </li>
+                <li>
+                  <span class="language-en">Write clean, maintainable and well-tested code.</span>
+                  <span class="language-vi">Viết mã sạch, dễ bảo trì và được kiểm thử kỹ.</span>
+                </li>
+                <li>
+                  <span class="language-en">Collaborate with designers, analysts and developers.</span>
+                  <span class="language-vi">Phối hợp với nhà thiết kế, chuyên viên phân tích và lập trình viên.</span>
+                </li>
+                <li>
+                  <span class="language-en">Resolve bugs and follow security and data protection practices.</span>
+                  <span class="language-vi">Khắc phục lỗi và tuân thủ các quy trình bảo mật, bảo vệ dữ liệu.</span>
+                </li>
+              </ul>
+              <h3>
+                <span class="language-en">Requirements</span>
+                <span class="language-vi">Yêu cầu</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Knowledge of JavaScript, Python or Java.</span>
+                  <span class="language-vi">Kiến thức về JavaScript, Python hoặc Java.</span>
+                </li>
+                <li>
+                  <span class="language-en">Understanding of web development fundamentals.</span>
+                  <span class="language-vi">Hiểu các nền tảng phát triển web.</span>
+                </li>
+                <li>
+                  <span class="language-en">Familiarity with databases and APIs is an advantage.</span>
+                  <span class="language-vi">Biết về cơ sở dữ liệu và API là một lợi thế.</span>
+                </li>
+                <li>
+                  <span class="language-en">Strong logical thinking and problem-solving skills.</span>
+                  <span class="language-vi">Tư duy logic và kỹ năng giải quyết vấn đề tốt.</span>
+                </li>
+                <li>
+                  <span class="language-en">Ability to learn new technologies.</span>
+                  <span class="language-vi">Có khả năng học công nghệ mới.</span>
+                </li>
+              </ul>
+            </div>
+            <input type="checkbox" id="show_details_dhd05" class="show-details-checkbox visually-hidden" />
+            <label for="show_details_dhd05" class="details-toggle-label">
+              <span class="visually-hidden">
+                <span class="language-en">Toggle job details for Digital Health Software Developer</span>
+                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Lập trình viên phần mềm sức khỏe số</span>
+              </span>
+              <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+            </label>
+            <a class="job-apply-button" href="apply.html#skip-to-application">
+              <span class="language-en">Apply for this job</span>
+              <span class="language-vi">Ứng tuyển công việc này</span>
+            </a>
+          </div>
+
+          <div class="job-card salary-under-30 salary-20-under-30 location-hanoi job-qa experience-1-year">
+            <div class="ref-code">
+              <p>
+                <span class="language-en">Job ID:</span>
+                <span class="language-vi">Mã việc làm:</span>
+                <span class="ref-code-value"><strong>QAT06</strong></span>
+              </p>
+            </div>
+            <h2>
+              <span class="language-en">Healthcare Quality Assurance Tester</span>
+              <span class="language-vi">Kiểm thử đảm bảo chất lượng chăm sóc sức khỏe</span>
+            </h2>
+            <p class="company-name">
+              <span class="language-en">Medlatec Digital</span>
+              <span class="language-vi">Medlatec Số</span>
+            </p>
+            <h3>
+              <span class="language-en">Quality Assurance | Full-time</span>
+              <span class="language-vi">Đảm bảo chất lượng | Toàn thời gian</span>
+            </h3>
+            <p>
+              <span class="language-en">
+                Test digital healthcare services and appointment workflows to identify issues before release and provide a reliable user
+                experience.
+              </span>
+              <span class="language-vi">
+                Kiểm thử dịch vụ chăm sóc sức khỏe số và quy trình đặt lịch để phát hiện lỗi trước khi phát hành.
+              </span>
+            </p>
+            <div class="job-meta">
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Salary</span>
+                  <span class="language-vi">Lương</span>
+                </span>
+                <span class="language-en">22 - 38 million VND / month</span>
+                <span class="language-vi">22 - 38 triệu VND / tháng</span>
+              </p>
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Location</span>
+                  <span class="language-vi">Địa điểm</span>
+                </span>
+                <span class="language-en">Hanoi, Vietnam</span>
+                <span class="language-vi">Hà Nội, Việt Nam</span>
+              </p>
+              <p class="experience-meta">
+                <span class="meta-label">
+                  <span class="language-en">Experience</span>
+                  <span class="language-vi">Kinh nghiệm</span>
+                </span>
+                <span class="language-en">1 year</span>
+                <span class="language-vi">1 năm</span>
+              </p>
+            </div>
+            <div class="job-details">
+              <h3>
+                <span class="language-en">Key Responsibilities</span>
+                <span class="language-vi">Trách nhiệm chính</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Test website features and healthcare workflows.</span>
+                  <span class="language-vi">Kiểm thử tính năng website và quy trình chăm sóc sức khỏe.</span>
+                </li>
+                <li>
+                  <span class="language-en">Create and execute test cases from requirements.</span>
+                  <span class="language-vi">Tạo và thực hiện các trường hợp kiểm thử từ yêu cầu.</span>
+                </li>
+                <li>
+                  <span class="language-en">Document defects and perform regression testing.</span>
+                  <span class="language-vi">Ghi nhận lỗi và thực hiện kiểm thử hồi quy.</span>
+                </li>
+                <li>
+                  <span class="language-en">Work with developers to verify fixes.</span>
+                  <span class="language-vi">Phối hợp với lập trình viên để xác nhận bản sửa lỗi.</span>
+                </li>
+              </ul>
+              <h3>
+                <span class="language-en">Requirements</span>
+                <span class="language-vi">Yêu cầu</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Understanding of software testing fundamentals.</span>
+                  <span class="language-vi">Hiểu các nền tảng kiểm thử phần mềm.</span>
+                </li>
+                <li>
+                  <span class="language-en">Ability to follow procedures and document results.</span>
+                  <span class="language-vi">Có khả năng tuân thủ quy trình và ghi nhận kết quả.</span>
+                </li>
+                <li>
+                  <span class="language-en">Strong attention to detail and analytical skills.</span>
+                  <span class="language-vi">Chú ý đến chi tiết và kỹ năng phân tích tốt.</span>
+                </li>
+                <li>
+                  <span class="language-en">Bug-tracking experience is an advantage.</span>
+                  <span class="language-vi">Có kinh nghiệm theo dõi lỗi là một lợi thế.</span>
+                </li>
+                <li>
+                  <span class="language-en">Basic knowledge of web applications.</span>
+                  <span class="language-vi">Kiến thức cơ bản về ứng dụng web.</span>
+                </li>
+              </ul>
+            </div>
+            <input type="checkbox" id="show_details_qat06" class="show-details-checkbox visually-hidden" />
+            <label for="show_details_qat06" class="details-toggle-label">
+              <span class="visually-hidden">
+                <span class="language-en">Toggle job details for Healthcare Quality Assurance Tester</span>
+                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Kiểm thử đảm bảo chất lượng chăm sóc sức khỏe</span>
+              </span>
+              <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+            </label>
+            <a class="job-apply-button" href="apply.html#skip-to-application">
+              <span class="language-en">Apply for this job</span>
+              <span class="language-vi">Ứng tuyển công việc này</span>
+            </a>
+          </div>
+
+          <div class="job-card salary-over-50 location-hcm job-analytics experience-5-years">
+            <div class="ref-code">
+              <p>
+                <span class="language-en">Job ID:</span>
+                <span class="language-vi">Mã việc làm:</span>
+                <span class="ref-code-value"><strong>HDA03</strong></span>
+              </p>
+            </div>
+            <h2>
+              <span class="language-en">Health Data Analyst</span>
+              <span class="language-vi">Chuyên viên phân tích dữ liệu sức khỏe</span>
+            </h2>
+            <p class="company-name">
+              <span class="language-en">VNG HealthTech</span>
+              <span class="language-vi">VNG HealthTech</span>
+            </p>
+            <h3>
+              <span class="language-en">Data Analytics | Full-time</span>
+              <span class="language-vi">Phân tích dữ liệu | Toàn thời gian</span>
+            </h3>
+            <p>
+              <span class="language-en">
+                Analyse digital healthcare data to identify trends, evaluate service performance and support data-driven decisions
+                responsibly.
+              </span>
+              <span class="language-vi">
+                Phân tích dữ liệu chăm sóc sức khỏe số để nhận diện xu hướng, đánh giá hiệu quả dịch vụ và hỗ trợ quyết định dựa trên dữ
+                liệu.
+              </span>
+            </p>
+            <div class="job-meta">
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Salary</span>
+                  <span class="language-vi">Lương</span>
+                </span>
+                <span class="language-en">35 - 60 million VND / month</span>
+                <span class="language-vi">35 - 60 triệu VND / tháng</span>
+              </p>
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Location</span>
+                  <span class="language-vi">Địa điểm</span>
+                </span>
+                <span class="language-en">Ho Chi Minh City, Vietnam</span>
+                <span class="language-vi">Thành phố Hồ Chí Minh, Việt Nam</span>
+              </p>
+              <p class="experience-meta">
+                <span class="meta-label">
+                  <span class="language-en">Experience</span>
+                  <span class="language-vi">Kinh nghiệm</span>
+                </span>
+                <span class="language-en">5 years</span>
+                <span class="language-vi">5 năm</span>
+              </p>
+            </div>
+            <div class="job-details">
+              <h3>
+                <span class="language-en">Key Responsibilities</span>
+                <span class="language-vi">Trách nhiệm chính</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Analyse platform usage and appointment booking records.</span>
+                  <span class="language-vi">Phân tích việc sử dụng nền tảng và hồ sơ đặt lịch.</span>
+                </li>
+                <li>
+                  <span class="language-en">Prepare reports, dashboards and visualisations.</span>
+                  <span class="language-vi">Chuẩn bị báo cáo, bảng điều khiển và hình ảnh trực quan.</span>
+                </li>
+                <li>
+                  <span class="language-en">Monitor performance and identify opportunities for improvement.</span>
+                  <span class="language-vi">Theo dõi hiệu suất và xác định cơ hội cải thiện.</span>
+                </li>
+                <li>
+                  <span class="language-en">Check data quality and follow privacy requirements.</span>
+                  <span class="language-vi">Kiểm tra chất lượng dữ liệu và tuân thủ yêu cầu về quyền riêng tư.</span>
+                </li>
+              </ul>
+              <h3>
+                <span class="language-en">Requirements</span>
+                <span class="language-vi">Yêu cầu</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Basic knowledge of data analysis and statistics.</span>
+                  <span class="language-vi">Kiến thức cơ bản về phân tích dữ liệu và thống kê.</span>
+                </li>
+                <li>
+                  <span class="language-en">Microsoft Excel experience; SQL or visualisation tools are an advantage.</span>
+                  <span class="language-vi">Kinh nghiệm Microsoft Excel; biết SQL hoặc công cụ trực quan hóa là một lợi thế.</span>
+                </li>
+                <li>
+                  <span class="language-en">Strong analytical thinking and attention to detail.</span>
+                  <span class="language-vi">Tư duy phân tích và chú ý đến chi tiết tốt.</span>
+                </li>
+                <li>
+                  <span class="language-en">Ability to communicate findings clearly.</span>
+                  <span class="language-vi">Có khả năng trình bày phát hiện rõ ràng.</span>
+                </li>
+                <li>
+                  <span class="language-en">Understanding of data privacy is desirable.</span>
+                  <span class="language-vi">Ưu tiên hiểu về quyền riêng tư dữ liệu.</span>
+                </li>
+              </ul>
+            </div>
+            <input type="checkbox" id="show_details_hda003" class="show-details-checkbox visually-hidden" />
+            <label for="show_details_hda003" class="details-toggle-label">
+              <span class="visually-hidden">
+                <span class="language-en">Toggle job details for Health Data Analyst</span>
+                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Chuyên viên phân tích dữ liệu sức khỏe</span>
+              </span>
+              <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+            </label>
+            <a class="job-apply-button" href="apply.html#skip-to-application">
+              <span class="language-en">Apply for this job</span>
+              <span class="language-vi">Ứng tuyển công việc này</span>
+            </a>
+          </div>
+
+          <div class="job-card salary-negotiable location-cantho job-content experience-3-years">
+            <div class="ref-code">
+              <p>
+                <span class="language-en">Job ID:</span>
+                <span class="language-vi">Mã việc làm:</span>
+                <span class="ref-code-value"><strong>HCW01</strong></span>
+              </p>
+            </div>
+            <h2>
+              <span class="language-en">Healthcare Content Writer</span>
+              <span class="language-vi">Biên tập viên nội dung chăm sóc sức khỏe</span>
+            </h2>
+            <p class="company-name">
+              <span class="language-en">eDoctor Vietnam</span>
+              <span class="language-vi">eDoctor Việt Nam</span>
+            </p>
+            <h3>
+              <span class="language-en">Description</span>
+              <span class="language-vi">Mô tả</span>
+            </h3>
+            <p>
+              <span class="language-en">
+                We are looking for a Healthcare Content Writer to create clear, engaging and reliable health-related content for our digital
+                health information websites. The successful candidate will help users understand health topics through accessible and
+                well-organised digital content.
+              </span>
+              <span class="language-vi">
+                Chúng tôi tìm kiếm biên tập viên nội dung chăm sóc sức khỏe để tạo nội dung rõ ràng, hấp dẫn và đáng tin cậy cho các website
+                thông tin sức khỏe số.
+              </span>
+            </p>
+            <div class="job-meta">
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Salary</span>
+                  <span class="language-vi">Lương</span>
+                </span>
+                <span class="language-en">Negotiable</span>
+                <span class="language-vi">Thỏa thuận</span>
+              </p>
+              <p>
+                <span class="meta-label">
+                  <span class="language-en">Location</span>
+                  <span class="language-vi">Địa điểm</span>
+                </span>
+                <span class="language-en">Can Tho, Vietnam</span>
+                <span class="language-vi">Cần Thơ, Việt Nam</span>
+              </p>
+              <p class="experience-meta">
+                <span class="meta-label">
+                  <span class="language-en">Experience</span>
+                  <span class="language-vi">Kinh nghiệm</span>
+                </span>
+                <span class="language-en">3 years</span>
+                <span class="language-vi">3 năm</span>
+              </p>
+            </div>
+            <div class="job-details">
+              <h3>
+                <span class="language-en">Key Responsibilities:</span>
+                <span class="language-vi">Trách nhiệm chính:</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Research and write health-related articles and educational content.</span>
+                  <span class="language-vi">Nghiên cứu và viết bài báo sức khỏe cùng nội dung giáo dục.</span>
+                </li>
+                <li>
+                  <span class="language-en">Review content for clarity, accuracy and readability.</span>
+                  <span class="language-vi">Kiểm tra nội dung về tính rõ ràng, chính xác và dễ đọc.</span>
+                </li>
+                <li>
+                  <span class="language-en">Collaborate with healthcare professionals and the digital content team.</span>
+                  <span class="language-vi">Phối hợp với chuyên gia chăm sóc sức khỏe và đội ngũ nội dung số.</span>
+                </li>
+                <li>
+                  <span class="language-en">Update existing website content when information needs revision.</span>
+                  <span class="language-vi">Cập nhật nội dung website khi thông tin cần chỉnh sửa.</span>
+                </li>
+                <li>
+                  <span class="language-en">Follow content guidelines and maintain consistent writing standards.</span>
+                  <span class="language-vi">Tuân thủ hướng dẫn nội dung và duy trì tiêu chuẩn viết nhất quán.</span>
+                </li>
+              </ul>
+              <h3>
+                <span class="language-en">Requirements:</span>
+                <span class="language-vi">Yêu cầu:</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Strong written communication and research skills.</span>
+                  <span class="language-vi">Kỹ năng viết và nghiên cứu tốt.</span>
+                </li>
+                <li>
+                  <span class="language-en">Excellent attention to detail.</span>
+                  <span class="language-vi">Chú ý xuất sắc đến chi tiết.</span>
+                </li>
+                <li>
+                  <span class="language-en">Ability to explain complex information in simple language.</span>
+                  <span class="language-vi">Có khả năng giải thích thông tin phức tạp bằng ngôn ngữ đơn giản.</span>
+                </li>
+                <li>
+                  <span class="language-en">Understanding of health and wellness topics.</span>
+                  <span class="language-vi">Hiểu về các chủ đề sức khỏe và thể chất.</span>
+                </li>
+                <li>
+                  <span class="language-en">Experience in content writing or health communication is an advantage.</span>
+                  <span class="language-vi">Có kinh nghiệm viết nội dung hoặc truyền thông sức khỏe là một lợi thế.</span>
+                </li>
+              </ul>
+              <h3>
+                <span class="language-en">Benefits</span>
+                <span class="language-vi">Phúc lợi</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="language-en">Health, dental, and vision insurance</span>
+                  <span class="language-vi">Bảo hiểm sức khỏe, nha khoa và thị lực</span>
+                </li>
+                <li>
+                  <span class="language-en">Retirement savings plan</span>
+                  <span class="language-vi">Kế hoạch tiết kiệm hưu trí</span>
+                </li>
+                <li>
+                  <span class="language-en">Paid time off and holidays</span>
+                  <span class="language-vi">Nghỉ phép và ngày lễ có lương</span>
+                </li>
+                <li>
+                  <span class="language-en">Professional development opportunities</span>
+                  <span class="language-vi">Cơ hội phát triển chuyên môn</span>
+                </li>
+                <li>
+                  <span class="language-en">Flexible work arrangements</span>
+                  <span class="language-vi">Thỏa thuận làm việc linh hoạt</span>
+                </li>
+              </ul>
+            </div>
+            <input type="checkbox" id="show_details_hcw01" class="show-details-checkbox visually-hidden" />
+            <label for="show_details_hcw01" class="details-toggle-label">
+              <span class="visually-hidden">
+                <span class="language-en">Toggle job details for Healthcare Content Writer</span>
+                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Biên tập viên nội dung chăm sóc sức khỏe</span>
+              </span>
+              <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
+            </label>
+            <a class="job-apply-button" href="apply.html#skip-to-application">
+              <span class="language-en">Apply for this job</span>
+              <span class="language-vi">Ứng tuyển công việc này</span>
+            </a>
+          </div>
+        </div>
+        <div class="FilterSidebar-Container">
+          <input class="filter-toggle visually-hidden" type="checkbox" id="filter-toggle" />
+          <label class="filter-toggle-label" for="filter-toggle">
+            <span>
+              <span class="language-en">Filter jobs</span>
+              <span class="language-vi">Lọc việc làm</span>
+            </span>
+            <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+          </label>
+          <div id="job-filter">
+            <form>
+              <fieldset>
+                <legend class="filter-main-title">
+                  <span class="language-en">Filter</span>
+                  <span class="language-vi">Bộ lọc</span>
+                </legend>
+
+                <fieldset class="filter-group">
+                  <legend>
+                    <span class="language-en">Salary</span>
+                    <span class="language-vi">Lương</span>
+                  </legend>
+                  <label>
+                    <input type="radio" name="salary" id="salary-all" checked />
+                    <span class="language-en">All salaries</span>
+                    <span class="language-vi">Tất cả mức lương</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="salary" id="salary-under-30" />
+                    <span class="language-en">Under 30M VND</span>
+                    <span class="language-vi">Dưới 30 triệu VND</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="salary" id="salary-10-20" />
+                    <span class="language-en">10M - 20M VND</span>
+                    <span class="language-vi">10 - 20 triệu VND</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="salary" id="salary-20-under-30" />
+                    <span class="language-en">20M - under 30M VND</span>
+                    <span class="language-vi">20 - dưới 30 triệu VND</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="salary" id="salary-30-50" />
+                    <span class="language-en">30M - 50M VND</span>
+                    <span class="language-vi">30 - 50 triệu VND</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="salary" id="salary-over-50" />
+                    <span class="language-en">Over 50M VND</span>
+                    <span class="language-vi">Trên 50 triệu VND</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="salary" id="salary-negotiable" />
+                    <span class="language-en">Negotiable</span>
+                    <span class="language-vi">Thỏa thuận</span>
+                  </label>
+                </fieldset>
+
+                <fieldset class="filter-group">
+                  <legend>
+                    <span class="language-en">Experience</span>
+                    <span class="language-vi">Kinh nghiệm</span>
+                  </legend>
+                  <label>
+                    <input type="radio" name="experience" id="experience-all" checked />
+                    <span class="language-en">All experience levels</span>
+                    <span class="language-vi">Tất cả mức kinh nghiệm</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="experience" id="experience-none" />
+                    <span class="language-en">No experience</span>
+                    <span class="language-vi">Không yêu cầu kinh nghiệm</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="experience" id="experience-1-year" />
+                    <span class="language-en">1 year</span>
+                    <span class="language-vi">1 năm</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="experience" id="experience-2-years" />
+                    <span class="language-en">2 years</span>
+                    <span class="language-vi">2 năm</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="experience" id="experience-3-years" />
+                    <span class="language-en">3 years</span>
+                    <span class="language-vi">3 năm</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="experience" id="experience-5-years" />
+                    <span class="language-en">5 years</span>
+                    <span class="language-vi">5 năm</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="experience" id="experience-8-years" />
+                    <span class="language-en">8 years</span>
+                    <span class="language-vi">8 năm</span>
+                  </label>
+                </fieldset>
+
+                <fieldset class="filter-group">
+                  <legend>
+                    <span class="language-en">Location</span>
+                    <span class="language-vi">Địa điểm</span>
+                  </legend>
+                  <label>
+                    <input type="radio" name="location" id="location-all" checked />
+                    <span class="language-en">All locations</span>
+                    <span class="language-vi">Tất cả địa điểm</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="location" id="location-hcm" />
+                    <span class="language-en">Ho Chi Minh City</span>
+                    <span class="language-vi">Thành phố Hồ Chí Minh</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="location" id="location-hanoi" />
+                    <span class="language-en">Hanoi</span>
+                    <span class="language-vi">Hà Nội</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="location" id="location-danang" />
+                    <span class="language-en">Da Nang</span>
+                    <span class="language-vi">Đà Nẵng</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="location" id="location-cantho" />
+                    <span class="language-en">Can Tho</span>
+                    <span class="language-vi">Cần Thơ</span>
+                  </label>
+                </fieldset>
+
+                <fieldset class="filter-group">
+                  <legend>
+                    <span class="language-en">Job type</span>
+                    <span class="language-vi">Loại công việc</span>
+                  </legend>
+                  <label>
+                    <input type="radio" name="job-type" id="job-type-all" checked />
+                    <span class="language-en">All job types</span>
+                    <span class="language-vi">Tất cả loại công việc</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="job-type" id="job-type-support" />
+                    <span class="language-en">Customer support</span>
+                    <span class="language-vi">Hỗ trợ khách hàng</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="job-type" id="job-type-design" />
+                    <span class="language-en">Product design</span>
+                    <span class="language-vi">Thiết kế sản phẩm</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="job-type" id="job-type-development" />
+                    <span class="language-en">Software development</span>
+                    <span class="language-vi">Phát triển phần mềm</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="job-type" id="job-type-qa" />
+                    <span class="language-en">Quality assurance</span>
+                    <span class="language-vi">Đảm bảo chất lượng</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="job-type" id="job-type-analytics" />
+                    <span class="language-en">Data analytics</span>
+                    <span class="language-vi">Phân tích dữ liệu</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="job-type" id="job-type-content" />
+                    <span class="language-en">Content writing</span>
+                    <span class="language-vi">Viết nội dung</span>
+                  </label>
+                </fieldset>
+                <button type="reset" class="clear-filters">
+                  <span class="language-en">Clear filters</span>
+                  <span class="language-vi">Xóa bộ lọc</span>
+                </button>
+              </fieldset>
+            </form>
+          </div>
+
+          <aside class="sidebar">
+            <section class="tips-box">
+              <h3>
+                <span class="language-en">Application Tips</span>
+                <span class="language-vi">Mẹo ứng tuyển</span>
+              </h3>
+              <ol>
+                <li>
+                  <span class="language-en">Read the job description carefully to understand the role and requirements.</span>
+                  <span class="language-vi">Đọc kỹ mô tả công việc để hiểu vai trò và yêu cầu.</span>
+                </li>
+                <li>
+                  <span class="language-en">Prepare your resume and cover letter tailored to the specific job.</span>
+                  <span class="language-vi">Chuẩn bị CV và thư xin việc phù hợp với công việc cụ thể.</span>
+                </li>
+                <li>
+                  <span class="language-en">Highlight relevant skills, experiences, and achievements.</span>
+                  <span class="language-vi">Làm nổi bật kỹ năng, kinh nghiệm và thành tích liên quan.</span>
+                </li>
+                <li>
+                  <span class="language-en">Follow the application instructions provided in the job listing.</span>
+                  <span class="language-vi">Thực hiện hướng dẫn ứng tuyển trong tin tuyển dụng.</span>
+                </li>
+                <li>
+                  <span class="language-en">Submit your application before the deadline.</span>
+                  <span class="language-vi">Nộp đơn trước thời hạn.</span>
+                </li>
+              </ol>
+            </section>
+            <section class="disclaimer-box">
+              <h3>
+                <span class="language-en">Disclaimer</span>
+                <span class="language-vi">Tuyên bố miễn trừ</span>
+              </h3>
+              <p>
+                <span class="language-en">
+                  All job listings are subject to change and may be filled or removed at any time. T1 Health &amp; Wellness is not
+                  responsible for any discrepancies or inaccuracies in the job postings.
+                </span>
+                <span class="language-vi">
+                  Tất cả tin tuyển dụng có thể thay đổi, được tuyển đủ hoặc gỡ bỏ bất cứ lúc nào. T1 Health &amp; Wellness không chịu trách
+                  nhiệm về bất kỳ sai lệch hoặc thiếu chính xác nào trong tin tuyển dụng.
+                </span>
+              </p>
+            </section>
+            <section class="ref-code-box">
+              <h3>
+                <span class="language-en">Job Reference Code</span>
+                <span class="language-vi">Mã tham chiếu công việc</span>
+              </h3>
+              <p>
+                <span class="language-en">
+                  Double-check your
+                  <strong>Job Reference Code</strong>
+                  before submitting the application form!
+                </span>
+                <span class="language-vi">
+                  Hãy kiểm tra kỹ
+                  <strong>Mã tham chiếu công việc</strong>
+                  trước khi gửi đơn ứng tuyển!
+                </span>
+              </p>
+            </section>
+
+            <section class="help-box">
+              <h3>
+                <span class="language-en">Need Help?</span>
+                <span class="language-vi">Cần trợ giúp?</span>
+              </h3>
+              <p>
+                <span class="language-en">
+                  Contact our HR team at
+                  <a href="mailto:106208127@student.swin.edu.au">106208127@student.swin.edu.au</a>
+                </span>
+                <span class="language-vi">
+                  Liên hệ đội ngũ nhân sự qua
+                  <a href="mailto:106208127@student.swin.edu.au">106208127@student.swin.edu.au</a>
+                </span>
+              </p>
+            </section>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER: company information, project links, and website standards. -->
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <!-- Company branding -->
+        <div class="footer-brand-content">
+          <a href="index.html" class="footer-brand" aria-label="T1 Health &amp; Wellness home">
+            <img src="images/logo.png" alt="" class="footer-logo" />
+            <span class="footer-brand-text">
+              <strong>T1</strong>
+              <span>HEALTH &amp; WELLNESS</span>
+            </span>
+          </a>
+          <h2 class="footer-heading">
+            <span class="language-en">Better health. Smarter care.</span>
+            <span class="language-vi">Sức khỏe tốt hơn. Chăm sóc thông minh hơn.</span>
+          </h2>
+          <p class="footer-description">
+            <span class="language-en">Accessible digital healthcare and wellness services, designed around you.</span>
+            <span class="language-vi">Dịch vụ chăm sóc sức khỏe và thể chất số dễ tiếp cận, được thiết kế dành riêng cho bạn.</span>
+          </p>
+        </div>
+
+        <!-- Back-to-top link -->
+        <a class="footer-back-to-top" href="#top">
+          <span>
+            <span class="language-en">TO THE SURFACE</span>
+            <span class="language-vi">LÊN ĐẦU TRANG</span>
+          </span>
+          <i class="fa-solid fa-caret-up" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <!-- Copyright and project resources -->
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          <span class="language-en">&copy; 2026 T1 Health &amp; Wellness. All rights reserved.</span>
+          <span class="language-vi">&copy; 2026 T1 Health &amp; Wellness. Đã đăng ký bản quyền.</span>
+        </p>
+        <nav class="footer-links" aria-label="Footer resources">
+          <a href="mailto:104848806@student.swin.edu.au" title="T1W&H@mail.com">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <span>
+              <span class="language-en">Email us</span>
+              <span class="language-vi">Liên hệ qua email</span>
+            </span>
+          </a>
+          <span class="footer-separator" aria-hidden="true">·</span>
+          <a
+            href="https://github.com/Ba568o/COS10026_Web_Technology_Project_1_T1_Group"
+            title="T1 Health & Wellness - GitHub Repository"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-github" aria-hidden="true"></i>
+            <span>
+              <span class="language-en">GitHub Repository</span>
+              <span class="language-vi">Kho lưu trữ GitHub</span>
+            </span>
+          </a>
+          <span class="footer-separator" aria-hidden="true">·</span>
+          <a
+            href="https://104848806.atlassian.net/jira/software/projects/T123/summary"
+            title="T1 Health & Wellness - Jira Project"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-jira" aria-hidden="true"></i>
+            <span>
+              <span class="language-en">Jira Project</span>
+              <span class="language-vi">Dự án Jira</span>
+            </span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Website standards and deployment status -->
+      <p class="footer-status">
+        <span>
+          <span class="language-en">Valid HTML5 &amp; CSS3</span>
+          <span class="language-vi">HTML5 &amp; CSS3 hợp lệ</span>
+        </span>
+        <span aria-hidden="true">·</span>
+        <span>
+          <span class="language-en">WCAG 2.1 AA</span>
+          <span class="language-vi">Đạt chuẩn tiếp cận web WCAG 2.1 AA</span>
+        </span>
+        <span aria-hidden="true">·</span>
+        <span>
+          <span class="language-en">GitHub Pages Deployed</span>
+          <span class="language-vi">Đã triển khai trên GitHub Pages</span>
+        </span>
+      </p>
+    </footer>
+  </body>
 </html>
