@@ -1792,3 +1792,20 @@ body:has(#dark-toggle:checked) .about-hub-orbit-inner { border-color: rgba(80, 1
     translate: none;
   }
 }
+
+
+/* Moving signal dots follow each individual dashed connection (SVG animateMotion). */
+.about-hub-line-dot {
+  fill: #d92f44;
+  filter: drop-shadow(0 0 5px rgba(217, 47, 68, .4));
+  animation: none !important;
+}
+.about-hub-line-dot.about-hub-dot-teal {
+  fill: #2f9e8f;
+  filter: drop-shadow(0 0 5px rgba(47, 158, 143, .4));
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-hub-line-dot animateMotion {
+    display: none;
+  }
+}

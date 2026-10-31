@@ -265,14 +265,34 @@
                 <stop offset="1" stop-color="#2f9e8f" stop-opacity=".65" />
               </linearGradient>
             </defs>
-            <path class="about-hub-line" d="M260 220 L125 105" />
-            <path class="about-hub-line" d="M260 220 L395 105" />
-            <path class="about-hub-line" d="M260 220 L125 335" />
-            <path class="about-hub-line" d="M260 220 L395 335" />
-            <circle class="about-hub-line-dot" cx="125" cy="105" r="4" />
-            <circle class="about-hub-line-dot" cx="395" cy="105" r="4" />
-            <circle class="about-hub-line-dot" cx="125" cy="335" r="4" />
-            <circle class="about-hub-line-dot" cx="395" cy="335" r="4" />
+
+            <!-- Dashed connections -->
+            <path id="about-path-people" class="about-hub-line" d="M260 220 L125 105" />
+            <path id="about-path-growth" class="about-hub-line" d="M260 220 L395 105" />
+            <path id="about-path-trust" class="about-hub-line" d="M260 220 L125 335" />
+            <path id="about-path-impact" class="about-hub-line" d="M260 220 L395 335" />
+
+            <!-- Moving dots: each dot follows its own dashed connection -->
+            <circle class="about-hub-line-dot" r="4">
+              <animateMotion dur="3.8s" repeatCount="indefinite" begin="0s" rotate="auto">
+                <mpath href="#about-path-people" />
+              </animateMotion>
+            </circle>
+            <circle class="about-hub-line-dot about-hub-dot-teal" r="4">
+              <animateMotion dur="3.8s" repeatCount="indefinite" begin=".95s" rotate="auto">
+                <mpath href="#about-path-growth" />
+              </animateMotion>
+            </circle>
+            <circle class="about-hub-line-dot" r="4">
+              <animateMotion dur="3.8s" repeatCount="indefinite" begin="1.9s" rotate="auto">
+                <mpath href="#about-path-trust" />
+              </animateMotion>
+            </circle>
+            <circle class="about-hub-line-dot about-hub-dot-teal" r="4">
+              <animateMotion dur="3.8s" repeatCount="indefinite" begin="2.85s" rotate="auto">
+                <mpath href="#about-path-impact" />
+              </animateMotion>
+            </circle>
           </svg>
 
           <div class="about-hub-core">
