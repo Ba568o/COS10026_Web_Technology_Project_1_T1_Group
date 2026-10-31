@@ -72,6 +72,11 @@ a {
 .site-header {
   background: #000000;
   color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+.site-header:hover {
+  background: #000000;
 }
 
 .navbar {
@@ -133,6 +138,7 @@ a {
 }
 
 .nav-links a:hover,
+.nav-links a.active,
 .nav-links a[aria-current="page"] {
   /* hover or the page you are currently on */
   color: #d5333b;
@@ -482,6 +488,11 @@ body {
     .site-header,
     .site-footer {
       background: #050505;
+      transition: background-color 0.3s ease;
+    }
+
+    .site-header:hover {
+      background: #000000;
     }
 
     .theme-icons {
@@ -743,6 +754,7 @@ body {
 
 .site-header .nav-links a:hover,
 .site-header .nav-links a:focus-visible,
+.site-header .nav-links a.active,
 .site-header .nav-links a[aria-current="page"] {
   background: #303030;
   color: #ffffff;
@@ -750,6 +762,7 @@ body {
 
 .site-header .nav-links a:hover::after,
 .site-header .nav-links a:focus-visible::after,
+.site-header .nav-links a.active::after,
 .site-header .nav-links a[aria-current="page"]::after {
   opacity: 1;
   transform: scaleX(1);
