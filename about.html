@@ -219,25 +219,50 @@
   <main id="main-content" tabindex="-1">
 
     <!-- ===== HERO BANNER ===== -->
-    <section class="about-hero" aria-labelledby="about-heading">
-      <div class="about-container about-hero-layout">
+    <section class="about-hero hero" aria-labelledby="about-heading">
+      <!-- Decorative ambient glow synced with index.html and jobs.html -->
+      <div class="about-hero-bg hero-background" aria-hidden="true">
+        <div class="about-hero-glow hero-glow"></div>
+      </div>
 
-        <!-- Left: tag, heading, description, CTA -->
-        <div class="about-hero-content">
+      <div class="about-container about-hero-layout hero-layout">
+
+        <!-- Left: pill tag, H1 heading, description, and CTA -->
+        <div class="about-hero-content hero-content">
           <p class="about-tag">T1 GROUP ABOUT US</p>
           <h1 id="about-heading">Great things start<br>with our team.</h1>
           <p class="about-hero-text">
             We are a passionate group of health &amp; wellness professionals united by one goal:
             helping people live better every day.
           </p>
-          <a class="about-btn" href="#our-team" aria-label="Explore our team section">EXPLORE OUR TEAM &rarr;</a>
+          <a class="about-btn" href="#our-team">
+            <span>EXPLORE OUR TEAM</span>
+            <i class="fa-solid fa-arrow-right-long about-btn-arrow" aria-hidden="true"></i>
+          </a>
         </div>
 
-        <!-- Right: black team card -->
-        <div class="about-team-note">
-          <img src="images/logo.png" alt="" class="about-team-logo">
-          <p>Different strengths.<br><strong>One team.</strong></p>
-          <span class="about-team-caption">That&rsquo;s the T1 spirit.</span>
+        <!-- Right: proportional dark visual card -->
+        <div class="about-team-note about-hero-card hero-card">
+          <div class="about-team-note-top">
+            <div class="about-team-brand">
+              <img src="images/logo.png" alt="" class="about-team-logo">
+              <span class="about-team-brand-label">T1 GROUP</span>
+            </div>
+            <span class="about-team-pill">4 MEMBERS</span>
+          </div>
+
+          <div class="about-team-note-body">
+            <span class="about-team-accent" aria-hidden="true"></span>
+            <p class="about-team-quote">Different strengths.<br><strong>One team.</strong></p>
+            <p class="about-team-caption">That&rsquo;s the T1 spirit &mdash; uniting engineering, design, and accessibility.</p>
+          </div>
+
+          <div class="about-team-note-footer">
+            <span>COS10026 &middot; Web Technology</span>
+            <span class="about-team-status">
+              <span class="about-status-dot" aria-hidden="true"></span>Swinburne
+            </span>
+          </div>
         </div>
 
       </div>

@@ -33,108 +33,281 @@ html {
   z-index: 9999;
 }
 
-/* Container */
+/* Container — 80rem outer with 2.5rem side padding = 75rem (1200px) inner width,
+   matching #main-content .container (max-width: 1200px) in index.css */
 .about-container {
-  max-width: 112rem;
+  width: 100%;
+  max-width: 80rem;
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 5vw, 7.5rem);
+  padding: 0 clamp(1.25rem, 4vw, 2.5rem);
 }
 
 
 /* ==========================================================================
-   1. Hero Banner
+   1. Hero Banner (Balanced proportions synced with index.html)
    ========================================================================== */
-.about-hero {
-  padding: 4.5rem 0 5rem;
-  background: #f4f4f2;
+.about-hero,
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  background: #f0f1ed;
 }
 
-.about-hero-layout {
-  display: grid;
-  grid-template-columns: 1fr 21.25rem;
+.about-hero-bg,
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.about-hero-glow,
+.hero-glow {
+  position: absolute;
+  top: -9.375rem;
+  right: 5%;
+  width: 26.25rem;
+  height: 26.25rem;
+  border-radius: 50%;
+  background: rgba(117, 174, 188, 0.14);
+  filter: blur(60px);
+}
+
+/* 1. Khung chứa Hero (.about-hero-layout / .hero-layout / .about-container)
+   Max-width 1200px, căn giữa bằng margin: 0 auto, display: flex cân bằng trục dọc */
+.about-hero-layout,
+.about-hero .about-container,
+.hero-layout {
+  display: flex;
   align-items: center;
-  gap: 3rem;
+  justify-content: space-between;
+  gap: 3.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
 }
 
+/* 2. Cụm nội dung bên trái (.about-hero-content / .hero-content) */
+.about-hero-content,
+.hero-content {
+  flex: 1 1 55%;
+  max-width: 620px;
+  min-width: 0;
+}
+
+/* Pill tag synced with "DIGITAL HEALTHCARE" in index.html (#d92f44 / #ffffff = 4.73:1 AA) */
 .about-tag {
   display: inline-block;
   margin: 0 0 1.125rem;
-  padding: 0.375rem 0.75rem;
+  padding: 0.45rem 0.75rem;
   border-radius: 0.25rem;
-  background: #d5333b;
+  background: #d92f44;
   color: #ffffff;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
 .about-hero h1 {
   margin: 0 0 1.25rem;
-  color: #111827;
-  font-size: 4rem;
+  color: #151515;
+  font-size: clamp(2.375rem, 4.2vw, 3.875rem);
+  font-weight: 800;
   line-height: 1.08;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .about-hero-text {
-  max-width: 32.5rem;
+  max-width: 33.5rem;
   margin: 0 0 2rem;
   color: #4b5563;
   font-size: 1.125rem;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
+/* CTA button synced with "EXPLORE OUR SERVICE ->" in index.html */
 .about-btn {
-  display: inline-block;
-  padding: 0.875rem 1.75rem;
-  border-radius: 999px;
-  background: #d5333b;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 2.875rem;
+  padding: 0.85rem 1.625rem;
+  border-radius: 0.25rem;
+  background: #d92f44;
   color: #ffffff;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   text-decoration: none;
   transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.about-btn:hover,
-.about-btn:focus-visible {
-  background: #b4232a;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(226, 35, 26, 0.25);
+.about-btn-arrow {
+  font-size: 0.9375rem;
+  transition: transform 0.25s ease;
 }
 
-/* Black "One team." card */
-.about-team-note {
-  padding: 2.25rem;
-  border-radius: 16px;
+.about-btn:hover,
+.about-btn:focus-visible {
   background: #0f0f0f;
   color: #ffffff;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 15, 15, 0.16);
+}
+
+.about-btn:hover .about-btn-arrow,
+.about-btn:focus-visible .about-btn-arrow {
+  transform: translateX(5px);
+}
+
+/* 3. Khối Visual Card màu đen bên phải (.about-team-note / .about-hero-card / .hero-card)
+   flex: 0 0 420px, padding 32px 28px, border 1px solid rgba(255,255,255,0.12),
+   box-shadow 0 20px 40px rgba(0,0,0,0.18), border-radius 20px */
+.about-team-note,
+.about-hero-card,
+.hero-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex: 0 0 420px;
+  width: 420px;
+  max-width: 100%;
+  min-height: 19.75rem;
+  padding: 32px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  background: #0f0f0f;
+  color: #ffffff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+}
+
+.about-team-note::before {
+  content: "";
+  position: absolute;
+  top: -4.5rem;
+  right: -4.5rem;
+  width: 13rem;
+  height: 13rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 47, 68, 0.2) 0%, rgba(217, 47, 68, 0) 70%);
+  pointer-events: none;
+}
+
+.about-team-note-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.about-team-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
 }
 
 .about-team-logo {
   display: block;
   width: auto;
-  height: 2.5rem;
+  height: 2.125rem;
 }
 
-.about-team-note p {
-  margin: 1.75rem 0 0.625rem;
-  font-size: 1.75rem;
+.about-team-brand-label {
+  color: #e5e7eb;
+  font-size: 0.75rem;
   font-weight: 700;
-  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.about-team-note strong {
-  color: #ff5a5f;
+.about-team-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.6875rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e5e7eb;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-team-note-body {
+  position: relative;
+  z-index: 1;
+}
+
+.about-team-accent {
+  display: block;
+  width: 2.25rem;
+  height: 0.1875rem;
+  margin-bottom: 0.9375rem;
+  border-radius: 999px;
+  background: #d92f44;
+}
+
+.about-team-quote {
+  margin: 0 0 0.625rem;
+  color: #ffffff;
+  font-size: clamp(1.625rem, 2.2vw, 1.95rem);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.about-team-quote strong {
+  color: #ff5c6a;
 }
 
 .about-team-caption {
-  color: #d1d5db;
+  margin: 0;
+  color: #cbd5e1;
   font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.about-team-note-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #a3a3a3;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.about-team-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.about-status-dot {
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  background: #35b779;
+  box-shadow: 0 0 0 3px rgba(53, 183, 121, 0.18);
 }
 
 
@@ -200,7 +373,7 @@ html {
   list-style: none;
 }
 
-.about-section-nav li + li {
+.about-section-nav li+li {
   border-top: 1px solid #f0f0f0;
 }
 
@@ -431,7 +604,7 @@ body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] .about-step-
   line-height: 1.7;
 }
 
-.about-schedule-list > li {
+.about-schedule-list>li {
   padding: 0.75rem 1rem;
   border: 1px solid #f0f0f0;
   border-left: 3px solid #e2231a;
@@ -804,7 +977,25 @@ body:has(#dark-toggle:checked) {
 }
 
 body:has(#dark-toggle:checked) .about-hero {
-  background: #141414;
+  background: #171717;
+}
+
+body:has(#dark-toggle:checked) .about-hero-glow {
+  background: rgba(117, 174, 188, 0.08);
+}
+
+body:has(#dark-toggle:checked) .about-btn:hover,
+body:has(#dark-toggle:checked) .about-btn:focus-visible {
+  background: #b4232a;
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(217, 47, 68, 0.28);
+}
+
+body:has(#dark-toggle:checked) .about-team-note,
+body:has(#dark-toggle:checked) .about-hero-card,
+body:has(#dark-toggle:checked) .hero-card {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: #0b0b0b;
 }
 
 body:has(#dark-toggle:checked) .about-hero h1,
@@ -839,7 +1030,7 @@ body:has(#dark-toggle:checked) .about-content-section {
   background: #111111;
 }
 
-body:has(#dark-toggle:checked) .about-section-nav li + li,
+body:has(#dark-toggle:checked) .about-section-nav li+li,
 body:has(#dark-toggle:checked) .about-card-header,
 body:has(#dark-toggle:checked) .about-info-block,
 body:has(#dark-toggle:checked) .contribution-member {
@@ -853,14 +1044,14 @@ body:has(#dark-toggle:checked) .about-section-nav a:focus-visible {
 
 body:has(#dark-toggle:checked) .about-card,
 body:has(#dark-toggle:checked) .about-member-card,
-body:has(#dark-toggle:checked) .about-schedule-list > li,
+body:has(#dark-toggle:checked) .about-schedule-list>li,
 body:has(#dark-toggle:checked) .contribution-item {
   border-color: #2e2e2e;
   background: #1b1b1b;
   box-shadow: none;
 }
 
-body:has(#dark-toggle:checked) .about-schedule-list > li {
+body:has(#dark-toggle:checked) .about-schedule-list>li {
   border-left-color: #e2231a;
 }
 
@@ -957,8 +1148,8 @@ body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
   .about-sidebar {
     top: 0;
     z-index: 5;
-    margin: 0 calc(-1 * clamp(1.5rem, 5vw, 7.5rem));
-    padding: 0.75rem clamp(1.5rem, 5vw, 7.5rem);
+    margin: 0 calc(-1 * clamp(1.25rem, 4vw, 2.5rem));
+    padding: 0.75rem clamp(1.25rem, 4vw, 2.5rem);
     border-bottom: 1px solid #f0f0f0;
     background: #ffffff;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
@@ -992,7 +1183,7 @@ body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
     scroll-snap-align: start;
   }
 
-  .about-section-nav li + li {
+  .about-section-nav li+li {
     border-top: none;
   }
 
@@ -1040,31 +1231,72 @@ body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
   }
 }
 
-/* Hero stacks a little earlier */
-@media (max-width: 900px) {
-  .about-hero-layout {
-    grid-template-columns: 1fr;
+/* --------------------------------------------------------------------------
+   8b. Responsive Hero (< 992px):
+   Đổi flex-direction sang column, căn giữa khối chữ và Card đen hiển thị
+   bên dưới với width: 100%; max-width: 480px.
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .about-hero-layout,
+  .about-hero .about-container,
+  .hero-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 48px 24px;
   }
 
-  .about-hero h1 {
-    font-size: 2.75rem;
+  .about-hero-content,
+  .hero-content {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
   }
 
-  .about-team-note {
-    max-width: 28rem;
+  .about-hero-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-team-note,
+  .about-hero-card,
+  .hero-card {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: 480px;
+    text-align: left;
   }
 }
 
 /* --------------------------------------------------------------------------
-   8b. Mobile (< 768px)
+   8c. Mobile (< 768px)
    -------------------------------------------------------------------------- */
 @media (max-width: 767px) {
-  .about-hero {
-    padding: 3rem 0 3.5rem;
+  .about-hero-layout,
+  .about-hero .about-container,
+  .hero-layout {
+    gap: 2rem;
+    padding: 40px 16px;
   }
 
   .about-hero h1 {
-    font-size: 2.25rem;
+    font-size: clamp(2rem, 6vw, 2.375rem);
+  }
+
+  .about-hero-text {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .about-team-note,
+  .about-hero-card,
+  .hero-card {
+    max-width: 100%;
+    min-height: 0;
+    gap: 1.25rem;
+    padding: 24px 20px;
   }
 
   .about-content-section {
@@ -1121,7 +1353,9 @@ body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
    8c. Reduced motion
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
+
   .about-btn,
+  .about-btn-arrow,
   .about-card,
   .about-member-card,
   .contribution-item,
@@ -1132,6 +1366,8 @@ body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
   }
 
   .about-btn:hover,
+  .about-btn:hover .about-btn-arrow,
+  .about-btn:focus-visible .about-btn-arrow,
   .about-member-card:hover,
   .contribution-item:hover {
     transform: none;
