@@ -7496,3 +7496,98 @@ body.about-page .about-hero h1 {
   font-size: clamp(2rem, 3.5vw, 2.75rem);
   line-height: 1.25;
 }
+
+
+/* ========================================================================== 
+ * HOMEPAGE CONTENT WIDTH FIX
+ * Widen only the Services / Digital Solutions and Appointment sections.
+ * Keep the existing page structure, cards, table content and other pages.
+ * ========================================================================== */
+
+/* Section 1: give the service cards and digital-solutions table more room. */
+body.index-page #home-services > .services-layout {
+  box-sizing: border-box;
+  width: 90%;
+  max-width: 1600px;
+  margin-right: auto;
+  margin-left: auto;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 2.5vw, 2.75rem);
+}
+
+body.index-page #home-services .service-card {
+  min-width: 0;
+  overflow-wrap: normal;
+}
+
+body.index-page #home-services .service-card h3,
+body.index-page #home-services .service-card p {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* Section 4: widen the appointment table and make its text easier to read. */
+body.index-page .appointment-container {
+  box-sizing: border-box;
+  width: 94%;
+  max-width: 1700px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+body.index-page .appointment-table {
+  width: 100%;
+  min-width: 1200px;
+  table-layout: auto;
+  font-size: 15px;
+}
+
+body.index-page .appointment-table th,
+body.index-page .appointment-table td {
+  padding: 17px 16px;
+}
+
+body.index-page .appointment-table thead th {
+  font-size: 13px;
+}
+
+body.index-page .appointment-table td strong {
+  font-size: 15px;
+}
+
+body.index-page .appointment-table td small {
+  font-size: 12px;
+}
+
+body.index-page .appointment-book-button {
+  padding: 11px 15px;
+  font-size: 13px;
+}
+
+/* Tablet: retain the existing stacked layout and avoid squeezing columns. */
+@media (max-width: 1000px) {
+  body.index-page #home-services > .services-layout {
+    width: 90%;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  body.index-page .appointment-container {
+    width: 94%;
+  }
+}
+
+/* Small screens: the appointment table remains horizontally scrollable. */
+@media (max-width: 700px) {
+  body.index-page #home-services > .services-layout {
+    width: 90%;
+  }
+
+  body.index-page .appointment-container {
+    width: 94%;
+  }
+
+  body.index-page .appointment-table {
+    min-width: 1200px;
+  }
+}
