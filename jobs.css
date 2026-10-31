@@ -200,12 +200,6 @@ main {
 
 #job-filter {
   width: 100%;
-  max-height: 72vh;
-  overflow-y: auto;
-  padding-right: 0.5rem;
-  scrollbar-gutter: stable;
-  overscroll-behavior: contain;
-  border: 1px solid #cccccc;
 
   fieldset {
     border: 1px solid #cccccc;
@@ -474,6 +468,13 @@ body:has(#dark-toggle:checked) {
     }
   }
 
+  #job-filter {
+    border-color: #4e4e4e;
+    legend {
+        border-color: #4e4e4e !important;
+        color: #ffffff !important;
+    }
+  }
   #job-filter fieldset,
   .sidebar section {
     border-color: #4e4e4e;
@@ -492,16 +493,15 @@ body:has(#dark-toggle:checked) {
     color: #ffffff;
   }
 
-  .filter-group {
-    border-top-color: #1b5a56;
-  }
-
   #job-filter legend,
   #job-filter label,
   .sidebar h3 {
     color: white;
   }
-
+  
+  .sidebar {
+    border-color: #555555;
+  }
   .sidebar p,
   .sidebar strong {
     color: #dddddd;
