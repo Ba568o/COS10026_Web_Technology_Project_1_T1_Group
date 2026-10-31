@@ -14,7 +14,7 @@
   <!-- Shared site styles first, then page styles -->
   <link rel="stylesheet" href="apply.css">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="css/pages/about/about.css">
+  <link rel="stylesheet" href="about.css">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
@@ -77,6 +77,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+
       .team-photo-wrapper,
       .team-photo-wrapper img {
         transition: none;
@@ -219,50 +220,157 @@
   <main id="main-content" tabindex="-1">
 
     <!-- ===== HERO BANNER ===== -->
-    <section class="about-hero hero" aria-labelledby="about-heading">
-      <!-- Decorative ambient glow synced with index.html and jobs.html -->
-      <div class="about-hero-bg hero-background" aria-hidden="true">
-        <div class="about-hero-glow hero-glow"></div>
+    <section class="about-hero" aria-labelledby="about-heading">
+      <!-- Decorative ambient glow (same layer as index.html / jobs.html) -->
+      <div class="about-hero-bg" aria-hidden="true">
+        <div class="about-hero-glow"></div>
       </div>
 
-      <div class="about-container about-hero-layout hero-layout">
+      <div class="about-hero-layout">
 
         <!-- Left: pill tag, H1 heading, description, and CTA -->
-        <div class="about-hero-content hero-content">
-          <p class="about-tag">T1 GROUP ABOUT US</p>
-          <h1 id="about-heading">Great things start<br>with our team.</h1>
+        <div class="about-hero-content">
+          <p class="about-tag">
+            <span class="language-en">T1 GROUP &middot; ABOUT US</span>
+            <span class="language-vi">NHÓM T1 &middot; VỀ CHÚNG TÔI</span>
+          </p>
+          <h1 id="about-heading">
+            <span class="language-en">Great things start<br>with our team.</span>
+            <span class="language-vi">Những điều tuyệt vời<br>bắt đầu từ đội ngũ chúng tôi.</span>
+          </h1>
           <p class="about-hero-text">
-            We are a passionate group of health &amp; wellness professionals united by one goal:
-            helping people live better every day.
+            <span class="language-en">We are a passionate group of health &amp; wellness professionals united by one
+              goal: helping people live better every day.</span>
+            <span class="language-vi">Chúng tôi là tập thể đầy nhiệt huyết trong lĩnh vực y tế và chăm sóc sức khỏe số,
+              cùng chung một mục tiêu: giúp mọi người sống khỏe hơn mỗi ngày.</span>
           </p>
           <a class="about-btn" href="#our-team">
-            <span>EXPLORE OUR TEAM</span>
+            <span>
+              <span class="language-en">EXPLORE OUR TEAM</span>
+              <span class="language-vi">KHÁM PHÁ ĐỘI NGŨ</span>
+            </span>
             <i class="fa-solid fa-arrow-right-long about-btn-arrow" aria-hidden="true"></i>
           </a>
         </div>
 
-        <!-- Right: proportional dark visual card -->
-        <div class="about-team-note about-hero-card hero-card">
-          <div class="about-team-note-top">
-            <div class="about-team-brand">
-              <img src="images/logo.png" alt="" class="about-team-logo">
-              <span class="about-team-brand-label">T1 GROUP</span>
+        <!-- Right: light app mockup with floating satellite chips (style of jobs.html) -->
+        <div class="about-hero-visual">
+
+          <!-- Main mockup card -->
+          <div class="about-mock-card">
+            <div class="about-mock-header">
+              <span class="about-mock-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </span>
+              <span class="about-mock-title">
+                <span class="language-en">ABOUT T1 TEAM</span>
+                <span class="language-vi">ĐỘI NGŨ T1</span>
+              </span>
+              <span class="about-mock-menu">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"
+                  focusable="false">
+                  <circle cx="5" cy="12" r="2" />
+                  <circle cx="12" cy="12" r="2" />
+                  <circle cx="19" cy="12" r="2" />
+                </svg>
+              </span>
             </div>
-            <span class="about-team-pill">4 MEMBERS</span>
+
+            <div class="about-mock-body">
+              <div class="about-mock-copy">
+                <span class="about-mock-eyebrow">
+                  <span class="language-en">BUILDING TOGETHER</span>
+                  <span class="language-vi">CÙNG NHAU XÂY DỰNG</span>
+                </span>
+                <p class="about-mock-heading">
+                  <span class="language-en">Different strengths.<br><strong>One team.</strong></span>
+                  <span class="language-vi">Thế mạnh riêng biệt.<br><strong>Một tập thể gắn kết.</strong></span>
+                </p>
+                <p class="about-mock-text">
+                  <span class="language-en">Four members, one shared vision.</span>
+                  <span class="language-vi">Bốn thành viên, một tầm nhìn chung.</span>
+                </p>
+              </div>
+
+              <!-- CSS illustration: four team members -->
+              <div class="about-team-illustration" aria-hidden="true">
+                <span class="about-person about-person-one"></span>
+                <span class="about-person about-person-two"></span>
+                <span class="about-person about-person-three"></span>
+                <span class="about-person about-person-four"></span>
+              </div>
+            </div>
+
+            <div class="about-mock-footer">
+              <span class="about-status-dot" aria-hidden="true"></span>
+              <span>
+                <span class="language-en">4 Active Contributors</span>
+                <span class="language-vi">4 thành viên đóng góp</span>
+              </span>
+              <span class="about-mock-meta">
+                <span class="language-en">COS10026 &middot; Swinburne</span>
+                <span class="language-vi">COS10026 &middot; ĐH Swinburne</span>
+              </span>
+            </div>
           </div>
 
-          <div class="about-team-note-body">
-            <span class="about-team-accent" aria-hidden="true"></span>
-            <p class="about-team-quote">Different strengths.<br><strong>One team.</strong></p>
-            <p class="about-team-caption">That&rsquo;s the T1 spirit &mdash; uniting engineering, design, and accessibility.</p>
+          <!-- Chip 1 (top-left): health & wellness -->
+          <div class="about-chip about-chip-health" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path
+                d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z" />
+              <polyline points="3.5 12 8 12 10 9 13 15 15 12 20.5 12" />
+            </svg>
           </div>
 
-          <div class="about-team-note-footer">
-            <span>COS10026 &middot; Web Technology</span>
-            <span class="about-team-status">
-              <span class="about-status-dot" aria-hidden="true"></span>Swinburne
+          <!-- Chip 2 (top-right): growth -->
+          <div class="about-chip about-chip-growth" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+              <polyline points="16 7 22 7 22 13" />
+            </svg>
+          </div>
+
+          <!-- Chip 3 (bottom-right): horizontal pill -->
+          <div class="about-chip-pill" aria-hidden="true">
+            <span class="about-chip-pill-icon">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </span>
+            <span class="about-chip-pill-copy">
+              <strong>
+                <span class="language-en">Together as One</span>
+                <span class="language-vi">Together as One</span>
+              </strong>
+              <small>
+                <span class="language-en">Built for excellence</span>
+                <span class="language-vi">Đồng lòng vì sự xuất sắc ✓</span>
+              </small>
+            </span>
+            <span class="about-chip-pill-check">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
             </span>
           </div>
+
+          <!-- Decorative particles -->
+          <span class="about-particle about-particle-one" aria-hidden="true"></span>
+          <span class="about-particle about-particle-two" aria-hidden="true"></span>
         </div>
 
       </div>
@@ -276,33 +384,56 @@
           <!-- ── LEFT: sticky sidebar navigation ── -->
           <aside class="about-sidebar" aria-label="About page sections">
             <div class="about-sidebar-content">
-              <p class="about-eyebrow">IN THIS PAGE</p>
-              <h2>About<br>our group.</h2>
-              <p class="about-sidebar-desc">Get to know T1 — who we are, what we built, and the people behind it.</p>
+              <p class="about-eyebrow">
+                <span class="language-en">IN THIS PAGE</span>
+                <span class="language-vi">TRONG TRANG NÀY</span>
+              </p>
+              <h2>
+                <span class="language-en">About<br>our group.</span>
+                <span class="language-vi">Giới thiệu<br>về nhóm.</span>
+              </h2>
+              <p class="about-sidebar-desc">
+                <span class="language-en">Get to know T1 &mdash; who we are, what we built, and the people behind
+                  it.</span>
+                <span class="language-vi">Khám phá T1 &mdash; chúng tôi là ai, những gì chúng tôi đã tạo dựng và các
+                  thành viên phía sau dự án.</span>
+              </p>
               <nav class="about-section-nav" aria-label="Jump to section">
                 <ol>
                   <li>
                     <a href="#group-info" aria-label="Section 01: Group Information">
                       <span class="about-step-number" aria-hidden="true">01</span>
-                      <span class="about-step-text">Group Information<small>Who we are</small></span>
+                      <span class="about-step-text">
+                        <span class="language-en">Group Information<small>Who we are</small></span>
+                        <span class="language-vi">Thông tin nhóm<small>Chúng tôi là ai</small></span>
+                      </span>
                     </a>
                   </li>
                   <li>
                     <a href="#contributions" aria-label="Section 02: Member Contributions">
                       <span class="about-step-number" aria-hidden="true">02</span>
-                      <span class="about-step-text">Member Contributions<small>What each of us built</small></span>
+                      <span class="about-step-text">
+                        <span class="language-en">Member Contributions<small>What each of us built</small></span>
+                        <span class="language-vi">Đóng góp thành viên<small>Phần việc từng cá nhân</small></span>
+                      </span>
                     </a>
                   </li>
                   <li>
                     <a href="#our-team-cards" aria-label="Section 03: Our Team">
                       <span class="about-step-number" aria-hidden="true">03</span>
-                      <span class="about-step-text">Our Team<small>Faces behind T1</small></span>
+                      <span class="about-step-text">
+                        <span class="language-en">Our Team<small>Faces behind T1</small></span>
+                        <span class="language-vi">Đội ngũ của chúng tôi<small>Gương mặt phía sau T1</small></span>
+                      </span>
                     </a>
                   </li>
                   <li>
                     <a href="#fun-facts" aria-label="Section 04: Fun Facts">
                       <span class="about-step-number" aria-hidden="true">04</span>
-                      <span class="about-step-text">Fun Facts<small>The lighter side of us</small></span>
+                      <span class="about-step-text">
+                        <span class="language-en">Fun Facts<small>The lighter side of us</small></span>
+                        <span class="language-vi">Thông tin thú vị<small>Những điều thú vị về thành viên</small></span>
+                      </span>
                     </a>
                   </li>
                 </ol>
@@ -317,33 +448,80 @@
             <article class="about-card" id="group-info">
               <header class="about-card-header">
                 <span class="about-card-badge" aria-hidden="true">01</span>
-                <h2>Group Information</h2>
+                <h2>
+                  <span class="language-en">Group Information</span>
+                  <span class="language-vi">Thông tin nhóm</span>
+                </h2>
               </header>
 
               <div class="about-card-body">
 
                 <!-- Group name -->
                 <div class="about-info-block">
-                  <p class="about-info-label"><svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg><span>Group Name</span></p>
-                  <p class="about-info-value">T1 &mdash; <strong>Together as One</strong></p>
+                  <p class="about-info-label">
+                    <svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"
+                      focusable="false">
+                      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                      <line x1="4" y1="22" x2="4" y2="15" />
+                    </svg>
+                    <span>
+                      <span class="language-en">Group Name</span>
+                      <span class="language-vi">Tên nhóm</span>
+                    </span>
+                  </p>
+                  <p class="about-info-value">T1 &mdash; <strong><span class="language-en">Together as One</span><span
+                        class="language-vi">Together as One</span></strong></p>
                 </div>
 
                 <!-- Subject -->
                 <div class="about-info-block">
-                  <p class="about-info-label"><svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span>Subject</span></p>
-                  <p class="about-info-value">COS10026 &mdash; Web Technology, Project 1<br>
-                    <span class="about-uni">Swinburne University of Technology</span>
+                  <p class="about-info-label">
+                    <svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"
+                      focusable="false">
+                      <path d="M22 10 12 5 2 10l10 5 10-5z" />
+                      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                    </svg>
+                    <span>
+                      <span class="language-en">Subject</span>
+                      <span class="language-vi">Môn học</span>
+                    </span>
+                  </p>
+                  <p class="about-info-value">
+                    <span class="language-en">COS10026 &mdash; Web Technology, Project 1</span>
+                    <span class="language-vi">COS10026 &mdash; Công nghệ Web, Dự án 1</span><br>
+                    <span class="about-uni">
+                      <span class="language-en">Swinburne University of Technology</span>
+                      <span class="language-vi">Đại học Công nghệ Swinburne</span>
+                    </span>
                   </p>
                 </div>
 
                 <!-- Schedule using a valid nested list -->
                 <div class="about-info-block">
-                  <p class="about-info-label"><svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Class Schedule</span></p>
+                  <p class="about-info-label">
+                    <svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"
+                      focusable="false">
+                      <rect x="3" y="4" width="18" height="18" rx="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    <span>
+                      <span class="language-en">Class Schedule</span>
+                      <span class="language-vi">Lịch học</span>
+                    </span>
+                  </p>
                   <ul class="about-schedule-list">
                     <li>
-                      <strong>Lecture</strong>
+                      <strong>
+                        <span class="language-en">Lecture</span>
+                        <span class="language-vi">Tiết lý thuyết</span>
+                      </strong>
                       <ul>
-                        <li>Wednesday &mdash; 9:00&nbsp;AM &ndash; 12:00&nbsp;PM</li>
+                        <li>
+                          <span class="language-en">Wednesday &mdash; 9:00&nbsp;AM &ndash; 12:00&nbsp;PM</span>
+                          <span class="language-vi">Thứ Tư &mdash; 9:00&nbsp;Sáng &ndash; 12:00&nbsp;Trưa</span>
+                        </li>
                       </ul>
                     </li>
                   </ul>
@@ -351,39 +529,67 @@
 
                 <!-- Member list: micro-cards with role badge + student ID -->
                 <div class="about-info-block">
-                  <p class="about-info-label"><svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Group Members</span></p>
+                  <p class="about-info-label">
+                    <svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"
+                      focusable="false">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    <span>
+                      <span class="language-en">Group Members</span>
+                      <span class="language-vi">Thành viên trong nhóm</span>
+                    </span>
+                  </p>
                   <ul class="about-member-list">
                     <li class="about-member-card">
                       <span class="about-member-avatar" aria-hidden="true">TB</span>
                       <span class="about-member-info">
                         <span class="about-member-name">Thai Bao Nguyen</span>
-                        <span class="about-member-role role-leader">TEAM LEADER</span>
+                        <span class="about-member-role role-leader">
+                          <span class="language-en">TEAM LEADER</span>
+                          <span class="language-vi">TRƯỞNG NHÓM</span>
+                        </span>
                       </span>
-                      <span class="member-id"><span class="visually-hidden">Student ID: </span>104848806</span>
+                      <span class="member-id"><span class="visually-hidden"><span class="language-en">Student ID:
+                          </span><span class="language-vi">Mã số sinh viên: </span></span>104848806</span>
                     </li>
                     <li class="about-member-card">
                       <span class="about-member-avatar" aria-hidden="true">MH</span>
                       <span class="about-member-info">
                         <span class="about-member-name">Minh Hoang Bui</span>
-                        <span class="about-member-role role-coordinator">COORDINATOR</span>
+                        <span class="about-member-role role-coordinator">
+                          <span class="language-en">COORDINATOR</span>
+                          <span class="language-vi">ĐIỀU PHỐI VIÊN</span>
+                        </span>
                       </span>
-                      <span class="member-id"><span class="visually-hidden">Student ID: </span>106208127</span>
+                      <span class="member-id"><span class="visually-hidden"><span class="language-en">Student ID:
+                          </span><span class="language-vi">Mã số sinh viên: </span></span>106208127</span>
                     </li>
                     <li class="about-member-card">
                       <span class="about-member-avatar" aria-hidden="true">ST</span>
                       <span class="about-member-info">
                         <span class="about-member-name">Sy Tho Nguyen</span>
-                        <span class="about-member-role role-developer">DEVELOPER</span>
+                        <span class="about-member-role role-developer">
+                          <span class="language-en">DEVELOPER</span>
+                          <span class="language-vi">LẬP TRÌNH VIÊN</span>
+                        </span>
                       </span>
-                      <span class="member-id"><span class="visually-hidden">Student ID: </span>105705546</span>
+                      <span class="member-id"><span class="visually-hidden"><span class="language-en">Student ID:
+                          </span><span class="language-vi">Mã số sinh viên: </span></span>105705546</span>
                     </li>
                     <li class="about-member-card">
                       <span class="about-member-avatar" aria-hidden="true">AV</span>
                       <span class="about-member-info">
                         <span class="about-member-name">Anh Vu Duong</span>
-                        <span class="about-member-role role-developer">DEVELOPER</span>
+                        <span class="about-member-role role-developer">
+                          <span class="language-en">DEVELOPER</span>
+                          <span class="language-vi">LẬP TRÌNH VIÊN</span>
+                        </span>
                       </span>
-                      <span class="member-id"><span class="visually-hidden">Student ID: </span>106404734</span>
+                      <span class="member-id"><span class="visually-hidden"><span class="language-en">Student ID:
+                          </span><span class="language-vi">Mã số sinh viên: </span></span>106404734</span>
                     </li>
                   </ul>
                 </div>
@@ -395,7 +601,10 @@
             <article class="about-card" id="contributions">
               <header class="about-card-header">
                 <span class="about-card-badge" aria-hidden="true">02</span>
-                <h2>Member Contributions</h2>
+                <h2>
+                  <span class="language-en">Member Contributions</span>
+                  <span class="language-vi">Đóng góp của thành viên</span>
+                </h2>
               </header>
 
               <div class="about-card-body">
@@ -405,26 +614,59 @@
                   <div class="contribution-item">
                     <dt class="contribution-member">
                       <span class="contribution-name">Thai Bao Nguyen</span>
-                      <span class="member-id"><span class="visually-hidden">Student ID: </span>104848806</span>
-                      <span class="contribution-role role-leader">Team Leader &amp; Project Manager</span>
+                      <span class="member-id"><span class="visually-hidden"><span class="language-en">Student ID:
+                          </span><span class="language-vi">Mã số sinh viên: </span></span>104848806</span>
+                      <span class="contribution-role role-leader">
+                        <span class="language-en">Team Leader &amp; Project Manager</span>
+                        <span class="language-vi">Trưởng nhóm &amp; Quản lý dự án</span>
+                      </span>
                     </dt>
                     <dd class="contribution-page">
-                      <span class="contribution-label">Assigned Page</span>
+                      <span class="contribution-label">
+                        <span class="language-en">Assigned Page</span>
+                        <span class="language-vi">Trang được phân công</span>
+                      </span>
                       <code class="contribution-file">index.html</code>
                     </dd>
                     <dd class="contribution-details">
-                      <span class="contribution-label">Role-Specific Tasks</span>
+                      <span class="contribution-label">
+                        <span class="language-en">Role-Specific Tasks</span>
+                        <span class="language-vi">Nhiệm vụ chuyên trách</span>
+                      </span>
                       <ul class="contribution-tasks">
-                        <li>Designed and developed the Home page (<code>index.html</code>) &mdash; hero section, interactive components, and overall layout.</li>
-                        <li>Managed project tracking, sprint milestones, and task assignments via Jira.</li>
-                        <li>Configured and maintained the team GitHub repository, defining the branching model and PR review guidelines.</li>
-                        <li>Deployed and verified the website on GitHub Pages, integrating pull requests into the <code>develop</code> branch.</li>
+                        <li>
+                          <span class="language-en">Designed and developed the Home page (<code>index.html</code>)
+                            &mdash; hero section, interactive components, and overall layout.</span>
+                          <span class="language-vi">Thiết kế và phát triển trang chủ (<code>index.html</code>) &mdash;
+                            khu vực hero, các thành phần tương tác và bố cục tổng thể.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Managed project tracking, sprint milestones, and task assignments
+                            via Jira.</span>
+                          <span class="language-vi">Quản lý tiến độ dự án, các mốc sprint và phân công nhiệm vụ cho
+                            thành viên thông qua Jira.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Configured and maintained the team GitHub repository, defining the
+                            branching model and PR review guidelines.</span>
+                          <span class="language-vi">Thiết lập và quản lý kho lưu trữ GitHub của nhóm, xây dựng mô hình
+                            phân nhánh và quy chuẩn đánh giá PR.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Deployed and verified the website on GitHub Pages, integrating pull
+                            requests into the <code>develop</code> branch.</span>
+                          <span class="language-vi">Triển khai và kiểm thử website trên GitHub Pages, tích hợp các pull
+                            request vào nhánh <code>develop</code>.</span>
+                        </li>
                       </ul>
                     </dd>
                     <dd class="contribution-quote">
                       <blockquote>
-                        <p lang="vi">“Làm leader không phải là đứng trước chỉ đường, mà là đứng sau đảm bảo không ai bị bỏ lại.”</p>
-                        <p class="contribution-quote-en">&ldquo;Being a leader isn&rsquo;t about standing in front pointing the way, it&rsquo;s about standing behind making sure no one gets left behind.&rdquo;</p>
+                        <p lang="vi" class="language-vi">“Làm leader không phải là đứng trước chỉ đường, mà là đứng sau
+                          đảm bảo không ai bị bỏ lại.”</p>
+                        <p class="language-en contribution-quote-en">&ldquo;Being a leader isn&rsquo;t about standing in
+                          front pointing the way, it&rsquo;s about standing behind making sure no one gets left
+                          behind.&rdquo;</p>
                         <footer class="contribution-quote-attr">&mdash; Thai Bao Nguyen</footer>
                       </blockquote>
                     </dd>
@@ -434,26 +676,58 @@
                   <div class="contribution-item">
                     <dt class="contribution-member">
                       <span class="contribution-name">Minh Hoang Bui</span>
-                      <span class="member-id"><span class="visually-hidden">Student ID: </span>106208127</span>
-                      <span class="contribution-role role-coordinator">Project Coordinator &amp; Code Validator</span>
+                      <span class="member-id"><span class="visually-hidden"><span class="language-en">Student ID:
+                          </span><span class="language-vi">Mã số sinh viên: </span></span>106208127</span>
+                      <span class="contribution-role role-coordinator">
+                        <span class="language-en">Project Coordinator &amp; Code Validator</span>
+                        <span class="language-vi">Điều phối viên dự án &amp; Kiểm duyệt mã nguồn</span>
+                      </span>
                     </dt>
                     <dd class="contribution-page">
-                      <span class="contribution-label">Assigned Page</span>
+                      <span class="contribution-label">
+                        <span class="language-en">Assigned Page</span>
+                        <span class="language-vi">Trang được phân công</span>
+                      </span>
                       <code class="contribution-file">jobs.html</code>
                     </dd>
                     <dd class="contribution-details">
-                      <span class="contribution-label">Role-Specific Tasks</span>
+                      <span class="contribution-label">
+                        <span class="language-en">Role-Specific Tasks</span>
+                        <span class="language-vi">Nhiệm vụ chuyên trách</span>
+                      </span>
                       <ul class="contribution-tasks">
-                        <li>Researched industry salary benchmarks and engineered the Jobs listing page (<code>jobs.html</code>) with accessible filter layouts.</li>
-                        <li>Served as Project Coordinator, facilitating group communication, meeting schedules, and team agreements.</li>
-                        <li>Conducted comprehensive W3C HTML5 and CSS3 code validation across all project files to guarantee compliance.</li>
-                        <li>Implemented accessible expand/collapse job detail toggles using pure CSS.</li>
+                        <li>
+                          <span class="language-en">Researched industry salary benchmarks and engineered the Jobs
+                            listing page (<code>jobs.html</code>) with accessible filter layouts.</span>
+                          <span class="language-vi">Nghiên cứu khung lương ngành và xây dựng trang danh sách việc làm
+                            (<code>jobs.html</code>) với bộ lọc tương tác dễ tiếp cận.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Served as Project Coordinator, facilitating group communication,
+                            meeting schedules, and team agreements.</span>
+                          <span class="language-vi">Đảm nhiệm vai trò Điều phối viên dự án, duy trì trao đổi nhóm, sắp
+                            xếp lịch họp và văn bản thỏa thuận nhóm.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Conducted comprehensive W3C HTML5 and CSS3 code validation across
+                            all project files to guarantee compliance.</span>
+                          <span class="language-vi">Kiểm thử toàn diện tính hợp lệ W3C HTML5 và CSS3 trên mọi tập tin dự
+                            án để đảm bảo chuẩn tuân thủ.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Implemented accessible expand/collapse job detail toggles using pure
+                            CSS.</span>
+                          <span class="language-vi">Hiện thực hóa tính năng đóng/mở chi tiết công việc thân thiện tiếp
+                            cận hoàn toàn bằng CSS thuần.</span>
+                        </li>
                       </ul>
                     </dd>
                     <dd class="contribution-quote">
                       <blockquote>
-                        <p lang="vi">“Một trang web tốt không chỉ đẹp mắt — nó còn phải đúng và có ý nghĩa với người dùng.”</p>
-                        <p class="contribution-quote-en">&ldquo;A great web page isn&rsquo;t just visually appealing — it must be accurate and meaningful to the people who use it.&rdquo;</p>
+                        <p lang="vi" class="language-vi">“Một trang web tốt không chỉ đẹp mắt — nó còn phải đúng và có ý
+                          nghĩa với người dùng.”</p>
+                        <p class="language-en contribution-quote-en">&ldquo;A great web page isn&rsquo;t just visually
+                          appealing — it must be accurate and meaningful to the people who use it.&rdquo;</p>
                         <footer class="contribution-quote-attr">&mdash; Minh Hoang Bui</footer>
                       </blockquote>
                     </dd>
@@ -463,26 +737,58 @@
                   <div class="contribution-item">
                     <dt class="contribution-member">
                       <span class="contribution-name">Sy Tho Nguyen</span>
-                      <span class="member-id"><span class="visually-hidden">Student ID: </span>105705546</span>
-                      <span class="contribution-role role-developer">Accessibility Specialist</span>
+                      <span class="member-id"><span class="visually-hidden"><span class="language-en">Student ID:
+                          </span><span class="language-vi">Mã số sinh viên: </span></span>105705546</span>
+                      <span class="contribution-role role-developer">
+                        <span class="language-en">Accessibility Specialist</span>
+                        <span class="language-vi">Chuyên viên tiếp cận Web (Accessibility)</span>
+                      </span>
                     </dt>
                     <dd class="contribution-page">
-                      <span class="contribution-label">Assigned Page</span>
+                      <span class="contribution-label">
+                        <span class="language-en">Assigned Page</span>
+                        <span class="language-vi">Trang được phân công</span>
+                      </span>
                       <code class="contribution-file">apply.html</code>
                     </dd>
                     <dd class="contribution-details">
-                      <span class="contribution-label">Role-Specific Tasks</span>
+                      <span class="contribution-label">
+                        <span class="language-en">Role-Specific Tasks</span>
+                        <span class="language-vi">Nhiệm vụ chuyên trách</span>
+                      </span>
                       <ul class="contribution-tasks">
-                        <li>Engineered the comprehensive job application form structure (<code>apply.html</code>) using semantic HTML5 form controls and fieldsets.</li>
-                        <li>Served as Accessibility Specialist, auditing WCAG 2.1 AA compliance, keyboard navigation, and color contrast.</li>
-                        <li>Configured thorough client-side form validations, including regex pattern matching for phone numbers and postcodes.</li>
-                        <li>Ensured full accessibility support for assistive technologies and screen readers.</li>
+                        <li>
+                          <span class="language-en">Engineered the comprehensive job application form structure
+                            (<code>apply.html</code>) using semantic HTML5 form controls and fieldsets.</span>
+                          <span class="language-vi">Xây dựng biểu mẫu ứng tuyển toàn diện (<code>apply.html</code>) sử
+                            dụng các phần tử biểu mẫu ngữ nghĩa HTML5 và fieldset.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Served as Accessibility Specialist, auditing WCAG 2.1 AA compliance,
+                            keyboard navigation, and color contrast.</span>
+                          <span class="language-vi">Đảm nhận vai trò Chuyên viên tiếp cận Web, kiểm định chuẩn WCAG 2.1
+                            AA, điều hướng bàn phím và độ tương phản màu sắc.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Configured thorough client-side form validations, including regex
+                            pattern matching for phone numbers and postcodes.</span>
+                          <span class="language-vi">Cấu hình kiểm tra tính hợp lệ biểu mẫu phía client chi tiết, bao gồm
+                            so khớp regex cho số điện thoại và mã bưu chính.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Ensured full accessibility support for assistive technologies and
+                            screen readers.</span>
+                          <span class="language-vi">Đảm bảo khả năng tương thích toàn diện cho công nghệ hỗ trợ và phần
+                            mềm đọc màn hình.</span>
+                        </li>
                       </ul>
                     </dd>
                     <dd class="contribution-quote">
                       <blockquote>
-                        <p lang="vi">“Một biểu mẫu chuẩn xác và mượt mà chính là sự tôn trọng thiết thực nhất đối với thời gian của người dùng.”</p>
-                        <p class="contribution-quote-en">&ldquo;A precise and frictionless form is the most practical way to respect our users&rsquo; time.&rdquo;</p>
+                        <p lang="vi" class="language-vi">“Một biểu mẫu chuẩn xác và mượt mà chính là sự tôn trọng thiết
+                          thực nhất đối với thời gian của người dùng.”</p>
+                        <p class="language-en contribution-quote-en">&ldquo;A precise and frictionless form is the most
+                          practical way to respect our users&rsquo; time.&rdquo;</p>
                         <footer class="contribution-quote-attr">&mdash; Sy Tho Nguyen</footer>
                       </blockquote>
                     </dd>
@@ -492,27 +798,60 @@
                   <div class="contribution-item">
                     <dt class="contribution-member">
                       <span class="contribution-name">Anh Vu Duong</span>
-                      <span class="member-id"><span class="visually-hidden">Student ID: </span>106404734</span>
-                      <span class="contribution-role role-developer">Frontend Developer &amp; Responsive Tester</span>
+                      <span class="member-id"><span class="visually-hidden"><span class="language-en">Student ID:
+                          </span><span class="language-vi">Mã số sinh viên: </span></span>106404734</span>
+                      <span class="contribution-role role-developer">
+                        <span class="language-en">Frontend Developer &amp; Responsive Tester</span>
+                        <span class="language-vi">Lập trình viên Frontend &amp; Kiểm thử giao diện</span>
+                      </span>
                     </dt>
                     <dd class="contribution-page">
-                      <span class="contribution-label">Assigned Page</span>
+                      <span class="contribution-label">
+                        <span class="language-en">Assigned Page</span>
+                        <span class="language-vi">Trang được phân công</span>
+                      </span>
                       <code class="contribution-file">about.html</code>
                     </dd>
                     <dd class="contribution-details">
-                      <span class="contribution-label">Role-Specific Tasks</span>
+                      <span class="contribution-label">
+                        <span class="language-en">Role-Specific Tasks</span>
+                        <span class="language-vi">Nhiệm vụ chuyên trách</span>
+                      </span>
                       <ul class="contribution-tasks">
-                        <li>Built the Group Information section, class schedule with valid nested lists, and full member roster with student IDs.</li>
-                        <li>Conducted responsive design testing across multiple screen sizes and physical devices to ensure consistent presentation.</li>
-                        <li>Sourced, formatted, and optimized team media, member quotes, and the Fun Facts summary data table.</li>
-                        <li>Implemented sticky sidebar navigation, hover micro-interactions, and pure CSS layout refinements.</li>
+                        <li>
+                          <span class="language-en">Built the Group Information section, class schedule with valid
+                            nested lists, and full member roster with student IDs.</span>
+                          <span class="language-vi">Xây dựng phần Thông tin nhóm, lịch học với danh sách lồng hợp lệ và
+                            danh sách thành viên kèm mã sinh viên.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Conducted responsive design testing across multiple screen sizes and
+                            physical devices to ensure consistent presentation.</span>
+                          <span class="language-vi">Thực hiện kiểm thử responsive đa màn hình và trên thiết bị vật lý để
+                            đảm bảo hiển thị đồng nhất.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Sourced, formatted, and optimized team media, member quotes, and the
+                            Fun Facts summary data table.</span>
+                          <span class="language-vi">Thu thập, định dạng và tối ưu hóa hình ảnh nhóm, trích dẫn thành
+                            viên và bảng tổng hợp Fun Facts.</span>
+                        </li>
+                        <li>
+                          <span class="language-en">Implemented sticky sidebar navigation, hover micro-interactions, and
+                            pure CSS layout refinements.</span>
+                          <span class="language-vi">Thiết lập thanh điều hướng sidebar cố định (sticky), các vi tương
+                            tác hover và tinh chỉnh layout bằng CSS thuần.</span>
+                        </li>
                       </ul>
                     </dd>
                     <dd class="contribution-quote">
                       <!-- inline style required by assignment rubric (demonstration of inline CSS) -->
-                      <blockquote style="margin: 0; padding: 1.25rem 1.5rem; border-left: 4px solid #e2231a; border-radius: 0 12px 12px 0; background: #fff5f5; box-shadow: inset 0 0 0 1px #fde4e4; font-family: 'Lora', 'Merriweather', 'Times New Roman', Georgia, serif; font-style: italic; line-height: 1.7;">
-                        <p lang="vi">“Không có lỗi nào không sửa được, chỉ có code chưa commit đủ nhiều.”</p>
-                        <p class="contribution-quote-en">&ldquo;There is no bug that cannot be fixed, only code that
+                      <blockquote
+                        style="margin: 0; padding: 1.25rem 1.5rem; border-left: 4px solid #e2231a; border-radius: 0 12px 12px 0; background: #fff5f5; box-shadow: inset 0 0 0 1px #fde4e4; font-family: 'Lora', 'Merriweather', 'Times New Roman', Georgia, serif; font-style: italic; line-height: 1.7;">
+                        <p lang="vi" class="language-vi">“Không có lỗi nào không sửa được, chỉ có code chưa commit đủ
+                          nhiều.”</p>
+                        <p class="language-en contribution-quote-en">&ldquo;There is no bug that cannot be fixed, only
+                          code that
                           hasn&rsquo;t been committed enough.&rdquo;</p>
                         <footer class="contribution-quote-attr">&mdash; Anh Vu Duong</footer>
                       </blockquote>
@@ -527,7 +866,10 @@
             <article class="about-card" id="our-team-cards">
               <header class="about-card-header">
                 <span class="about-card-badge" aria-hidden="true">03</span>
-                <h2>Our Team</h2>
+                <h2>
+                  <span class="language-en">Our Team</span>
+                  <span class="language-vi">Đội ngũ của chúng tôi</span>
+                </h2>
               </header>
 
               <div class="about-card-body">
@@ -538,8 +880,13 @@
                       loading="lazy" decoding="async">
                   </div>
                   <figcaption>
-                    T1 Team Members
-                    <span>Working together on COS10026 Web Technology &mdash; Project 1.</span>
+                    <strong class="language-en">T1 Team Members</strong>
+                    <strong class="language-vi">Các thành viên nhóm T1</strong>
+                    <span>
+                      <span class="language-en">Working together on COS10026 Web Technology &mdash; Project 1.</span>
+                      <span class="language-vi">Cùng nhau hợp tác trong môn Công nghệ Web COS10026 &mdash; Dự án
+                        1.</span>
+                    </span>
                   </figcaption>
                 </figure>
               </div><!-- /.about-card-body -->
@@ -549,55 +896,116 @@
             <article class="about-card" id="fun-facts">
               <header class="about-card-header">
                 <span class="about-card-badge" aria-hidden="true">04</span>
-                <h2>Fun Facts</h2>
+                <h2>
+                  <span class="language-en">Fun Facts</span>
+                  <span class="language-vi">Thông tin thú vị</span>
+                </h2>
               </header>
 
               <div class="about-card-body">
                 <div class="about-table-container table-responsive">
                   <table class="about-fun-facts-table">
-                    <caption>Team T1 Member Fun Facts &amp; Preferences</caption>
+                    <caption>
+                      <span class="language-en">Team T1 Member Fun Facts &amp; Preferences</span>
+                      <span class="language-vi">Sở thích &amp; Thông tin thú vị về thành viên nhóm T1</span>
+                    </caption>
                     <thead>
                       <tr>
-                        <th scope="col">Member</th>
-                        <th scope="col">Hometown</th>
-                        <th scope="col">Dream Role</th>
-                        <th scope="col">Favorite Tech</th>
-                        <th scope="col">Hobbies</th>
+                        <th scope="col">
+                          <span class="language-en">Member</span>
+                          <span class="language-vi">Thành viên</span>
+                        </th>
+                        <th scope="col">
+                          <span class="language-en">Hometown</span>
+                          <span class="language-vi">Quê quán</span>
+                        </th>
+                        <th scope="col">
+                          <span class="language-en">Dream Role</span>
+                          <span class="language-vi">Vị trí mơ ước</span>
+                        </th>
+                        <th scope="col">
+                          <span class="language-en">Favorite Tech</span>
+                          <span class="language-vi">Công nghệ yêu thích</span>
+                        </th>
+                        <th scope="col">
+                          <span class="language-en">Hobbies</span>
+                          <span class="language-vi">Sở thích</span>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <th scope="row">Thai Bao Nguyen</th>
-                        <td>Hai Duong</td>
-                        <td>Full-stack Lead</td>
+                        <td>
+                          <span class="language-en">Hai Duong</span>
+                          <span class="language-vi">Hải Dương</span>
+                        </td>
+                        <td>
+                          <span class="language-en">Full-stack Lead</span>
+                          <span class="language-vi">Trưởng nhóm Full-stack</span>
+                        </td>
                         <td>React &amp; Spring Boot</td>
-                        <td>Gaming &amp; Coding</td>
+                        <td>
+                          <span class="language-en">Gaming &amp; Coding</span>
+                          <span class="language-vi">Chơi game &amp; Lập trình</span>
+                        </td>
                       </tr>
                       <tr>
                         <th scope="row">Minh Hoang Bui</th>
-                        <td>Hai Phong</td>
-                        <td>AI Engineer</td>
+                        <td>
+                          <span class="language-en">Hai Phong</span>
+                          <span class="language-vi">Hải Phòng</span>
+                        </td>
+                        <td>
+                          <span class="language-en">AI Engineer</span>
+                          <span class="language-vi">Kỹ sư Trí tuệ nhân tạo (AI)</span>
+                        </td>
                         <td>Python &amp; React</td>
-                        <td>Music &amp; Football</td>
+                        <td>
+                          <span class="language-en">Music &amp; Football</span>
+                          <span class="language-vi">Âm nhạc &amp; Bóng đá</span>
+                        </td>
                       </tr>
                       <tr>
                         <th scope="row">Sy Tho Nguyen</th>
-                        <td>Nghe An</td>
-                        <td>Backend Engineer</td>
+                        <td>
+                          <span class="language-en">Nghe An</span>
+                          <span class="language-vi">Nghệ An</span>
+                        </td>
+                        <td>
+                          <span class="language-en">Backend Engineer</span>
+                          <span class="language-vi">Kỹ sư Backend</span>
+                        </td>
                         <td>Java &amp; Node.js</td>
-                        <td>Chess &amp; LeetCode</td>
+                        <td>
+                          <span class="language-en">Chess &amp; LeetCode</span>
+                          <span class="language-vi">Cờ vua &amp; Thuật toán (LeetCode)</span>
+                        </td>
                       </tr>
                       <tr>
                         <th scope="row">Anh Vu Duong</th>
-                        <td>Ha Tinh</td>
-                        <td>UI/UX Developer</td>
+                        <td>
+                          <span class="language-en">Ha Tinh</span>
+                          <span class="language-vi">Hà Tĩnh</span>
+                        </td>
+                        <td>
+                          <span class="language-en">UI/UX Developer</span>
+                          <span class="language-vi">Lập trình viên UI/UX</span>
+                        </td>
                         <td>HTML5/CSS3 &amp; Vite</td>
-                        <td>Gaming &amp; Football</td>
+                        <td>
+                          <span class="language-en">Gaming &amp; Football</span>
+                          <span class="language-vi">Chơi game &amp; Bóng đá</span>
+                        </td>
                       </tr>
                     </tbody>
                     <tfoot>
                       <tr>
-                        <td colspan="5">T1 Team &mdash; Built with passion and 100% pure HTML5/CSS3.</td>
+                        <td colspan="5">
+                          <span class="language-en">T1 Team &mdash; Built with passion and 100% pure HTML5/CSS3.</span>
+                          <span class="language-vi">Nhóm T1 &mdash; Được kiến tạo bằng đam mê và 100% HTML5/CSS3 thuần
+                            túy.</span>
+                        </td>
                       </tr>
                     </tfoot>
                   </table>

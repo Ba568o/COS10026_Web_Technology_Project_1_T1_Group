@@ -33,6 +33,109 @@ html {
   z-index: 9999;
 }
 
+
+/* --------------------------------------------------------------------------
+   0a. Robust Bilingual Language Switching (HTML5 & CSS3 Pure)
+   Default / #language-en / #lang-en: English active; Vietnamese hidden.
+   Active / #language-vi / #lang-vi: Vietnamese active; English hidden.
+   Prevents text duplication or overlap across sidebar navigation, hero visual card,
+   and member quotes.
+   -------------------------------------------------------------------------- */
+
+/* Default & English checked: Hide all Vietnamese elements completely */
+.language-vi,
+.lang-vi,
+body:has(#language-en:checked) .language-vi,
+body:has(#language-en:checked) .lang-vi,
+body:has(#lang-en:checked) .language-vi,
+body:has(#lang-en:checked) .lang-vi {
+  display: none !important;
+}
+
+/* Vietnamese checked: Hide all English elements completely */
+body:has(#language-vi:checked) .language-en,
+body:has(#language-vi:checked) .lang-en,
+body:has(#lang-vi:checked) .language-en,
+body:has(#lang-vi:checked) .lang-en {
+  display: none !important;
+}
+
+/* Vietnamese checked: Reveal Vietnamese inline/general elements */
+body:has(#language-vi:checked) .language-vi,
+body:has(#language-vi:checked) .lang-vi,
+body:has(#lang-vi:checked) .language-vi,
+body:has(#lang-vi:checked) .lang-vi {
+  display: revert !important;
+}
+
+/* Ensure language-specific search forms display properly */
+body:has(#language-vi:checked) .nav-search.language-vi,
+body:has(#lang-vi:checked) .nav-search.language-vi {
+  display: flex !important;
+}
+
+/* Block-level elements in English mode (default) */
+.about-step-text > .language-en,
+.about-step-text > .lang-en,
+.about-mock-heading > .language-en,
+.about-mock-heading > .lang-en,
+.contribution-quote blockquote p.language-en,
+.contribution-quote blockquote p.lang-en {
+  display: block !important;
+}
+
+/* Explicitly hide English block-level elements when Vietnamese is active */
+body:has(#language-vi:checked) .about-step-text > .language-en,
+body:has(#language-vi:checked) .about-step-text > .lang-en,
+body:has(#language-vi:checked) .about-mock-heading > .language-en,
+body:has(#language-vi:checked) .about-mock-heading > .lang-en,
+body:has(#language-vi:checked) .contribution-quote blockquote p.language-en,
+body:has(#language-vi:checked) .contribution-quote blockquote p.lang-en,
+body:has(#lang-vi:checked) .about-step-text > .language-en,
+body:has(#lang-vi:checked) .about-step-text > .lang-en,
+body:has(#lang-vi:checked) .about-mock-heading > .language-en,
+body:has(#lang-vi:checked) .about-mock-heading > .lang-en,
+body:has(#lang-vi:checked) .contribution-quote blockquote p.language-en,
+body:has(#lang-vi:checked) .contribution-quote blockquote p.lang-en {
+  display: none !important;
+}
+
+/* Block-level elements in Vietnamese mode */
+body:has(#language-vi:checked) .about-step-text > .language-vi,
+body:has(#language-vi:checked) .about-step-text > .lang-vi,
+body:has(#language-vi:checked) .about-mock-heading > .language-vi,
+body:has(#language-vi:checked) .about-mock-heading > .lang-vi,
+body:has(#language-vi:checked) .contribution-quote blockquote p.language-vi,
+body:has(#language-vi:checked) .contribution-quote blockquote p.lang-vi,
+body:has(#lang-vi:checked) .about-step-text > .language-vi,
+body:has(#lang-vi:checked) .about-step-text > .lang-vi,
+body:has(#lang-vi:checked) .about-mock-heading > .language-vi,
+body:has(#lang-vi:checked) .about-mock-heading > .lang-vi,
+body:has(#lang-vi:checked) .contribution-quote blockquote p.language-vi,
+body:has(#lang-vi:checked) .contribution-quote blockquote p.lang-vi {
+  display: block !important;
+}
+
+/* Quote paragraph typography */
+.contribution-quote blockquote p.language-vi,
+.contribution-quote blockquote p.lang-vi,
+.contribution-quote blockquote p.language-en,
+.contribution-quote blockquote p.lang-en {
+  margin: 0;
+  color: #111827;
+  font-family: "Lora", "Merriweather", "Times New Roman", Georgia, serif;
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+body:has(#dark-toggle:checked) .contribution-quote blockquote p.language-en,
+body:has(#dark-toggle:checked) .contribution-quote blockquote p.lang-en,
+body:has(#dark-toggle:checked) .contribution-quote blockquote p.language-vi,
+body:has(#dark-toggle:checked) .contribution-quote blockquote p.lang-vi {
+  color: #f5f5f5;
+}
+
 /* Container — 80rem outer with 2.5rem side padding = 75rem (1200px) inner width,
    matching #main-content .container (max-width: 1200px) in index.css */
 .about-container {
@@ -44,20 +147,20 @@ html {
 
 
 /* ==========================================================================
-   1. Hero Banner (Balanced proportions synced with index.html)
+   1. Hero Banner
+   Layout mirrors index.html; the right visual mirrors the "light app mockup
+   + floating chips" illustration of jobs.html (.jobs-hero-animation).
    ========================================================================== */
-.about-hero,
-.hero {
+.about-hero {
   position: relative;
   isolation: isolate;
   overflow: hidden;
   width: 100%;
-  padding: 0;
   background: #f0f1ed;
 }
 
-.about-hero-bg,
-.hero-background {
+/* Decorative background glow */
+.about-hero-bg {
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -65,8 +168,7 @@ html {
   pointer-events: none;
 }
 
-.about-hero-glow,
-.hero-glow {
+.about-hero-glow {
   position: absolute;
   top: -9.375rem;
   right: 5%;
@@ -77,11 +179,10 @@ html {
   filter: blur(60px);
 }
 
-/* 1. Khung chứa Hero (.about-hero-layout / .hero-layout / .about-container)
-   Max-width 1200px, căn giữa bằng margin: 0 auto, display: flex cân bằng trục dọc */
-.about-hero-layout,
-.about-hero .about-container,
-.hero-layout {
+/* --------------------------------------------------------------------------
+   1a. Hero frame: centred 1200px flex row, text left / visual right
+   -------------------------------------------------------------------------- */
+.about-hero-layout {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -92,15 +193,16 @@ html {
   padding: 60px 24px;
 }
 
-/* 2. Cụm nội dung bên trái (.about-hero-content / .hero-content) */
-.about-hero-content,
-.hero-content {
+/* --------------------------------------------------------------------------
+   1b. Left column: tag, heading, description, CTA
+   -------------------------------------------------------------------------- */
+.about-hero-content {
   flex: 1 1 55%;
   max-width: 620px;
   min-width: 0;
 }
 
-/* Pill tag synced with "DIGITAL HEALTHCARE" in index.html (#d92f44 / #ffffff = 4.73:1 AA) */
+/* Pill tag synced with "DIGITAL HEALTHCARE" in index.html (#ffffff on #d92f44 = 4.73:1) */
 .about-tag {
   display: inline-block;
   margin: 0 0 1.125rem;
@@ -118,9 +220,9 @@ html {
 .about-hero h1 {
   margin: 0 0 1.25rem;
   color: #151515;
-  font-size: clamp(2.375rem, 4.2vw, 3.875rem);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
   font-weight: 800;
-  line-height: 1.08;
+  line-height: 1.25;
   letter-spacing: -0.025em;
 }
 
@@ -168,146 +270,418 @@ html {
   transform: translateX(5px);
 }
 
-/* 3. Khối Visual Card màu đen bên phải (.about-team-note / .about-hero-card / .hero-card)
-   flex: 0 0 420px, padding 32px 28px, border 1px solid rgba(255,255,255,0.12),
-   box-shadow 0 20px 40px rgba(0,0,0,0.18), border-radius 20px */
-.about-team-note,
-.about-hero-card,
-.hero-card {
+/* --------------------------------------------------------------------------
+   1c. Right column wrapper — position: relative so the chips can orbit it
+   -------------------------------------------------------------------------- */
+.about-hero-visual {
   position: relative;
-  overflow: hidden;
+  isolation: isolate;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex: 0 0 420px;
-  width: 420px;
+  flex: 0 1 460px;
+  align-items: center;
+  justify-content: center;
+  width: 460px;
   max-width: 100%;
-  min-height: 19.75rem;
-  padding: 32px 28px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 20px;
-  background: #0f0f0f;
-  color: #ffffff;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+  min-height: 440px;
 }
 
-.about-team-note::before {
-  content: "";
-  position: absolute;
-  top: -4.5rem;
-  right: -4.5rem;
-  width: 13rem;
-  height: 13rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(217, 47, 68, 0.2) 0%, rgba(217, 47, 68, 0) 70%);
-  pointer-events: none;
-}
-
-.about-team-note-top {
+/* --------------------------------------------------------------------------
+   1d. Main mockup card (white, 24px radius, layered soft shadow)
+   -------------------------------------------------------------------------- */
+.about-mock-card {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  width: min(100%, 400px);
+  padding: 24px;
+  border: 1px solid #f0f0f0;
+  border-radius: 24px;
+  background: #ffffff;
+  color: #151515;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  animation: about-card-float 5s ease-in-out infinite;
+}
+
+/* Card header: icon + small caps title + "..." menu */
+.about-mock-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.about-team-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.625rem;
+.about-mock-icon {
+  display: grid;
+  flex: 0 0 42px;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #fff0f2;
+  color: #d92f44;
 }
 
-.about-team-logo {
-  display: block;
-  width: auto;
-  height: 2.125rem;
-}
-
-.about-team-brand-label {
-  color: #e5e7eb;
+.about-mock-title {
+  flex: 1;
+  color: #333333;
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.about-team-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.3rem 0.6875rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  color: #e5e7eb;
-  font-size: 0.6875rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.about-team-note-body {
-  position: relative;
-  z-index: 1;
+.about-mock-menu {
+  display: grid;
+  place-items: center;
+  color: #6b7280;
 }
 
-.about-team-accent {
+.about-mock-icon svg,
+.about-mock-menu svg,
+.about-chip svg,
+.about-chip-pill svg {
   display: block;
-  width: 2.25rem;
-  height: 0.1875rem;
-  margin-bottom: 0.9375rem;
-  border-radius: 999px;
-  background: #d92f44;
 }
 
-.about-team-quote {
-  margin: 0 0 0.625rem;
-  color: #ffffff;
-  font-size: clamp(1.625rem, 2.2vw, 1.95rem);
-  font-weight: 800;
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-}
-
-.about-team-quote strong {
-  color: #ff5c6a;
-}
-
-.about-team-caption {
-  margin: 0;
-  color: #cbd5e1;
-  font-size: 0.9375rem;
-  line-height: 1.55;
-}
-
-.about-team-note-footer {
-  position: relative;
-  z-index: 1;
+/* Card body: copy on the left, team illustration on the right */
+.about-mock-body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: #a3a3a3;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  gap: 12px;
+  padding: 22px 0;
 }
 
-.about-team-status {
-  display: inline-flex;
+.about-mock-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.about-mock-eyebrow {
+  display: block;
+  margin-bottom: 10px;
+  color: #d92f44;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.about-mock-heading {
+  margin: 0;
+  color: #151515;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.about-mock-heading strong {
+  color: #d92f44;
+}
+
+.about-mock-text {
+  margin: 10px 0 0;
+  color: #6b7280;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   1e. CSS illustration: four team members (same technique as jobs.html)
+   -------------------------------------------------------------------------- */
+.about-team-illustration {
+  position: relative;
+  flex: 0 0 148px;
+  height: 132px;
+}
+
+/* Soft floor shadow under the group */
+.about-team-illustration::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 6px;
+  right: 6px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.about-person {
+  position: absolute;
+  bottom: 4px;
+  width: 40px;
+  border-radius: 20px 20px 8px 8px;
+  transform-origin: bottom center;
+}
+
+/* Head */
+.about-person::before {
+  content: "";
+  position: absolute;
+  top: -29px;
+  left: 7px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #f1c5a5;
+  box-shadow: inset 0 5px 0 #4b3028;
+}
+
+.about-person-one {
+  left: 0;
+  height: 64px;
+  background: #d92f44;
+  animation: about-person-bob 3s ease-in-out infinite;
+}
+
+.about-person-two {
+  left: 34px;
+  z-index: 2;
+  height: 84px;
+  background: #344b68;
+  animation: about-person-bob 3s ease-in-out 0.3s infinite;
+}
+
+.about-person-three {
+  left: 70px;
+  z-index: 3;
+  height: 76px;
+  background: #e7a84b;
+  animation: about-person-bob 3s ease-in-out 0.6s infinite;
+}
+
+.about-person-three::before {
+  box-shadow: inset 0 6px 0 #1f2937;
+}
+
+.about-person-four {
+  right: 0;
+  z-index: 1;
+  height: 60px;
+  background: #2f9e8f;
+  animation: about-person-bob 3s ease-in-out 0.9s infinite;
+}
+
+.about-person-four::before {
+  box-shadow: inset 0 5px 0 #7c4a2d;
+}
+
+/* Card footer: green live dot + contributors + course meta */
+.about-mock-footer {
+  display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 9px;
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
+  color: #4b5563;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .about-status-dot {
-  width: 0.4375rem;
-  height: 0.4375rem;
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #35b779;
-  box-shadow: 0 0 0 3px rgba(53, 183, 121, 0.18);
+  box-shadow: 0 0 0 4px rgba(53, 183, 121, 0.12);
+  animation: about-status-pulse 2s ease-in-out infinite;
+}
+
+.about-mock-meta {
+  margin-left: auto;
+  color: #6b7280;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   1f. Floating satellite chips (absolute, around the main card)
+   -------------------------------------------------------------------------- */
+.about-chip {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(217, 47, 68, 0.12);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Chip 1 — top-left, red heart-pulse */
+.about-chip-health {
+  top: 6%;
+  left: 0;
+  color: #d92f44;
+  animation: about-icon-float 4s ease-in-out infinite;
+}
+
+/* Chip 2 — top-right, teal growth chart */
+.about-chip-growth {
+  top: 13%;
+  right: 0;
+  border-color: rgba(47, 158, 143, 0.18);
+  color: #1f8a7d;
+  animation: about-icon-float 4s ease-in-out 1s infinite;
+}
+
+/* Chip 3 — bottom-right horizontal pill */
+.about-chip-pill {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 7%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px 10px 10px;
+  border: 1px solid #eeeeee;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+  animation: about-chip-float 4s ease-in-out 1.5s infinite;
+}
+
+.about-chip-pill-icon {
+  display: grid;
+  flex: 0 0 38px;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff0f2;
+  color: #d92f44;
+}
+
+.about-chip-pill-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.about-chip-pill-copy strong,
+.about-chip-pill-copy small {
+  display: block;
+  white-space: nowrap;
+}
+
+.about-chip-pill-copy strong {
+  color: #222222;
+  font-size: 0.85rem;
+  line-height: 1.25;
+}
+
+.about-chip-pill-copy small {
+  margin-top: 2px;
+  color: #6b7280;
+  font-size: 0.7rem;
+}
+
+.about-chip-pill-check {
+  display: grid;
+  place-items: center;
+  color: #16a34a;
+}
+
+/* Small decorative particles */
+.about-particle {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  background: #d92f44;
+  opacity: 0.5;
+}
+
+.about-particle-one {
+  top: 4%;
+  right: 26%;
+  width: 9px;
+  height: 9px;
+  animation: about-particle-drift 5s ease-in-out infinite;
+}
+
+.about-particle-two {
+  bottom: 14%;
+  left: 8%;
+  width: 6px;
+  height: 6px;
+  animation: about-particle-drift 4s ease-in-out 1s infinite;
+}
+
+/* --------------------------------------------------------------------------
+   1g. Hero keyframes (prefixed "about-" to avoid clashing with jobs/index)
+   -------------------------------------------------------------------------- */
+@keyframes about-card-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -9px;
+  }
+}
+
+@keyframes about-chip-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -7px;
+  }
+}
+
+@keyframes about-icon-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(5deg);
+  }
+}
+
+@keyframes about-person-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes about-status-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(53, 183, 121, 0.12);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(53, 183, 121, 0.04);
+  }
+}
+
+@keyframes about-particle-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translate(8px, -15px);
+    opacity: 0.8;
+  }
 }
 
 
@@ -991,11 +1365,13 @@ body:has(#dark-toggle:checked) .about-btn:focus-visible {
   box-shadow: 0 10px 24px rgba(217, 47, 68, 0.28);
 }
 
-body:has(#dark-toggle:checked) .about-team-note,
-body:has(#dark-toggle:checked) .about-hero-card,
-body:has(#dark-toggle:checked) .hero-card {
-  border-color: rgba(255, 255, 255, 0.14);
-  background: #0b0b0b;
+/* Hero mockup keeps its light "app" surface in dark mode (as in jobs.html),
+   with deeper shadows so it still lifts off the #171717 background */
+body:has(#dark-toggle:checked) .about-mock-card,
+body:has(#dark-toggle:checked) .about-chip,
+body:has(#dark-toggle:checked) .about-chip-pill {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 body:has(#dark-toggle:checked) .about-hero h1,
@@ -1232,22 +1608,19 @@ body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
 }
 
 /* --------------------------------------------------------------------------
-   8b. Responsive Hero (< 992px):
-   Đổi flex-direction sang column, căn giữa khối chữ và Card đen hiển thị
-   bên dưới với width: 100%; max-width: 480px.
+   8b. Responsive Hero (< 992px): stack vertically, centre the text block and
+       place the mockup underneath (width: 100%; max-width: 480px).
+       Chips stay inside the wrapper (no negative offsets) => no overflow-x.
    -------------------------------------------------------------------------- */
 @media (max-width: 991px) {
-  .about-hero-layout,
-  .about-hero .about-container,
-  .hero-layout {
+  .about-hero-layout {
     flex-direction: column;
     align-items: center;
     gap: 2.5rem;
     padding: 48px 24px;
   }
 
-  .about-hero-content,
-  .hero-content {
+  .about-hero-content {
     flex: 1 1 auto;
     width: 100%;
     max-width: 620px;
@@ -1256,17 +1629,31 @@ body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
   }
 
   .about-hero-text {
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
   }
 
-  .about-team-note,
-  .about-hero-card,
-  .hero-card {
+  .about-hero-visual {
     flex: 0 1 auto;
     width: 100%;
     max-width: 480px;
+    min-height: 420px;
     text-align: left;
+  }
+
+  .about-chip-health {
+    top: 2%;
+    left: 2%;
+  }
+
+  .about-chip-growth {
+    top: 8%;
+    right: 2%;
+  }
+
+  .about-chip-pill {
+    right: 2%;
+    bottom: 3%;
   }
 }
 
@@ -1274,9 +1661,7 @@ body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
    8c. Mobile (< 768px)
    -------------------------------------------------------------------------- */
 @media (max-width: 767px) {
-  .about-hero-layout,
-  .about-hero .about-container,
-  .hero-layout {
+  .about-hero-layout {
     gap: 2rem;
     padding: 40px 16px;
   }
@@ -1290,15 +1675,81 @@ body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
     font-size: 1rem;
   }
 
-  .about-team-note,
-  .about-hero-card,
-  .hero-card {
-    max-width: 100%;
+  /* Visual sizes itself to the card; padding leaves room for the chips */
+  .about-hero-visual {
     min-height: 0;
-    gap: 1.25rem;
-    padding: 24px 20px;
+    padding: 34px 0 56px;
   }
 
+  .about-mock-card {
+    padding: 20px;
+  }
+
+  .about-chip {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+  }
+
+  .about-chip-health {
+    top: 0;
+    left: 0;
+  }
+
+  .about-chip-growth {
+    top: 6px;
+    right: 0;
+  }
+
+  .about-chip-pill {
+    right: 0;
+    bottom: 0;
+  }
+}
+
+/* Small phones (< 480px): stack the card body, drop the square chips and
+   centre the pill under the card so nothing overflows horizontally */
+@media (max-width: 479px) {
+  .about-hero-visual {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .about-chip,
+  .about-particle {
+    display: none;
+  }
+
+  .about-mock-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-team-illustration {
+    flex-basis: auto;
+    width: 148px;
+    align-self: center;
+  }
+
+  .about-mock-footer {
+    flex-wrap: wrap;
+  }
+
+  .about-mock-meta {
+    margin-left: 17px;
+    flex-basis: 100%;
+  }
+
+  .about-chip-pill {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin-top: -14px;
+  }
+}
+
+/* Mobile (< 768px): main content */
+@media (max-width: 767px) {
   .about-content-section {
     padding: 2rem 0 4rem;
   }
@@ -1371,5 +1822,11 @@ body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
   .about-member-card:hover,
   .contribution-item:hover {
     transform: none;
+  }
+
+  .about-hero-visual,
+  .about-hero-visual *,
+  .about-hero-visual *::before {
+    animation: none !important;
   }
 }
