@@ -21,29 +21,66 @@
     integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
     crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <!-- Embedded CSS (Required by Assignment Rubric) -->
+  <!-- Embedded CSS (Required by Assignment Rubric) — styles Card 03: Team Photo -->
   <style>
     .team-photo-wrapper {
-      border: 2px solid #e5e5e5;
-      border-radius: 8px;
+      margin: 0;
       overflow: hidden;
-      margin: 1.5rem 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #f0f0f0;
+      border-radius: 16px;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .team-photo-wrapper:hover {
+      border-color: #f6c9cc;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Inner frame clips the zoom so the image never overlaps the caption */
+    .team-photo-frame {
+      overflow: hidden;
+      background: #f4f4f2;
     }
 
     .team-photo-wrapper img {
-      width: 100%;
-      height: auto;
       display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      transition: transform 0.5s ease;
+    }
+
+    .team-photo-wrapper:hover img {
+      transform: scale(1.02);
     }
 
     .team-photo-wrapper figcaption {
-      padding: 0.75rem 1rem;
-      font-size: 0.875rem;
-      color: #5f5f5a;
+      padding: 1rem 1.25rem 1.125rem;
+      border-top: 1px solid #f0f0f0;
+      background: #fafafa;
+      color: #111827;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      line-height: 1.5;
       text-align: center;
-      background: #fafaf8;
-      border-top: 1px solid #e5e5e5;
+    }
+
+    .team-photo-wrapper figcaption span {
+      display: block;
+      margin-top: 0.25rem;
+      color: #4b5563;
+      font-size: 0.8125rem;
+      font-weight: 400;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .team-photo-wrapper,
+      .team-photo-wrapper img {
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -260,52 +297,68 @@
 
               <div class="about-card-body">
 
-                <!-- Group name & subject -->
+                <!-- Group name -->
                 <div class="about-info-block">
-                  <p class="about-info-label">Group Name</p>
+                  <p class="about-info-label"><svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg><span>Group Name</span></p>
                   <p class="about-info-value">T1 &mdash; <strong>Together as One</strong></p>
                 </div>
 
+                <!-- Subject -->
                 <div class="about-info-block">
-                  <p class="about-info-label">Subject</p>
+                  <p class="about-info-label"><svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span>Subject</span></p>
                   <p class="about-info-value">COS10026 &mdash; Web Technology, Project 1<br>
                     <span class="about-uni">Swinburne University of Technology</span>
                   </p>
                 </div>
 
-                <!-- Schedule using nested lists -->
+                <!-- Schedule using a valid nested list -->
                 <div class="about-info-block">
-                  <p class="about-info-label">Class Schedule</p>
+                  <p class="about-info-label"><svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Class Schedule</span></p>
                   <ul class="about-schedule-list">
-
-                    <strong>Lecture</strong>
-                    <ul>
-                      <li>Wednesday &mdash; 9:00&nbsp;AM &ndash; 12:00&nbsp;PM</li>
-                    </ul>
-
-
+                    <li>
+                      <strong>Lecture</strong>
+                      <ul>
+                        <li>Wednesday &mdash; 9:00&nbsp;AM &ndash; 12:00&nbsp;PM</li>
+                      </ul>
+                    </li>
                   </ul>
                 </div>
 
-                <!-- Member list -->
+                <!-- Member list: micro-cards with role badge + student ID -->
                 <div class="about-info-block">
-                  <p class="about-info-label">Group Members</p>
+                  <p class="about-info-label"><svg class="about-info-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Group Members</span></p>
                   <ul class="about-member-list">
-                    <li>
-                      <span class="about-member-name">Thai Bao Nguyen</span>
-                      <span class="member-id">104848806</span>
+                    <li class="about-member-card">
+                      <span class="about-member-avatar" aria-hidden="true">TB</span>
+                      <span class="about-member-info">
+                        <span class="about-member-name">Thai Bao Nguyen</span>
+                        <span class="about-member-role role-leader">Team Leader</span>
+                      </span>
+                      <span class="member-id"><span class="visually-hidden">Student ID: </span>104848806</span>
                     </li>
-                    <li>
-                      <span class="about-member-name">Minh Hoang Bui</span>
-                      <span class="member-id">106208127</span>
+                    <li class="about-member-card">
+                      <span class="about-member-avatar" aria-hidden="true">MH</span>
+                      <span class="about-member-info">
+                        <span class="about-member-name">Minh Hoang Bui</span>
+                        <span class="about-member-role role-developer">Developer</span>
+                      </span>
+                      <span class="member-id"><span class="visually-hidden">Student ID: </span>106208127</span>
                     </li>
-                    <li>
-                      <span class="about-member-name">Sy Tho Nguyen</span>
-                      <span class="member-id">105705546</span>
+                    <li class="about-member-card">
+                      <span class="about-member-avatar" aria-hidden="true">ST</span>
+                      <span class="about-member-info">
+                        <span class="about-member-name">Sy Tho Nguyen</span>
+                        <span class="about-member-role role-developer">Developer</span>
+                      </span>
+                      <span class="member-id"><span class="visually-hidden">Student ID: </span>105705546</span>
                     </li>
-                    <li>
-                      <span class="about-member-name">Anh Vu Duong</span>
-                      <span class="member-id">106404734</span>
+                    <li class="about-member-card">
+                      <span class="about-member-avatar" aria-hidden="true">AV</span>
+                      <span class="about-member-info">
+                        <span class="about-member-name">Anh Vu Duong</span>
+                        <span class="about-member-role role-developer">Developer</span>
+                      </span>
+                      <span class="member-id"><span class="visually-hidden">Student ID: </span>106404734</span>
                     </li>
                   </ul>
                 </div>
@@ -328,7 +381,7 @@
                     <dt class="contribution-member">
                       <span class="contribution-name">Thai Bao Nguyen</span>
                       <span class="member-id">104848806</span>
-                      <span class="contribution-role">Leader</span>
+                      <span class="contribution-role role-leader">Team Leader</span>
                     </dt>
                     <dd class="contribution-page">
                       <span class="contribution-label">Assigned Page</span>
@@ -363,7 +416,7 @@
                     <dt class="contribution-member">
                       <span class="contribution-name">Minh Hoang Bui</span>
                       <span class="member-id">106208127</span>
-                      <span class="contribution-role">Member</span>
+                      <span class="contribution-role role-developer">Developer</span>
                     </dt>
                     <dd class="contribution-page">
                       <span class="contribution-label">Assigned Page</span>
@@ -398,7 +451,7 @@
                     <dt class="contribution-member">
                       <span class="contribution-name">Sy Tho Nguyen</span>
                       <span class="member-id">105705546</span>
-                      <span class="contribution-role">Member</span>
+                      <span class="contribution-role role-developer">Developer</span>
                     </dt>
                     <dd class="contribution-page">
                       <span class="contribution-label">Assigned Page</span>
@@ -433,7 +486,7 @@
                     <dt class="contribution-member">
                       <span class="contribution-name">Anh Vu Duong</span>
                       <span class="member-id">106404734</span>
-                      <span class="contribution-role">Member</span>
+                      <span class="contribution-role role-developer">Developer</span>
                     </dt>
                     <dd class="contribution-page">
                       <span class="contribution-label">Assigned Page</span>
@@ -455,7 +508,7 @@
                     </dd>
                     <dd class="contribution-quote">
                       <!-- inline style required by assignment rubric (demonstration of inline CSS) -->
-                      <blockquote style="border-left: 4px solid #ef4f5d; padding-left: 1rem; margin: 1rem 0;">
+                      <blockquote style="margin: 0; padding: 1.25rem 1.5rem; border-left: 4px solid #e2231a; border-radius: 0 12px 12px 0; background: #fff5f5; box-shadow: inset 0 0 0 1px #fde4e4; font-family: Georgia, 'Times New Roman', serif; font-style: italic; line-height: 1.7;">
                         <p lang="vi">&ldquo;Không có lỗi nào không sửa được, chỉ có code chưa commit đủ nhiều.&rdquo;
                         </p>
                         <p class="contribution-quote-en">&ldquo;There is no bug that cannot be fixed, only code that
@@ -478,8 +531,14 @@
 
               <div class="about-card-body">
                 <figure class="team-photo-wrapper">
-                  <img src="images/t1_team.png" alt="T1 Group Members Photo">
-                  <figcaption>T1 Team Members &mdash; Working together on COS10026 Web Technology Project 1.
+                  <div class="team-photo-frame">
+                    <img src="images/t1_team.png"
+                      alt="Group photo of the four T1 members — Thai Bao Nguyen, Minh Hoang Bui, Sy Tho Nguyen and Anh Vu Duong — standing together and smiling at the camera."
+                      loading="lazy" decoding="async">
+                  </div>
+                  <figcaption>
+                    T1 Team Members
+                    <span>Working together on COS10026 Web Technology &mdash; Project 1.</span>
                   </figcaption>
                 </figure>
               </div><!-- /.about-card-body -->
@@ -507,28 +566,28 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Thai Bao Nguyen</td>
+                        <th scope="row">Thai Bao Nguyen</th>
                         <td>Hai Duong</td>
                         <td>Full-stack Lead</td>
                         <td>React &amp; Spring Boot</td>
                         <td>Gaming &amp; Coding</td>
                       </tr>
                       <tr>
-                        <td>Minh Hoang Bui</td>
+                        <th scope="row">Minh Hoang Bui</th>
                         <td>Hai Phong</td>
                         <td>AI Engineer</td>
                         <td>Python &amp; React</td>
                         <td>Music &amp; Football</td>
                       </tr>
                       <tr>
-                        <td>Sy Tho Nguyen</td>
+                        <th scope="row">Sy Tho Nguyen</th>
                         <td>Nghe An</td>
                         <td>Backend Engineer</td>
                         <td>Java &amp; Node.js</td>
                         <td>Chess &amp; LeetCode</td>
                       </tr>
                       <tr>
-                        <td>Anh Vu Duong</td>
+                        <th scope="row">Anh Vu Duong</th>
                         <td>Ha Tinh</td>
                         <td>UI/UX Developer</td>
                         <td>HTML5/CSS3 &amp; Vite</td>
