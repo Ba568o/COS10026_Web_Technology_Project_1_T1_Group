@@ -7470,3 +7470,29 @@ body.jobs-page #main-content .hero .hero-content > .hero-text {
     transition: none;
   }
 }
+
+/* ==========================================================================
+ * JOBS HERO SPACING FIX
+ * Match the vertical breathing room of the Apply page without changing
+ * the Jobs hero content, columns, illustration, or following sections.
+ * ========================================================================== */
+body.jobs-page #main-content > .hero {
+  padding: 4.5rem 0 5rem;
+}
+
+@media (max-width: 700px) {
+  body.jobs-page #main-content > .hero {
+    padding: 2.5rem 0 3rem;
+  }
+}
+
+
+/* ==========================================================================
+ * ABOUT HERO HEADING FIX
+ * Restore the About page's own heading scale instead of the shared 4rem size.
+ * This keeps the intended two-line heading without changing other pages.
+ * ========================================================================== */
+body.about-page .about-hero h1 {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  line-height: 1.25;
+}
