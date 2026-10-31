@@ -33,6 +33,109 @@ html {
   z-index: 9999;
 }
 
+
+/* --------------------------------------------------------------------------
+   0a. Robust Bilingual Language Switching (HTML5 & CSS3 Pure)
+   Default / #language-en / #lang-en: English active; Vietnamese hidden.
+   Active / #language-vi / #lang-vi: Vietnamese active; English hidden.
+   Prevents text duplication or overlap across sidebar navigation, hero visual card,
+   and member quotes.
+   -------------------------------------------------------------------------- */
+
+/* Default & English checked: Hide all Vietnamese elements completely */
+.language-vi,
+.lang-vi,
+body:has(#language-en:checked) .language-vi,
+body:has(#language-en:checked) .lang-vi,
+body:has(#lang-en:checked) .language-vi,
+body:has(#lang-en:checked) .lang-vi {
+  display: none !important;
+}
+
+/* Vietnamese checked: Hide all English elements completely */
+body:has(#language-vi:checked) .language-en,
+body:has(#language-vi:checked) .lang-en,
+body:has(#lang-vi:checked) .language-en,
+body:has(#lang-vi:checked) .lang-en {
+  display: none !important;
+}
+
+/* Vietnamese checked: Reveal Vietnamese inline/general elements */
+body:has(#language-vi:checked) .language-vi,
+body:has(#language-vi:checked) .lang-vi,
+body:has(#lang-vi:checked) .language-vi,
+body:has(#lang-vi:checked) .lang-vi {
+  display: revert !important;
+}
+
+/* Ensure language-specific search forms display properly */
+body:has(#language-vi:checked) .nav-search.language-vi,
+body:has(#lang-vi:checked) .nav-search.language-vi {
+  display: flex !important;
+}
+
+/* Block-level elements in English mode (default) */
+.about-step-text > .language-en,
+.about-step-text > .lang-en,
+.about-mock-heading > .language-en,
+.about-mock-heading > .lang-en,
+.contribution-quote blockquote p.language-en,
+.contribution-quote blockquote p.lang-en {
+  display: block !important;
+}
+
+/* Explicitly hide English block-level elements when Vietnamese is active */
+body:has(#language-vi:checked) .about-step-text > .language-en,
+body:has(#language-vi:checked) .about-step-text > .lang-en,
+body:has(#language-vi:checked) .about-mock-heading > .language-en,
+body:has(#language-vi:checked) .about-mock-heading > .lang-en,
+body:has(#language-vi:checked) .contribution-quote blockquote p.language-en,
+body:has(#language-vi:checked) .contribution-quote blockquote p.lang-en,
+body:has(#lang-vi:checked) .about-step-text > .language-en,
+body:has(#lang-vi:checked) .about-step-text > .lang-en,
+body:has(#lang-vi:checked) .about-mock-heading > .language-en,
+body:has(#lang-vi:checked) .about-mock-heading > .lang-en,
+body:has(#lang-vi:checked) .contribution-quote blockquote p.language-en,
+body:has(#lang-vi:checked) .contribution-quote blockquote p.lang-en {
+  display: none !important;
+}
+
+/* Block-level elements in Vietnamese mode */
+body:has(#language-vi:checked) .about-step-text > .language-vi,
+body:has(#language-vi:checked) .about-step-text > .lang-vi,
+body:has(#language-vi:checked) .about-mock-heading > .language-vi,
+body:has(#language-vi:checked) .about-mock-heading > .lang-vi,
+body:has(#language-vi:checked) .contribution-quote blockquote p.language-vi,
+body:has(#language-vi:checked) .contribution-quote blockquote p.lang-vi,
+body:has(#lang-vi:checked) .about-step-text > .language-vi,
+body:has(#lang-vi:checked) .about-step-text > .lang-vi,
+body:has(#lang-vi:checked) .about-mock-heading > .language-vi,
+body:has(#lang-vi:checked) .about-mock-heading > .lang-vi,
+body:has(#lang-vi:checked) .contribution-quote blockquote p.language-vi,
+body:has(#lang-vi:checked) .contribution-quote blockquote p.lang-vi {
+  display: block !important;
+}
+
+/* Quote paragraph typography */
+.contribution-quote blockquote p.language-vi,
+.contribution-quote blockquote p.lang-vi,
+.contribution-quote blockquote p.language-en,
+.contribution-quote blockquote p.lang-en {
+  margin: 0;
+  color: #111827;
+  font-family: "Lora", "Merriweather", "Times New Roman", Georgia, serif;
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+body:has(#dark-toggle:checked) .contribution-quote blockquote p.language-en,
+body:has(#dark-toggle:checked) .contribution-quote blockquote p.lang-en,
+body:has(#dark-toggle:checked) .contribution-quote blockquote p.language-vi,
+body:has(#dark-toggle:checked) .contribution-quote blockquote p.lang-vi {
+  color: #f5f5f5;
+}
+
 /* Container — 80rem outer with 2.5rem side padding = 75rem (1200px) inner width,
    matching #main-content .container (max-width: 1200px) in index.css */
 .about-container {
@@ -117,9 +220,9 @@ html {
 .about-hero h1 {
   margin: 0 0 1.25rem;
   color: #151515;
-  font-size: clamp(2.375rem, 4.2vw, 3.875rem);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
   font-weight: 800;
-  line-height: 1.08;
+  line-height: 1.25;
   letter-spacing: -0.025em;
 }
 
