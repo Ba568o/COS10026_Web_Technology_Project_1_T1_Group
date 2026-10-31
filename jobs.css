@@ -1029,3 +1029,61 @@ body:has(#dark-toggle:checked) {
         transition: none !important;
     }
 }
+
+/* --------------------------------------------------------------------------
+   JOBS HERO - FULL-WIDTH LAYOUT
+   Overrides the shared #main-content .container width only inside this Hero.
+   -------------------------------------------------------------------------- */
+
+#main-content .hero > .container.hero-layout {
+    box-sizing: border-box;
+    width: 90%;
+    max-width: 1800px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+}
+
+#main-content .hero > .container.hero-layout > .hero-content {
+    min-width: 0;
+    max-width: 45rem;
+}
+
+#main-content .hero > .container.hero-layout > .jobs-hero-animation {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 38rem;
+    justify-self: end;
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    #main-content .hero > .container.hero-layout {
+        width: 92%;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+        gap: 1.5rem;
+    }
+
+    #main-content .hero > .container.hero-layout > .jobs-hero-animation {
+        max-width: 30rem;
+    }
+}
+
+@media (max-width: 700px) {
+    #main-content .hero > .container.hero-layout {
+        width: 90%;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2rem;
+    }
+
+    #main-content .hero > .container.hero-layout > .jobs-hero-animation {
+        width: min(100%, 24rem);
+        max-width: 24rem;
+        justify-self: center;
+        margin: 0 auto;
+    }
+}
