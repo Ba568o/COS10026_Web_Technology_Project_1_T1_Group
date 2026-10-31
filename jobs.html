@@ -20,7 +20,7 @@
 </head>
 
 <body id="top">
-        <!-- HEADER -->
+        <!-- HEADER: brand, primary navigation, display settings, and language-specific search. -->
 
         <a class="skip-link" href="#main-content">Skip to main content</a>
 
@@ -37,10 +37,10 @@
 
                         <!-- Primary navigation; the brand provides the link to Home. -->
                         <ul class="nav-links">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="jobs.html">Jobs</a></li>
-                                <li><a href="apply.html">Apply</a></li>
-                                <li><a href="about.html">About</a></li>
+                                <li><a href="index.html"><span class="language-en">Home</span><span class="language-vi">Trang chủ</span></a></li>
+                                <li><a href="jobs.html"><span class="language-en">Jobs</span><span class="language-vi">Tuyển dụng</span></a></li>
+                                <li><a href="apply.html"><span class="language-en">Apply</span><span class="language-vi">Ứng tuyển</span></a></li>
+                                <li><a href="about.html"><span class="language-en">About</span><span class="language-vi">Giới thiệu</span></a></li>
                         </ul>
 
                         <!-- Display settings, site search, and the primary call to action. -->
@@ -104,24 +104,39 @@
                                         </div>
                                 </div>
 
-                                <form class="nav-search" action="https://www.google.com/search" method="GET"
+                                <!-- English search form; visibility is controlled by the language setting. -->
+                                <form class="nav-search language-en" action="https://www.google.com/search" method="GET"
                                         role="search" target="_blank">
-                                        <label class="visually-hidden" for="site-search">Search</label>
-                                        <button type="submit" class="nav-search-submit" aria-label="Submit search"><i
-                                                        class="fa-solid fa-magnifying-glass"
-                                                        aria-hidden="true"></i></button>
-                                        <input type="search" id="site-search" name="q" placeholder="Search" required>
+                                        <label class="visually-hidden" for="site-search-en">Search</label>
+                                        <button type="submit" class="nav-search-submit" aria-label="Submit search">
+                                                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                                        </button>
+                                        <input type="search" id="site-search-en" name="q" placeholder="SEARCH" required>
                                         <input type="hidden" name="as_sitesearch"
                                                 value="ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group">
                                 </form>
 
-                                <a class="btn-pill" href="apply.html">Get started</a>
+                                <!-- Vietnamese search form; visibility is controlled by the language setting. -->
+                                <form class="nav-search language-vi" action="https://www.google.com/search" method="GET"
+                                        role="search" target="_blank">
+                                        <label class="visually-hidden" for="site-search-vi">Tìm kiếm</label>
+                                        <button type="submit" class="nav-search-submit" aria-label="Gửi tìm kiếm">
+                                                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                                        </button>
+                                        <input type="search" id="site-search-vi" name="q" placeholder="TÌM KIẾM" required>
+                                        <input type="hidden" name="as_sitesearch"
+                                                value="ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group">
+                                </form>
+
+                                <a class="btn-pill" href="apply.html">
+                                        <span class="language-en">Get started</span>
+                                <span class="language-vi">Bắt đầu</span></a>
                         </div>
                 </nav>
         </header>
         <main id="main-content">
 
-                <!-- HERO -->
+                <!-- HERO: page introduction and online healthcare illustration. -->
                 <section class="hero" aria-labelledby="apply-heading">
 
                         <!-- Background animation -->
@@ -136,114 +151,111 @@
                                 <!-- Left content -->
                                 <div class="hero-content">
 
-                                        <p class="tag">DIGITAL HEALTHCARE</p>
+                                        <p class="tag"><span class="language-en">DIGITAL HEALTHCARE</span><span class="language-vi">CHĂM SÓC SỨC KHỎE SỐ</span></p>
 
                                         <h1 id="apply-heading">
-                                                Better Health <br> Smarter Care
+                                                <span class="language-en">Better Health <br> Smarter Care</span>
+                                                <span class="language-vi">Sức khỏe tốt hơn <br> Chăm sóc thông minh hơn</span>
                                         </h1>
 
                                         <p class="hero-text">
-                                                T1 is a digital health and wellness provider delivering accessible
-                                                online health information, convenient appointment booking and
-                                                patient-focused digital services
+                                                <span class="language-en">T1 is a digital health and wellness provider delivering accessible online health information, convenient appointment booking and patient-focused digital services.</span>
+                                                <span class="language-vi">T1 là đơn vị cung cấp dịch vụ sức khỏe và chăm sóc sức khỏe số, mang đến thông tin y tế trực tuyến dễ tiếp cận, đặt lịch hẹn thuận tiện và các dịch vụ số lấy bệnh nhân làm trung tâm.</span>
                                         </p>
 
                                         <a class="btn btn-submit" href="apply.css">
-                                                APPLY NOW
-                                                <span> <i class="fa-solid fa-arrow-right-long"></i></span>
+                                                <span class="language-en">APPLY NOW</span>
+                                                <span class="language-vi">ỨNG TUYỂN NGAY</span>
+                                                <span aria-hidden="true"><i class="fa-solid fa-arrow-right-long"></i></span>
                                         </a>
 
                                 </div>
 
-                                <!-- Right: Online healthcare animation -->
-                                <div class="health-animation">
+                                <!-- Right: Shared digital-health animation for Jobs, Apply, and About pages. -->
+                                <div class="page-hero-animation jobs-hero-animation" aria-label="Digital healthcare careers illustration">
 
-                                        <!-- Floating medical icons -->
-                                        <div class="float-icon icon-heart" aria-hidden="true">
-                                                <i class="fa-solid fa-heart-pulse"></i>
-                                        </div>
+                                        <!-- Main floating interface card -->
+                                        <div class="animation-card career-main-card">
 
-                                        <div class="float-icon icon-cross" aria-hidden="true">
-                                                <i class="fa-solid fa-stethoscope"></i>
-                                        </div>
-
-                                        <div class="float-icon icon-plus" aria-hidden="true">
-                                                <i class="fa-solid fa-plus"></i>
-                                        </div>
-
-                                        <!-- Video consultation window -->
-                                        <div class="video-window">
-
-                                                <div class="video-header">
-                                                        <span class="live-dot"></span>
-                                                        <span>ONLINE CONSULTATION</span>
-                                                        <i class="fa-solid fa-ellipsis"></i>
-                                                </div>
-
-                                                <div class="doctor-area">
-
-                                                        <div class="doctor-avatar" aria-hidden="true">
-
-                                                                <div class="doctor-hair"></div>
-
-                                                                <div class="doctor-face">
-                                                                        <div class="doctor-eyes"></div>
-                                                                        <div class="doctor-smile"></div>
-                                                                </div>
-
-                                                                <div class="doctor-neck"></div>
-
-                                                                <div class="doctor-coat">
-                                                                        <div class="doctor-shirt"></div>
-                                                                        <div class="doctor-pocket">T1</div>
-                                                                </div>
-
-                                                                <div class="doctor-stethoscope"></div>
-
-                                                        </div>
-
-                                                        <div class="doctor-label">
-                                                                <i class="fa-solid fa-circle-check"></i>
-                                                                Your doctor is here
-                                                        </div>
-
-                                                </div>
-
-                                                <div class="call-controls">
-                                                        <span><i class="fa-solid fa-microphone"></i></span>
-                                                        <span><i class="fa-solid fa-video"></i></span>
-                                                        <span class="end-call">
-                                                                <i class="fa-solid fa-phone"></i>
+                                                <div class="career-card-header">
+                                                        <span class="career-card-icon" aria-hidden="true">
+                                                                <i class="fa-solid fa-briefcase-medical"></i>
+                                                        </span>
+                                                        <span class="career-card-heading">
+                                                                <span class="language-en">CAREER OPPORTUNITIES</span>
+                                                                <span class="language-vi">CƠ HỘI NGHỀ NGHIỆP</span>
+                                                        </span>
+                                                        <span class="career-card-menu" aria-hidden="true">
+                                                                <i class="fa-solid fa-ellipsis"></i>
                                                         </span>
                                                 </div>
 
+                                                <div class="career-card-content">
+                                                        <div class="career-card-copy">
+                                                                <span class="career-eyebrow">
+                                                                        <span class="language-en">BUILD YOUR FUTURE</span>
+                                                                        <span class="language-vi">XÂY DỰNG TƯƠNG LAI</span>
+                                                                </span>
+                                                                <strong>
+                                                                        <span class="language-en">Make an impact with T1</span>
+                                                                        <span class="language-vi">Cùng T1 tạo nên khác biệt</span>
+                                                                </strong>
+                                                                <p>
+                                                                        <span class="language-en">Grow your skills in digital healthcare.</span>
+                                                                        <span class="language-vi">Phát triển kỹ năng trong lĩnh vực chăm sóc sức khỏe số.</span>
+                                                                </p>
+                                                        </div>
+
+                                                        <div class="career-team-illustration" aria-hidden="true">
+                                                                <span class="team-person person-one"></span>
+                                                                <span class="team-person person-two"></span>
+                                                                <span class="team-person person-three"></span>
+                                                        </div>
+                                                </div>
+
+                                                <div class="career-card-footer">
+                                                        <span class="career-status-dot"></span>
+                                                        <span>
+                                                                <span class="language-en">Opportunities at T1</span>
+                                                                <span class="language-vi">Cơ hội tại T1</span>
+                                                        </span>
+                                                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                                                </div>
+
                                         </div>
 
-                                        <!-- Floating health information card -->
-                                        <div class="health-status">
-
-                                                <div class="status-icon">
-                                                        <i class="fa-solid fa-heart-pulse"></i>
-                                                </div>
-
-                                                <div>
-                                                        <strong>Health matters</strong>
-                                                        <p>Care from anywhere</p>
-                                                </div>
-
-                                                <span class="status-check">
-                                                        <i class="fa-solid fa-check"></i>
+                                        <!-- Floating job notification -->
+                                        <div class="animation-card career-notification-card">
+                                                <span class="notification-icon" aria-hidden="true">
+                                                        <i class="fa-solid fa-user-plus"></i>
                                                 </span>
-
+                                                <span class="notification-copy">
+                                                        <strong>
+                                                                <span class="language-en">Join our team</span>
+                                                                <span class="language-vi">Gia nhập đội ngũ</span>
+                                                        </strong>
+                                                        <small>
+                                                                <span class="language-en">Your next step starts here</span>
+                                                                <span class="language-vi">Hành trình mới bắt đầu tại đây</span>
+                                                        </small>
+                                                </span>
+                                                <i class="fa-solid fa-check notification-check" aria-hidden="true"></i>
                                         </div>
 
-                                        <!-- Heartbeat decoration -->
-                                        <div class="pulse-line" aria-hidden="true">
-                                                <svg viewBox="0 0 240 55">
-                                                        <polyline
-                                                                points="0,30 45,30 60,30 75,8 91,47 108,18 122,30 160,30 175,30 190,12 205,30 240,30" />
-                                                </svg>
+                                        <!-- Floating digital-health symbol -->
+                                        <div class="animation-orbit-icon orbit-health" aria-hidden="true">
+                                                <i class="fa-solid fa-heart-pulse"></i>
                                         </div>
+
+                                        <!-- Floating growth symbol -->
+                                        <div class="animation-orbit-icon orbit-growth" aria-hidden="true">
+                                                <i class="fa-solid fa-chart-line"></i>
+                                        </div>
+
+                                        <!-- Decorative connection points for the CSS animation -->
+                                        <span class="animation-particle particle-one" aria-hidden="true"></span>
+                                        <span class="animation-particle particle-two" aria-hidden="true"></span>
+                                        <span class="animation-particle particle-three" aria-hidden="true"></span>
 
                                 </div>
 
@@ -1252,7 +1264,7 @@
                 </section>
         </main>
 
-        <!-- FOOTER -->
+        <!-- FOOTER: company branding, project resources, and website information. -->
         <footer class="site-footer">
                 <div class="footer-main">
                         <!-- Company branding -->
@@ -1326,7 +1338,7 @@
                                         &amp; CSS3 hợp
                                         lệ</span></span>
                         <span aria-hidden="true">·</span>
-                        <span><span class="language-en">WCAG 2.1 AA</span><span class="language-vi">WCAG 2.1
+                        <span><span class="language-en">WCAG 2.1 AA</span><span class="language-vi">Đạt chuẩn tiếp cận web WCAG 2.1
                                         AA</span></span>
                         <span aria-hidden="true">·</span>
                         <span><span class="language-en">GitHub Pages Deployed</span><span class="language-vi">Đã triển
