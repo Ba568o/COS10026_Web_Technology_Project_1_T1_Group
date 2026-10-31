@@ -682,7 +682,7 @@ body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] .about-step-
 .contribution-quote blockquote p {
   margin: 0 0 0.5rem;
   color: #111827;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Lora", "Merriweather", "Times New Roman", Georgia, serif;
   font-size: 1rem;
   font-style: italic;
   line-height: 1.7;
