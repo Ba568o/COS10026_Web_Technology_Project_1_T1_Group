@@ -150,7 +150,7 @@
           </a>
         </div>
 
-        <div class="team-animation apply-team-animation" aria-label="T1 team collaboration illustration">
+        <div class="team-animation apply-team-animation">
           <div class="team-orbit team-orbit-one" aria-hidden="true"></div>
           <div class="team-orbit team-orbit-two" aria-hidden="true"></div>
 
@@ -313,7 +313,7 @@
                     <span class="placeholder-field">
                       <input type="text" id="first-name" autocomplete="given-name" name="first_name" placeholder=" "
                       pattern="[A-Za-z\s]{2,50}" title="Only letters and spaces, 2-50 characters" maxlength="50" required
-                      aria-required="true">
+                      >
                       <span class="input-placeholder language-en" aria-hidden="true">e.g. Sy Tho</span>
                       <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Sỹ Thọ</span>
                     </span>
@@ -327,7 +327,7 @@
                     <span class="placeholder-field">
                       <input type="text" id="last-name" autocomplete="family-name" name="last_name" placeholder=" "
                       pattern="[A-Za-z\s]{2,50}" title="Only letters and spaces, 2-50 characters" maxlength="50" required
-                      aria-required="true">
+                      >
                       <span class="input-placeholder language-en" aria-hidden="true">e.g. Nguyen</span>
                       <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Nguyễn</span>
                     </span>
@@ -341,7 +341,7 @@
                       <span class="language-vi">Ngày sinh</span>
                       <span class="required">*</span>
                     </label>
-                    <input type="date" id="dob" autocomplete="bday" name="date_of_birth" required aria-required="true">
+                    <input type="date" id="dob" autocomplete="bday" name="date_of_birth" required>
                   </div>
                   <div class="form-group">
                     <span class="field-label" id="gender-label">
@@ -378,7 +378,7 @@
                     </label>
                     <span class="placeholder-field">
                       <input type="email" id="email" autocomplete="email" name="email" placeholder=" "
-                      required aria-required="true">
+                      required >
                       <span class="input-placeholder language-en" aria-hidden="true">e.g. example@email.com</span>
                       <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: tên_mẫu@email.com</span>
                     </span>
@@ -391,7 +391,7 @@
                     </label>
                     <span class="placeholder-field">
                       <input type="tel" id="phone" autocomplete="tel" name="phone" placeholder=" "
-                      pattern="[0-9\s\+\-]{8,15}" title="8-15 digits, spaces, + or - allowed" required aria-required="true">
+                      pattern="[0-9\s\+\-]{8,15}" title="8-15 digits, spaces, + or - allowed" required >
                       <span class="input-placeholder language-en" aria-hidden="true">e.g. 0412 345 678</span>
                       <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 0412 345 678</span>
                     </span>
@@ -417,8 +417,8 @@
                     <span class="required">*</span>
                   </label>
                   <span class="placeholder-field">
-                    <input type="text" id="street" autocomplete="street-address" name="street_address"
-                    placeholder=" " maxlength="100" required aria-required="true">
+                    <input type="text" id="street" name="street_address"
+                    placeholder=" " maxlength="100" required >
                     <span class="input-placeholder language-en" aria-hidden="true">e.g. 123 Burwood Road</span>
                     <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 123 đường Burwood</span>
                   </span>
@@ -433,7 +433,7 @@
                     </label>
                     <span class="placeholder-field">
                       <input type="text" id="suburb" autocomplete="address-level2" name="suburb" placeholder=" "
-                      pattern="[A-Za-z\s\-]{2,50}" title="Only letters, spaces and hyphens" required aria-required="true">
+                      pattern="[A-Za-z\s\-]{2,50}" title="Only letters, spaces and hyphens" required >
                       <span class="input-placeholder language-en" aria-hidden="true">e.g. Hawthorn</span>
                       <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Thành phố Hawthorn</span>
                     </span>
@@ -476,7 +476,7 @@
                     <span class="placeholder-field">
                       <input type="text" id="postcode" inputmode="numeric" autocomplete="postal-code" name="postcode"
                       placeholder=" " pattern="[0-9]{4}" title="Australian postcode must be exactly 4 digits"
-                      maxlength="4" required aria-required="true">
+                      maxlength="4" required >
                       <span class="input-placeholder language-en" aria-hidden="true">e.g. 3122</span>
                       <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 3122</span>
                     </span>
@@ -504,7 +504,7 @@
                     </label>
                     <span class="placeholder-field">
                       <input type="text" id="job-ref" name="job_reference" placeholder=" " pattern="[A-Za-z0-9]{5}"
-                      title="Exactly 5 alphanumeric characters (e.g. AB123)" maxlength="5" required aria-required="true">
+                      title="Exactly 5 alphanumeric characters (e.g. AB123)" maxlength="5" required >
                       <span class="input-placeholder language-en" aria-hidden="true">e.g. AB123</span>
                       <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: AB123</span>
                     </span>
@@ -592,9 +592,9 @@
                     <span class="required">*</span>
                   </label>
                   <span class="file-input-wrap">
-                    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required aria-required="true"
+                    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required 
                       aria-describedby="cv-help">
-                    <label class="file-button-label" for="cv" aria-hidden="true">
+                    <label class="file-button-label" for="cv">
                       <span class="language-en">Choose File</span>
                       <span class="language-vi">Chọn tệp</span>
                     </label>
@@ -630,7 +630,7 @@
 
                 <div class="form-group form-group-full">
                   <label class="checkbox-label terms-label">
-                    <input type="checkbox" id="terms" name="terms" required aria-required="true">
+                    <input type="checkbox" id="terms" name="terms" required>
                     <span>
                       <span class="language-en">I confirm that all information provided is accurate and I agree to the <a href="#">terms and conditions</a>.</span>
                       <span class="language-vi">Tôi xác nhận mọi thông tin đã cung cấp là chính xác và đồng ý với <a href="#">điều khoản và điều kiện</a>.</span>
