@@ -1110,8 +1110,7 @@ body:has(#language-vi:checked) .nav-search.language-vi {
 
 /* Hide search box on small screens to save space on navbar. */
 @media (max-width: 480px) {
-  body .site-header .nav-search.language-en,
-  body .site-header .nav-search.language-vi {
+  .btn-pill,.btn-pill{
     display: none !important;
   }
 }
