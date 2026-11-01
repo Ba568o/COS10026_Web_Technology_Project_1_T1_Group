@@ -1,0 +1,1688 @@
+/* ==========================================================================
+   about.css — Dedicated Stylesheet for About Us Page
+   Author: Anh Vu Duong (106404734) | T1 Health & Wellness
+   Module Purpose:
+   - Manages responsive layout, pure CSS bilingual toggling, micro-interactions,
+     and section styling exclusively for about.html.
+   - Synchronized with the design system established in index.html and jobs.html.
+   - Adheres strictly to HTML5 & CSS3 pure standards (no JavaScript, no CSS variables).
+
+   Academic Integrity & Accessibility Verification:
+   AI (Gemini Flash 3.8) was utilized during the development phase to audit hex color
+   contrast ratios against W3C WCAG 2.1 AA specifications (e.g., verifying dark and
+   light theme contrast on white/dark backgrounds) and optimize CSS selectors for
+   paint/render performance without layout shifts.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Page-level helpers
+   -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Accessibility — skip link keyboard navigation */
+.skip-link:focus {
+  top: 0.625rem;
+  outline: 2px solid #e2231a;
+  outline-offset: 2px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-weight: 700;
+  z-index: 9999;
+}
+
+
+/* --------------------------------------------------------------------------
+   0a. Bilingual Toggle Engine (100% Pure CSS State Management)
+   
+   Architecture & Technical Mechanism:
+   - Operates completely without JavaScript using CSS pseudo-class `:checked`
+     combined with modern parent/sibling selector query `:has()`.
+   - Default state / English mode (`#language-en:checked`):
+     All elements carrying `.language-vi` / `.lang-vi` are set to `display: none !important;`.
+   - Vietnamese mode (`#language-vi:checked`):
+     All elements carrying `.language-en` / `.lang-en` are set to `display: none !important;`,
+     while `.language-vi` elements revert to their native flow (`display: revert !important;`
+     or `display: block !important;` for navigation steps and headings).
+   
+   Intentional Quote Exclusion:
+   - Notice that the member quotes in Card 02 (.contribution-quote-vi, .contribution-quote-en)
+     do NOT use the language-toggling classes. This ensures both original Vietnamese and
+     its English counterpart remain visible concurrently in all modes, strictly
+     satisfying the rubric criteria for bilingual member philosophies.
+   -------------------------------------------------------------------------- */
+
+/* Default & English checked: Hide all Vietnamese elements completely */
+.language-vi,
+.lang-vi,
+body:has(#language-en:checked) .language-vi,
+body:has(#language-en:checked) .lang-vi,
+body:has(#lang-en:checked) .language-vi,
+body:has(#lang-en:checked) .lang-vi {
+  display: none !important;
+}
+
+/* Vietnamese checked: Hide all English elements completely */
+body:has(#language-vi:checked) .language-en,
+body:has(#language-vi:checked) .lang-en,
+body:has(#lang-vi:checked) .language-en,
+body:has(#lang-vi:checked) .lang-en {
+  display: none !important;
+}
+
+/* Vietnamese checked: Reveal Vietnamese inline/general elements */
+body:has(#language-vi:checked) .language-vi,
+body:has(#language-vi:checked) .lang-vi,
+body:has(#lang-vi:checked) .language-vi,
+body:has(#lang-vi:checked) .lang-vi {
+  display: revert !important;
+}
+
+/* Ensure language-specific search forms display properly */
+body:has(#language-vi:checked) .nav-search.language-vi,
+body:has(#lang-vi:checked) .nav-search.language-vi {
+  display: flex !important;
+}
+
+/* Block-level elements in English mode (default) */
+.about-step-text > .language-en,
+.about-step-text > .lang-en {
+  display: block !important;
+}
+
+/* Explicitly hide English block-level elements when Vietnamese is active */
+body:has(#language-vi:checked) .about-step-text > .language-en,
+body:has(#language-vi:checked) .about-step-text > .lang-en,
+body:has(#lang-vi:checked) .about-step-text > .language-en,
+body:has(#lang-vi:checked) .about-step-text > .lang-en {
+  display: none !important;
+}
+
+/* Block-level elements in Vietnamese mode */
+body:has(#language-vi:checked) .about-step-text > .language-vi,
+body:has(#language-vi:checked) .about-step-text > .lang-vi,
+body:has(#lang-vi:checked) .about-step-text > .language-vi,
+body:has(#lang-vi:checked) .about-step-text > .lang-vi {
+  display: block !important;
+}
+
+/* Container — 80rem outer with 2.5rem side padding = 75rem (1200px) inner width,
+   matching #main-content .container (max-width: 1200px) in index.css */
+.about-container {
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+}
+
+
+/* ==========================================================================
+   1. Hero Banner
+   Layout mirrors index.html; the right visual features the T1 Connected Hub
+   system illustrating team synergy and cross-functional collaboration.
+   ========================================================================== */
+.about-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  background: #f0f1ed;
+}
+
+/* Decorative background glow */
+.about-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.about-hero-glow {
+  position: absolute;
+  top: -9.375rem;
+  right: 5%;
+  width: 26.25rem;
+  height: 26.25rem;
+  border-radius: 50%;
+  background: rgba(117, 174, 188, 0.14);
+  filter: blur(60px);
+}
+
+/* --------------------------------------------------------------------------
+   1a. Hero frame: centred 1200px flex row, text left / visual right
+   -------------------------------------------------------------------------- */
+.about-hero-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
+}
+
+/* --------------------------------------------------------------------------
+   1b. Left column: tag, heading, description, CTA
+   -------------------------------------------------------------------------- */
+.about-hero-content {
+  flex: 1 1 55%;
+  max-width: 620px;
+  min-width: 0;
+}
+
+/* Pill tag synced with "DIGITAL HEALTHCARE" in index.html (#ffffff on #d92f44 = 4.73:1) */
+.about-tag {
+  display: inline-block;
+  margin: 0 0 1.125rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.25rem;
+  background: #d92f44;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.about-hero h1 {
+  margin: 0 0 1.25rem;
+  color: #151515;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: normal;
+  overflow-wrap: break-word;
+}
+
+.about-hero-text {
+  max-width: 33.5rem;
+  margin: 0 0 2rem;
+  color: #4b5563;
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+/* CTA button synced with "EXPLORE OUR SERVICE ->" in index.html */
+.about-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 2.875rem;
+  padding: 0.85rem 1.625rem;
+  border-radius: 0.25rem;
+  background: #d92f44;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about-btn-arrow {
+  font-size: 0.9375rem;
+  transition: transform 0.25s ease;
+}
+
+.about-btn:hover,
+.about-btn:focus-visible {
+  background: #0f0f0f;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 15, 15, 0.16);
+}
+
+.about-btn:hover .about-btn-arrow,
+.about-btn:focus-visible .about-btn-arrow {
+  transform: translateX(5px);
+}
+
+/* --------------------------------------------------------------------------
+   1c. Hero Visual Showcase (Responsive Absolute Orbit & Card Floating System)
+   
+   Responsive Architecture & Overflow-X Prevention:
+   - Desktop screens: The visual showcase wrapper (.about-hero-visual) establishes
+     a relative coordinate boundary (`position: relative; isolation: isolate;`).
+     Satellite elements, orbits, and floating chips leverage `position: absolute`
+     anchored to this container, ensuring high-fidelity visual staging without altering
+     the document flow of the left content column.
+   - Small & Medium screens (< 992px): As viewport shrinks, floating absolute elements
+     are automatically re-constrained into flexible, static coordinates or hidden via
+     media queries to eliminate the common mobile defect of unintended horizontal
+     scrolling (`overflow-x`).
+   -------------------------------------------------------------------------- */
+.about-hero-visual {
+  position: relative;
+  isolation: isolate;
+  flex: 0 1 520px;
+  width: min(520px, 100%);
+  min-height: 440px;
+  display: grid;
+  place-items: center;
+}
+.about-hub-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(217, 47, 68, .13);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.about-hub-orbit-outer {
+  width: 390px;
+  height: 390px;
+  border-style: dashed;
+  animation: about-hub-rotate 42s linear infinite;
+}
+.about-hub-orbit-inner {
+  width: 270px;
+  height: 270px;
+  border-color: rgba(47, 158, 143, .22);
+  box-shadow: 0 0 0 18px rgba(47, 158, 143, .025), 0 0 0 42px rgba(217, 47, 68, .018);
+  animation: about-hub-breathe 5s ease-in-out infinite;
+}
+.about-hub-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  z-index: 1;
+}
+.about-hub-line {
+  fill: none;
+  stroke: url(#about-line-gradient);
+  stroke-width: 2;
+  stroke-dasharray: 7 8;
+  stroke-linecap: round;
+  animation: about-hub-dash 18s linear infinite;
+}
+.about-hub-line-dot {
+  fill: #d92f44;
+  filter: drop-shadow(0 0 5px rgba(217, 47, 68, .35));
+  animation: about-hub-dot 2.8s ease-in-out infinite;
+}
+.about-hub-core {
+  position: relative;
+  z-index: 3;
+  width: 154px;
+  height: 154px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(217, 47, 68, .16);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, #fff 0%, #fff7f7 62%, #fcebed 100%);
+  box-shadow: 0 18px 48px rgba(120, 35, 48, .13), inset 0 0 0 8px rgba(217, 47, 68, .035);
+  animation: about-hub-core-float 5s ease-in-out infinite;
+}
+.about-hub-core-ring {
+  position: absolute;
+  inset: -10px;
+  border: 1px solid rgba(217, 47, 68, .25);
+  border-radius: 50%;
+  animation: about-hub-ring 3.2s ease-out infinite;
+}
+.about-hub-core-mark {
+  color: #d92f44;
+  font-size: 2.65rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -.09em;
+}
+.about-hub-core-caption {
+  color: #68717d;
+  font-size: .56rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-align: center;
+}
+.about-hub-node {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 132px;
+  padding: 11px 15px;
+  border: 1px solid rgba(20, 30, 40, .07);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .96);
+  color: #27313c;
+  box-shadow: 0 12px 30px rgba(23, 35, 48, .09);
+  animation: about-hub-node-float 4.5s ease-in-out infinite;
+}
+.about-hub-node-one { top: 48px; left: 12px; }
+.about-hub-node-two { top: 48px; right: 12px; animation-delay: .7s; }
+.about-hub-node-three { bottom: 48px; left: 12px; animation-delay: 1.4s; }
+.about-hub-node-four { bottom: 48px; right: 12px; animation-delay: 2.1s; }
+.about-hub-node-icon {
+  display: grid;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 11px;
+  background: #fff0f2;
+  color: #d92f44;
+}
+.about-hub-node-icon svg { width: 21px; height: 21px; }
+.about-hub-node-two .about-hub-node-icon,
+.about-hub-node-four .about-hub-node-icon {
+  background: #eaf6f4;
+  color: #238b7e;
+}
+.about-hub-node-label {
+  font-size: .82rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.about-hub-spark {
+  position: absolute;
+  z-index: 2;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d92f44;
+  box-shadow: 0 0 0 5px rgba(217, 47, 68, .08);
+  animation: about-hub-twinkle 3s ease-in-out infinite;
+}
+.about-hub-spark-one { top: 20%; left: 47%; }
+.about-hub-spark-two { right: 8%; top: 48%; background: #2f9e8f; animation-delay: 1s; }
+.about-hub-spark-three { bottom: 17%; left: 46%; background: #e7a84b; animation-delay: 2s; }
+
+@keyframes about-hub-rotate {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@keyframes about-hub-breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.045); }
+}
+@keyframes about-hub-dash { to { stroke-dashoffset: -120; } }
+@keyframes about-hub-dot {
+  0%, 100% { opacity: .45; transform: scale(.8); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+@keyframes about-hub-core-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -7px; }
+}
+@keyframes about-hub-ring {
+  0% { transform: scale(.92); opacity: .7; }
+  100% { transform: scale(1.28); opacity: 0; }
+}
+@keyframes about-hub-node-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -7px; }
+}
+@keyframes about-hub-twinkle {
+  0%, 100% { opacity: .35; transform: scale(.75); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+
+
+
+
+/* ==========================================================================
+   2. Main Content — split layout (sticky sidebar + cards)
+   ========================================================================== */
+.about-content-section {
+  padding: 4rem 0 6rem;
+  background: #ffffff;
+}
+
+.about-split-layout {
+  display: grid;
+  grid-template-columns: 17.5rem minmax(0, 1fr);
+  align-items: start;
+  gap: 3.5rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   2a. Sidebar "In This Page" — Sticky Index Navigation & Hover Micro-Interactions
+   Technical Debugging & Implementation Note:
+   - Challenge: Initially, `position: sticky` failed to anchor during page scroll
+     because an ancestor container was clipping the viewport with `overflow: hidden`,
+     and the flex/grid child stretched to full container height by default.
+   - Solution: Configured `align-self: start` (or `align-self: flex-start`) to prevent
+     the sidebar item from expanding to 100% column height, and set `top: 110px` to
+     clear the fixed site header perfectly. All overflow constraints on ancestor
+     layout blocks were audited and eliminated so the sticky boundary persists
+     throughout the entire content section.
+   -------------------------------------------------------------------------- */
+.about-sidebar {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+}
+
+.about-sidebar-content {
+  padding-top: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility & WCAG 2.1 AA Color Contrast Rationale:
+   - Decorative Elements: Primary brand red `#e2231a` is used for borders, icons,
+     and accent buttons with white text (achieving > 4.5:1).
+   - Body Text & Eyebrows: When rendering small text or eyebrow labels on white/light
+     surfaces, `#e2231a` only achieves ~4.6:1 (borderline for AA compliance under varying displays).
+   - Solution: Lowered red tone to `#b4232a` for all red textual elements. This boosts
+     the contrast ratio to ~6.5:1 against #ffffff, comfortably exceeding W3C WCAG 2.1 AA
+     and automated WAVE Accessibility Tool audit thresholds without sacrificing visual branding.
+   -------------------------------------------------------------------------- */
+.about-eyebrow {
+  margin: 0;
+  color: #b4232a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.about-sidebar-content h2 {
+  margin: 0.625rem 0 0.75rem;
+  color: #111827;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
+.about-sidebar-desc {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.9375rem;
+}
+
+.about-section-nav {
+  margin: 1.75rem 0 0;
+}
+
+.about-section-nav ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-section-nav li+li {
+  border-top: 1px solid #f0f0f0;
+}
+
+.about-section-nav a {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.875rem;
+  padding: 0.95rem 0.875rem 0.95rem 1.125rem;
+  border-radius: 0 10px 10px 0;
+  color: #111827;
+  text-decoration: none;
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+/* Red vertical bar that slides in from the centre */
+.about-section-nav a::before {
+  position: absolute;
+  top: 0.55rem;
+  bottom: 0.55rem;
+  left: 0;
+  width: 3px;
+  border-radius: 999px;
+  background: #e2231a;
+  content: "";
+  transform: scaleY(0);
+  transition: transform 0.25s ease;
+}
+
+.about-step-number {
+  flex: 0 0 1.75rem;
+  color: #9ca3af;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.5;
+  transition: color 0.25s ease;
+}
+
+.about-step-text {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  transition: color 0.25s ease;
+}
+
+.about-section-nav small {
+  display: block;
+  color: #5f5f5a;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+/* Hover / keyboard focus / active (:target via :has — no JavaScript) */
+.about-section-nav a:hover,
+.about-section-nav a:focus-visible,
+body:has(#group-info:target) .about-section-nav a[href="#group-info"],
+body:has(#contributions:target) .about-section-nav a[href="#contributions"],
+body:has(#our-team-cards:target) .about-section-nav a[href="#our-team-cards"],
+body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] {
+  background: #fef2f2;
+}
+
+.about-section-nav a:hover::before,
+.about-section-nav a:focus-visible::before,
+body:has(#group-info:target) .about-section-nav a[href="#group-info"]::before,
+body:has(#contributions:target) .about-section-nav a[href="#contributions"]::before,
+body:has(#our-team-cards:target) .about-section-nav a[href="#our-team-cards"]::before,
+body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"]::before {
+  transform: scaleY(1);
+}
+
+.about-section-nav a:hover .about-step-text,
+.about-section-nav a:hover .about-step-number,
+.about-section-nav a:focus-visible .about-step-text,
+.about-section-nav a:focus-visible .about-step-number,
+body:has(#group-info:target) .about-section-nav a[href="#group-info"] .about-step-text,
+body:has(#group-info:target) .about-section-nav a[href="#group-info"] .about-step-number,
+body:has(#contributions:target) .about-section-nav a[href="#contributions"] .about-step-text,
+body:has(#contributions:target) .about-section-nav a[href="#contributions"] .about-step-number,
+body:has(#our-team-cards:target) .about-section-nav a[href="#our-team-cards"] .about-step-text,
+body:has(#our-team-cards:target) .about-section-nav a[href="#our-team-cards"] .about-step-number,
+body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] .about-step-text,
+body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] .about-step-number {
+  color: #b4232a;
+}
+
+.about-section-nav a:focus-visible {
+  outline: 3px solid #e2231a;
+  outline-offset: 2px;
+}
+
+
+/* --------------------------------------------------------------------------
+   2b. Card shell (shared by Cards 01 – 04)
+   -------------------------------------------------------------------------- */
+.about-cards-area {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-width: 0;
+}
+
+.about-card {
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  scroll-margin-top: 110px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.about-card:hover {
+  border-color: #ebebeb;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+}
+
+/* Highlight the card the user just jumped to */
+.about-card:target {
+  border-color: #f6c9cc;
+  box-shadow: 0 0 0 4px #fde8e8, 0 10px 30px rgba(0, 0, 0, 0.07);
+}
+
+.about-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.about-card-badge {
+  display: flex;
+  flex: 0 0 2.25rem;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  border-radius: 10px;
+  background: #e2231a;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 6px 14px rgba(226, 35, 26, 0.25);
+}
+
+.about-card-header h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.about-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem 2rem;
+}
+
+
+/* ==========================================================================
+   3. Card 01 — Group Information
+   ========================================================================== */
+.about-info-block {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 0.5rem 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.about-info-block:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.about-info-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  padding-top: 0.125rem;
+  color: #4b5563;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  align-self: start;
+}
+
+/* Minimal stroke SVG icon inside a soft red circle */
+.about-info-icon {
+  flex: 0 0 auto;
+  box-sizing: content-box;
+  width: 1rem;
+  height: 1rem;
+  padding: 0.45rem;
+  border-radius: 50%;
+  background: #fdecec;
+  fill: none;
+  stroke: #b4232a;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.about-info-value {
+  margin: 0;
+  color: #111827;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.about-uni {
+  color: #4b5563;
+  font-size: 0.875rem;
+}
+
+/* Nested schedule list */
+.about-schedule-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #111827;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.about-schedule-list>li {
+  padding: 0.75rem 1rem;
+  border: 1px solid #f0f0f0;
+  border-left: 3px solid #e2231a;
+  border-radius: 0 10px 10px 0;
+  background: #fcfcfd;
+}
+
+.about-schedule-list ul {
+  margin: 0.25rem 0 0;
+  padding-left: 1.25rem;
+  list-style: circle;
+  color: #4b5563;
+}
+
+/* Member list — micro-cards with lift on hover */
+.about-member-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-member-card {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-width: 0;
+  padding: 0.875rem 1rem;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.about-member-card:hover {
+  border-color: #f6c9cc;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+.about-member-avatar {
+  display: flex;
+  flex: 0 0 2.5rem;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #111827;
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.about-member-info {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.about-member-name {
+  color: #111827;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* Role badges (shared by Card 01 and Card 02) */
+.about-member-role,
+.contribution-role {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.about-member-role {
+  white-space: nowrap;
+}
+
+.contribution-role {
+  white-space: normal;
+  text-align: center;
+}
+
+.role-leader {
+  background: #e2231a;
+  color: #ffffff;
+}
+
+.role-coordinator {
+  border-color: #fed7aa;
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.role-developer {
+  background: #111827;
+  color: #ffffff;
+}
+
+/* Student ID pill — light red background, dark red text (contrast 5.7:1) */
+.member-id {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid #f9d0d2;
+  border-radius: 999px;
+  background: #fdecec;
+  color: #b4232a;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+
+/* ==========================================================================
+   4. Card 02 — Member Contributions
+   ========================================================================== */
+.contributions-list {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Each member is its own card */
+.contribution-item {
+  padding: 1.5rem;
+  border: 1px solid #f0f0f0;
+  border-radius: 14px;
+  background: #fcfcfd;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.contribution-item:hover {
+  border-color: #f6c9cc;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+/* Leader card gets a red top accent to show hierarchy */
+.contribution-item:has(.role-leader) {
+  border-top: 3px solid #e2231a;
+}
+
+.contribution-member {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0 0 1.125rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+.contribution-name {
+  margin-right: auto;
+  color: #111827;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.contributions-list dd {
+  margin: 0 0 1rem;
+}
+
+.contributions-list dd:last-child {
+  margin-bottom: 0;
+}
+
+.contribution-page {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.contribution-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contribution-label {
+  color: #4b5563;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.contribution-file,
+.contribution-tasks code {
+  padding: 0.125rem 0.4rem;
+  border-radius: 0.3rem;
+  background: #fdecec;
+  color: #b4232a;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.contribution-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #1f2937;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.contribution-tasks li::marker {
+  color: #e2231a;
+}
+
+/* Quote callout — red left bar, very light red background, serif italic */
+.contribution-quote {
+  margin-top: 0.25rem;
+}
+
+.contribution-quote blockquote {
+  position: relative;
+  margin: 0;
+  padding: 1.125rem 1.375rem;
+  border-left: 4px solid #e2231a;
+  border-radius: 0 12px 12px 0;
+  background: #fff5f5;
+  box-shadow: inset 0 0 0 1px #fde4e4;
+  font-family: "Lora", "Merriweather", "Times New Roman", Georgia, serif;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+/* Primary Vietnamese quote line */
+.contribution-quote blockquote p,
+.contribution-quote blockquote .contribution-quote-vi {
+  margin: 0;
+  color: #111827;
+  font-family: "Lora", "Merriweather", "Times New Roman", Georgia, serif;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+/* Translated English quote line placed right underneath */
+.contribution-quote blockquote .contribution-quote-en {
+  margin-top: 6px;
+  margin-bottom: 0;
+  color: #4b5563;
+  font-family: "Lora", "Merriweather", "Times New Roman", Georgia, serif;
+  font-size: 0.9375rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.contribution-quote-attr {
+  margin: 0.625rem 0 0;
+  color: #b4232a;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+
+/* ==========================================================================
+   5. Card 03 — Team Photo
+   Visual styles: embedded <style> in about.html (rubric requirement).
+   ========================================================================== */
+
+
+/* ==========================================================================
+   6. Card 04 — Fun Facts Table (matches the index.html data tables)
+   ========================================================================== */
+.about-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 28px rgba(20, 30, 45, 0.06);
+}
+
+.about-fun-facts-table {
+  width: 100%;
+  min-width: 40rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  text-align: left;
+}
+
+.about-fun-facts-table caption {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+  color: #111827;
+  font-weight: 700;
+  text-align: left;
+}
+
+.about-fun-facts-table th,
+.about-fun-facts-table td {
+  padding: 0.95rem 1.25rem;
+  border-bottom: 1px solid #eef0f3;
+  vertical-align: middle;
+}
+
+.about-fun-facts-table thead th {
+  background: #171717;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.about-fun-facts-table tbody th {
+  color: #111827;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-fun-facts-table tbody td {
+  color: #1f2937;
+}
+
+.about-fun-facts-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.about-fun-facts-table tbody tr:nth-child(even) {
+  background: #f8f9fb;
+}
+
+.about-fun-facts-table tbody tr:hover {
+  background: #fff0f2;
+}
+
+.about-fun-facts-table tbody tr:hover th {
+  color: #b4232a;
+  box-shadow: inset 3px 0 0 #e2231a;
+}
+
+.about-fun-facts-table tfoot td {
+  padding: 1rem;
+  border-bottom: 0;
+  background: #f0f2f5;
+  color: #4b5563;
+  font-size: 0.8125rem;
+  font-style: italic;
+  text-align: center;
+}
+
+
+/* ==========================================================================
+   7. Dark mode (driven by the shared #dark-toggle checkbox in the header)
+   ========================================================================== */
+body:has(#dark-toggle:checked) {
+  background: #0f0f0f;
+  color: #f5f5f5;
+}
+
+body:has(#dark-toggle:checked) .about-hero {
+  background: #171717;
+}
+
+body:has(#dark-toggle:checked) .about-hero-glow {
+  background: rgba(117, 174, 188, 0.08);
+}
+
+body:has(#dark-toggle:checked) .about-btn:hover,
+body:has(#dark-toggle:checked) .about-btn:focus-visible {
+  background: #b4232a;
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(217, 47, 68, 0.28);
+}
+
+
+
+body:has(#dark-toggle:checked) .about-hero h1,
+body:has(#dark-toggle:checked) .about-sidebar-content h2,
+body:has(#dark-toggle:checked) .about-card-header h2,
+body:has(#dark-toggle:checked) .about-info-value,
+body:has(#dark-toggle:checked) .about-member-name,
+body:has(#dark-toggle:checked) .contribution-name,
+body:has(#dark-toggle:checked) .about-schedule-list,
+body:has(#dark-toggle:checked) .contribution-tasks,
+body:has(#dark-toggle:checked) .about-section-nav a {
+  color: #f5f5f5;
+}
+
+body:has(#dark-toggle:checked) .about-hero-text,
+body:has(#dark-toggle:checked) .about-sidebar-desc,
+body:has(#dark-toggle:checked) .about-section-nav small,
+body:has(#dark-toggle:checked) .about-info-label,
+body:has(#dark-toggle:checked) .about-uni,
+body:has(#dark-toggle:checked) .about-schedule-list ul,
+body:has(#dark-toggle:checked) .contribution-label {
+  color: #c9c9c9;
+}
+
+body:has(#dark-toggle:checked) .about-eyebrow,
+body:has(#dark-toggle:checked) .about-section-nav a:hover .about-step-text,
+body:has(#dark-toggle:checked) .about-section-nav a:hover .about-step-number {
+  color: #ff7a80;
+}
+
+body:has(#dark-toggle:checked) .about-content-section {
+  background: #111111;
+}
+
+body:has(#dark-toggle:checked) .about-section-nav li+li,
+body:has(#dark-toggle:checked) .about-card-header,
+body:has(#dark-toggle:checked) .about-info-block,
+body:has(#dark-toggle:checked) .contribution-member {
+  border-color: #2e2e2e;
+}
+
+body:has(#dark-toggle:checked) .about-section-nav a:hover,
+body:has(#dark-toggle:checked) .about-section-nav a:focus-visible {
+  background: #2a1517;
+}
+
+body:has(#dark-toggle:checked) .about-card,
+body:has(#dark-toggle:checked) .about-member-card,
+body:has(#dark-toggle:checked) .about-schedule-list>li,
+body:has(#dark-toggle:checked) .contribution-item {
+  border-color: #2e2e2e;
+  background: #1b1b1b;
+  box-shadow: none;
+}
+
+body:has(#dark-toggle:checked) .about-schedule-list>li {
+  border-left-color: #e2231a;
+}
+
+body:has(#dark-toggle:checked) .contribution-item:has(.role-leader) {
+  border-top-color: #e2231a;
+}
+
+body:has(#dark-toggle:checked) .about-member-avatar,
+body:has(#dark-toggle:checked) .role-developer {
+  background: #f5f5f5;
+  color: #111111;
+}
+
+body:has(#dark-toggle:checked) .role-coordinator {
+  background: #451a03;
+  color: #fed7aa;
+  border-color: #78350f;
+}
+
+/* !important only to override the rubric-required inline background */
+body:has(#dark-toggle:checked) .contribution-quote blockquote {
+  background: #2a1517 !important;
+  box-shadow: none !important;
+}
+
+body:has(#dark-toggle:checked) .contribution-quote blockquote p,
+body:has(#dark-toggle:checked) .contribution-quote blockquote .contribution-quote-vi {
+  color: #f5f5f5;
+}
+
+body:has(#dark-toggle:checked) .contribution-quote blockquote .contribution-quote-en {
+  color: #d4d4d4;
+}
+
+body:has(#dark-toggle:checked) .contribution-quote-attr {
+  color: #ff7a80;
+}
+
+body:has(#dark-toggle:checked) .team-photo-wrapper,
+body:has(#dark-toggle:checked) .team-photo-wrapper figcaption {
+  border-color: #2e2e2e;
+  background: #1b1b1b;
+  color: #f5f5f5;
+}
+
+body:has(#dark-toggle:checked) .team-photo-wrapper figcaption span {
+  color: #c9c9c9;
+}
+
+body:has(#dark-toggle:checked) .about-table-container {
+  border-color: #2e2e2e;
+  background: #1b1b1b;
+  box-shadow: none;
+}
+
+body:has(#dark-toggle:checked) .about-fun-facts-table caption,
+body:has(#dark-toggle:checked) .about-fun-facts-table tbody th,
+body:has(#dark-toggle:checked) .about-fun-facts-table tbody td {
+  border-color: #2e2e2e;
+  color: #f5f5f5;
+}
+
+body:has(#dark-toggle:checked) .about-fun-facts-table tbody tr:nth-child(even) {
+  background: #202020;
+}
+
+body:has(#dark-toggle:checked) .about-fun-facts-table tbody tr:hover {
+  background: #2a1517;
+}
+
+body:has(#dark-toggle:checked) .about-fun-facts-table tbody tr:hover th {
+  color: #ff7a80;
+}
+
+body:has(#dark-toggle:checked) .about-fun-facts-table tfoot td {
+  background: #222222;
+  color: #c9c9c9;
+}
+
+
+/* ==========================================================================
+   8. Responsive
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   8a. Tablet (<= 1024px): single column, sidebar becomes a sticky
+       horizontal tab bar that scrolls sideways.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .about-split-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .about-sidebar {
+    top: 0;
+    z-index: 5;
+    margin: 0 calc(-1 * clamp(1.25rem, 4vw, 2.5rem));
+    padding: 0.75rem clamp(1.25rem, 4vw, 2.5rem);
+    border-bottom: 1px solid #f0f0f0;
+    background: #ffffff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .about-sidebar-content {
+    padding-top: 0;
+  }
+
+  .about-sidebar-content h2,
+  .about-sidebar-desc,
+  .about-section-nav small {
+    display: none;
+  }
+
+  .about-section-nav {
+    margin: 0.5rem 0 0;
+  }
+
+  .about-section-nav ol {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+  }
+
+  .about-section-nav li {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  .about-section-nav li+li {
+    border-top: none;
+  }
+
+  /* Pills instead of vertical rows */
+  .about-section-nav a {
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .about-section-nav a::before {
+    display: none;
+  }
+
+  .about-section-nav a:hover,
+  .about-section-nav a:focus-visible,
+  body:has(#group-info:target) .about-section-nav a[href="#group-info"],
+  body:has(#contributions:target) .about-section-nav a[href="#contributions"],
+  body:has(#our-team-cards:target) .about-section-nav a[href="#our-team-cards"],
+  body:has(#fun-facts:target) .about-section-nav a[href="#fun-facts"] {
+    border-color: #e2231a;
+  }
+
+  .about-step-number {
+    flex: 0 0 auto;
+  }
+
+  .about-step-text {
+    font-size: 0.875rem;
+  }
+
+  .about-card {
+    scroll-margin-top: 5.5rem;
+  }
+
+  body:has(#dark-toggle:checked) .about-sidebar {
+    border-color: #2e2e2e;
+    background: #111111;
+  }
+
+  body:has(#dark-toggle:checked) .about-section-nav a {
+    border-color: #2e2e2e;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8b. Responsive Hero (< 992px): stack vertically, centre the text block and
+       position Connected Hub below.
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .about-hero-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 48px 24px;
+  }
+
+  .about-hero-content {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .about-hero h1 {
+    font-size: 3.25rem;
+    line-height: 1.08;
+  }
+
+  .about-hero-text {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+
+}
+
+/* --------------------------------------------------------------------------
+   8c. Mobile (< 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .about-hero-layout {
+    gap: 2rem;
+    padding: 40px 16px;
+  }
+
+  .about-hero h1 {
+    font-size: 2.6rem;
+    line-height: 1.08;
+  }
+
+  .about-hero-text {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+
+
+}
+
+
+
+/* Mobile (< 768px): main content */
+@media (max-width: 767px) {
+  .about-content-section {
+    padding: 2rem 0 4rem;
+  }
+
+  .about-card-header {
+    padding: 1.125rem 1.25rem;
+  }
+
+  .about-card-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .about-card-body {
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+
+  .about-info-block {
+    grid-template-columns: 1fr;
+    gap: 0.625rem;
+  }
+
+  .about-member-list {
+    grid-template-columns: 1fr;
+  }
+
+  .contribution-item {
+    padding: 1.125rem;
+  }
+
+  .contribution-name {
+    flex: 1 1 100%;
+  }
+
+  .contribution-quote blockquote {
+    padding: 0.875rem 1rem;
+  }
+}
+
+/* Very small phones: let the ID pill drop under the name */
+@media (max-width: 380px) {
+  .about-member-card {
+    flex-wrap: wrap;
+  }
+
+  .member-id {
+    margin-left: 3.375rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8c. Reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+  .about-btn,
+  .about-btn-arrow,
+  .about-card,
+  .about-member-card,
+  .contribution-item,
+  .about-section-nav a,
+  .about-section-nav a::before,
+  .about-fun-facts-table tbody tr {
+    transition: none;
+  }
+
+  .about-btn:hover,
+  .about-btn:hover .about-btn-arrow,
+  .about-btn:focus-visible .about-btn-arrow,
+  .about-member-card:hover,
+  .contribution-item:hover {
+    transform: none;
+  }
+
+  .about-hero-visual,
+  .about-hero-visual *,
+  .about-hero-visual *::before {
+    animation: none !important;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   About Connected Hub — responsive and theme overrides only
+   -------------------------------------------------------------------------- */
+.about-hero-visual {
+  display: grid;
+  flex-direction: initial;
+  align-items: initial;
+  justify-content: initial;
+  padding: 0;
+  text-align: initial;
+}
+body:has(#dark-toggle:checked) .about-hub-node {
+  border-color: rgba(255, 255, 255, .12);
+  background: #22272d;
+  color: #f5f5f5;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, .35);
+}
+body:has(#dark-toggle:checked) .about-hub-core {
+  background: radial-gradient(circle at 35% 25%, #2b3037 0%, #20252b 100%);
+  border-color: rgba(255, 122, 128, .3);
+}
+body:has(#dark-toggle:checked) .about-hub-core-caption { color: #c9c9c9; }
+body:has(#dark-toggle:checked) .about-hub-orbit-outer { border-color: rgba(255, 122, 128, .16); }
+body:has(#dark-toggle:checked) .about-hub-orbit-inner { border-color: rgba(80, 190, 174, .22); }
+
+@media (max-width: 991px) {
+  .about-hero-visual {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: 520px;
+    min-height: 440px;
+  }
+}
+@media (max-width: 767px) {
+  .about-hero-visual { min-height: 390px; max-width: 480px; }
+  .about-hub-orbit-outer { width: 340px; height: 340px; }
+  .about-hub-orbit-inner { width: 235px; height: 235px; }
+  .about-hub-node-one { top: 32px; left: 0; }
+  .about-hub-node-two { top: 32px; right: 0; }
+  .about-hub-node-three { bottom: 32px; left: 0; }
+  .about-hub-node-four { bottom: 32px; right: 0; }
+}
+@media (max-width: 479px) {
+  .about-hero-visual { min-height: 330px; max-width: 360px; }
+  .about-hub-orbit-outer { width: 280px; height: 280px; }
+  .about-hub-orbit-inner { width: 190px; height: 190px; }
+  .about-hub-core { width: 124px; height: 124px; }
+  .about-hub-core-mark { font-size: 2.2rem; }
+  .about-hub-node { min-width: 112px; gap: 7px; padding: 8px 9px; border-radius: 12px; }
+  .about-hub-node-icon { flex-basis: 30px; width: 30px; height: 30px; border-radius: 9px; }
+  .about-hub-node-icon svg { width: 18px; height: 18px; }
+  .about-hub-node-label { font-size: .72rem; }
+  .about-hub-node-one { top: 20px; left: 0; }
+  .about-hub-node-two { top: 20px; right: 0; }
+  .about-hub-node-three { bottom: 20px; left: 0; }
+  .about-hub-node-four { bottom: 20px; right: 0; }
+}
+@media (max-width: 380px) {
+  .about-hero-visual { min-height: 290px; max-width: 320px; }
+  .about-hub-orbit-outer { width: 245px; height: 245px; }
+  .about-hub-orbit-inner { width: 165px; height: 165px; }
+  .about-hub-core { width: 108px; height: 108px; }
+  .about-hub-core-mark { font-size: 1.9rem; }
+  .about-hub-node { min-width: 100px; padding: 7px; gap: 6px; }
+  .about-hub-node-icon { flex-basis: 26px; width: 26px; height: 26px; }
+  .about-hub-node-label { font-size: .66rem; }
+  .about-hub-node-one { top: 16px; left: -2px; }
+  .about-hub-node-two { top: 16px; right: -2px; }
+  .about-hub-node-three { bottom: 16px; left: -2px; }
+  .about-hub-node-four { bottom: 16px; right: -2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-hub-orbit-outer,
+  .about-hub-orbit-inner,
+  .about-hub-line,
+  .about-hub-line-dot,
+  .about-hub-core,
+  .about-hub-core-ring,
+  .about-hub-node,
+  .about-hub-spark {
+    animation: none !important;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   About hero alignment correction
+   Keep the copy and animation spread across the available desktop width,
+   and pin the T1 hub itself to the exact centre of its visual area.
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+  .about-hero-layout {
+    max-width: 1720px;
+    padding-left: clamp(32px, 5.2vw, 100px);
+    padding-right: clamp(32px, 5.2vw, 100px);
+    gap: clamp(48px, 6vw, 112px);
+    justify-content: space-between;
+  }
+
+  .about-hero-content {
+    flex: 1 1 680px;
+    max-width: 680px;
+  }
+
+  .about-hero-visual {
+    flex: 0 1 600px;
+    width: 600px;
+    max-width: 52%;
+    min-height: 480px;
+  }
+
+  .about-hub-core {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* The core remains centred when the hero stacks on tablet/mobile too. */
+@media (max-width: 991px) {
+  .about-hero-visual {
+    width: 100%;
+    max-width: 520px;
+    min-height: 440px;
+  }
+
+  .about-hub-core {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-hub-core {
+    translate: none;
+  }
+}
+
+
+/* Moving signal dots follow each individual dashed connection (SVG animateMotion). */
+.about-hub-line-dot {
+  fill: #d92f44;
+  filter: drop-shadow(0 0 5px rgba(217, 47, 68, .4));
+  animation: none !important;
+}
+.about-hub-line-dot.about-hub-dot-teal {
+  fill: #2f9e8f;
+  filter: drop-shadow(0 0 5px rgba(47, 158, 143, .4));
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-hub-line-dot animateMotion {
+    display: none;
+  }
+}
