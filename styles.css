@@ -7591,3 +7591,141 @@ body.index-page .appointment-book-button {
     min-width: 1200px;
   }
 }
+
+
+/* ==========================================================================
+ * FINAL INTERACTION CONSISTENCY FIX
+ * Hero CTA hover is black on every page. Navbar hover is disabled on Home
+ * only; Jobs, Apply and About keep the existing hover treatment.
+ * ========================================================================== */
+
+/* All Hero Explore buttons: red at rest, black on hover/focus. */
+body.index-page #main-content .hero .btn-submit:hover,
+body.index-page #main-content .hero .btn-submit:focus-visible,
+body.jobs-page #main-content .hero .btn-submit:hover,
+body.jobs-page #main-content .hero .btn-submit:focus-visible,
+body.apply-page #main-content .hero .btn-submit:hover,
+body.apply-page #main-content .hero .btn-submit:focus-visible,
+body.about-page #main-content .about-hero .about-btn:hover,
+body.about-page #main-content .about-hero .about-btn:focus-visible {
+  border-color: #000000;
+  background-color: #000000;
+  background: #000000;
+  color: #ffffff;
+}
+
+/* Home: do not show the navbar hover pill/underline on inactive links.
+   The current-page indicator for HOME remains visible. */
+body.index-page .site-header .nav-links a:not(.active):not([aria-current="page"]):hover {
+  background: transparent;
+  color: #ffffff;
+}
+
+body.index-page .site-header .nav-links a:not(.active):not([aria-current="page"]):hover::after {
+  opacity: 0;
+  transform: scaleX(0.7);
+}
+
+/* About: remove the small vertical lift that made Explore Our Team bounce. */
+body.about-page #main-content .about-hero .about-btn {
+  transition: background-color 0.25s ease, border-color 0.25s ease,
+              color 0.25s ease, box-shadow 0.25s ease;
+}
+
+body.about-page #main-content .about-hero .about-btn:hover,
+body.about-page #main-content .about-hero .about-btn:focus-visible {
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* ==========================================================================
+ * FINAL HOVER POLISH — About, Jobs and Apply
+ * Only adjusts the requested button hover behaviour and timing.
+ * ========================================================================== */
+
+/* ABOUT: keep the arrow stationary; the button itself must not bounce. */
+body.about-page #main-content .about-hero .about-btn,
+body.about-page #main-content .about-hero .about-btn:hover,
+body.about-page #main-content .about-hero .about-btn:focus-visible {
+  transform: none !important;
+}
+
+body.about-page #main-content .about-hero .about-btn-arrow,
+body.about-page #main-content .about-hero .about-btn:hover .about-btn-arrow,
+body.about-page #main-content .about-hero .about-btn:focus-visible .about-btn-arrow {
+  transform: none !important;
+  transition: none !important;
+}
+
+/* JOBS: job-card action buttons also turn black on hover/focus. */
+body.jobs-page #main-content .job-apply-button,
+body.jobs-page #main-content .job-apply-button:hover,
+body.jobs-page #main-content .job-apply-button:focus-visible {
+  transition: background-color 0.35s ease, border-color 0.35s ease,
+              color 0.35s ease, box-shadow 0.35s ease;
+}
+
+body.jobs-page #main-content .job-apply-button:hover,
+body.jobs-page #main-content .job-apply-button:focus-visible {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important;
+  transform: none;
+  box-shadow: none;
+}
+
+/* APPLY: slow the colour transition so the black hover state feels deliberate. */
+body.apply-page #main-content .file-input-wrap .file-button-label {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body.apply-page #main-content .file-input-wrap:hover .file-button-label,
+body.apply-page #main-content .file-input-wrap:focus-within .file-button-label {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  color: #ffffff;
+}
+
+body.apply-page #main-content .form-buttons .btn-submit {
+  transition: background-color 0.4s ease, border-color 0.4s ease,
+              color 0.4s ease, box-shadow 0.4s ease;
+}
+
+body.apply-page #main-content .form-buttons .btn-submit:hover,
+body.apply-page #main-content .form-buttons .btn-submit:focus-visible {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+
+/* ==========================================================================
+ * HOMEPAGE NAVBAR — NO ACTIVE PILL OR HOVER INDICATOR
+ * Home keeps the plain navigation appearance. Jobs, Apply and About retain
+ * the grey hover/active pill and red underline.
+ * ========================================================================== */
+body.index-page .site-header .nav-links a,
+body.index-page .site-header .nav-links a:hover,
+body.index-page .site-header .nav-links a:focus-visible,
+body.index-page .site-header .nav-links a.active,
+body.index-page .site-header .nav-links a[aria-current="page"] {
+  background: transparent !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Remove the red underline from every Home navigation item,
+   including the active HOME link. */
+body.index-page .site-header .nav-links a::after,
+body.index-page .site-header .nav-links a:hover::after,
+body.index-page .site-header .nav-links a:focus-visible::after,
+body.index-page .site-header .nav-links a.active::after,
+body.index-page .site-header .nav-links a[aria-current="page"]::after {
+  display: none !important;
+  opacity: 0 !important;
+  transform: none !important;
+}
