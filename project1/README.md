@@ -4,7 +4,7 @@ Website for **COS10026 — Web Technology, Project 1** at Swinburne University o
 
 **T1** stands for **Together as one**. The site presents a fictional digital healthcare brand with job listings, an application form, and an about page for the group.
 
-**Live site:** [ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group](https://ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group/)
+**Live site:** [ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group](https://ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group/project1/)
 
 ---
 
