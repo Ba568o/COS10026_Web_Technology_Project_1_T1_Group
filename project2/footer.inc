@@ -45,7 +45,7 @@
           </a>
           <span class="footer-separator" aria-hidden="true">·</span>
           <a
-            href="https://ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group/project1/"
+            href="https://ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group/project2/"
             title="T1 Health & Wellness - GitHub Pages Live Site"
             target="_blank"
             rel="noopener noreferrer"
