@@ -4,6 +4,10 @@ require_once __DIR__ . '/eoi_helpers.php';
 $errors = $_SESSION['eoi_errors'] ?? [];
 $old = $_SESSION['eoi_old'] ?? [];
 unset($_SESSION['eoi_errors'], $_SESSION['eoi_old']);
+$requestedJob = $_GET['job'] ?? '';
+if (($old['job_reference'] ?? '') === '' && is_string($requestedJob) && preg_match('/^[A-Za-z0-9]{5}$/', $requestedJob)) {
+    $old['job_reference'] = strtoupper($requestedJob);
+}
 if (empty($_SESSION['eoi_token'])) {
     $_SESSION['eoi_token'] = bin2hex(random_bytes(32));
 }
