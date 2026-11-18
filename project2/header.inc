@@ -12,9 +12,9 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
 
     <!-- Shared site styles -->
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
     <?php if (!empty($pageStylesheet)): ?>
-    <link rel="stylesheet" href="<?= htmlspecialchars($pageStylesheet, ENT_QUOTES, 'UTF-8') ?>" />
+    <link rel="stylesheet" href="styles/<?= htmlspecialchars($pageStylesheet, ENT_QUOTES, 'UTF-8') ?>" />
     <?php endif; ?>
 
     <!-- Font Awesome -->
