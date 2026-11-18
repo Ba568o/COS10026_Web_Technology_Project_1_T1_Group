@@ -21,12 +21,12 @@ function auth_valid_token($token): bool
 }
 function auth_logged_in(): bool
 {
-    if (empty($_SESSION['hr_user_id'])) return false;
-    if (time() - ($_SESSION['hr_last_active'] ?? 0) > 1800) {
-        unset($_SESSION['hr_user_id'], $_SESSION['hr_username'], $_SESSION['hr_last_active']);
+    if (empty($_SESSION['user_id'])) return false;
+    if (time() - ($_SESSION['last_active'] ?? 0) > 1800) {
+        unset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['last_active']);
         return false;
     }
-    $_SESSION['hr_last_active'] = time();
+    $_SESSION['last_active'] = time();
     return true;
 }
 function auth_require_login(): void
@@ -34,6 +34,7 @@ function auth_require_login(): void
     auth_start();
     header('Cache-Control: no-store');
     if (!auth_logged_in()) {
+        $_SESSION['return_to'] = basename($_SERVER['SCRIPT_NAME'] ?? 'index.php');
         header('Location: login.php');
         exit;
     }
