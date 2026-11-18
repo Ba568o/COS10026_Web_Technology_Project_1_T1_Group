@@ -34,6 +34,12 @@
               <span class="language-vi">Giới thiệu</span>
             </a>
           </li>
+          <li>
+            <a href="login.php" <?= $currentPage === 'login.php' ? 'aria-current="page"' : '' ?>>
+              <span class="language-en">HR Login</span>
+              <span class="language-vi">Đăng nhập HR</span>
+            </a>
+          </li>
         </ul>
 
         <!-- Display settings, site search, and the primary call to action. -->
