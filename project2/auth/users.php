@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../settings.php';
-/** Create the assignment marker account once; never reset an existing password. */
+/** Applicant accounts are created through signup; no automatic admin account. */
 function auth_database(): PDO
 {
     $db = database_connection();
@@ -11,12 +11,6 @@ function auth_database(): PDO
         failed_attempts INT UNSIGNED NOT NULL DEFAULT 0,
         locked_until DATETIME NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
-    $exists = $db->prepare('SELECT id FROM users WHERE username = ?');
-    $exists->execute(['admin']);
-    if (!$exists->fetch()) {
-        $insert = $db->prepare('INSERT INTO users (username, password_hash) VALUES (?, ?) ON DUPLICATE KEY UPDATE username = username');
-        $insert->execute(['admin', password_hash('admin', PASSWORD_DEFAULT)]);
-    }
     return $db;
 }
 /** Serialize attempts for a user so concurrent requests cannot bypass lockout. */
