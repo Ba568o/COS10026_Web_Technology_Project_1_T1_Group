@@ -1468,3 +1468,109 @@ body.apply-page #main-content > .hero .hero-content > .hero-text {
 }
 .application-feedback ul { padding-left: 1.5rem; }
 .application-feedback li { margin: .5rem 0; }
+
+body.apply-page .confirm-layout {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+body.apply-page .match-jobs h2 {
+  margin: 0.4rem 0 0.75rem;
+  font-size: 2rem;
+}
+body.apply-page .match-intro {
+  max-width: 42rem;
+  margin: 0 0 1.25rem;
+  color: #5f5f5a;
+}
+body.apply-page .match-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: end;
+  margin: 0 0 1.25rem;
+}
+body.apply-page .match-filters label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 700;
+}
+body.apply-page .match-filters input,
+body.apply-page .match-filters select {
+  min-width: 14rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #cdcdc4;
+  border-radius: 0.25rem;
+  background: #fafaf8;
+  color: #111111;
+  font: inherit;
+}
+body.apply-page .match-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body.apply-page .match-card {
+  margin: 0 0 1rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #dcdcd5;
+  background: #ffffff;
+}
+body.apply-page .match-card h3 {
+  margin: 0.2rem 0 0.35rem;
+  font-size: 1.35rem;
+}
+body.apply-page .match-ref,
+body.apply-page .match-meta {
+  margin: 0;
+  color: #5f5f5a;
+}
+body.apply-page .match-applied {
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.45rem;
+  background: #ef4f5d;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+body.apply-page .match-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.8rem 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+body.apply-page .match-skills li {
+  padding: 0.2rem 0.55rem;
+  background: #fdecee;
+  color: #d92f44;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+body.apply-page .match-pages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+body.apply-page .match-pages a {
+  color: #d92f44;
+  font-weight: 700;
+}
+body:has(#dark-toggle:checked).apply-page .match-intro,
+body:has(#dark-toggle:checked).apply-page .match-ref,
+body:has(#dark-toggle:checked).apply-page .match-meta {
+  color: #c8c8c2;
+}
+body:has(#dark-toggle:checked).apply-page .match-card {
+  border-color: #4e4e4e;
+  background: #1b1b1b;
+  color: #f5f5f5;
+}
+body:has(#dark-toggle:checked).apply-page .match-filters input,
+body:has(#dark-toggle:checked).apply-page .match-filters select {
+  border-color: #4e4e4e;
+  background: #111111;
+  color: #f5f5f5;
+}
