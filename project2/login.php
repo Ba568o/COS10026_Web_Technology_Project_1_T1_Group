@@ -23,10 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$loggedIn) {
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['role'] = $user['role'];
                 $_SESSION['last_active'] = time();
                 $_SESSION['auth_token'] = bin2hex(random_bytes(32));
-                $destination = $_SESSION['return_to'] ?? 'account.php';
-                if (!in_array($destination, ['index.php', 'jobs.php', 'apply.php', 'about.php', 'account.php'], true)) $destination = 'account.php';
+                $home = $user['role'] === 'manager' ? 'manage.php' : 'account.php';
+                $destination = $_SESSION['return_to'] ?? $home;
+                $allowed = ['index.php', 'jobs.php', 'apply.php', 'about.php', 'account.php'];
+                if ($user['role'] === 'manager') $allowed[] = 'manage.php';
+                if (!in_array($destination, $allowed, true)) $destination = $home;
                 unset($_SESSION['return_to']);
                 header('Location: ' . $destination, true, 303);
                 exit;
@@ -65,7 +69,7 @@ include __DIR__ . '/nav.inc';
         <div class="login-card-top"><span class="login-lock" aria-hidden="true"><i class="fa-solid fa-lock"></i></span><span class="language-en">CAREER PORTAL</span><span class="language-vi">CỔNG VIỆC LÀM</span></div>
         <?php if ($loggedIn): ?>
             <h2 id="form-heading"><span class="language-en">You're signed in</span><span class="language-vi">Đăng nhập thành công</span></h2>
-            <p><a href="account.php">My CV / CV của tôi</a> · <a href="jobs.php">Find jobs / Tìm việc</a></p>
+            <p><a href="account.php">My CV / CV của tôi</a> · <a href="jobs.php">Find jobs / Tìm việc</a><?php if (($_SESSION['role'] ?? '') === 'manager'): ?> · <a href="manage.php">Manage EOIs</a><?php endif; ?></p>
             <p><?= auth_escape((string) $_SESSION['username']) ?></p>
             <p><span class="language-en">Your session is active.</span><span class="language-vi">Phiên đăng nhập đang hoạt động.</span></p>
             <form action="logout.php" method="post">

@@ -23,7 +23,7 @@ function auth_logged_in(): bool
 {
     if (empty($_SESSION['user_id'])) return false;
     if (time() - ($_SESSION['last_active'] ?? 0) > 1800) {
-        unset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['last_active']);
+        unset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['role'], $_SESSION['last_active']);
         return false;
     }
     $_SESSION['last_active'] = time();

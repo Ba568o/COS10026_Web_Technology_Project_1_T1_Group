@@ -1,0 +1,50 @@
+.manage {
+  max-width: 112rem;
+  margin: 0 auto;
+  padding: 3rem clamp(1.5rem, 5vw, 7.5rem) 5rem;
+}
+.manage-heading h1 { margin: .5rem 0; font-size: clamp(2rem, 4vw, 3rem); }
+.manage-eyebrow { margin: 0; color: #d92f44; font-size: .75rem; font-weight: 700; letter-spacing: .08em; }
+.manage-heading p, .manage-hint { color: #5f5f5a; }
+.manage-panel { margin-top: 2rem; padding: 1.5rem; border: 1px solid #dcdcd5; border-radius: .375rem; background: #fff; }
+.manage-panel h2 { margin: 0 0 1rem; font-size: 1.25rem; }
+.manage-search, .manage-delete, .manage td form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1rem;
+  align-items: end;
+}
+.manage label { display: grid; gap: .35rem; font-size: .8rem; font-weight: 700; }
+.manage input, .manage select {
+  min-height: 2.75rem;
+  padding: .5rem .75rem;
+  border: 1px solid #cdcdc4;
+  border-radius: .25rem;
+  background: #fafaf8;
+  font: inherit;
+}
+.manage button {
+  min-height: 2.75rem;
+  padding: .5rem 1rem;
+  border: 0;
+  border-radius: .25rem;
+  background: #ef4f5d;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.manage button:hover { background: #111; }
+.manage-delete button { background: #111; }
+.manage-notice, .manage-error { padding: 1rem; border-left: 4px solid #d92f44; }
+.manage-notice { background: #f3f7f3; border-left-color: #2f7d4a; }
+.manage-error { background: #fff0f1; }
+.manage-table-wrap { overflow-x: auto; }
+.manage table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.manage th, .manage td { padding: .75rem; border-bottom: 1px solid #dcdcd5; text-align: left; vertical-align: top; }
+.manage th { font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; }
+body.manage-page:has(#dark-toggle:checked) .manage-panel { background: #1b1b1b; border-color: #4e4e4e; color: #f5f5f5; }
+body.manage-page:has(#dark-toggle:checked) .manage input,
+body.manage-page:has(#dark-toggle:checked) .manage select { background: #111; color: #f5f5f5; border-color: #4e4e4e; }
+body.manage-page:has(#dark-toggle:checked) .manage th,
+body.manage-page:has(#dark-toggle:checked) .manage td { border-color: #4e4e4e; }
