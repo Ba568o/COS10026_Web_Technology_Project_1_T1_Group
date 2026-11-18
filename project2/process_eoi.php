@@ -50,7 +50,7 @@ if (!$errors) {
         $fields = array_keys($values);
         $stmt = $db->prepare('INSERT INTO eoi (`' . implode('`,`', $fields) . '`) VALUES (' . implode(',', array_fill(0, count($fields), '?')) . ')');
         $stmt->execute(array_values($values));
-        $_SESSION['eoi_receipt'] = ['number'=>$db->lastInsertId(), 'job'=>$data['job_reference']];
+        $_SESSION['eoi_receipt'] = ['number'=>$db->lastInsertId(), 'job'=>$data['job_reference'], 'skills'=>$data['skills']];
         unset($_SESSION['eoi_token'], $_SESSION['eoi_old'], $_SESSION['eoi_errors']);
         header('Location: eoi_confirmation.php', true, 303);
         exit;
