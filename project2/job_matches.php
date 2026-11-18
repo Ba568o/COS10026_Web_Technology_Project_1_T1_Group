@@ -1,15 +1,29 @@
 <?php
-/** Open roles from jobs.php, tagged with the same skill values as the apply form. */
-function job_catalog(): array
+require_once __DIR__ . '/components/listing.php';
+
+/**
+ * Open roles are read from MySQL. This file does not insert any rows.
+ * Seed jobs(reference, title_en, title_vi, company_en, company_vi, place_en, place_vi)
+ * and job_skills(reference, skill). Skill values match the apply form:
+ * html-css, javascript, php, sql, python, project-management.
+ */
+function job_ensure_tables(PDO $db): void
 {
-    return [
-        ['reference' => 'DHS02', 'title' => ['Digital Health Support Specialist', 'Chuyên viên hỗ trợ sức khỏe số'], 'company' => ['T1 Health & Wellness', 'T1 Sức khỏe & Wellness'], 'place' => ['Ho Chi Minh City', 'Thành phố Hồ Chí Minh'], 'skills' => ['html-css', 'project-management']],
-        ['reference' => 'UXD04', 'title' => ['Healthcare UX/UI Designer', 'Nhà thiết kế UX/UI chăm sóc sức khỏe'], 'company' => ['Vinmec Digital Health', 'Vinmec Sức khỏe số'], 'place' => ['Hanoi', 'Hà Nội'], 'skills' => ['html-css', 'javascript']],
-        ['reference' => 'DHD05', 'title' => ['Digital Health Software Developer', 'Lập trình viên phần mềm sức khỏe số'], 'company' => ['FPT Smart Healthcare', 'FPT Chăm sóc sức khỏe thông minh'], 'place' => ['Da Nang', 'Đà Nẵng'], 'skills' => ['html-css', 'javascript', 'php', 'sql', 'python']],
-        ['reference' => 'QAT06', 'title' => ['Healthcare Quality Assurance Tester', 'Kiểm thử đảm bảo chất lượng chăm sóc sức khỏe'], 'company' => ['Medlatec Digital', 'Medlatec Số'], 'place' => ['Hanoi', 'Hà Nội'], 'skills' => ['javascript', 'php', 'sql']],
-        ['reference' => 'HDA03', 'title' => ['Health Data Analyst', 'Chuyên viên phân tích dữ liệu sức khỏe'], 'company' => ['VNG HealthTech', 'VNG HealthTech'], 'place' => ['Ho Chi Minh City', 'Thành phố Hồ Chí Minh'], 'skills' => ['sql', 'python']],
-        ['reference' => 'HCW01', 'title' => ['Healthcare Content Writer', 'Biên tập viên nội dung chăm sóc sức khỏe'], 'company' => ['eDoctor Vietnam', 'eDoctor Việt Nam'], 'place' => ['Can Tho', 'Cần Thơ'], 'skills' => ['html-css', 'project-management']],
-    ];
+    $db->exec("CREATE TABLE IF NOT EXISTS jobs (
+        reference CHAR(5) NOT NULL PRIMARY KEY,
+        title_en VARCHAR(120) NOT NULL,
+        title_vi VARCHAR(120) NOT NULL,
+        company_en VARCHAR(120) NOT NULL,
+        company_vi VARCHAR(120) NOT NULL,
+        place_en VARCHAR(80) NOT NULL,
+        place_vi VARCHAR(80) NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+    $db->exec("CREATE TABLE IF NOT EXISTS job_skills (
+        reference CHAR(5) NOT NULL,
+        skill VARCHAR(30) NOT NULL,
+        PRIMARY KEY (reference, skill),
+        CONSTRAINT job_skills_reference FOREIGN KEY (reference) REFERENCES jobs (reference)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
 }
 
 function job_skill_labels(): array
@@ -39,58 +53,79 @@ function job_known_skills(array $skills): array
 
 /**
  * Jobs that share a skill with the applicant, then filtered and paged.
- * With no selected skills, every open role stays available.
+ * With no selected skills, every stored role stays available.
  */
-function job_match_list(array $userSkills, array $query, int $perPage = 3): array
+function job_match_list(PDO $db, array $userSkills, array $query, int $perPage = 3): array
 {
+    job_ensure_tables($db);
     $userSkills = job_known_skills($userSkills);
+    $allowed = $userSkills ?: array_keys(job_skill_labels());
     $skill = $query['skill'] ?? '';
-    if (!is_string($skill) || !in_array($skill, $userSkills ?: array_keys(job_skill_labels()), true)) {
+    if (!is_string($skill) || !in_array($skill, $allowed, true)) {
         $skill = '';
     }
     $q = $query['q'] ?? '';
     $q = is_string($q) && preg_match('//u', $q) ? mb_substr(trim($q), 0, 80) : '';
-    $needle = mb_strtolower($q, 'UTF-8');
+
+    $params = [];
+    if ($userSkills) {
+        $marks = implode(',', array_fill(0, count($userSkills), '?'));
+        $join = "INNER JOIN job_skills matched ON matched.reference = jobs.reference AND matched.skill IN ($marks)";
+        $params = $userSkills;
+        $score = 'COUNT(DISTINCT matched.skill)';
+    } else {
+        $join = 'LEFT JOIN job_skills matched ON matched.reference = jobs.reference';
+        $score = '0';
+    }
+    $where = [];
+    if ($skill !== '') {
+        $where[] = 'EXISTS (SELECT 1 FROM job_skills chosen WHERE chosen.reference = jobs.reference AND chosen.skill = ?)';
+        $params[] = $skill;
+    }
+    if ($q !== '') {
+        $term = '%' . strtr($q, ['!' => '!!', '%' => '!%', '_' => '!_']) . '%';
+        $where[] = "(jobs.reference LIKE ? ESCAPE '!' OR jobs.title_en LIKE ? ESCAPE '!' OR jobs.title_vi LIKE ? ESCAPE '!' OR jobs.company_en LIKE ? ESCAPE '!' OR jobs.company_vi LIKE ? ESCAPE '!' OR jobs.place_en LIKE ? ESCAPE '!' OR jobs.place_vi LIKE ? ESCAPE '!')";
+        array_push($params, $term, $term, $term, $term, $term, $term, $term);
+    }
+    $clause = $where ? ' WHERE ' . implode(' AND ', $where) : '';
+    $group = ' GROUP BY jobs.reference, jobs.title_en, jobs.title_vi, jobs.company_en, jobs.company_vi, jobs.place_en, jobs.place_vi';
+    $from = "FROM jobs $join$clause";
+
+    $stored = (int) $db->query('SELECT COUNT(*) FROM jobs')->fetchColumn();
+    $count = $db->prepare("SELECT COUNT(*) FROM (SELECT jobs.reference $from$group) matched_jobs");
+    $count->execute($params);
+    $pagination = listing_pagination((int) $count->fetchColumn(), (int) (is_scalar($query['page'] ?? 1) ? $query['page'] : 1), $perPage);
+
+    $statement = $db->prepare("SELECT jobs.reference, jobs.title_en, jobs.title_vi, jobs.company_en, jobs.company_vi, jobs.place_en, jobs.place_vi, GROUP_CONCAT(DISTINCT matched.skill ORDER BY matched.skill SEPARATOR ',') AS skills, $score AS score $from$group ORDER BY score DESC, jobs.reference ASC LIMIT ? OFFSET ?");
+    foreach ($params as $i => $value) {
+        $statement->bindValue($i + 1, $value, PDO::PARAM_STR);
+    }
+    $statement->bindValue(count($params) + 1, $pagination['per_page'], PDO::PARAM_INT);
+    $statement->bindValue(count($params) + 2, $pagination['offset'], PDO::PARAM_INT);
+    $statement->execute();
 
     $rows = [];
-    foreach (job_catalog() as $job) {
-        $overlap = array_values(array_intersect($job['skills'], $userSkills));
-        if ($userSkills && !$overlap) {
-            continue;
-        }
-        if ($skill !== '' && !in_array($skill, $job['skills'], true)) {
-            continue;
-        }
-        if ($needle !== '') {
-            $haystack = mb_strtolower(implode(' ', [$job['reference'], $job['title'][0], $job['title'][1], $job['company'][0], $job['company'][1], $job['place'][0], $job['place'][1]]), 'UTF-8');
-            if (!str_contains($haystack, $needle)) {
-                continue;
-            }
-        }
-        $job['overlap'] = $userSkills ? $overlap : $job['skills'];
-        $job['score'] = count($overlap);
-        $rows[] = $job;
+    foreach ($statement->fetchAll() as $job) {
+        $stored = $job['skills'] !== null && $job['skills'] !== '' ? explode(',', $job['skills']) : [];
+        $rows[] = [
+            'reference' => $job['reference'],
+            'title' => [$job['title_en'], $job['title_vi']],
+            'company' => [$job['company_en'], $job['company_vi']],
+            'place' => [$job['place_en'], $job['place_vi']],
+            'overlap' => $stored,
+            'score' => (int) $job['score'],
+        ];
     }
-    usort($rows, function (array $a, array $b): int {
-        if ($a['score'] !== $b['score']) {
-            return $b['score'] <=> $a['score'];
-        }
-        return $a['reference'] <=> $b['reference'];
-    });
-
-    $perPage = max(1, min(10, $perPage));
-    $total = count($rows);
-    $pages = max(1, (int) ceil($total / $perPage));
-    $page = filter_var($query['page'] ?? 1, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
-    $page = max(1, min($pages, $page ?: 1));
     return [
-        'rows' => array_slice($rows, ($page - 1) * $perPage, $perPage),
-        'total' => $total,
-        'page' => $page,
-        'pages' => $pages,
+        'rows' => $rows,
+        'total' => $pagination['total'],
+        'page' => $pagination['page'],
+        'pages' => $pagination['pages'],
         'skill' => $skill,
         'q' => $q,
         'user_skills' => $userSkills,
+        'stored' => $stored,
+        'error' => false,
     ];
 }
 

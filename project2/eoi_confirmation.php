@@ -2,12 +2,18 @@
 session_start();
 require_once __DIR__ . '/eoi_helpers.php';
 require_once __DIR__ . '/job_matches.php';
+require_once __DIR__ . '/settings.php';
 $receipt = $_SESSION['eoi_receipt'] ?? null;
 if (!$receipt) {
     header('Location: apply.php');
     exit;
 }
-$matches = job_match_list($receipt['skills'] ?? [], $_GET);
+$matches = ['rows' => [], 'total' => 0, 'page' => 1, 'pages' => 1, 'skill' => '', 'q' => '', 'user_skills' => job_known_skills($receipt['skills'] ?? []), 'stored' => 0, 'error' => true];
+try {
+    $matches = job_match_list(database_connection(), $receipt['skills'] ?? [], $_GET);
+} catch (PDOException $error) {
+    error_log('Job match database error: ' . $error->getMessage());
+}
 $labels = job_skill_labels();
 $filterSkills = $matches['user_skills'] ?: array_keys($labels);
 $pageTitle = 'Application received - T1 Health & Wellness';
@@ -64,17 +70,27 @@ include __DIR__ . '/nav.inc';
         </form>
       <?php endforeach; ?>
 
-      <?php if (!$matches['rows']): ?>
+      <?php if ($matches['error']): ?>
         <p>
-          <span class="language-en">No open roles match this filter.</span>
-          <span class="language-vi">Không có vị trí nào khớp bộ lọc này.</span>
+          <span class="language-en">The role list could not be loaded. Please try again later.</span>
+          <span class="language-vi">Không tải được danh sách vị trí. Vui lòng thử lại sau.</span>
+        </p>
+      <?php elseif (!$matches['rows']): ?>
+        <p>
+          <?php if ($matches['stored'] === 0): ?>
+            <span class="language-en">No roles are stored yet.</span>
+            <span class="language-vi">Chưa có vị trí nào trong cơ sở dữ liệu.</span>
+          <?php else: ?>
+            <span class="language-en">No open roles match this filter.</span>
+            <span class="language-vi">Không có vị trí nào khớp bộ lọc này.</span>
+          <?php endif; ?>
         </p>
       <?php else: ?>
         <ol class="match-list">
           <?php foreach ($matches['rows'] as $job): ?>
             <li class="match-card">
               <p class="match-ref"><?= eoi_escape($job['reference']) ?>
-                <?php if (strtoupper((string) $receipt['job']) === $job['reference']): ?>
+                <?php if (strtoupper((string) $receipt['job']) === strtoupper($job['reference'])): ?>
                   <span class="match-applied">
                     <span class="language-en">Applied</span>
                     <span class="language-vi">Đã nộp</span>
@@ -91,9 +107,10 @@ include __DIR__ . '/nav.inc';
               </p>
               <ul class="match-skills">
                 <?php foreach ($job['overlap'] as $skill): ?>
+                  <?php $label = $labels[$skill] ?? [$skill, $skill]; ?>
                   <li>
-                    <span class="language-en"><?= eoi_escape($labels[$skill][0]) ?></span>
-                    <span class="language-vi"><?= eoi_escape($labels[$skill][1]) ?></span>
+                    <span class="language-en"><?= eoi_escape($label[0]) ?></span>
+                    <span class="language-vi"><?= eoi_escape($label[1]) ?></span>
                   </li>
                 <?php endforeach; ?>
               </ul>
