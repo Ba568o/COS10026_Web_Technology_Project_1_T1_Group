@@ -44,12 +44,20 @@ include __DIR__ . '/nav.inc';
 ?>
 <main id="main-content" class="login-layout">
     <section class="login-intro" aria-labelledby="login-heading">
-        <p class="login-eyebrow">T1 HEALTH &amp; WELLNESS</p>
+        <p class="login-eyebrow"><span class="language-en">PEOPLE BEHIND BETTER CARE</span><span class="language-vi">CON NGƯỜI LÀM NÊN SỰ KHÁC BIỆT</span></p>
         <h1 id="login-heading"><span class="language-en">Welcome back.</span><span class="language-vi">Chào mừng trở lại.</span></h1>
         <p><span class="language-en">Sign in to your HR account.</span><span class="language-vi">Đăng nhập vào tài khoản nhân sự của bạn.</span></p>
-        <a href="jobs.php"><span class="language-en">Looking for a role? Explore jobs →</span><span class="language-vi">Bạn đang tìm việc? Xem các vị trí →</span></a>
+        <div class="login-team-note">
+            <img src="images/logo.png" alt="T1" width="72" height="40">
+            <div>
+                <strong><span class="language-en">Great care starts with great people.</span><span class="language-vi">Chăm sóc tận tâm bắt đầu từ con người.</span></strong>
+                <p><span class="language-en">Together, we build a healthier tomorrow.</span><span class="language-vi">Cùng nhau xây dựng một ngày mai khỏe mạnh hơn.</span></p>
+            </div>
+        </div>
+        <a class="login-jobs-link" href="jobs.php"><span class="language-en">Looking for a role? Explore jobs →</span><span class="language-vi">Bạn đang tìm việc? Xem các vị trí →</span></a>
     </section>
     <section class="login-card" aria-labelledby="form-heading">
+        <div class="login-card-top"><span class="login-lock" aria-hidden="true"><i class="fa-solid fa-lock"></i></span><span class="language-en">STAFF PORTAL</span><span class="language-vi">CỔNG NHÂN SỰ</span></div>
         <?php if ($loggedIn): ?>
             <h2 id="form-heading"><span class="language-en">You're signed in</span><span class="language-vi">Đăng nhập thành công</span></h2>
             <p><?= auth_escape((string) $_SESSION['hr_username']) ?></p>
@@ -60,6 +68,7 @@ include __DIR__ . '/nav.inc';
             </form>
         <?php else: ?>
             <h2 id="form-heading"><span class="language-en">HR sign in</span><span class="language-vi">Đăng nhập nhân sự</span></h2>
+            <p class="login-description"><span class="language-en">Welcome to your workspace. Enter your details to continue.</span><span class="language-vi">Chào mừng đến không gian làm việc. Nhập thông tin để tiếp tục.</span></p>
             <?php if ($error): ?><p class="login-error" id="login-error" role="alert"><?= auth_escape($error) ?></p><?php endif; ?>
             <form action="login.php" method="post" novalidate <?= $error ? 'aria-describedby="login-error"' : '' ?>>
                 <input type="hidden" name="csrf_token" value="<?= auth_escape(auth_token()) ?>">
@@ -70,6 +79,7 @@ include __DIR__ . '/nav.inc';
                 <button type="submit"><span class="language-en">Sign in</span><span class="language-vi">Đăng nhập</span></button>
             </form>
         <?php endif; ?>
+        <p class="login-footnote"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> <span class="language-en">For authorised T1 team members</span><span class="language-vi">Dành cho thành viên T1 được cấp quyền</span></p>
     </section>
 </main>
 <?php include __DIR__ . '/footer.inc'; ?>
