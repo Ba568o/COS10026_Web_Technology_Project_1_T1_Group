@@ -1,4 +1,12 @@
 <?php
+session_start();
+require_once __DIR__ . '/eoi_helpers.php';
+$errors = $_SESSION['eoi_errors'] ?? [];
+$old = $_SESSION['eoi_old'] ?? [];
+unset($_SESSION['eoi_errors'], $_SESSION['eoi_old']);
+if (empty($_SESSION['eoi_token'])) {
+    $_SESSION['eoi_token'] = bin2hex(random_bytes(32));
+}
 $pageTitle = 'Job Application - T1 Health & Wellness';
 $pageDescription = 'Apply for a job position at T1 Health & Wellness. Fill out the application form with your details.';
 $bodyClass = 'apply-page';
@@ -211,12 +219,21 @@ include 'nav.inc';
                 </p>
               </div>
 
+              <?php if ($errors): ?>
+              <div class="application-feedback" role="alert" tabindex="-1">
+                <h3>Please correct your application / Vui lòng sửa thông tin</h3>
+                <ul><?php foreach ($errors as $error): ?><li><?= eoi_escape($error) ?></li><?php endforeach; ?></ul>
+                <p>Please select your CV again. / Vui lòng chọn lại CV.</p>
+              </div>
+              <?php endif; ?>
               <form
-                action="https://mercury.swin.edu.au/it000000/formtest.php"
+                action="process_eoi.php"
+                novalidate
                 method="POST"
                 enctype="multipart/form-data"
                 class="apply-form"
               >
+                <input type="hidden" name="csrf_token" value="<?= eoi_escape($_SESSION['eoi_token']) ?>" />
                 <fieldset class="form-section" id="personal-info">
                   <legend>
                     <span class="section-number" aria-hidden="true">01</span>
@@ -242,11 +259,7 @@ include 'nav.inc';
                           autocomplete="given-name"
                           name="first_name"
                           placeholder=" "
-                          pattern="[A-Za-z\s]{2,50}"
-                          title="Only letters and spaces, 2-50 characters"
-                          maxlength="50"
-                          required
-                        />
+                        value="<?= eoi_escape($old['first_name'] ?? '') ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. Sy Tho</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Sỹ Thọ</span>
                       </span>
@@ -264,11 +277,7 @@ include 'nav.inc';
                           autocomplete="family-name"
                           name="last_name"
                           placeholder=" "
-                          pattern="[A-Za-z\s]{2,50}"
-                          title="Only letters and spaces, 2-50 characters"
-                          maxlength="50"
-                          required
-                        />
+                        value="<?= eoi_escape($old['last_name'] ?? '') ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. Nguyen</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Nguyễn</span>
                       </span>
@@ -282,7 +291,7 @@ include 'nav.inc';
                         <span class="language-vi">Ngày sinh</span>
                         <span class="required">*</span>
                       </label>
-                      <input type="date" id="dob" autocomplete="bday" name="date_of_birth" required />
+                      <input type="date" id="dob" autocomplete="bday" name="date_of_birth" value="<?= eoi_escape($old['date_of_birth'] ?? '') ?>" />
                     </div>
                     <div class="form-group">
                       <span class="field-label" id="gender-label">
@@ -292,17 +301,17 @@ include 'nav.inc';
                       </span>
                       <div class="radio-group" role="radiogroup" aria-labelledby="gender-label">
                         <label class="radio-label">
-                          <input type="radio" name="gender" value="male" required />
+                          <input type="radio" name="gender" value="male" <?= ($old['gender'] ?? '') === 'male' ? 'checked' : '' ?> />
                           <span class="language-en">Male</span>
                           <span class="language-vi">Nam</span>
                         </label>
                         <label class="radio-label">
-                          <input type="radio" name="gender" value="female" />
+                          <input type="radio" name="gender" value="female" <?= ($old['gender'] ?? '') === 'female' ? 'checked' : '' ?> />
                           <span class="language-en">Female</span>
                           <span class="language-vi">Nữ</span>
                         </label>
                         <label class="radio-label">
-                          <input type="radio" name="gender" value="other" />
+                          <input type="radio" name="gender" value="other" <?= ($old['gender'] ?? '') === 'other' ? 'checked' : '' ?> />
                           <span class="language-en">Other</span>
                           <span class="language-vi">Khác</span>
                         </label>
@@ -318,7 +327,7 @@ include 'nav.inc';
                         <span class="required">*</span>
                       </label>
                       <span class="placeholder-field">
-                        <input type="email" id="email" autocomplete="email" name="email" placeholder=" " required />
+                        <input type="email" id="email" autocomplete="email" name="email" placeholder=" " value="<?= eoi_escape($old['email'] ?? '') ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. example@email.com</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: tên_mẫu@email.com</span>
                       </span>
@@ -336,10 +345,7 @@ include 'nav.inc';
                           autocomplete="tel"
                           name="phone"
                           placeholder=" "
-                          pattern="[0-9\s\+\-]{8,15}"
-                          title="8-15 digits, spaces, + or - allowed"
-                          required
-                        />
+                        value="<?= eoi_escape($old['phone'] ?? '') ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. 0412 345 678</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 0412 345 678</span>
                       </span>
@@ -365,7 +371,7 @@ include 'nav.inc';
                       <span class="required">*</span>
                     </label>
                     <span class="placeholder-field">
-                      <input type="text" id="street" name="street_address" placeholder=" " maxlength="100" required />
+                      <input type="text" id="street" name="street_address" placeholder=" " value="<?= eoi_escape($old['street_address'] ?? '') ?>" />
                       <span class="input-placeholder language-en" aria-hidden="true">e.g. 123 Burwood Road</span>
                       <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 123 đường Burwood</span>
                     </span>
@@ -385,42 +391,29 @@ include 'nav.inc';
                           autocomplete="address-level2"
                           name="suburb"
                           placeholder=" "
-                          pattern="[A-Za-z\s\-]{2,50}"
-                          title="Only letters, spaces and hyphens"
-                          required
-                        />
+                        value="<?= eoi_escape($old['suburb'] ?? '') ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. Hawthorn</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Thành phố Hawthorn</span>
                       </span>
                     </div>
                     <div class="form-group">
-                      <label id="state-label">
+                      <label id="state-label" for="state-en">
                         <span class="language-en">State</span>
                         <span class="language-vi">Bang/Tỉnh</span>
                         <span class="required">*</span>
                       </label>
-                      <select id="state-en" class="language-en" aria-labelledby="state-label" autocomplete="address-level1" name="state">
-                        <option value="" disabled selected>-- Select State --</option>
-                        <option value="VIC">VIC</option>
-                        <option value="NSW">NSW</option>
-                        <option value="QLD">QLD</option>
-                        <option value="SA">SA</option>
-                        <option value="WA">WA</option>
-                        <option value="TAS">TAS</option>
-                        <option value="NT">NT</option>
-                        <option value="ACT">ACT</option>
+                      <select id="state-en" aria-labelledby="state-label" autocomplete="address-level1" name="state">
+                        <option value="" <?= ($old['state'] ?? '') === '' ? 'selected' : '' ?> disabled>-- Select State --</option>
+                        <option value="VIC" <?= ($old['state'] ?? '') === 'VIC' ? 'selected' : '' ?>>VIC</option>
+                        <option value="NSW" <?= ($old['state'] ?? '') === 'NSW' ? 'selected' : '' ?>>NSW</option>
+                        <option value="QLD" <?= ($old['state'] ?? '') === 'QLD' ? 'selected' : '' ?>>QLD</option>
+                        <option value="SA" <?= ($old['state'] ?? '') === 'SA' ? 'selected' : '' ?>>SA</option>
+                        <option value="WA" <?= ($old['state'] ?? '') === 'WA' ? 'selected' : '' ?>>WA</option>
+                        <option value="TAS" <?= ($old['state'] ?? '') === 'TAS' ? 'selected' : '' ?>>TAS</option>
+                        <option value="NT" <?= ($old['state'] ?? '') === 'NT' ? 'selected' : '' ?>>NT</option>
+                        <option value="ACT" <?= ($old['state'] ?? '') === 'ACT' ? 'selected' : '' ?>>ACT</option>
                       </select>
-                      <select id="state-vi" class="language-vi" aria-labelledby="state-label" autocomplete="address-level1" name="state">
-                        <option value="" disabled selected>-- Chọn Bang/Tỉnh --</option>
-                        <option value="VIC">Bang VIC</option>
-                        <option value="NSW">Bang NSW</option>
-                        <option value="QLD">Bang QLD</option>
-                        <option value="SA">Bang SA</option>
-                        <option value="WA">Bang WA</option>
-                        <option value="TAS">Bang TAS</option>
-                        <option value="NT">Bang NT</option>
-                        <option value="ACT">Bang ACT</option>
-                      </select>
+
                     </div>
                     <div class="form-group">
                       <label for="postcode">
@@ -436,11 +429,7 @@ include 'nav.inc';
                           autocomplete="postal-code"
                           name="postcode"
                           placeholder=" "
-                          pattern="[0-9]{4}"
-                          title="Australian postcode must be exactly 4 digits"
-                          maxlength="4"
-                          required
-                        />
+                        value="<?= eoi_escape($old['postcode'] ?? '') ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. 3122</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 3122</span>
                       </span>
@@ -472,37 +461,26 @@ include 'nav.inc';
                           id="job-ref"
                           name="job_reference"
                           placeholder=" "
-                          pattern="[A-Za-z0-9]{5}"
-                          title="Exactly 5 alphanumeric characters (e.g. AB123)"
-                          maxlength="5"
-                          required
-                        />
+                        value="<?= eoi_escape($old['job_reference'] ?? '') ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. AB123</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: AB123</span>
                       </span>
                     </div>
                     <div class="form-group">
-                      <label id="position-label">
+                      <label id="position-label" for="position-en">
                         <span class="language-en">Preferred Position</span>
                         <span class="language-vi">Vị trí mong muốn</span>
                         <span class="required">*</span>
                       </label>
-                      <select id="position-en" class="language-en" aria-labelledby="position-label" name="position">
-                        <option value="" disabled selected>-- Select Position --</option>
-                        <option value="president">President</option>
-                        <option value="vice-president">Vice President</option>
-                        <option value="manager">Manager</option>
-                        <option value="developer">Developer</option>
-                        <option value="designer">Designer</option>
+                      <select id="position-en" aria-labelledby="position-label" name="position">
+                        <option value="" <?= ($old['position'] ?? '') === '' ? 'selected' : '' ?> disabled>-- Select Position --</option>
+                        <option value="president" <?= ($old['position'] ?? '') === 'president' ? 'selected' : '' ?>>President</option>
+                        <option value="vice-president" <?= ($old['position'] ?? '') === 'vice-president' ? 'selected' : '' ?>>Vice President</option>
+                        <option value="manager" <?= ($old['position'] ?? '') === 'manager' ? 'selected' : '' ?>>Manager</option>
+                        <option value="developer" <?= ($old['position'] ?? '') === 'developer' ? 'selected' : '' ?>>Developer</option>
+                        <option value="designer" <?= ($old['position'] ?? '') === 'designer' ? 'selected' : '' ?>>Designer</option>
                       </select>
-                      <select id="position-vi" class="language-vi" aria-labelledby="position-label" name="position">
-                        <option value="" disabled selected>-- Chọn vị trí --</option>
-                        <option value="president">Chủ tịch</option>
-                        <option value="vice-president">Phó Chủ tịch</option>
-                        <option value="manager">Quản lý</option>
-                        <option value="developer">Lập trình viên</option>
-                        <option value="designer">Nhà thiết kế</option>
-                      </select>
+
                     </div>
                   </div>
 
@@ -517,27 +495,27 @@ include 'nav.inc';
                     </span>
                     <div class="checkbox-group" role="group" aria-labelledby="skills-label">
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="html-css" />
+                        <input type="checkbox" name="skills[]" value="html-css" <?= in_array('html-css', $old['skills'] ?? [], true) ? 'checked' : '' ?> />
                         HTML/CSS
                       </label>
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="javascript" />
+                        <input type="checkbox" name="skills[]" value="javascript" <?= in_array('javascript', $old['skills'] ?? [], true) ? 'checked' : '' ?> />
                         JavaScript
                       </label>
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="php" />
+                        <input type="checkbox" name="skills[]" value="php" <?= in_array('php', $old['skills'] ?? [], true) ? 'checked' : '' ?> />
                         PHP
                       </label>
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="sql" />
+                        <input type="checkbox" name="skills[]" value="sql" <?= in_array('sql', $old['skills'] ?? [], true) ? 'checked' : '' ?> />
                         SQL/Database
                       </label>
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="python" />
+                        <input type="checkbox" name="skills[]" value="python" <?= in_array('python', $old['skills'] ?? [], true) ? 'checked' : '' ?> />
                         Python
                       </label>
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="project-management" />
+                        <input type="checkbox" name="skills[]" value="project-management" <?= in_array('project-management', $old['skills'] ?? [], true) ? 'checked' : '' ?> />
                         <span class="language-en">Project Management</span>
                         <span class="language-vi">Quản lý dự án</span>
                       </label>
@@ -555,9 +533,8 @@ include 'nav.inc';
                         name="other_skills"
                         rows="5"
                         placeholder=" "
-                        maxlength="500"
                         aria-describedby="other-skills-help"
-                      ></textarea>
+                      ><?= eoi_escape($old['other_skills'] ?? '') ?></textarea>
                       <span class="input-placeholder language-en" aria-hidden="true">
                         Describe any additional skills, certifications, or relevant experience...
                       </span>
@@ -578,15 +555,15 @@ include 'nav.inc';
                       <span class="required">*</span>
                     </label>
                     <span class="file-input-wrap">
-                      <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required aria-describedby="cv-help" />
+                      <input type="file" id="cv" name="cv" aria-describedby="cv-help" />
                       <label class="file-button-label" for="cv">
                         <span class="language-en">Choose File</span>
                         <span class="language-vi">Chọn tệp</span>
                       </label>
                     </span>
                     <small id="cv-help" class="form-help file-note">
-                      <span class="language-en">PDF, DOC or DOCX</span>
-                      <span class="language-vi">PDF, DOC hoặc DOCX</span>
+                      <span class="language-en">PDF, DOC or DOCX, maximum 5 MB</span>
+                      <span class="language-vi">PDF, DOC hoặc DOCX, tối đa 5 MB</span>
                     </small>
                   </div>
                 </fieldset>
@@ -621,7 +598,7 @@ include 'nav.inc';
 
                   <div class="form-group form-group-full">
                     <label class="checkbox-label terms-label">
-                      <input type="checkbox" id="terms" name="terms" required />
+                      <input type="checkbox" id="terms" name="terms" <?= ($old['terms'] ?? '') === 'on' ? 'checked' : '' ?> />
                       <span>
                         <span class="language-en">
                           I confirm that all information provided is accurate and I agree to the

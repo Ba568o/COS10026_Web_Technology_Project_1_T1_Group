@@ -1457,3 +1457,14 @@ body.apply-page #main-content > .hero .hero-content > .hero-text {
     line-height: 1.08;
   }
 }
+
+.application-feedback {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 1px solid #b4c4be;
+  border-radius: 12px;
+  background: #f4faf6;
+  color: #17392c;
+}
+.application-feedback ul { padding-left: 1.5rem; }
+.application-feedback li { margin: .5rem 0; }
