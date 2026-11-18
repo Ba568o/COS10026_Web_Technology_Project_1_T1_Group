@@ -126,7 +126,7 @@ no password. `.gitignore` excludes local environment files, editor files and log
 - Success redirects to a receipt containing the EOInumber, avoiding resubmission
   when the receipt is refreshed. Direct GET access to the processor redirects.
 
-Jobs database rendering, HR authentication/management and About contributions in
+Jobs database rendering, HR management queries and About contributions in
 the database are separate unfinished work items. The shared listing functions
 below are not yet connected to any page.
 
@@ -222,3 +222,29 @@ logic in `components/listing.php`.
 - [GitHub repository](https://github.com/Ba568o/COS10026_Web_Technology_Project_1_T1_Group)
 - [Jira board](https://104848806.atlassian.net/jira/software/projects/T123/summary)
 - [MIT License](project1/LICENSE)
+
+## HR login
+
+Open `http://localhost:8000/login.php` or choose **HR Login** in the navigation.
+Use the assignment marker account: username `admin`, password `admin`.
+The database connection password in `settings.php` remains empty; this is separate
+from the HR account password.
+
+On the first well-formed login attempt, the application creates the `users` table
+and seeds the admin account if absent. Passwords are stored using `password_hash`
+and verified using `password_verify`, with prepared SQL queries. The database
+account needs CREATE, SELECT, INSERT and UPDATE permissions. Existing admin
+passwords are not overwritten. The database itself must already exist.
+
+Five failed attempts lock an account for five minutes. Successful login rotates
+the session ID; inactive HR sessions expire after 30 minutes. Logout requires a
+POST with a CSRF token and clears the session and cookie.
+
+For now, successful login returns to a signed-in confirmation on `login.php`.
+The job search page is unchanged. The manager dashboard is not implemented yet;
+when adding it, put the following before any HTML or database access:
+
+```php
+require_once __DIR__ . '/auth/session.php';
+auth_require_login();
+```
