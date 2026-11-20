@@ -3,7 +3,7 @@ require_once __DIR__ . '/auth/session.php';
 require_once __DIR__ . '/auth/registration.php';
 auth_start();
 header('Cache-Control: no-store');
-if (auth_logged_in()) { header('Location: account.php'); exit; }
+if (auth_logged_in()) { header('Location: ' . (($_SESSION['role'] ?? '') === 'manager' ? 'manage.php' : 'jobs.php')); exit; }
 $errors = [];
 $username = is_string($_POST['username'] ?? null) ? trim($_POST['username']) : '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
