@@ -50,21 +50,78 @@ require_once __DIR__ . '/settings.php';
 $db = database_connection();
 ```
 
-The connection uses `utf8mb4`, exceptions and native prepared statements. The MySQL account needs `CREATE`, `SELECT`, `INSERT`, `UPDATE` and `DELETE` on `t1_health`.
+The connection uses `utf8mb4`, exceptions and native prepared statements. The MySQL account needs `CREATE`, `ALTER`, `SELECT`, `INSERT`, `UPDATE` and `DELETE` on `t1_health`.
 
 The `eoi` and `users` tables are created on first use. They are not created until a page that needs them runs.
 
-## Run
+## Chạy Project 2 trên máy hiện tại
 
-From the repository root:
+### 1. MySQL
+
+Đảm bảo MySQL trên Mac đang chạy ở cổng **3306**. Database `t1_health` và
+user `t1_local` đã được tạo trên máy này; mật khẩu kết nối để trống theo đề.
+Không cần chạy lại script setup mỗi lần mở web.
+
+### 2. Chạy website
+
+Mở terminal tại thư mục gốc `COS10026_Web_Technology_Project_1_T1_Group` rồi chạy:
 
 ```bash
 php -S localhost:8000 -t project2
 ```
 
-Open [http://localhost:8000](http://localhost:8000).
+Giữ terminal mở trong lúc dùng web. Nhấn `Ctrl+C` để dừng server.
 
-With XAMPP, put the repository under `htdocs`, start Apache and MySQL, then open `http://localhost/<repository-folder>/project2/`. Keep the same PHP upload limits.
+| Trang | Địa chỉ |
+| --- | --- |
+| Trang chủ | [localhost:8000](http://localhost:8000) |
+| Tìm việc | [jobs.php](http://localhost:8000/jobs.php) |
+| Ứng tuyển và upload CV | [apply.php](http://localhost:8000/apply.php) |
+| Đăng ký người dùng | [signup.php](http://localhost:8000/signup.php) |
+| Đăng nhập | [login.php](http://localhost:8000/login.php) |
+| Quản lý EOI | [manage.php](http://localhost:8000/manage.php) |
+
+Đăng nhập **`admin` / `admin`** để vào trang quản lý. Đây là tài khoản website,
+không phải tài khoản MySQL/phpMyAdmin. Người dùng thường đăng ký ở `signup.php`;
+đăng nhập thành công sẽ chuyển đến Jobs và có thể gửi CV qua Apply.
+
+### 3. Mở phpMyAdmin khi cần xem database
+
+Mở **Docker Desktop**, chờ Docker khởi động rồi chạy:
+
+```bash
+docker start cos10026-phpmyadmin
+```
+
+Mở [phpMyAdmin tại localhost:8081](http://localhost:8081), đăng nhập bằng tài khoản
+MySQL quản trị đang dùng trong lab, rồi chọn database **`t1_health`**.
+
+Docker ở cấu hình này chỉ chạy phpMyAdmin. MySQL chạy trên Mac; website PHP kết nối
+trực tiếp tới MySQL và không cần mở phpMyAdmin để hoạt động.
+
+### Giới hạn upload và lỗi thường gặp
+
+PHP trên máy đã được cấu hình trong `/usr/local/etc/php/8.5/php.ini`:
+
+```ini
+upload_max_filesize = 5M
+post_max_size = 8M
+```
+
+Không cần thêm `-d` vào lệnh chạy. Nếu sửa `php.ini`, dừng và chạy lại PHP server.
+Trên máy khác, đặt hai giá trị này trong file `php.ini` đang được PHP sử dụng.
+
+- **Address already in use:** cổng 8000 đang có server khác. Dừng server đó hoặc
+  chạy `php -S localhost:8002 -t project2` và mở `http://localhost:8002`.
+- **Access denied:** kiểm tra tài khoản `t1_local` và mật khẩu trống trong
+  `settings.php`; xem phần thiết lập database bên dưới nếu chạy trên máy mới.
+- **Connection refused:** kiểm tra MySQL trên Mac đang chạy ở cổng 3306.
+- **Không mở được phpMyAdmin:** kiểm tra Docker Desktop và container
+  `cos10026-phpmyadmin` đã chạy; dùng cổng 8081, không phải 8000.
+
+Với XAMPP trên máy khác, đặt repository vào `htdocs`, bật Apache và MySQL rồi mở
+`http://localhost/<repository-folder>/project2/`. Cấu hình tài khoản database và
+hai giới hạn upload trong PHP của XAMPP tương ứng.
 
 ## Expression of Interest
 
@@ -161,15 +218,3 @@ disabling security on your existing installation.
 The first login creates the users table and seeds admin/admin only if absent.
 An existing admin password or role is never overwritten. Applicants are sent to
 jobs.php; managers to manage.php. Applicants upload their CV through apply.php.
-
-Current COS10026 setup: Docker container `cos10026-phpmyadmin` exposes
-http://localhost:8081 and connects to the Mac MySQL server through
-`host.docker.internal:3306`. PHP running on the Mac uses `localhost` and `t1_local`
-with an empty password. Start phpMyAdmin with `docker start cos10026-phpmyadmin`.
-Run PHP from the repository root with:
-
-```bash
-php -S localhost:8000 -t project2
-```
-
-Local PHP upload limits are configured in `/usr/local/etc/php/8.5/php.ini`: `upload_max_filesize = 5M` and `post_max_size = 8M`. Restart PHP after changing these settings. On another machine, configure the same limits in its active php.ini.

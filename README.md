@@ -4,7 +4,7 @@ Static website for **COS10026 — Web Technology, Project 1** at Swinburne Unive
 
 **T1** stands for **Together as One**. The site is a fictional digital healthcare brand: home, jobs, an application form, and an about page.
 
-Project 2 (PHP and MySQL) is documented separately in [project2/README.md](project2/README.md).
+Project 2 (PHP and MySQL): xem [hướng dẫn chạy website, phpMyAdmin và đăng nhập](project2/README.md#chạy-project-2-trên-máy-hiện-tại).
 
 **Live site:** [ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group/project1/](https://ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group/project1/)
 
