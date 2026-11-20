@@ -34,7 +34,7 @@ include __DIR__ . '/header.inc'; include __DIR__ . '/nav.inc';
 </a>
 <a class="portal-choice portal-choice-hr" href="hr_login.php">
 <span class="portal-icon" aria-hidden="true"><i class="fa-solid fa-briefcase"></i></span>
-<span class="portal-copy"><strong><span class="language-en">HR</span><span class="language-vi">Nhà tuyển dụng</span></strong><span><span class="language-en">For assigned accounts. Post, edit and remove jobs, and open CVs.</span><span class="language-vi">Dành cho tài khoản được cấp. Đăng, sửa, xóa việc và xem CV.</span></span></span>
+<span class="portal-copy"><strong><span class="language-en">HR</span><span class="language-vi">Nhà tuyển dụng</span></strong><span><span class="language-en">For assigned accounts. Review applications and open CVs.</span><span class="language-vi">Dành cho tài khoản được cấp. Xem hồ sơ và mở CV.</span></span></span>
 <i class="fa-solid fa-arrow-right portal-arrow" aria-hidden="true"></i>
 </a>
 </div>
