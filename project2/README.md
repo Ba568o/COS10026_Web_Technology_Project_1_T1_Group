@@ -59,7 +59,7 @@ The `eoi` and `users` tables are created on first use. They are not created unti
 From the repository root:
 
 ```bash
-php -d upload_max_filesize=5M -d post_max_size=8M -S localhost:8000 -t project2
+php -S localhost:8000 -t project2
 ```
 
 Open [http://localhost:8000](http://localhost:8000).
@@ -169,5 +169,7 @@ with an empty password. Start phpMyAdmin with `docker start cos10026-phpmyadmin`
 Run PHP from the repository root with:
 
 ```bash
-php -d upload_max_filesize=5M -d post_max_size=8M -S localhost:8000 -t project2
+php -S localhost:8000 -t project2
 ```
+
+Local PHP upload limits are configured in `/usr/local/etc/php/8.5/php.ini`: `upload_max_filesize = 5M` and `post_max_size = 8M`. Restart PHP after changing these settings. On another machine, configure the same limits in its active php.ini.
