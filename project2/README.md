@@ -2,7 +2,7 @@
 
 PHP and MySQL version of the T1 site for **COS10026 — Web Technology** at Swinburne University of Technology.
 
-Project 1 (HTML and CSS only) stays in `project1/` and has its own README at the repository root. This file covers Project 2 only.
+Hướng dẫn khởi động và tài khoản nằm trong [README gốc](../README.md). Tài liệu này mô tả chi tiết Project 2. Project 1 HTML/CSS nằm trong `project1/`.
 
 ## Pages
 
@@ -129,7 +129,7 @@ hai giới hạn upload trong PHP của XAMPP tương ứng.
 
 - Server-side checks cover every field, allowed selections, and the CV file.
 - Accepted CV types are PDF, DOC and DOCX, up to 5 MB. The file type is checked, not only the extension.
-- A session token blocks a forged repeat submit.
+- A session token checks that the submission comes from the application form session.
 - A valid application is stored in `eoi`. Skills are saved as JSON. The CV is saved as a BLOB.
 - `EOInumber` is the auto-increment primary key.
 - `status` is `New`, `Current` or `Final`. New records start as `New`.
