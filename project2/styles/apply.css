@@ -1574,3 +1574,9 @@ body:has(#dark-toggle:checked).apply-page .match-filters select {
   background: #111111;
   color: #f5f5f5;
 }
+.apply-result { margin: 0 0 1.25rem; padding: 1rem 1.1rem; border-radius: .375rem; }
+.apply-result p { margin: .25rem 0; }
+.apply-result.ok { background: #f3f7f3; border-left: 4px solid #2f7d4a; }
+.apply-result.bad { background: #fff0f1; border-left: 4px solid #d92f44; color: #821b2a; }
+body:has(#dark-toggle:checked).apply-page .apply-result.ok { background: #16301f; color: #d7f0df; }
+body:has(#dark-toggle:checked).apply-page .apply-result.bad { background: #3a151b; color: #ffd5db; }

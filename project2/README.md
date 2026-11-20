@@ -1,197 +1,69 @@
 # T1 Health & Wellness — Project 2
 
-PHP and MySQL version of the T1 site for **COS10026 — Web Technology** at Swinburne University of Technology.
+PHP and MySQL version of the T1 website for **COS10026 — Web Technology** at Swinburne University of Technology.
 
-Tài liệu này hướng dẫn chạy và phát triển Project 2. Tài liệu Project 1 nằm trong [project1/README.md](../project1/README.md).
+## Overview
 
-## Pages
+T1 is the careers site for a digital health provider. Visitors can read the home page, browse jobs, open the about page and view the application form. Accounts are split into two tables:
 
-| Page | File | Purpose |
+- **Users** (`users`): job seekers register themselves. After signing in, the site looks the same as it does for a visitor.
+- **HR** (`hr_users`): accounts are created in the database. There is no HR registration page. After signing in, HR can review applications and open stored CVs.
+
+Applications are stored in the `eoi` table. Only an HR account can open a CV.
+
+| Page | File | Who can use it |
 | --- | --- | --- |
-| Home | `index.php` | Brand, services, careers and appointments |
-| Jobs | `jobs.php` | Open roles and job details |
-| Apply | `apply.php` | Application form and CV upload |
-| About | `about.php` | Team information and contributions |
-| Login | `login.php` | Applicant sign-in, and the HR manager sign-in |
-| Sign up | `signup.php` | Create an applicant account |
-| Manage | `manage.php` | HR queries for EOI records |
-| Log out | `logout.php` | Ends the session |
+| Home | `index.php` | Everyone |
+| Jobs | `jobs.php` | Everyone |
+| Apply | `apply.php` | Everyone. The form saves an EOI in this page |
+| About | `about.php` | Everyone |
+| Choose a login | `login.php` | Everyone |
+| User login and sign up | `user_login.php`, `signup.php` | Job seekers |
+| HR login | `hr_login.php` | HR |
+| Applications and CVs | `manage.php`, `hr_cv.php` | HR |
 
-Shared layout: `header.inc`, `nav.inc`, `footer.inc`.
+HR logins are rows in `hr_users`. The setup script creates **`t1healthhr1` / `t1healthhr1`** through **`t1healthhr5` / `t1healthhr5`**. The older **`admin` / `admin`** account remains when it is already in the table. These are website accounts, not the MySQL account.
 
-## Requirements
+Passwords are stored with `password_hash` and checked with `password_verify`. The hash cannot be turned back into the original password.
 
-- PHP with `pdo_mysql`, `mbstring`, `fileinfo` and `zip`
-- MySQL or MariaDB
-- A PHP server. Live Server and `python -m http.server` do not run PHP.
+## How to run
 
-## Database setup
+PHP with `pdo_mysql`, and MySQL or MariaDB listening on port **3306**, are required. Live Server and `python -m http.server` do not run PHP.
 
-1. Start MySQL and create the database:
+### First time on a new machine
 
-```sql
-CREATE DATABASE IF NOT EXISTS t1_health CHARACTER SET utf8mb4;
+In phpMyAdmin or MySQL Workbench, run `database/local_setup.sql` with an administrator account. The script creates the `t1_health` database and the `t1_local` user with an empty password. The site reads those settings from `settings.php`.
+
+Then, from the repository root:
+
+```bash
+php project2/database/setup_portals.php
 ```
 
-2. Connection settings are in `settings.php`. The password stays empty:
+This creates the `users`, `hr_users` and `eoi` tables, adds the five HR accounts when they are missing, and loads 16 sample applications. Run it once. Running it again does not insert those applications a second time or replace an HR password.
 
-```php
-$host = 'localhost';
-$user = 't1_local';
-$password = '';
-$database = 't1_health';
-```
+### Each time you open the site
 
-Every database page uses this file:
-
-```php
-require_once __DIR__ . '/settings.php';
-$db = database_connection();
-```
-
-The connection uses `utf8mb4`, exceptions and native prepared statements. The MySQL account needs `CREATE`, `ALTER`, `SELECT`, `INSERT`, `UPDATE` and `DELETE` on `t1_health`.
-
-The `eoi` and `users` tables are created on first use. They are not created until a page that needs them runs.
-
-## Chạy Project 2 trên máy hiện tại
-
-### 1. MySQL
-
-Đảm bảo MySQL trên Mac đang chạy ở cổng **3306**. Database `t1_health` và
-user `t1_local` đã được tạo trên máy này; mật khẩu kết nối để trống theo đề.
-Không cần chạy lại script setup mỗi lần mở web.
-
-### 2. Chạy website
-
-Mở terminal tại thư mục gốc `COS10026_Web_Technology_Project_1_T1_Group` rồi chạy:
+From the repository root:
 
 ```bash
 php -S localhost:8000 -t project2
 ```
 
-Giữ terminal mở trong lúc dùng web. Nhấn `Ctrl+C` để dừng server.
+Leave the terminal open. Press `Ctrl+C` to stop the server. Open [http://localhost:8000](http://localhost:8000).
 
-| Trang | Địa chỉ |
+| Task | Address |
 | --- | --- |
-| Trang chủ | [localhost:8000](http://localhost:8000) |
-| Tìm việc | [jobs.php](http://localhost:8000/jobs.php) |
-| Ứng tuyển và upload CV | [apply.php](http://localhost:8000/apply.php) |
-| Đăng ký người dùng | [signup.php](http://localhost:8000/signup.php) |
-| Đăng nhập | [login.php](http://localhost:8000/login.php) |
-| Quản lý EOI | [manage.php](http://localhost:8000/manage.php) |
+| Home | http://localhost:8000 |
+| Login | http://localhost:8000/login.php |
+| Job seeker sign up | http://localhost:8000/signup.php |
+| Applications, after an HR login | http://localhost:8000/manage.php |
 
-Đăng nhập **`admin` / `admin`** để vào trang quản lý. Đây là tài khoản website,
-không phải tài khoản MySQL/phpMyAdmin. Người dùng thường đăng ký ở `signup.php`;
-đăng nhập thành công sẽ chuyển đến Jobs. Apply hiện chỉ có giao diện.
+If port 8000 is already in use, pick another port, for example `php -S localhost:8002 -t project2`.
 
-### 3. Mở phpMyAdmin khi cần xem database
+With XAMPP, put the repository in `htdocs`, start Apache and MySQL, then open `http://localhost/<repository-folder>/project2/`.
 
-Mở **Docker Desktop**, chờ Docker khởi động rồi chạy:
-
-```bash
-docker start cos10026-phpmyadmin
-```
-
-Mở [phpMyAdmin tại localhost:8081](http://localhost:8081), đăng nhập bằng tài khoản
-MySQL quản trị đang dùng trong lab, rồi chọn database **`t1_health`**.
-
-Docker ở cấu hình này chỉ chạy phpMyAdmin. MySQL chạy trên Mac; website PHP kết nối
-trực tiếp tới MySQL và không cần mở phpMyAdmin để hoạt động.
-
-### Giới hạn upload và lỗi thường gặp
-
-PHP trên máy đã được cấu hình trong `/usr/local/etc/php/8.5/php.ini`:
-
-```ini
-upload_max_filesize = 5M
-post_max_size = 8M
-```
-
-Không cần thêm `-d` vào lệnh chạy. Nếu sửa `php.ini`, dừng và chạy lại PHP server.
-Trên máy khác, đặt hai giá trị này trong file `php.ini` đang được PHP sử dụng.
-
-- **Address already in use:** cổng 8000 đang có server khác. Dừng server đó hoặc
-  chạy `php -S localhost:8002 -t project2` và mở `http://localhost:8002`.
-- **Access denied:** kiểm tra tài khoản `t1_local` và mật khẩu trống trong
-  `settings.php`; xem phần thiết lập database bên dưới nếu chạy trên máy mới.
-- **Connection refused:** kiểm tra MySQL trên Mac đang chạy ở cổng 3306.
-- **Không mở được phpMyAdmin:** kiểm tra Docker Desktop và container
-  `cos10026-phpmyadmin` đã chạy; dùng cổng 8081, không phải 8000.
-
-Với XAMPP trên máy khác, đặt repository vào `htdocs`, bật Apache và MySQL rồi mở
-`http://localhost/<repository-folder>/project2/`. Cấu hình tài khoản database và
-hai giới hạn upload trong PHP của XAMPP tương ứng.
-
-## Phạm vi hiện tại: yêu cầu 2, 3 và 6
-
-- `settings.php`: kết nối MySQL dùng chung, mật khẩu trống.
-- `eoi_helpers.php`: định nghĩa bảng `eoi`, đầy đủ trường và status New/Current/Final.
-- Login và `manage.php`: xác thực manager và quản lý các bản ghi EOI.
-
-Phần 4 đã được gỡ: không còn `process_eoi.php`, validation đơn phía server hay
-trang xác nhận EOInumber. Apply chỉ giữ giao diện; nút gửi bị vô hiệu hóa để tránh
-submit đến endpoint không tồn tại. Bảng và dữ liệu EOI hiện có được giữ nguyên.
-Manager vẫn quản lý các bản ghi đã có hoặc dữ liệu được nhập bằng phpMyAdmin.
-
-## HR manager
-
-Open `login.php`, or use **HR Login** in the navigation.
-
-| Username | Password |
-| --- | --- |
-| `admin` | `admin` |
-
-This account is created automatically if it is missing. The password in the `users` table is a hash, not the plain text. The empty value in `settings.php` is the MySQL password, not this login.
-
-After signing in, a manager is sent to `manage.php`. An applicant account cannot open that page.
-
-The manager can:
-
-- list every EOI
-- list by job reference
-- list by first name, last name, or both
-- choose the sort field and ascending or descending order
-- change one EOI status to `New`, `Current` or `Final`
-- delete every EOI for one job reference
-
-## Accounts and security
-
-- Applicant passwords are hashed with `password_hash` and checked with `password_verify`.
-- Queries that use visitor input use prepared statements.
-- Output is escaped before it is printed.
-- Login rotates the session id. The session cookie is `HttpOnly`.
-- An inactive session ends after 30 minutes.
-- Five failed sign-in attempts lock that account for five minutes.
-- Logout is a POST with a token, then the session and cookie are cleared.
-- The username `admin` cannot be registered from the sign-up page.
-
-## Project structure
-
-```text
-project2/
-├── index.php, jobs.php, apply.php, about.php
-├── eoi_helpers.php
-├── login.php, signup.php, logout.php, manage.php
-├── settings.php
-├── header.inc, nav.inc, footer.inc
-├── auth/
-│   ├── session.php
-│   ├── users.php
-│   └── registration.php
-├── components/listing.php
-├── styles/
-└── images/
-```
-
-`components/listing.php` is a shared search and pagination helper. No page calls it yet.
-
-## Adding a page
-
-1. Set `$pageTitle`, `$pageDescription`, `$pageStylesheet`, `$bodyClass` and `$currentPage`.
-2. Include `header.inc`, then `nav.inc`. Stylesheet names are relative to `styles/`.
-3. Include `footer.inc` at the end.
-4. For a page that only a signed-in user may open, call `auth_require_login()` before any HTML.
-5. Keep new database access on `database_connection()` from `settings.php`.
+phpMyAdmin is only the tool for viewing MySQL. The PHP pages connect to MySQL directly. In phpMyAdmin, select the `t1_health` database. The main tables for this part are `users`, `hr_users` and `eoi`.
 
 ## Team
 
@@ -201,17 +73,3 @@ project2/
 | Minh Hoang Bui | 106208127 | Jobs |
 | Sy Tho Nguyen | 105705546 | Apply |
 | Anh Vu Duong | 106404734 | About |
-
-## phpMyAdmin / existing local MySQL
-
-phpMyAdmin manages MySQL; PHP connects directly to MySQL, not to the phpMyAdmin URL.
-If root requires a password, keep it unchanged. Sign into phpMyAdmin or Workbench
-with your existing administrator account and execute `database/local_setup.sql`.
-Then set `$user = 't1_local'` in `settings.php`, leaving `$password = ''`.
-This account is scoped to `t1_health` on localhost. If MySQL rejects empty passwords
-under its password policy, use the course's configured local server instead of
-disabling security on your existing installation.
-
-The first login creates the users table and seeds admin/admin only if absent.
-An existing admin password or role is never overwritten. Applicants are sent to
-jobs.php; managers to manage.php. Application submission and CV processing have been removed from the current scope.

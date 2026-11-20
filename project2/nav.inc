@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/auth/session.php';
+$navRole = auth_logged_in() ? (string) ($_SESSION['role'] ?? '') : '';
+?>
 <nav class="navbar" aria-label="Main navigation">
         <!-- Brand links to the home page. -->
         <a href="index.php" class="brand" aria-label="T1 Health &amp; Wellness - home">
@@ -32,12 +36,6 @@
             <a href="about.php" <?php echo $currentPage === 'about.php' ? 'aria-current="page"' : ''; ?>>
               <span class="language-en">About</span>
               <span class="language-vi">Giới thiệu</span>
-            </a>
-          </li>
-          <li>
-            <a href="login.php" <?= $currentPage === 'login.php' ? 'aria-current="page"' : '' ?>>
-              <span class="language-en">HR Login</span>
-              <span class="language-vi">Đăng nhập HR</span>
             </a>
           </li>
         </ul>
@@ -142,10 +140,13 @@
             <input type="hidden" name="as_sitesearch" value="ba568o.github.io/COS10026_Web_Technology_Project_1_T1_Group" />
           </form>
 
-          <a class="btn-pill" href="apply.php">
-            <span class="language-en">Get started</span>
-            <span class="language-vi">Bắt đầu</span>
-          </a>
+          <?php if ($navRole === 'manager'): ?>
+          <a class="btn-pill" href="manage.php"><span class="language-en">Applications</span><span class="language-vi">Hồ sơ</span></a>
+          <?php elseif ($navRole !== ''): ?>
+          <a class="btn-pill nav-user" href="login.php"><?= auth_escape((string) $_SESSION['username']) ?></a>
+          <?php else: ?>
+          <a class="btn-pill" href="login.php"><span class="language-en">Login</span><span class="language-vi">Đăng nhập</span></a>
+          <?php endif; ?>
         </div>
       </nav>
 </header>

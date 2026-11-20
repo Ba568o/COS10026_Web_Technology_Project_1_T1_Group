@@ -162,6 +162,10 @@ a {
   background: #d92f44;
 }
 
+.btn-pill.nav-user {
+  text-transform: none;
+}
+
 .site-footer {
   box-sizing: border-box;
   width: 100%;
@@ -618,6 +622,10 @@ body {
 
     .language-vi {
       display: revert;
+    }
+
+    select option.language-vi {
+      display: block;
     }
   }
 

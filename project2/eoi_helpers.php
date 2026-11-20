@@ -2,6 +2,7 @@
 /** Creates the Expression of Interest table used by the apply form and the HR manager. */
 function eoi_ensure_table(PDO $db): void
 {
+    // Create the applications table the first time an EOI is saved or listed.
     $db->exec("CREATE TABLE IF NOT EXISTS eoi (
         EOInumber INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         first_name VARCHAR(50) NOT NULL,

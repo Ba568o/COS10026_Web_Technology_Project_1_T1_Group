@@ -53,7 +53,7 @@ include 'nav.inc';
             <a class="btn btn-submit" href="apply.php">
               <span class="language-en">APPLY NOW</span>
               <span class="language-vi">ỨNG TUYỂN NGAY</span>
-              <span aria-hidden="true"><i class="fa-solid fa-arrow-right-long"></i></span>
+              <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
             </a>
           </div>
 
@@ -1115,10 +1115,7 @@ include 'nav.inc';
                     <span class="language-vi">Viết nội dung</span>
                   </label>
                 </fieldset>
-                <button type="reset" class="clear-filters">
-                  <span class="language-en">Clear filters</span>
-                  <span class="language-vi">Xóa bộ lọc</span>
-                </button>
+                <button type="reset" class="clear-filters"><span class="language-en">Clear filters</span><span class="language-vi">Xóa bộ lọc</span></button>
               </fieldset>
             </form>
           </div>

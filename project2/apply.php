@@ -1,4 +1,126 @@
 <?php
+require_once __DIR__ . '/auth/session.php';
+require_once __DIR__ . '/settings.php';
+require_once __DIR__ . '/eoi_helpers.php';
+auth_start();
+
+/** Trims posted text and removes tags or extra slashes. */
+function apply_clean($value): string
+{
+    // Checkboxes and missing fields are not strings, so they become empty.
+    if (!is_string($value)) return '';
+    // Remove added slashes, HTML tags and surrounding spaces.
+    return trim(strip_tags(stripslashes($value)));
+}
+
+$applyPositions = ['president', 'vice-president', 'manager', 'developer', 'designer'];
+$applyStates = ['VIC', 'NSW', 'QLD', 'SA', 'WA', 'TAS', 'NT', 'ACT'];
+$applyGenders = ['male', 'female', 'other'];
+$applySkills = ['html-css', 'javascript', 'php', 'sql', 'python', 'project-management'];
+$values = [
+    'first_name' => '', 'last_name' => '', 'date_of_birth' => '', 'gender' => '',
+    'email' => '', 'phone' => '', 'street_address' => '', 'suburb' => '', 'state' => '',
+    'postcode' => '', 'job_reference' => '', 'position' => '', 'other_skills' => '',
+    'skills' => [], 'terms' => false,
+];
+if (is_string($_GET['job'] ?? null) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
+    $values['job_reference'] = strtoupper(apply_clean($_GET['job']));
+}
+$errors = [];
+$eoiNumber = null;
+if (!empty($_SESSION['apply_eoi'])) {
+    $eoiNumber = (int) $_SESSION['apply_eoi'];
+    unset($_SESSION['apply_eoi']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Copy each text field into $values after cleaning.
+    foreach (['first_name', 'last_name', 'date_of_birth', 'gender', 'email', 'phone', 'street_address', 'suburb', 'state', 'postcode', 'job_reference', 'position', 'other_skills'] as $key) {
+        $values[$key] = apply_clean($_POST[$key] ?? null);
+    }
+    $values['job_reference'] = strtoupper($values['job_reference']);
+    $values['state'] = strtoupper($values['state']);
+    $values['skills'] = [];
+    // Keep only skill values that appear on the form.
+    foreach (is_array($_POST['skills'] ?? null) ? $_POST['skills'] : [] as $skill) {
+        $skill = apply_clean($skill);
+        if (in_array($skill, $applySkills, true)) $values['skills'][] = $skill;
+    }
+    // A missing checkbox means the terms were not accepted.
+    $values['terms'] = isset($_POST['terms']);
+
+    if ($values['first_name'] === '' || mb_strlen($values['first_name']) > 50 || !preg_match("/^[\\p{L}\\s.'-]+$/u", $values['first_name'])) $errors[] = 'First name: 1–50 letters. / Tên: 1–50 chữ.';
+    if ($values['last_name'] === '' || mb_strlen($values['last_name']) > 50 || !preg_match("/^[\\p{L}\\s.'-]+$/u", $values['last_name'])) $errors[] = 'Last name: 1–50 letters. / Họ: 1–50 chữ.';
+    $dob = DateTime::createFromFormat('Y-m-d', $values['date_of_birth']);
+    // format() must match the input, so dates like 2024-02-31 are rejected.
+    if (!$dob || $dob->format('Y-m-d') !== $values['date_of_birth']) {
+        $errors[] = 'Enter a valid date of birth. / Nhập ngày sinh hợp lệ.';
+    } else {
+        $age = $dob->diff(new DateTime('today'))->y;
+        if ($age < 15 || $age > 80) $errors[] = 'Age must be from 15 to 80. / Tuổi từ 15 đến 80.';
+    }
+    if (!in_array($values['gender'], $applyGenders, true)) $errors[] = 'Choose a gender. / Chọn giới tính.';
+    if (!filter_var($values['email'], FILTER_VALIDATE_EMAIL) || strlen($values['email']) > 254) $errors[] = 'Enter a valid email. / Nhập email hợp lệ.';
+    $phoneDigits = preg_replace('/\D/', '', $values['phone']);
+    if ($values['phone'] === '' || strlen($values['phone']) > 15 || strlen($phoneDigits) < 8) $errors[] = 'Phone: 8–15 digits, maximum 15 characters. / Số điện thoại: 8–15 chữ số, tối đa 15 ký tự.';
+    if ($values['street_address'] === '' || mb_strlen($values['street_address']) > 100) $errors[] = 'Street address is required, maximum 100 characters. / Địa chỉ tối đa 100 ký tự.';
+    if ($values['suburb'] === '' || mb_strlen($values['suburb']) > 50) $errors[] = 'Suburb is required, maximum 50 characters. / Quận hoặc thành phố tối đa 50 ký tự.';
+    if (!in_array($values['state'], $applyStates, true)) $errors[] = 'Choose a state. / Chọn bang.';
+    if (!preg_match('/^\d{4}$/', $values['postcode'])) $errors[] = 'Postcode must be 4 digits. / Mã bưu chính gồm 4 số.';
+    if (!preg_match('/^[A-Z0-9]{5}$/', $values['job_reference'])) $errors[] = 'Job reference must be 5 letters or digits. / Mã việc gồm 5 chữ hoặc số.';
+    if (!in_array($values['position'], $applyPositions, true)) $errors[] = 'Choose a position. / Chọn vị trí.';
+    if (mb_strlen($values['other_skills']) > 500) $errors[] = 'Other skills: maximum 500 characters. / Kỹ năng khác tối đa 500 ký tự.';
+    if (!$values['terms']) $errors[] = 'Please accept the terms. / Vui lòng đồng ý điều khoản.';
+
+    // Validate the uploaded CV before any database write.
+    $cv = $_FILES['cv'] ?? null;
+    $cvData = '';
+    $cvName = '';
+    $cvMime = '';
+    if (!is_array($cv) || ($cv['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+        $errors[] = 'Upload a CV. / Hãy tải CV lên.';
+    } elseif (($cv['error'] ?? UPLOAD_ERR_OK) !== UPLOAD_ERR_OK) {
+        $errors[] = 'The CV could not be uploaded. / Không tải được CV.';
+    } else {
+        $cvName = apply_clean(basename((string) $cv['name']));
+        $extension = strtolower(pathinfo($cvName, PATHINFO_EXTENSION));
+        if (!in_array($extension, ['pdf', 'doc', 'docx'], true)) $errors[] = 'CV must be PDF, DOC or DOCX. / CV phải là PDF, DOC hoặc DOCX.';
+        if (($cv['size'] ?? 0) < 1 || ($cv['size'] ?? 0) > 5 * 1024 * 1024) $errors[] = 'CV must be 5 MB or smaller. / CV tối đa 5 MB.';
+        if (!$errors) {
+            // Read the temp file so the CV can be stored as a blob.
+            $cvData = file_get_contents($cv['tmp_name']);
+            $detected = mime_content_type($cv['tmp_name']);
+            $cvMime = is_string($detected) ? $detected : 'application/octet-stream';
+            if ($cvData === false || $cvData === '') $errors[] = 'The CV file is empty. / Tệp CV trống.';
+            if (strlen($cvName) > 255) $cvName = substr($cvName, -255);
+            if (strlen($cvMime) > 100) $cvMime = substr($cvMime, 0, 100);
+        }
+    }
+
+    if (!$errors) {
+        try {
+            $db = database_connection();
+            eoi_ensure_table($db);
+            // Skills are stored as a JSON list. Status stays at the default New.
+            $insert = $db->prepare('INSERT INTO eoi (first_name, last_name, date_of_birth, gender, email, phone, street_address, suburb, state, postcode, job_reference, position, skills, other_skills, cv_name, cv_mime, cv, terms) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+            $insert->execute([
+                $values['first_name'], $values['last_name'], $values['date_of_birth'], $values['gender'],
+                $values['email'], $values['phone'], $values['street_address'], $values['suburb'],
+                $values['state'], $values['postcode'], $values['job_reference'], $values['position'],
+                json_encode(array_values(array_unique($values['skills'])), JSON_UNESCAPED_UNICODE),
+                $values['other_skills'], $cvName, $cvMime, $cvData, 1,
+            ]);
+            $_SESSION['apply_eoi'] = (int) $db->lastInsertId();
+            // 303 sends the browser to GET so a refresh does not insert again.
+            header('Location: apply.php#application', true, 303);
+            exit;
+        } catch (PDOException $exception) {
+            error_log('Apply save error: ' . $exception->getMessage());
+            $errors[] = 'The application could not be saved. / Không lưu được đơn.';
+        }
+    }
+}
+
 $pageTitle = 'Job Application - T1 Health & Wellness';
 $pageDescription = 'Apply for a job position at T1 Health & Wellness. Fill out the application form with your details.';
 $bodyClass = 'apply-page';
@@ -35,14 +157,9 @@ include 'nav.inc';
               <span class="language-vi">Hãy mang theo sự tò mò, ý tưởng và khát vọng của bạn. Cùng nhau bước tiếp.</span>
             </p>
             <a class="btn btn-submit" href="jobs.php">
-              <span class="language-en">
-                Explore open roles
-                <i class="fa-solid fa-arrow-right-long"></i>
-              </span>
-              <span class="language-vi">
-                Xem vị trí đang tuyển
-                <i class="fa-solid fa-arrow-right-long"></i>
-              </span>
+              <span class="language-en">Explore open roles</span>
+              <span class="language-vi">Xem vị trí đang tuyển</span>
+              <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
             </a>
           </div>
 
@@ -211,12 +328,17 @@ include 'nav.inc';
                 </p>
               </div>
 
-              <p role="note">Application submission is not implemented in this scope. / Chức năng gửi đơn chưa được triển khai trong phạm vi này.</p>
+              <?php if ($eoiNumber): ?>
+              <p class="apply-result ok" role="status"><span class="language-en">Application received. Your EOI number is <?= (int) $eoiNumber ?>.</span><span class="language-vi">Đã nhận đơn. Số EOI của bạn là <?= (int) $eoiNumber ?>.</span></p>
+              <?php elseif ($errors): ?>
+              <div class="apply-result bad" role="alert"><?php foreach ($errors as $error): ?><p><?= auth_language_pair($error) ?></p><?php endforeach; ?></div>
+              <?php endif; ?>
               <form
-                action="apply.php"
+                action="apply.php#application"
                 method="POST"
                 enctype="multipart/form-data"
                 class="apply-form"
+                novalidate
               >
                 <fieldset class="form-section" id="personal-info">
                   <legend>
@@ -243,7 +365,7 @@ include 'nav.inc';
                           autocomplete="given-name"
                           name="first_name"
                           placeholder=" "
-                        value="" />
+                        value="<?= auth_escape($values['first_name']) ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. Sy Tho</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Sỹ Thọ</span>
                       </span>
@@ -261,7 +383,7 @@ include 'nav.inc';
                           autocomplete="family-name"
                           name="last_name"
                           placeholder=" "
-                        value="" />
+                        value="<?= auth_escape($values['last_name']) ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. Nguyen</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Nguyễn</span>
                       </span>
@@ -275,7 +397,7 @@ include 'nav.inc';
                         <span class="language-vi">Ngày sinh</span>
                         <span class="required">*</span>
                       </label>
-                      <input type="date" id="dob" autocomplete="bday" name="date_of_birth" value="" />
+                      <input type="date" id="dob" autocomplete="bday" name="date_of_birth" value="<?= auth_escape($values['date_of_birth']) ?>" />
                     </div>
                     <div class="form-group">
                       <span class="field-label" id="gender-label">
@@ -285,17 +407,17 @@ include 'nav.inc';
                       </span>
                       <div class="radio-group" role="radiogroup" aria-labelledby="gender-label">
                         <label class="radio-label">
-                          <input type="radio" name="gender" value="male"  />
+                          <input type="radio" name="gender" value="male" <?= $values['gender'] === 'male' ? 'checked' : '' ?> />
                           <span class="language-en">Male</span>
                           <span class="language-vi">Nam</span>
                         </label>
                         <label class="radio-label">
-                          <input type="radio" name="gender" value="female"  />
+                          <input type="radio" name="gender" value="female" <?= $values['gender'] === 'female' ? 'checked' : '' ?> />
                           <span class="language-en">Female</span>
                           <span class="language-vi">Nữ</span>
                         </label>
                         <label class="radio-label">
-                          <input type="radio" name="gender" value="other"  />
+                          <input type="radio" name="gender" value="other" <?= $values['gender'] === 'other' ? 'checked' : '' ?> />
                           <span class="language-en">Other</span>
                           <span class="language-vi">Khác</span>
                         </label>
@@ -311,7 +433,7 @@ include 'nav.inc';
                         <span class="required">*</span>
                       </label>
                       <span class="placeholder-field">
-                        <input type="email" id="email" autocomplete="email" name="email" placeholder=" " value="" />
+                        <input type="text" id="email" autocomplete="email" name="email" placeholder=" " value="<?= auth_escape($values['email']) ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. example@email.com</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: tên_mẫu@email.com</span>
                       </span>
@@ -329,7 +451,7 @@ include 'nav.inc';
                           autocomplete="tel"
                           name="phone"
                           placeholder=" "
-                        value="" />
+                        value="<?= auth_escape($values['phone']) ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. 0412 345 678</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 0412 345 678</span>
                       </span>
@@ -355,7 +477,7 @@ include 'nav.inc';
                       <span class="required">*</span>
                     </label>
                     <span class="placeholder-field">
-                      <input type="text" id="street" name="street_address" placeholder=" " value="" />
+                      <input type="text" id="street" name="street_address" placeholder=" " value="<?= auth_escape($values['street_address']) ?>" />
                       <span class="input-placeholder language-en" aria-hidden="true">e.g. 123 Burwood Road</span>
                       <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 123 đường Burwood</span>
                     </span>
@@ -375,7 +497,7 @@ include 'nav.inc';
                           autocomplete="address-level2"
                           name="suburb"
                           placeholder=" "
-                        value="" />
+                        value="<?= auth_escape($values['suburb']) ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. Hawthorn</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: Thành phố Hawthorn</span>
                       </span>
@@ -387,15 +509,11 @@ include 'nav.inc';
                         <span class="required">*</span>
                       </label>
                       <select id="state-en" aria-labelledby="state-label" autocomplete="address-level1" name="state">
-                        <option value=""  disabled>-- Select State --</option>
-                        <option value="VIC" >VIC</option>
-                        <option value="NSW" >NSW</option>
-                        <option value="QLD" >QLD</option>
-                        <option value="SA" >SA</option>
-                        <option value="WA" >WA</option>
-                        <option value="TAS" >TAS</option>
-                        <option value="NT" >NT</option>
-                        <option value="ACT" >ACT</option>
+                        <option value="" disabled <?= $values['state'] === '' ? 'selected' : '' ?> class="language-en">-- Select State --</option>
+                        <option value="" disabled <?= $values['state'] === '' ? 'selected' : '' ?> class="language-vi">-- Chọn bang --</option>
+                        <?php foreach (['VIC', 'NSW', 'QLD', 'SA', 'WA', 'TAS', 'NT', 'ACT'] as $state): ?>
+                        <option value="<?= $state ?>" <?= $values['state'] === $state ? 'selected' : '' ?>><?= $state ?></option>
+                        <?php endforeach; ?>
                       </select>
 
                     </div>
@@ -413,7 +531,7 @@ include 'nav.inc';
                           autocomplete="postal-code"
                           name="postcode"
                           placeholder=" "
-                        value="" />
+                        value="<?= auth_escape($values['postcode']) ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. 3122</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: 3122</span>
                       </span>
@@ -445,7 +563,7 @@ include 'nav.inc';
                           id="job-ref"
                           name="job_reference"
                           placeholder=" "
-                        value="" />
+                        value="<?= auth_escape($values['job_reference']) ?>" />
                         <span class="input-placeholder language-en" aria-hidden="true">e.g. AB123</span>
                         <span class="input-placeholder language-vi" aria-hidden="true">Ví dụ: AB123</span>
                       </span>
@@ -457,12 +575,12 @@ include 'nav.inc';
                         <span class="required">*</span>
                       </label>
                       <select id="position-en" aria-labelledby="position-label" name="position">
-                        <option value=""  disabled>-- Select Position --</option>
-                        <option value="president" >President</option>
-                        <option value="vice-president" >Vice President</option>
-                        <option value="manager" >Manager</option>
-                        <option value="developer" >Developer</option>
-                        <option value="designer" >Designer</option>
+                        <option value="" disabled <?= $values['position'] === '' ? 'selected' : '' ?> class="language-en">-- Select Position --</option>
+                        <option value="" disabled <?= $values['position'] === '' ? 'selected' : '' ?> class="language-vi">-- Chọn vị trí --</option>
+                        <?php foreach (['president' => ['President', 'Chủ tịch'], 'vice-president' => ['Vice President', 'Phó chủ tịch'], 'manager' => ['Manager', 'Quản lý'], 'developer' => ['Developer', 'Lập trình viên'], 'designer' => ['Designer', 'Nhà thiết kế']] as $position => $label): ?>
+                        <option value="<?= $position ?>" <?= $values['position'] === $position ? 'selected' : '' ?> class="language-en"><?= $label[0] ?></option>
+                        <option value="<?= $position ?>" <?= $values['position'] === $position ? 'selected' : '' ?> class="language-vi"><?= $label[1] ?></option>
+                        <?php endforeach; ?>
                       </select>
 
                     </div>
@@ -479,27 +597,28 @@ include 'nav.inc';
                     </span>
                     <div class="checkbox-group" role="group" aria-labelledby="skills-label">
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="html-css"  />
+                        <input type="checkbox" name="skills[]" value="html-css" <?= in_array('html-css', $values['skills'], true) ? 'checked' : '' ?> />
                         HTML/CSS
                       </label>
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="javascript"  />
+                        <input type="checkbox" name="skills[]" value="javascript" <?= in_array('javascript', $values['skills'], true) ? 'checked' : '' ?> />
                         JavaScript
                       </label>
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="php"  />
+                        <input type="checkbox" name="skills[]" value="php" <?= in_array('php', $values['skills'], true) ? 'checked' : '' ?> />
                         PHP
                       </label>
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="sql"  />
-                        SQL/Database
+                        <input type="checkbox" name="skills[]" value="sql" <?= in_array('sql', $values['skills'], true) ? 'checked' : '' ?> />
+                        <span class="language-en">SQL/Database</span>
+                        <span class="language-vi">SQL/Cơ sở dữ liệu</span>
                       </label>
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="python"  />
+                        <input type="checkbox" name="skills[]" value="python" <?= in_array('python', $values['skills'], true) ? 'checked' : '' ?> />
                         Python
                       </label>
                       <label class="checkbox-label">
-                        <input type="checkbox" name="skills[]" value="project-management"  />
+                        <input type="checkbox" name="skills[]" value="project-management" <?= in_array('project-management', $values['skills'], true) ? 'checked' : '' ?> />
                         <span class="language-en">Project Management</span>
                         <span class="language-vi">Quản lý dự án</span>
                       </label>
@@ -518,7 +637,7 @@ include 'nav.inc';
                         rows="5"
                         placeholder=" "
                         aria-describedby="other-skills-help"
-                      ></textarea>
+                      ><?= auth_escape($values['other_skills']) ?></textarea>
                       <span class="input-placeholder language-en" aria-hidden="true">
                         Describe any additional skills, certifications, or relevant experience...
                       </span>
@@ -540,10 +659,7 @@ include 'nav.inc';
                     </label>
                     <span class="file-input-wrap">
                       <input type="file" id="cv" name="cv" aria-describedby="cv-help" />
-                      <label class="file-button-label" for="cv">
-                        <span class="language-en">Choose File</span>
-                        <span class="language-vi">Chọn tệp</span>
-                      </label>
+                      <label class="file-button-label" for="cv"><span class="language-en">Choose File</span><span class="language-vi">Chọn tệp</span></label>
                     </span>
                     <small id="cv-help" class="form-help file-note">
                       <span class="language-en">PDF, DOC or DOCX, maximum 5 MB</span>
@@ -582,7 +698,7 @@ include 'nav.inc';
 
                   <div class="form-group form-group-full">
                     <label class="checkbox-label terms-label">
-                      <input type="checkbox" id="terms" name="terms"  />
+                      <input type="checkbox" id="terms" name="terms" <?= $values['terms'] ? 'checked' : '' ?> />
                       <span>
                         <span class="language-en">
                           I confirm that all information provided is accurate and I agree to the
@@ -600,14 +716,8 @@ include 'nav.inc';
                   </div>
 
                   <div class="form-buttons">
-                    <button type="reset" class="btn btn-reset">
-                      <span class="language-en">Reset Form</span>
-                      <span class="language-vi">Đặt lại biểu mẫu</span>
-                    </button>
-                    <button type="button" class="btn btn-submit" disabled>
-                      <span class="language-en">Submit Application</span>
-                      <span class="language-vi">Gửi đơn ứng tuyển</span>
-                    </button>
+                    <button type="reset" class="btn btn-reset"><span class="language-en">Reset Form</span><span class="language-vi">Đặt lại biểu mẫu</span></button>
+                    <button type="submit" class="btn btn-submit"><span class="language-en">Submit Application</span><span class="language-vi">Gửi đơn ứng tuyển</span></button>
                   </div>
                 </fieldset>
               </form>

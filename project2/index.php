@@ -50,7 +50,7 @@ include 'nav.inc';
             <a class="btn btn-submit" href="#home-services">
               <span class="language-en">EXPLORE OUR SERVICE</span>
               <span class="language-vi">KHÁM PHÁ DỊCH VỤ</span>
-              <span><i class="fa-solid fa-arrow-right-long"></i></span>
+              <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
             </a>
           </div>
 
@@ -434,7 +434,7 @@ include 'nav.inc';
             <a href="jobs.php" class="careers-button">
               <span class="language-en">Explore Careers</span>
               <span class="language-vi">Khám phá cơ hội nghề nghiệp</span>
-              <span aria-hidden="true"><i class="fa-solid fa-arrow-right-long"></i></span>
+              <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
             </a>
           </div>
 
