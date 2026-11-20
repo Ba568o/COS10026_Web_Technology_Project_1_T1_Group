@@ -38,7 +38,7 @@ CREATE DATABASE IF NOT EXISTS t1_health CHARACTER SET utf8mb4;
 
 ```php
 $host = 'localhost';
-$user = 'root';
+$user = 't1_local';
 $password = '';
 $database = 't1_health';
 ```
@@ -147,3 +147,27 @@ project2/
 | Minh Hoang Bui | 106208127 | Jobs |
 | Sy Tho Nguyen | 105705546 | Apply |
 | Anh Vu Duong | 106404734 | About |
+
+## phpMyAdmin / existing local MySQL
+
+phpMyAdmin manages MySQL; PHP connects directly to MySQL, not to the phpMyAdmin URL.
+If root requires a password, keep it unchanged. Sign into phpMyAdmin or Workbench
+with your existing administrator account and execute `database/local_setup.sql`.
+Then set `$user = 't1_local'` in `settings.php`, leaving `$password = ''`.
+This account is scoped to `t1_health` on localhost. If MySQL rejects empty passwords
+under its password policy, use the course's configured local server instead of
+disabling security on your existing installation.
+
+The first login creates the users table and seeds admin/admin only if absent.
+An existing admin password or role is never overwritten. Applicants are sent to
+jobs.php; managers to manage.php. Applicants upload their CV through apply.php.
+
+Current COS10026 setup: Docker container `cos10026-phpmyadmin` exposes
+http://localhost:8081 and connects to the Mac MySQL server through
+`host.docker.internal:3306`. PHP running on the Mac uses `localhost` and `t1_local`
+with an empty password. Start phpMyAdmin with `docker start cos10026-phpmyadmin`.
+Run PHP from the repository root with:
+
+```bash
+php -d upload_max_filesize=5M -d post_max_size=8M -S localhost:8000 -t project2
+```

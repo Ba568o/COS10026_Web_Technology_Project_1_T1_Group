@@ -3,7 +3,7 @@
 // Keep the password empty as required by the assignment.
 // Create the t1_health database once before using database_connection().
 $host = 'localhost';
-$user = 'root';
+$user = 't1_local';
 $password = '';
 $database = 't1_health';
 
