@@ -25,12 +25,15 @@ Project 2 cần PHP để xử lý các file `.php`; không chạy bằng Python
 | Đăng nhập | [login.php](http://localhost:8000/login.php) |
 | Quản lý EOI | [manage.php](http://localhost:8000/manage.php) |
 
+> Phạm vi hiện tại: yêu cầu 2, 3, 6. Phần xử lý gửi đơn (số 4) đã gỡ;
+> Apply chỉ còn giao diện, chưa lưu đơn hoặc upload CV. Dữ liệu EOI cũ vẫn giữ nguyên.
+
 ## 2. Tài khoản đăng nhập website
 
 - **HR / người chấm bài:** username `admin`, password `admin` tại trang Login.
   Sau đăng nhập sẽ vào `manage.php`.
 - **Người tìm việc:** tạo tài khoản ở trang Sign up, sau đó đăng nhập bằng tài khoản
-  vừa tạo. Đăng nhập thành công chuyển đến Jobs; upload CV ở trang Apply.
+  vừa tạo. Đăng nhập thành công chuyển đến Jobs.
 
 ## 3. Mở phpMyAdmin để xem database
 

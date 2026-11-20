@@ -11,7 +11,6 @@ Hướng dẫn khởi động và tài khoản nằm trong [README gốc](../REA
 | Home | `index.php` | Brand, services, careers and appointments |
 | Jobs | `jobs.php` | Open roles and job details |
 | Apply | `apply.php` | Application form and CV upload |
-| Confirmation | `eoi_confirmation.php` | Receipt with the new EOI number |
 | About | `about.php` | Team information and contributions |
 | Login | `login.php` | Applicant sign-in, and the HR manager sign-in |
 | Sign up | `signup.php` | Create an applicant account |
@@ -83,7 +82,7 @@ Giữ terminal mở trong lúc dùng web. Nhấn `Ctrl+C` để dừng server.
 
 Đăng nhập **`admin` / `admin`** để vào trang quản lý. Đây là tài khoản website,
 không phải tài khoản MySQL/phpMyAdmin. Người dùng thường đăng ký ở `signup.php`;
-đăng nhập thành công sẽ chuyển đến Jobs và có thể gửi CV qua Apply.
+đăng nhập thành công sẽ chuyển đến Jobs. Apply hiện chỉ có giao diện.
 
 ### 3. Mở phpMyAdmin khi cần xem database
 
@@ -123,18 +122,16 @@ Với XAMPP trên máy khác, đặt repository vào `htdocs`, bật Apache và 
 `http://localhost/<repository-folder>/project2/`. Cấu hình tài khoản database và
 hai giới hạn upload trong PHP của XAMPP tương ứng.
 
-## Expression of Interest
+## Phạm vi hiện tại: yêu cầu 2, 3 và 6
 
-`apply.php` posts to `process_eoi.php`.
+- `settings.php`: kết nối MySQL dùng chung, mật khẩu trống.
+- `eoi_helpers.php`: định nghĩa bảng `eoi`, đầy đủ trường và status New/Current/Final.
+- Login và `manage.php`: xác thực manager và quản lý các bản ghi EOI.
 
-- Server-side checks cover every field, allowed selections, and the CV file.
-- Accepted CV types are PDF, DOC and DOCX, up to 5 MB. The file type is checked, not only the extension.
-- A session token checks that the submission comes from the application form session.
-- A valid application is stored in `eoi`. Skills are saved as JSON. The CV is saved as a BLOB.
-- `EOInumber` is the auto-increment primary key.
-- `status` is `New`, `Current` or `Final`. New records start as `New`.
-- Errors send the applicant back to the form with their text kept. They choose the CV file again.
-- Success goes to `eoi_confirmation.php`, so refreshing the receipt does not insert another row.
+Phần 4 đã được gỡ: không còn `process_eoi.php`, validation đơn phía server hay
+trang xác nhận EOInumber. Apply chỉ giữ giao diện; nút gửi bị vô hiệu hóa để tránh
+submit đến endpoint không tồn tại. Bảng và dữ liệu EOI hiện có được giữ nguyên.
+Manager vẫn quản lý các bản ghi đã có hoặc dữ liệu được nhập bằng phpMyAdmin.
 
 ## HR manager
 
@@ -173,7 +170,7 @@ The manager can:
 ```text
 project2/
 ├── index.php, jobs.php, apply.php, about.php
-├── process_eoi.php, eoi_helpers.php, eoi_confirmation.php
+├── eoi_helpers.php
 ├── login.php, signup.php, logout.php, manage.php
 ├── settings.php
 ├── header.inc, nav.inc, footer.inc
@@ -217,4 +214,4 @@ disabling security on your existing installation.
 
 The first login creates the users table and seeds admin/admin only if absent.
 An existing admin password or role is never overwritten. Applicants are sent to
-jobs.php; managers to manage.php. Applicants upload their CV through apply.php.
+jobs.php; managers to manage.php. Application submission and CV processing have been removed from the current scope.
