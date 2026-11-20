@@ -20,11 +20,8 @@ function auth_database(): PDO
     $existing->execute(['admin']);
     $admin = $existing->fetch();
     if (!$admin) {
-        $insert = $db->prepare("INSERT INTO users (username, password_hash, role) VALUES ('admin', ?, 'manager')");
+        $insert = $db->prepare("INSERT INTO users (username, password_hash, role) VALUES ('admin', ?, 'manager') ON DUPLICATE KEY UPDATE username = username");
         $insert->execute([password_hash('admin', PASSWORD_DEFAULT)]);
-    } elseif ($admin['role'] !== 'manager' || !password_verify('admin', $admin['password_hash'])) {
-        $update = $db->prepare("UPDATE users SET password_hash = ?, role = 'manager', failed_attempts = 0, locked_until = NULL WHERE id = ?");
-        $update->execute([password_hash('admin', PASSWORD_DEFAULT), $admin['id']]);
     }
     return $db;
 }
