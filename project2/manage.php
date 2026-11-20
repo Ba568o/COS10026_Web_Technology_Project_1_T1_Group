@@ -35,13 +35,19 @@ $sortFields = [
 ];
 $statusLabels = ['New' => 'Mới', 'Current' => 'Đang xử lý', 'Final' => 'Hoàn tất'];
 
-$list = $_GET['list'] ?? 'all';
+function manage_input(array $source, string $key, string $default = ''): string
+{
+    return isset($source[$key]) && is_string($source[$key]) ? trim($source[$key]) : $default;
+}
+
+$list = manage_input($_GET, 'list', 'all');
 if (!in_array($list, ['all', 'job', 'name'], true)) $list = 'all';
-$sort = isset($sortFields[$_GET['sort'] ?? '']) ? $_GET['sort'] : 'EOInumber';
+$sort = manage_input($_GET, 'sort');
+$sort = isset($sortFields[$sort]) ? $sort : 'EOInumber';
 $dir = ($_GET['dir'] ?? 'desc') === 'asc' ? 'asc' : 'desc';
-$jobReference = strtoupper(trim((string) ($_GET['job_reference'] ?? '')));
-$firstName = trim((string) ($_GET['first_name'] ?? ''));
-$lastName = trim((string) ($_GET['last_name'] ?? ''));
+$jobReference = strtoupper(manage_input($_GET, 'job_reference'));
+$firstName = manage_input($_GET, 'first_name');
+$lastName = manage_input($_GET, 'last_name');
 
 $notice = $_SESSION['manage_notice'] ?? '';
 $error = $_SESSION['manage_error'] ?? '';
@@ -66,7 +72,7 @@ try {
         }
         $action = $_POST['action'] ?? '';
         if ($action === 'delete') {
-            $reference = strtoupper(trim((string) ($_POST['job_reference'] ?? '')));
+            $reference = strtoupper(manage_input($_POST, 'job_reference'));
             if (!preg_match('/^[A-Z0-9]{5}$/', $reference)) {
                 $_SESSION['manage_error'] = ['Enter a job reference of exactly 5 letters or digits.', 'Mã việc phải gồm đúng 5 chữ hoặc số.'];
             } else {
@@ -83,9 +89,15 @@ try {
             } else {
                 $update = $db->prepare('UPDATE eoi SET status = ? WHERE EOInumber = ?');
                 $update->execute([$status, $number]);
-                $_SESSION['manage_notice'] = $update->rowCount()
-                    ? ['EOI ' . $number . ' is now ' . $status . '.', 'EOI ' . $number . ' đã chuyển sang ' . $statusLabels[$status] . '.']
-                    : ['That EOI number was not found.', 'Không tìm thấy số EOI này.'];
+                if ($update->rowCount()) {
+                    $_SESSION['manage_notice'] = ['EOI ' . $number . ' is now ' . $status . '.', 'EOI ' . $number . ' đã chuyển sang ' . $statusLabels[$status] . '.'];
+                } else {
+                    $exists = $db->prepare('SELECT EOInumber FROM eoi WHERE EOInumber = ?');
+                    $exists->execute([$number]);
+                    $_SESSION['manage_notice'] = $exists->fetch()
+                        ? ['Status is already ' . $status . '.', 'Trạng thái đã là ' . $statusLabels[$status] . '.']
+                        : ['That EOI number was not found.', 'Không tìm thấy số EOI này.'];
+                }
             }
         }
         manage_back($query);
