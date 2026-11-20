@@ -2,7 +2,7 @@
 
 PHP and MySQL version of the T1 site for **COS10026 — Web Technology** at Swinburne University of Technology.
 
-Hướng dẫn khởi động và tài khoản nằm trong [README gốc](../README.md). Tài liệu này mô tả chi tiết Project 2. Project 1 HTML/CSS nằm trong `project1/`.
+Tài liệu này hướng dẫn chạy và phát triển Project 2. Tài liệu Project 1 nằm trong [project1/README.md](../project1/README.md).
 
 ## Pages
 
