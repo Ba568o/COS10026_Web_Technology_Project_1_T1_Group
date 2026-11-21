@@ -16,3 +16,6 @@
 # Runtime logs
 *.log
 # settings.php is part of the assignment and intentionally remains tracked.
+
+# Vscode settings
+.vscode/
