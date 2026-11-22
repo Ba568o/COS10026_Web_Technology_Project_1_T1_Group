@@ -19,3 +19,8 @@
 
 # Vscode settings
 .vscode/
+
+# Other 
+.archify
+project2/project2_architecture.delivery.json
+project2/project2_architecture.html
