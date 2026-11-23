@@ -20,6 +20,9 @@
 # Vscode settings
 .vscode/
 
+# Plans
+Plans/
+
 # Other 
 .archify
 project2/project2_architecture.delivery.json
