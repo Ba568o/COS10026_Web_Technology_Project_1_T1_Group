@@ -1,9 +1,13 @@
 <?php
+// Database helpers for managing, seeding, loading, and filtering job listings.
+// Uses database_connection() from settings.php and falls back to jobs_seed.php if MySQL is unavailable.
 require_once __DIR__ . '/../settings.php';
 
+// Creates the jobs table if it does not exist yet, or adds any missing columns to an older 7-column table.
 function jobs_ensure_table(PDO $db): void
 {
-    // Nullable TEXT/LONGTEXT definitions work both for new tables and ALTER on non-empty 7-column tables (EC-18).
+    // Define the extended columns once so both CREATE TABLE and ALTER TABLE stay in sync.
+    // TEXT and LONGTEXT columns stay nullable because MySQL does not allow defaults on them when altering a populated table.
     $extraCols = [
         'category_en' => "VARCHAR(120) NOT NULL DEFAULT ''",
         'category_vi' => "VARCHAR(120) NOT NULL DEFAULT ''",
@@ -33,7 +37,8 @@ function jobs_ensure_table(PDO $db): void
         $extraSql .= ",\n        $col $def";
     }
 
-    // Preserve the 7 legacy columns used by job_matches.php; avoid CREATE INDEX because t1_local lacks INDEX privilege.
+    // Keep the original 7 columns from job_matches.php so skill matching keeps working.
+    // Avoid separate CREATE INDEX statements because the local t1_local user only has PRIMARY KEY / ALTER privileges.
     $db->exec("CREATE TABLE IF NOT EXISTS jobs (
         reference CHAR(5) NOT NULL PRIMARY KEY,
         title_en VARCHAR(120) NOT NULL,
@@ -44,6 +49,7 @@ function jobs_ensure_table(PDO $db): void
         place_vi VARCHAR(80) NOT NULL$extraSql
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
 
+    // Upgrade older 7-column tables in place by adding whichever extended columns are missing.
     $existing = array_map('strtolower', $db->query('SHOW COLUMNS FROM jobs')->fetchAll(PDO::FETCH_COLUMN));
     foreach ($extraCols as $col => $def) {
         if (!in_array($col, $existing, true)) {
@@ -52,8 +58,10 @@ function jobs_ensure_table(PDO $db): void
     }
 }
 
+// Inserts the default jobs from jobs_seed.php when the table is empty, and fixes HCW01's heading if needed.
 function jobs_seed_if_empty(PDO $db): void
 {
+    // Only seed when the table has zero rows so manual edits or extra jobs are never overwritten.
     if ((int) $db->query('SELECT COUNT(*) FROM jobs')->fetchColumn() === 0) {
         $insert = $db->prepare(
             'INSERT INTO jobs (
@@ -65,7 +73,9 @@ function jobs_seed_if_empty(PDO $db): void
                 responsibilities_json, requirements_json, benefits_json, apply_position, sort_order
             ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
         );
+
         foreach (require __DIR__ . '/jobs_seed.php' as $job) {
+            // Store bilingual bullet lists as UTF-8 JSON strings so one column holds both EN and VI arrays.
             $insert->execute([
                 $job['reference'],
                 $job['title']['en'],
@@ -97,11 +107,14 @@ function jobs_seed_if_empty(PDO $db): void
                 $job['sort_order'],
             ]);
         }
+
+        // Record the seed in app_migrations when running alongside setup_portals.php.
         if ($db->query("SHOW TABLES LIKE 'app_migrations'")->fetchColumn()) {
             $db->exec("INSERT IGNORE INTO app_migrations (name) VALUES ('jobs_seed')");
         }
     }
 
+    // Normalize HCW01 if an older row still has an empty heading or the old "Description" label.
     $db->exec(
         "UPDATE jobs
          SET category_en = 'Content Writing | Full-time', category_vi = 'Viết nội dung | Toàn thời gian'
@@ -110,18 +123,25 @@ function jobs_seed_if_empty(PDO $db): void
     );
 }
 
+// Loads all job listings ordered for display, falling back to jobs_seed.php if MySQL fails.
 function jobs_fetch_all(): array
 {
     try {
+        // Make sure the table exists and is seeded before querying.
         $db = database_connection();
         jobs_ensure_table($db);
         jobs_seed_if_empty($db);
+
         $rows = $db->query('SELECT * FROM jobs ORDER BY sort_order ASC, reference ASC')->fetchAll(PDO::FETCH_ASSOC);
         if (!$rows) {
             return require __DIR__ . '/jobs_seed.php';
         }
+
+        // Decode JSON list columns safely and guarantee both 'en' and 'vi' keys exist.
         $decode = static fn(?string $json): array =>
             (is_array($d = json_decode($json ?? '', true)) ? $d : []) + ['en' => [], 'vi' => []];
+
+        // Reshape flat MySQL columns back into the nested bilingual structure expected by templates.
         $jobs = [];
         foreach ($rows as $row) {
             $jobs[] = [
@@ -149,11 +169,13 @@ function jobs_fetch_all(): array
         }
         return $jobs;
     } catch (Throwable $e) {
+        // Log the error for debugging, but keep the Jobs and Apply pages working using the local seed array.
         error_log('jobs_fetch_all: ' . $e->getMessage());
         return require __DIR__ . '/jobs_seed.php';
     }
 }
 
+// Finds a single job by its 5-character reference code (ignoring case and extra spaces).
 function jobs_find_by_reference(string $ref): ?array
 {
     $target = strtoupper(trim($ref));
@@ -168,22 +190,26 @@ function jobs_find_by_reference(string $ref): ?array
     return null;
 }
 
+// Checks whether a job's USD salary range matches the selected filter bucket or custom min/max range.
 function jobs_matches_salary(array $job, string $salaryKey, ?int $customMin = null, ?int $customMax = null): bool
 {
     if ($salaryKey === 'all') {
         return true;
     }
+
     $min = isset($job['salary_min']) && is_numeric($job['salary_min']) ? (int) $job['salary_min'] : null;
     $max = isset($job['salary_max']) && is_numeric($job['salary_max']) ? (int) $job['salary_max'] : null;
     $negotiable = ($min === null || $max === null);
 
-    // Negotiable jobs match only 'all' and 'negotiable' so null never leaks into numeric buckets (EC-14).
+    // Handle negotiable jobs separately so null bounds never evaluate as < 1200 and leak into numeric buckets.
     if ($salaryKey === 'negotiable') {
         return $negotiable;
     }
     if ($negotiable) {
         return false;
     }
+
+    // For custom "other" ranges, swap reversed inputs and check if [min, max] overlaps [customMin, customMax].
     if ($salaryKey === 'other') {
         if ($customMin !== null && $customMax !== null && $customMin > $customMax) {
             [$customMin, $customMax] = [$customMax, $customMin];
@@ -191,6 +217,7 @@ function jobs_matches_salary(array $job, string $salaryKey, ?int $customMin = nu
         return ($customMin === null || $max >= $customMin) && ($customMax === null || $min <= $customMax);
     }
 
+    // Match preset USD salary buckets by checking interval overlap with the job's [min, max] range.
     return match ($salaryKey) {
         'under-1200' => $min < 1200,
         '400-800' => $max >= 400 && $min <= 800,
