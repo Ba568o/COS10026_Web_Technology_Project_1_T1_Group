@@ -8,7 +8,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 include 'header.inc';
 include 'nav.inc';
 ?>
-<!-- MAIN CONTENT: homepage sections and appointment information. -->
+<!-- MAIN CONTENT: home page of the T1 careers site — what T1 builds, why work here, and the open roles at a glance. -->
 
     <main id="main-content">
       <!-- HERO SECTION: introduces T1 and its digital healthcare focus. -->
@@ -24,34 +24,41 @@ include 'nav.inc';
           <!-- Hero text, introduction, and call-to-action link. -->
           <div class="hero-content">
             <p class="tag">
-              <span class="language-en">DIGITAL HEALTHCARE</span>
-              <span class="language-vi">CHĂM SÓC SỨC KHỎE SỐ</span>
+              <span class="language-en">CAREERS IN DIGITAL HEALTH</span>
+              <span class="language-vi">TUYỂN DỤNG NGÀNH SỨC KHỎE SỐ</span>
             </p>
 
             <h1 id="apply-heading">
-              <span class="language-en">Better Health</span>
-              <span class="language-vi">Sức khỏe tốt hơn</span>
+              <span class="language-en">Build Better Health</span>
+              <span class="language-vi">Kiến tạo sức khỏe</span>
               <br />
-              <span class="language-en">Smarter Care</span>
-              <span class="language-vi">Chăm sóc thông minh hơn</span>
+              <span class="language-en">Shape Smarter Care</span>
+              <span class="language-vi">Định hình chăm sóc</span>
             </h1>
 
             <p class="hero-text">
               <span class="language-en">
-                T1 is a digital health and wellness provider delivering accessible online health information, convenient appointment booking
-                and patient-focused digital services
+                T1 builds online patient platforms, booking systems and health information websites. We are hiring designers, developers,
+                analysts, testers and support specialists to make care easier to reach.
               </span>
               <span class="language-vi">
-                T1 là đơn vị cung cấp dịch vụ sức khỏe và chăm sóc sức khỏe số, mang đến thông tin y tế trực tuyến dễ tiếp cận, đặt lịch hẹn
-                thuận tiện và các dịch vụ số lấy bệnh nhân làm trung tâm.
+                T1 xây dựng nền tảng bệnh nhân trực tuyến, hệ thống đặt lịch và website thông tin sức khỏe. Chúng tôi đang tìm nhà thiết kế,
+                lập trình viên, chuyên viên dữ liệu, kiểm thử và hỗ trợ để chăm sóc sức khỏe dễ tiếp cận hơn.
               </span>
             </p>
 
-            <a class="btn btn-submit" href="#home-services">
-              <span class="language-en">EXPLORE OUR SERVICE</span>
-              <span class="language-vi">KHÁM PHÁ DỊCH VỤ</span>
-              <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
-            </a>
+            <!-- Main links: open roles first, then the team behind them. -->
+            <div class="hero-actions">
+              <a class="btn btn-submit" href="jobs.php">
+                <span class="language-en">EXPLORE JOBS</span>
+                <span class="language-vi">XEM VIỆC LÀM</span>
+                <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+              </a>
+              <a class="btn btn-outline" href="about.php">
+                <span class="language-en">MEET THE TEAM</span>
+                <span class="language-vi">GẶP ĐỘI NGŨ</span>
+              </a>
+            </div>
           </div>
 
           <!-- Decorative online-consultation illustration. -->
@@ -154,13 +161,13 @@ include 'nav.inc';
           <!-- Service cards describing the three main digital services. -->
           <div class="services-content">
             <p class="section-label">
-              <span class="language-en">OUR SERVICES</span>
-              <span class="language-vi">DỊCH VỤ CỦA CHÚNG TÔI</span>
+              <span class="language-en">WHAT WE BUILD</span>
+              <span class="language-vi">CHÚNG TÔI XÂY DỰNG GÌ</span>
             </p>
 
             <h2 id="services-heading">
-              <span class="language-en">Healthcare designed around you.</span>
-              <span class="language-vi">Dịch vụ chăm sóc sức khỏe dành riêng cho bạn.</span>
+              <span class="language-en">Products our teams work on every day.</span>
+              <span class="language-vi">Những sản phẩm đội ngũ T1 làm mỗi ngày.</span>
             </h2>
 
             <div class="service-cards">
@@ -313,8 +320,8 @@ include 'nav.inc';
           <!-- Introduction -->
           <div class="why-intro">
             <p class="section-label">
-              <span class="language-en">WHY CHOOSE T1</span>
-              <span class="language-vi">VÌ SAO CHỌN T1</span>
+              <span class="language-en">WHY WORK AT T1</span>
+              <span class="language-vi">VÌ SAO LÀM VIỆC TẠI T1</span>
             </p>
 
             <h2 id="why-heading">
@@ -324,12 +331,11 @@ include 'nav.inc';
 
             <p>
               <span class="language-en">
-                Our focus is on creating simple, accessible and reliable digital experiences that connect people with healthcare information
-                and services.
+                At T1 you build simple, accessible and reliable products that connect people with healthcare information and services.
               </span>
               <span class="language-vi">
-                Chúng tôi tập trung tạo ra những trải nghiệm số đơn giản, dễ tiếp cận và đáng tin cậy, kết nối mọi người với thông tin và
-                dịch vụ chăm sóc sức khỏe.
+                Tại T1, bạn tạo ra những sản phẩm đơn giản, dễ tiếp cận và đáng tin cậy, kết nối mọi người với thông tin và dịch vụ
+                chăm sóc sức khỏe.
               </span>
             </p>
           </div>
@@ -415,7 +421,7 @@ include 'nav.inc';
             <!-- Career highlights -->
             <div class="careers-stats">
               <div class="career-stat">
-                <strong>124</strong>
+                <strong>6</strong>
                 <span>
                   <span class="language-en">Open positions</span>
                   <span class="language-vi">Vị trí đang tuyển</span>
@@ -425,8 +431,8 @@ include 'nav.inc';
               <div class="career-stat">
                 <strong>4</strong>
                 <span>
-                  <span class="language-en">Offices</span>
-                  <span class="language-vi">Văn phòng</span>
+                  <span class="language-en">Cities</span>
+                  <span class="language-vi">Thành phố</span>
                 </span>
               </div>
             </div>
@@ -445,393 +451,282 @@ include 'nav.inc';
         </div>
       </section>
 
-      <!-- SECTION 4: healthcare service list, schedules, fees, and booking controls. -->
-      <section class="appointment-section" id="appointment">
-        <div class="appointment-container">
-          <!-- Section heading -->
-          <div class="appointment-heading">
-            <p class="section-label">
-              <span class="language-en">OUR HEALTHCARE SERVICES</span>
-              <span class="language-vi">DỊCH VỤ CHĂM SÓC SỨC KHỎE</span>
-            </p>
-            <h2>
-              <span class="language-en">Find the right care for you.</span>
-              <span class="language-vi">Tìm dịch vụ chăm sóc phù hợp với bạn.</span>
-            </h2>
-            <p>
-              <span class="language-en">
-                Explore our consultation services, available hours and fees. Select a service to view its booking confirmation.
-              </span>
-              <span class="language-vi">
-                Khám phá các dịch vụ tư vấn, thời gian hoạt động và mức phí. Chọn một dịch vụ để xem xác nhận đặt lịch.
-              </span>
-            </p>
+      <!-- SECTION 4: JOB PULSE — the open roles at a glance, drawn with HTML and CSS only (no JavaScript, no images).
+           The chart is a real <table>, so screen readers and visitors with CSS turned off still get every number.
+           Figures match the job descriptions on jobs.php (monthly salary in USD). Update both places together. -->
+      <section class="job-pulse" id="job-pulse" aria-labelledby="pulse-heading">
+        <div class="home-container">
+          <!-- Section heading with a decorative heartbeat line (CSS draws it in once; turned off for reduced motion). -->
+          <div class="pulse-heading">
+            <div>
+              <p class="section-label">
+                <span class="language-en">JOB PULSE</span>
+                <span class="language-vi">NHỊP TUYỂN DỤNG</span>
+              </p>
+              <h2 id="pulse-heading">
+                <span class="language-en">Where the demand is right now.</span>
+                <span class="language-vi">Những vị trí đang được săn đón.</span>
+              </h2>
+              <p class="pulse-lead">
+                <span class="language-en">Six open roles across four cities, ranked by how high the monthly salary can go.</span>
+                <span class="language-vi">Sáu vị trí tại bốn thành phố, xếp theo mức lương tối đa mỗi tháng.</span>
+              </p>
+            </div>
+            <svg class="pulse-beat" viewBox="0 0 320 60" aria-hidden="true" focusable="false">
+              <polyline points="0,32 70,32 88,32 100,8 114,54 128,20 140,32 210,32 222,32 232,16 244,44 254,32 320,32" />
+            </svg>
           </div>
 
-          <!-- Service table -->
-          <div class="appointment-table-wrapper">
-            <table class="appointment-table">
-              <thead>
-                <tr>
-                  <th scope="col">
-                    <span class="language-en">Category</span>
-                    <span class="language-vi">Danh mục</span>
-                  </th>
-                  <th scope="col">
-                    <span class="language-en">Healthcare Service</span>
-                    <span class="language-vi">Dịch vụ chăm sóc sức khỏe</span>
-                  </th>
-                  <th scope="col">
-                    <span class="language-en">Delivery Mode</span>
-                    <span class="language-vi">Hình thức</span>
-                  </th>
-                  <th scope="col">
-                    <span class="language-en">Available Days &amp; Hours</span>
-                    <span class="language-vi">Ngày và giờ hoạt động</span>
-                  </th>
-                  <th scope="col">
-                    <span class="language-en">Fee (USD)</span>
-                    <span class="language-vi">Chi phí (AUD)</span>
-                  </th>
-                  <th scope="col">
-                    <span class="language-en">Action</span>
-                    <span class="language-vi">Thao tác</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- General healthcare services -->
-                <tr>
-                  <td>
-                    <strong>
-                      <span class="language-en">General Care</span>
-                      <span class="language-vi">Chăm sóc tổng quát</span>
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="language-en">General Health Consultation</span>
-                    <span class="language-vi">Tư vấn sức khỏe tổng quát</span>
-                    <small>GEN-01</small>
-                  </td>
-                  <td>
-                    <span class="language-en">Online / In-person</span>
-                    <span class="language-vi">Trực tuyến / Trực tiếp</span>
-                  </td>
-                  <td>
-                    <span class="language-en">Mon–Fri</span>
-                    <span class="language-vi">Thứ Hai đến Thứ Sáu</span>
-                    <br />
-                    <span class="language-en">9:00 AM–5:00 PM</span>
-                    <span class="language-vi">9:00 sáng đến 5:00 chiều</span>
-                  </td>
-                  <td class="appointment-fee">
-                    <span class="language-en">$80.00</span>
-                    <span class="language-vi">80 đô la Mĩ</span>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="book-gen-01" class="appointment-book-toggle" />
-                    <label for="book-gen-01" class="appointment-book-button">
-                      <span class="language-en">Book Slot</span>
-                      <span class="language-vi">Đặt lịch</span>
-                    </label>
-                    <p class="appointment-success" role="status">
-                      <span class="language-en">Booking confirmed for General Health Consultation.</span>
-                      <span class="language-vi">Đã xác nhận đặt lịch tư vấn sức khỏe tổng quát.</span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>
-                      <span class="language-en">General Care</span>
-                      <span class="language-vi">Chăm sóc tổng quát</span>
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="language-en">Follow-up Consultation</span>
-                    <span class="language-vi">Tư vấn tái khám</span>
-                    <small>GEN-02</small>
-                  </td>
-                  <td>
-                    <span class="language-en">Online / In-person</span>
-                    <span class="language-vi">Trực tuyến / Trực tiếp</span>
-                  </td>
-                  <td>
-                    <span class="language-en">Mon–Fri</span>
-                    <span class="language-vi">Thứ Hai đến Thứ Sáu</span>
-                    <br />
-                    <span class="language-en">10:00 AM–4:00 PM</span>
-                    <span class="language-vi">10:00 sáng đến 4:00 chiều</span>
-                  </td>
-                  <td class="appointment-fee">
-                    <span class="language-en">$45.00</span>
-                    <span class="language-vi">45 đô la Mĩ</span>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="book-gen-02" class="appointment-book-toggle" />
-                    <label for="book-gen-02" class="appointment-book-button">
-                      <span class="language-en">Book Slot</span>
-                      <span class="language-vi">Đặt lịch</span>
-                    </label>
-                    <p class="appointment-success" role="status">
-                      <span class="language-en">Booking confirmed for Follow-up Consultation.</span>
-                      <span class="language-vi">Đã xác nhận đặt lịch tái khám.</span>
-                    </p>
-                  </td>
-                </tr>
-                <!-- Specialist healthcare services -->
-                <tr>
-                  <td>
-                    <strong>
-                      <span class="language-en">Specialist Care</span>
-                      <span class="language-vi">Chăm sóc chuyên khoa</span>
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="language-en">Cardiology Consultation</span>
-                    <span class="language-vi">Tư vấn tim mạch</span>
-                    <small>SPC-01</small>
-                  </td>
-                  <td>
-                    <span class="language-en">Online</span>
-                    <span class="language-vi">Trực tuyến</span>
-                  </td>
-                  <td>
-                    <span class="language-en">Tue &amp; Thu</span>
-                    <span class="language-vi">Thứ Ba đến Thứ Năm</span>
-                    <br />
-                    <span class="language-en">9:00 AM–1:00 PM</span>
-                    <span class="language-vi">9:00 sáng đến 1:00 chiều</span>
-                  </td>
-                  <td class="appointment-fee">
-                    <span class="language-en">$180.00</span>
-                    <span class="language-vi">180 đô la Mĩ</span>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="book-spc-01" class="appointment-book-toggle" />
-                    <label for="book-spc-01" class="appointment-book-button">
-                      <span class="language-en">Book Slot</span>
-                      <span class="language-vi">Đặt lịch</span>
-                    </label>
-                    <p class="appointment-success" role="status">
-                      <span class="language-en">Booking confirmed for Cardiology Consultation.</span>
-                      <span class="language-vi">Đã xác nhận đặt lịch tư vấn tim mạch.</span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>
-                      <span class="language-en">Specialist Care</span>
-                      <span class="language-vi">Chăm sóc chuyên khoa</span>
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="language-en">Diabetes &amp; Endocrine Consultation</span>
-                    <span class="language-vi">Tư vấn tiểu đường và nội tiết</span>
-                    <small>SPC-02</small>
-                  </td>
-                  <td>
-                    <span class="language-en">Online / In-person</span>
-                    <span class="language-vi">Trực tuyến / Trực tiếp</span>
-                  </td>
-                  <td>
-                    <span class="language-en">Wed &amp; Fri</span>
-                    <span class="language-vi">Thứ Tư và Thứ Sáu</span>
-                    <br />
-                    <span class="language-en">10:00 AM–4:00 PM</span>
-                    <span class="language-vi">10:00 sáng đến 4:00 chiều</span>
-                  </td>
-                  <td class="appointment-fee">
-                    <span class="language-en">$160.00</span>
-                    <span class="language-vi">160 đô la Mĩ</span>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="book-spc-02" class="appointment-book-toggle" />
-                    <label for="book-spc-02" class="appointment-book-button">
-                      <span class="language-en">Book Slot</span>
-                      <span class="language-vi">Đặt lịch</span>
-                    </label>
-                    <p class="appointment-success" role="status">
-                      <span class="language-en">Booking confirmed for Diabetes &amp; Endocrine Consultation.</span>
-                      <span class="language-vi">Đã xác nhận đặt lịch tư vấn tiểu đường và nội tiết.</span>
-                    </p>
-                  </td>
-                </tr>
-                <!-- Mental healthcare services -->
-                <tr>
-                  <td>
-                    <strong>
-                      <span class="language-en">Mental Health</span>
-                      <span class="language-vi">Sức khỏe tinh thần</span>
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="language-en">Psychology Consultation</span>
-                    <span class="language-vi">Tư vấn tâm lý</span>
-                    <small>MHT-01</small>
-                  </td>
-                  <td>
-                    <span class="language-en">Online / In-person</span>
-                    <span class="language-vi">Trực tuyến / Trực tiếp</span>
-                  </td>
-                  <td>
-                    <span class="language-en">Mon–Sat</span>
-                    <span class="language-vi">Thứ Hai đến Thứ Bảy</span>
-                    <br />
-                    <span class="language-en">9:00 AM–5:00 PM</span>
-                    <span class="language-vi">9:00 sáng đến 5:00 chiều</span>
-                  </td>
-                  <td class="appointment-fee">
-                    <span class="language-en">$150.00</span>
-                    <span class="language-vi">150 đô la Mĩ</span>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="book-mht-01" class="appointment-book-toggle" />
-                    <label for="book-mht-01" class="appointment-book-button">
-                      <span class="language-en">Book Slot</span>
-                      <span class="language-vi">Đặt lịch</span>
-                    </label>
-                    <p class="appointment-success" role="status">
-                      <span class="language-en">Booking confirmed for Psychology Consultation.</span>
-                      <span class="language-vi">Đã xác nhận đặt lịch tư vấn tâm lý.</span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>
-                      <span class="language-en">Mental Health</span>
-                      <span class="language-vi">Sức khỏe tinh thần</span>
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="language-en">Wellbeing &amp; Stress Consultation</span>
-                    <span class="language-vi">Tư vấn sức khỏe tinh thần và căng thẳng</span>
-                    <small>MHT-02</small>
-                  </td>
-                  <td>
-                    <span class="language-en">Online</span>
-                    <span class="language-vi">Trực tuyến</span>
-                  </td>
-                  <td>
-                    <span class="language-en">Mon–Fri</span>
-                    <span class="language-vi">Thứ Hai đến Thứ Sáu</span>
-                    <br />
-                    <span class="language-en">11:00 AM–6:00 PM</span>
-                    <span class="language-vi">11:00 trưa đến 6:00 tối</span>
-                  </td>
-                  <td class="appointment-fee">
-                    <span class="language-en">$95.00</span>
-                    <span class="language-vi">95 đô la Mĩ</span>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="book-mht-02" class="appointment-book-toggle" />
-                    <label for="book-mht-02" class="appointment-book-button">
-                      <span class="language-en">Book Slot</span>
-                      <span class="language-vi">Đặt lịch</span>
-                    </label>
-                    <p class="appointment-success" role="status">
-                      <span class="language-en">Booking confirmed for Wellbeing &amp; Stress Consultation.</span>
-                      <span class="language-vi">Đã xác nhận đặt lịch tư vấn sức khỏe tinh thần và căng thẳng.</span>
-                    </p>
-                  </td>
-                </tr>
-                <!-- Physical healthcare services -->
-                <tr>
-                  <td>
-                    <strong>
-                      <span class="language-en">Physical Health</span>
-                      <span class="language-vi">Sức khỏe thể chất</span>
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="language-en">Physiotherapy Consultation</span>
-                    <span class="language-vi">Tư vấn vật lý trị liệu</span>
-                    <small>PHY-01</small>
-                  </td>
-                  <td>
-                    <span class="language-en">In-person</span>
-                    <span class="language-vi">Trực tiếp</span>
-                  </td>
-                  <td>
-                    <span class="language-en">Mon–Fri</span>
-                    <span class="language-vi">Thứ Hai đến Thứ Sáu</span>
-                    <br />
-                    <span class="language-en">8:00 AM–4:00 PM</span>
-                    <span class="language-vi">8:00 sáng đến 4:00 chiều</span>
-                  </td>
-                  <td class="appointment-fee">
-                    <span class="language-en">$110.00</span>
-                    <span class="language-vi">110 đô la Mĩ</span>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="book-phy-01" class="appointment-book-toggle" />
-                    <label for="book-phy-01" class="appointment-book-button">
-                      <span class="language-en">Book Slot</span>
-                      <span class="language-vi">Đặt lịch</span>
-                    </label>
-                    <p class="appointment-success" role="status">
-                      <span class="language-en">Booking confirmed for Physiotherapy Consultation.</span>
-                      <span class="language-vi">Đã xác nhận đặt lịch tư vấn vật lý trị liệu.</span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>
-                      <span class="language-en">Physical Health</span>
-                      <span class="language-vi">Sức khỏe thể chất</span>
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="language-en">Nutrition &amp; Diet Consultation</span>
-                    <span class="language-vi">Tư vấn dinh dưỡng và chế độ ăn</span>
-                    <small>PHY-02</small>
-                  </td>
-                  <td>
-                    <span class="language-en">Online / In-person</span>
-                    <span class="language-vi">Trực tuyến / Trực tiếp</span>
-                  </td>
-                  <td>
-                    <span class="language-en">Mon, Wed &amp; Fri</span>
-                    <span class="language-vi">Thứ Hai và Thứ Tư đến Thứ Sáu</span>
-                    <br />
-                    <span class="language-en">9:00 AM–3:00 PM</span>
-                    <span class="language-vi">9:00 sáng đến 3:00 chiều</span>
-                  </td>
-                  <td class="appointment-fee">
-                    <span class="language-en">$90.00</span>
-                    <span class="language-vi">90 đô la Mĩ</span>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="book-phy-02" class="appointment-book-toggle" />
-                    <label for="book-phy-02" class="appointment-book-button">
-                      <span class="language-en">Book Slot</span>
-                      <span class="language-vi">Đặt lịch</span>
-                    </label>
-                    <p class="appointment-success" role="status">
-                      <span class="language-en">Booking confirmed for Nutrition &amp; Diet Consultation.</span>
-                      <span class="language-vi">Đã xác nhận đặt lịch tư vấn dinh dưỡng và chế độ ăn.</span>
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="6">
-                    <span class="language-en">
-                      Our healthcare services offer flexible appointment schedules and transparent pricing to help you find the right care
-                      for your needs. Please explore the available services and book a consultation at a time that suits you.
-                    </span>
-                    <span class="language-vi">
-                      Các dịch vụ chăm sóc sức khỏe của chúng tôi cung cấp lịch hẹn linh hoạt và mức giá minh bạch để giúp bạn tìm được dịch
-                      vụ phù hợp. Hãy khám phá các dịch vụ hiện có và đặt lịch tư vấn vào thời gian thuận tiện cho bạn.
-                    </span>
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
+          <div class="pulse-layout">
+            <!-- MAIN CHART: one row per role. Each bar runs from the lowest to the highest monthly salary.
+                 --min and --max (inline CSS custom properties) are the salary in USD; styles/index.css
+                 turns them into the bar position on a $0–$3,000 scale. -->
+            <div class="pulse-card">
+              <table class="pulse-chart">
+                <caption>
+                  <span class="language-en">Monthly salary range by role (USD)</span>
+                  <span class="language-vi">Khoảng lương theo vị trí (USD/tháng)</span>
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <span class="language-en">Role</span>
+                      <span class="language-vi">Vị trí</span>
+                    </th>
+                    <th scope="col" class="pulse-axis-head">
+                      <span class="visually-hidden">
+                        <span class="language-en">Salary range</span>
+                        <span class="language-vi">Khoảng lương</span>
+                      </span>
+                      <!-- Axis ticks: $0, $1k, $2k, $3k at 0%, 33%, 67%, 100% of the track. -->
+                      <span class="pulse-axis" aria-hidden="true">
+                        <span style="--at: 0">$0</span>
+                        <span style="--at: 1000">$1k</span>
+                        <span style="--at: 2000">$2k</span>
+                        <span style="--at: 3000">$3k</span>
+                      </span>
+                    </th>
+                    <th scope="col" class="pulse-exp-head">
+                      <span class="language-en">Experience</span>
+                      <span class="language-vi">Kinh nghiệm</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="is-hot">
+                    <th scope="row">
+                      <a href="jobs.php">
+                        <span class="language-en">Digital Health Software Developer</span>
+                        <span class="language-vi">Lập trình viên phần mềm sức khỏe số</span>
+                      </a>
+                      <span class="pulse-ref">DHD05</span>
+                      <span class="pulse-hot"><i class="fa-solid fa-fire" aria-hidden="true"></i> HOT</span>
+                    </th>
+                    <td>
+                      <span class="pulse-track"><span class="pulse-range" style="--min: 1800; --max: 3000"></span></span>
+                      <span class="pulse-value">$1,800 – $3,000</span>
+                      <!-- Shown when the row is hovered or focused. -->
+                      <span class="pulse-tip">
+                        <span class="language-en">Da Nang · Software Development</span>
+                        <span class="language-vi">Đà Nẵng · Phát triển phần mềm</span>
+                      </span>
+                    </td>
+                    <td class="pulse-exp">
+                      <span class="language-en">8 years</span>
+                      <span class="language-vi">8 năm</span>
+                    </td>
+                  </tr>
+                  <tr class="is-hot">
+                    <th scope="row">
+                      <a href="jobs.php">
+                        <span class="language-en">Health Data Analyst</span>
+                        <span class="language-vi">Chuyên viên phân tích dữ liệu sức khỏe</span>
+                      </a>
+                      <span class="pulse-ref">HDA03</span>
+                      <span class="pulse-hot"><i class="fa-solid fa-fire" aria-hidden="true"></i> HOT</span>
+                    </th>
+                    <td>
+                      <span class="pulse-track"><span class="pulse-range" style="--min: 1400; --max: 2400"></span></span>
+                      <span class="pulse-value">$1,400 – $2,400</span>
+                      <span class="pulse-tip">
+                        <span class="language-en">Ho Chi Minh City · Data Analytics</span>
+                        <span class="language-vi">TP. Hồ Chí Minh · Phân tích dữ liệu</span>
+                      </span>
+                    </td>
+                    <td class="pulse-exp">
+                      <span class="language-en">5 years</span>
+                      <span class="language-vi">5 năm</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <a href="jobs.php">
+                        <span class="language-en">Healthcare UX/UI Designer</span>
+                        <span class="language-vi">Nhà thiết kế UX/UI chăm sóc sức khỏe</span>
+                      </a>
+                      <span class="pulse-ref">UXD04</span>
+                    </th>
+                    <td>
+                      <span class="pulse-track"><span class="pulse-range" style="--min: 1200; --max: 2000"></span></span>
+                      <span class="pulse-value">$1,200 – $2,000</span>
+                      <span class="pulse-tip">
+                        <span class="language-en">Hanoi · Product Design</span>
+                        <span class="language-vi">Hà Nội · Thiết kế sản phẩm</span>
+                      </span>
+                    </td>
+                    <td class="pulse-exp">
+                      <span class="language-en">2 years</span>
+                      <span class="language-vi">2 năm</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <a href="jobs.php">
+                        <span class="language-en">Healthcare Quality Assurance Tester</span>
+                        <span class="language-vi">Kiểm thử đảm bảo chất lượng</span>
+                      </a>
+                      <span class="pulse-ref">QAT06</span>
+                    </th>
+                    <td>
+                      <span class="pulse-track"><span class="pulse-range" style="--min: 880; --max: 1520"></span></span>
+                      <span class="pulse-value">$880 – $1,520</span>
+                      <span class="pulse-tip">
+                        <span class="language-en">Hanoi · Quality Assurance</span>
+                        <span class="language-vi">Hà Nội · Đảm bảo chất lượng</span>
+                      </span>
+                    </td>
+                    <td class="pulse-exp">
+                      <span class="language-en">1 year</span>
+                      <span class="language-vi">1 năm</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <a href="jobs.php">
+                        <span class="language-en">Digital Health Support Specialist</span>
+                        <span class="language-vi">Chuyên viên hỗ trợ sức khỏe số</span>
+                      </a>
+                      <span class="pulse-ref">DHS02</span>
+                    </th>
+                    <td>
+                      <span class="pulse-track"><span class="pulse-range" style="--min: 720; --max: 1120"></span></span>
+                      <span class="pulse-value">$720 – $1,120</span>
+                      <span class="pulse-tip">
+                        <span class="language-en">Ho Chi Minh City · Customer Support</span>
+                        <span class="language-vi">TP. Hồ Chí Minh · Hỗ trợ khách hàng</span>
+                      </span>
+                    </td>
+                    <td class="pulse-exp">
+                      <span class="language-en">No experience</span>
+                      <span class="language-vi">Không yêu cầu</span>
+                    </td>
+                  </tr>
+                  <!-- Negotiable salary: no bar, a dashed full-width track instead, so it is not read as $0. -->
+                  <tr class="is-negotiable">
+                    <th scope="row">
+                      <a href="jobs.php">
+                        <span class="language-en">Healthcare Content Writer</span>
+                        <span class="language-vi">Biên tập viên nội dung</span>
+                      </a>
+                      <span class="pulse-ref">HCW01</span>
+                    </th>
+                    <td>
+                      <span class="pulse-track"></span>
+                      <span class="pulse-value">
+                        <span class="language-en">Negotiable</span>
+                        <span class="language-vi">Thỏa thuận</span>
+                      </span>
+                      <span class="pulse-tip">
+                        <span class="language-en">Can Tho · Content Writing</span>
+                        <span class="language-vi">Cần Thơ · Viết nội dung</span>
+                      </span>
+                    </td>
+                    <td class="pulse-exp">
+                      <span class="language-en">3 years</span>
+                      <span class="language-vi">3 năm</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="pulse-note">
+                <i class="fa-solid fa-fire" aria-hidden="true"></i>
+                <span class="language-en">HOT = the two roles with the highest salary ceiling. Figures from the job descriptions on the Jobs page.</span>
+                <span class="language-vi">HOT = hai vị trí có mức lương tối đa cao nhất. Số liệu lấy từ mô tả công việc ở trang Tuyển dụng.</span>
+              </p>
+            </div>
+
+            <!-- SIDE PANEL: headline figures and roles per city. -->
+            <aside class="pulse-side" aria-label="Open roles summary">
+              <dl class="pulse-stats">
+                <div>
+                  <dt>
+                    <span class="language-en">Top salary</span>
+                    <span class="language-vi">Lương cao nhất</span>
+                  </dt>
+                  <dd>$3,000</dd>
+                </div>
+                <div>
+                  <dt>
+                    <span class="language-en">Entry level</span>
+                    <span class="language-vi">Không cần kinh nghiệm</span>
+                  </dt>
+                  <dd>
+                    <span class="language-en">1 role</span>
+                    <span class="language-vi">1 vị trí</span>
+                  </dd>
+                </div>
+              </dl>
+
+              <!-- Roles per city: bar width = roles / 2 (the largest count), set with --count. -->
+              <h3>
+                <span class="language-en">Roles by city</span>
+                <span class="language-vi">Vị trí theo thành phố</span>
+              </h3>
+              <ul class="pulse-cities">
+                <li style="--count: 2">
+                  <span class="pulse-city-name">
+                    <span class="language-en">Ho Chi Minh City</span>
+                    <span class="language-vi">TP. Hồ Chí Minh</span>
+                  </span>
+                  <span class="pulse-city-bar" aria-hidden="true"></span>
+                  <span class="pulse-city-count">2</span>
+                </li>
+                <li style="--count: 2">
+                  <span class="pulse-city-name">
+                    <span class="language-en">Hanoi</span>
+                    <span class="language-vi">Hà Nội</span>
+                  </span>
+                  <span class="pulse-city-bar" aria-hidden="true"></span>
+                  <span class="pulse-city-count">2</span>
+                </li>
+                <li style="--count: 1">
+                  <span class="pulse-city-name">
+                    <span class="language-en">Da Nang</span>
+                    <span class="language-vi">Đà Nẵng</span>
+                  </span>
+                  <span class="pulse-city-bar" aria-hidden="true"></span>
+                  <span class="pulse-city-count">1</span>
+                </li>
+                <li style="--count: 1">
+                  <span class="pulse-city-name">
+                    <span class="language-en">Can Tho</span>
+                    <span class="language-vi">Cần Thơ</span>
+                  </span>
+                  <span class="pulse-city-bar" aria-hidden="true"></span>
+                  <span class="pulse-city-count">1</span>
+                </li>
+              </ul>
+
+              <a class="pulse-cta" href="jobs.php">
+                <span class="language-en">See every role</span>
+                <span class="language-vi">Xem tất cả vị trí</span>
+                <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+              </a>
+              <a class="pulse-cta pulse-cta-light" href="apply.php">
+                <span class="language-en">Apply now</span>
+                <span class="language-vi">Ứng tuyển ngay</span>
+              </a>
+            </aside>
           </div>
         </div>
       </section>
