@@ -1,334 +1,269 @@
 <?php
+/**
+ * index.php — home page of the T1 Health & Wellness careers site.
+ * Trang chủ của website tuyển dụng T1 Health & Wellness.
+ *
+ * Sections, top to bottom (styles in styles/index.css use the same numbers):
+ *   2. Hero          — looping video background (images/hero-loop.mp4, poster images/hero-poster.jpg)
+ *   3. Role ticker   — open role titles sliding sideways
+ *   4. Section 1     — What we build (bento grid of the three products)
+ *   5. Section 2     — Why work at T1 (three values)
+ *   6. Section 3     — Careers banner (kept from Project 1)
+ *   7. Section 4     — Job pulse (salary chart of the open roles)
+ * Header/navigation come from header.inc + nav.inc, the footer from footer.inc.
+ * No JavaScript and no database: every animation is CSS, every figure matches jobs.php.
+ */
+
+// Values read by header.inc (title, meta description, stylesheet, <body> id/class) and nav.inc (current page).
 $pageTitle = 'T1 Group - Health & Wellness';
-$pageDescription = '';
-$bodyClass = 'index-page';
+$pageDescription = 'T1 Health & Wellness careers: open roles in digital health, what our teams build and why to work with us.';
+$bodyClass = 'index-page';      // every rule in styles/index.css starts with body.index-page
 $pageStylesheet = 'index.css';
-$bodyId = 'top';
+$bodyId = 'top';                // target of the footer's "back to top" link
 $currentPage = basename($_SERVER['PHP_SELF']);
 include 'header.inc';
 include 'nav.inc';
 ?>
-<!-- MAIN CONTENT: home page of the T1 careers site — what T1 builds, why work here, and the open roles at a glance. -->
+<!-- MAIN CONTENT: home page of the T1 careers site — video hero, what T1 builds, why work here, careers, and the open roles at a glance. -->
 
     <main id="main-content">
-      <!-- HERO SECTION: introduces T1 and its digital healthcare focus. -->
-      <section class="hero" aria-labelledby="apply-heading">
-        <!-- Background animation -->
-        <div class="hero-background" aria-hidden="true">
-          <div class="hero-glow"></div>
-          <div class="hero-orb orb-one"></div>
-          <div class="hero-orb orb-two"></div>
+      <!-- HERO: full-width looping video behind the headline.
+           The video is muted, loops and plays inline, so browsers allow it to start on its own (no JavaScript).
+           poster = still frame shown while the video loads or if it cannot play.
+           aria-hidden: the video is decoration only; all the information is in the text. -->
+      <section class="home-hero" aria-labelledby="hero-heading">
+        <video class="home-hero-video" autoplay muted loop playsinline preload="metadata" poster="images/hero-poster.jpg" aria-hidden="true">
+          <source src="images/hero-loop.mp4" type="video/mp4" />
+        </video>
+        <!-- Dark gradient over the video so the white text stays readable. -->
+        <div class="home-hero-shade" aria-hidden="true"></div>
+
+        <div class="home-hero-inner">
+          <p class="home-hero-eyebrow">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span class="language-en">NOW HIRING · 6 OPEN ROLES</span>
+            <span class="language-vi">ĐANG TUYỂN · 6 VỊ TRÍ</span>
+          </p>
+
+          <h1 id="hero-heading">
+            <span class="language-en">Build better health.</span>
+            <span class="language-vi">Kiến tạo sức khỏe.</span>
+            <br />
+            <em>
+              <span class="language-en">Shape smarter care.</span>
+              <span class="language-vi">Định hình chăm sóc.</span>
+            </em>
+          </h1>
+
+          <p class="home-hero-text">
+            <span class="language-en">
+              T1 builds online patient platforms, booking systems and health information websites. Join the designers, developers,
+              analysts, testers and support specialists who make care easier to reach.
+            </span>
+            <span class="language-vi">
+              T1 xây dựng nền tảng bệnh nhân trực tuyến, hệ thống đặt lịch và website thông tin sức khỏe. Hãy cùng các nhà thiết kế,
+              lập trình viên, chuyên viên dữ liệu, kiểm thử và hỗ trợ giúp việc chăm sóc sức khỏe dễ tiếp cận hơn.
+            </span>
+          </p>
+
+          <div class="home-hero-actions">
+            <a class="hero-btn hero-btn-primary" href="jobs.php">
+              <span class="language-en">Explore jobs</span>
+              <span class="language-vi">Xem việc làm</span>
+              <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+            </a>
+            <a class="hero-btn hero-btn-ghost" href="about.php">
+              <span class="language-en">Meet the team</span>
+              <span class="language-vi">Gặp đội ngũ</span>
+            </a>
+          </div>
+
+          <!-- Three quick facts, same figures as the Jobs page. -->
+          <ul class="home-hero-facts">
+            <li>
+              <strong>6</strong>
+              <span class="language-en">open roles</span>
+              <span class="language-vi">vị trí đang tuyển</span>
+            </li>
+            <li>
+              <strong>4</strong>
+              <span class="language-en">cities in Vietnam</span>
+              <span class="language-vi">thành phố tại Việt Nam</span>
+            </li>
+            <li>
+              <strong>$720–$3,000</strong>
+              <span class="language-en">monthly salary</span>
+              <span class="language-vi">lương mỗi tháng</span>
+            </li>
+          </ul>
         </div>
 
-        <div class="container hero-layout">
-          <!-- Hero text, introduction, and call-to-action link. -->
-          <div class="hero-content">
-            <p class="tag">
-              <span class="language-en">CAREERS IN DIGITAL HEALTH</span>
-              <span class="language-vi">TUYỂN DỤNG NGÀNH SỨC KHỎE SỐ</span>
+        <!-- Jump to the next section. -->
+        <a class="home-hero-scroll" href="#what-we-build">
+          <span class="language-en">Scroll</span>
+          <span class="language-vi">Cuộn xuống</span>
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </a>
+      </section>
+
+      <!-- ROLE TICKER: the open roles scroll sideways (CSS animation). The list is printed twice so the loop has no gap;
+           the second copy is aria-hidden so screen readers read the roles once. Hover pauses it. -->
+      <div class="role-ticker">
+        <ul class="role-ticker-track">
+          <?php
+          // Role titles from the Jobs page. [English, Vietnamese]
+          $tickerRoles = [
+              ['Digital Health Software Developer', 'Lập trình viên phần mềm sức khỏe số'],
+              ['Health Data Analyst', 'Chuyên viên phân tích dữ liệu sức khỏe'],
+              ['Healthcare UX/UI Designer', 'Nhà thiết kế UX/UI chăm sóc sức khỏe'],
+              ['Healthcare Quality Assurance Tester', 'Kiểm thử đảm bảo chất lượng'],
+              ['Digital Health Support Specialist', 'Chuyên viên hỗ trợ sức khỏe số'],
+              ['Healthcare Content Writer', 'Biên tập viên nội dung'],
+          ];
+          foreach ([false, true] as $isCopy):
+              foreach ($tickerRoles as [$roleEn, $roleVi]): ?>
+          <li<?= $isCopy ? ' aria-hidden="true"' : '' ?>>
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            <span class="language-en"><?= $roleEn ?></span>
+            <span class="language-vi"><?= $roleVi ?></span>
+          </li>
+          <?php endforeach;
+          endforeach; ?>
+        </ul>
+      </div>
+
+      <!-- SECTION 1: WHAT WE BUILD — the three products as a bento grid.
+           Each card says who uses the product and which T1 teams work on it. -->
+      <section class="build" id="what-we-build" aria-labelledby="build-heading">
+        <div class="home-container">
+          <div class="build-heading">
+            <div>
+              <p class="section-label">
+                <span class="language-en">WHAT WE BUILD</span>
+                <span class="language-vi">CHÚNG TÔI XÂY DỰNG GÌ</span>
+              </p>
+              <h2 id="build-heading">
+                <span class="language-en">Three products. One goal: care people can reach.</span>
+                <span class="language-vi">Ba sản phẩm. Một mục tiêu: chăm sóc ai cũng tiếp cận được.</span>
+              </h2>
+            </div>
+            <p class="build-intro">
+              <span class="language-en">Every role at T1 works on at least one of these, from the first line of code to the last word on the page.</span>
+              <span class="language-vi">Mỗi vị trí ở T1 đều góp phần vào ít nhất một sản phẩm, từ dòng code đầu tiên đến chữ cuối cùng trên trang.</span>
             </p>
+          </div>
 
-            <h1 id="apply-heading">
-              <span class="language-en">Build Better Health</span>
-              <span class="language-vi">Kiến tạo sức khỏe</span>
-              <br />
-              <span class="language-en">Shape Smarter Care</span>
-              <span class="language-vi">Định hình chăm sóc</span>
-            </h1>
+          <div class="build-grid">
+            <!-- Card 01 (large): patient platforms, with a small CSS-drawn app preview. -->
+            <article class="build-card build-card-feature">
+              <span class="build-number" aria-hidden="true">01</span>
+              <div class="build-icon" aria-hidden="true"><i class="fa-solid fa-laptop-medical"></i></div>
+              <h3>
+                <span class="language-en">Online Patient Platforms</span>
+                <span class="language-vi">Nền tảng bệnh nhân trực tuyến</span>
+              </h3>
+              <p>
+                <span class="language-en">We support digital platforms that help patients access healthcare services conveniently.</span>
+                <span class="language-vi">Chúng tôi phát triển các nền tảng số giúp bệnh nhân tiếp cận dịch vụ chăm sóc sức khỏe một cách thuận tiện.</span>
+              </p>
+              <!-- Decorative app preview drawn with CSS boxes. -->
+              <div class="build-preview" aria-hidden="true">
+                <div class="preview-bar"><span></span><span></span><span></span></div>
+                <div class="preview-row preview-row-strong"></div>
+                <div class="preview-row"></div>
+                <div class="preview-chart">
+                  <span style="--h: 40%"></span><span style="--h: 65%"></span><span style="--h: 50%"></span><span style="--h: 85%"></span><span style="--h: 70%"></span><span style="--h: 95%"></span>
+                </div>
+              </div>
+              <dl class="build-meta">
+                <div>
+                  <dt><span class="language-en">Used by</span><span class="language-vi">Người dùng</span></dt>
+                  <dd><span class="language-en">Patients</span><span class="language-vi">Bệnh nhân</span></dd>
+                </div>
+                <div>
+                  <dt><span class="language-en">Teams</span><span class="language-vi">Đội ngũ</span></dt>
+                  <dd><span class="language-en">Support · Development · QA</span><span class="language-vi">Hỗ trợ · Phát triển · Kiểm thử</span></dd>
+                </div>
+              </dl>
+            </article>
 
-            <p class="hero-text">
-              <span class="language-en">
-                T1 builds online patient platforms, booking systems and health information websites. We are hiring designers, developers,
-                analysts, testers and support specialists to make care easier to reach.
+            <!-- Card 02 -->
+            <article class="build-card">
+              <span class="build-number" aria-hidden="true">02</span>
+              <div class="build-icon" aria-hidden="true"><i class="fa-regular fa-calendar-check"></i></div>
+              <h3>
+                <span class="language-en">Appointment Booking Systems</span>
+                <span class="language-vi">Hệ thống đặt lịch hẹn</span>
+              </h3>
+              <p>
+                <span class="language-en">We make it easier for patients to book and manage healthcare appointments online.</span>
+                <span class="language-vi">Chúng tôi giúp bệnh nhân dễ dàng đặt và quản lý lịch hẹn chăm sóc sức khỏe trực tuyến.</span>
+              </p>
+              <dl class="build-meta">
+                <div>
+                  <dt><span class="language-en">Used by</span><span class="language-vi">Người dùng</span></dt>
+                  <dd><span class="language-en">Patients, Clinics</span><span class="language-vi">Bệnh nhân, phòng khám</span></dd>
+                </div>
+                <div>
+                  <dt><span class="language-en">Teams</span><span class="language-vi">Đội ngũ</span></dt>
+                  <dd><span class="language-en">Development · UX/UI Design</span><span class="language-vi">Phát triển · Thiết kế UX/UI</span></dd>
+                </div>
+              </dl>
+            </article>
+
+            <!-- Card 03 -->
+            <article class="build-card">
+              <span class="build-number" aria-hidden="true">03</span>
+              <div class="build-icon" aria-hidden="true"><i class="fa-solid fa-book-open"></i></div>
+              <h3>
+                <span class="language-en">Health Information Websites</span>
+                <span class="language-vi">Trang web thông tin sức khỏe</span>
+              </h3>
+              <p>
+                <span class="language-en">We provide accessible digital resources to help people find useful health information.</span>
+                <span class="language-vi">Chúng tôi cung cấp các tài nguyên số dễ tiếp cận để mọi người tìm kiếm thông tin sức khỏe hữu ích.</span>
+              </p>
+              <dl class="build-meta">
+                <div>
+                  <dt><span class="language-en">Used by</span><span class="language-vi">Người dùng</span></dt>
+                  <dd><span class="language-en">General public</span><span class="language-vi">Công chúng</span></dd>
+                </div>
+                <div>
+                  <dt><span class="language-en">Teams</span><span class="language-vi">Đội ngũ</span></dt>
+                  <dd><span class="language-en">Content · Data Analytics</span><span class="language-vi">Nội dung · Phân tích dữ liệu</span></dd>
+                </div>
+              </dl>
+            </article>
+
+            <!-- Wide red card: the mission line and a link to the jobs. -->
+            <a class="build-card build-card-cta" href="jobs.php">
+              <span class="build-cta-text">
+                <span class="language-en">Technology designed to improve digital healthcare access.</span>
+                <span class="language-vi">Công nghệ nâng cao khả năng tiếp cận chăm sóc sức khỏe số.</span>
               </span>
-              <span class="language-vi">
-                T1 xây dựng nền tảng bệnh nhân trực tuyến, hệ thống đặt lịch và website thông tin sức khỏe. Chúng tôi đang tìm nhà thiết kế,
-                lập trình viên, chuyên viên dữ liệu, kiểm thử và hỗ trợ để chăm sóc sức khỏe dễ tiếp cận hơn.
-              </span>
-            </p>
-
-            <!-- Main links: open roles first, then the team behind them. -->
-            <div class="hero-actions">
-              <a class="btn btn-submit" href="jobs.php">
-                <span class="language-en">EXPLORE JOBS</span>
-                <span class="language-vi">XEM VIỆC LÀM</span>
+              <span class="build-cta-link">
+                <span class="language-en">See the teams that are hiring</span>
+                <span class="language-vi">Xem các đội đang tuyển</span>
                 <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
-              </a>
-              <a class="btn btn-outline" href="about.php">
-                <span class="language-en">MEET THE TEAM</span>
-                <span class="language-vi">GẶP ĐỘI NGŨ</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Decorative online-consultation illustration. -->
-          <div class="health-animation">
-            <!-- Floating medical icons used as visual decoration. -->
-            <div class="float-icon icon-heart" aria-hidden="true">
-              <i class="fa-solid fa-heart-pulse"></i>
-            </div>
-
-            <div class="float-icon icon-cross" aria-hidden="true">
-              <i class="fa-solid fa-stethoscope"></i>
-            </div>
-
-            <div class="float-icon icon-plus" aria-hidden="true">
-              <i class="fa-solid fa-plus"></i>
-            </div>
-
-            <!-- Mock video-consultation interface. -->
-            <div class="video-window">
-              <div class="video-header">
-                <span class="live-dot"></span>
-                <span>
-                  <span class="language-en">ONLINE CONSULTATION</span>
-                  <span class="language-vi">TƯ VẤN TRỰC TUYẾN</span>
-                </span>
-                <i class="fa-solid fa-ellipsis"></i>
-              </div>
-
-              <div class="doctor-area">
-                <div class="doctor-avatar" aria-hidden="true">
-                  <div class="doctor-hair"></div>
-
-                  <div class="doctor-face">
-                    <div class="doctor-eyes"></div>
-                    <div class="doctor-smile"></div>
-                  </div>
-
-                  <div class="doctor-neck"></div>
-
-                  <div class="doctor-coat">
-                    <div class="doctor-shirt"></div>
-                    <div class="doctor-pocket">T1</div>
-                  </div>
-
-                  <div class="doctor-stethoscope"></div>
-                </div>
-
-                <div class="doctor-label">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span class="language-en">Your doctor is here</span>
-                  <span class="language-vi">Bác sĩ của bạn đã sẵn sàng</span>
-                </div>
-              </div>
-
-              <div class="call-controls">
-                <span><i class="fa-solid fa-microphone"></i></span>
-                <span><i class="fa-solid fa-video"></i></span>
-                <span class="end-call">
-                  <i class="fa-solid fa-phone"></i>
-                </span>
-              </div>
-            </div>
-
-            <!-- Floating health-information card. -->
-            <div class="health-status">
-              <div class="status-icon">
-                <i class="fa-solid fa-heart-pulse"></i>
-              </div>
-
-              <div>
-                <strong>
-                  <span class="language-en">Health matters</span>
-                  <span class="language-vi">Sức khỏe là quan trọng</span>
-                </strong>
-                <p>
-                  <span class="language-en">Care from anywhere</span>
-                  <span class="language-vi">Chăm sóc sức khỏe ở bất cứ đâu</span>
-                </p>
-              </div>
-
-              <span class="status-check">
-                <i class="fa-solid fa-check"></i>
               </span>
-            </div>
-
-            <!-- Decorative heartbeat line. -->
-            <div class="pulse-line" aria-hidden="true">
-              <svg viewBox="0 0 240 55">
-                <polyline points="0,30 45,30 60,30 75,8 91,47 108,18 122,30 160,30 175,30 190,12 205,30 240,30" />
-              </svg>
-            </div>
+            </a>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 1: introduces T1 services and digital solutions. -->
-
-      <section id="home-services" aria-labelledby="services-heading">
-        <div class="home-container services-layout">
-          <!-- Service cards describing the three main digital services. -->
-          <div class="services-content">
-            <p class="section-label">
-              <span class="language-en">WHAT WE BUILD</span>
-              <span class="language-vi">CHÚNG TÔI XÂY DỰNG GÌ</span>
-            </p>
-
-            <h2 id="services-heading">
-              <span class="language-en">Products our teams work on every day.</span>
-              <span class="language-vi">Những sản phẩm đội ngũ T1 làm mỗi ngày.</span>
-            </h2>
-
-            <div class="service-cards">
-              <article class="service-card">
-                <!-- INLINE CSS EXAMPLE -->
-                <div class="service-icon" aria-hidden="true" style="background-color: #d92f44; color: #ffffff">
-                  <i class="fa-solid fa-laptop-medical"></i>
-                </div>
-
-                <h3>
-                  <span class="language-en">Online Patient Platforms</span>
-                  <span class="language-vi">Nền tảng bệnh nhân trực tuyến</span>
-                </h3>
-
-                <p>
-                  <span class="language-en">We support digital platforms that help patients access healthcare services conveniently.</span>
-                  <span class="language-vi">
-                    Chúng tôi phát triển các nền tảng số giúp bệnh nhân tiếp cận dịch vụ chăm sóc sức khỏe một cách thuận tiện.
-                  </span>
-                </p>
-              </article>
-
-              <article class="service-card">
-                <div class="service-icon" aria-hidden="true">
-                  <i class="fa-regular fa-calendar-check"></i>
-                </div>
-
-                <h3>
-                  <span class="language-en">Appointment Booking Systems</span>
-                  <span class="language-vi">Hệ thống đặt lịch hẹn</span>
-                </h3>
-
-                <p>
-                  <span class="language-en">We make it easier for patients to book and manage healthcare appointments online.</span>
-                  <span class="language-vi">Chúng tôi giúp bệnh nhân dễ dàng đặt và quản lý lịch hẹn chăm sóc sức khỏe trực tuyến.</span>
-                </p>
-              </article>
-
-              <article class="service-card">
-                <div class="service-icon" aria-hidden="true">
-                  <i class="fa-solid fa-book-open"></i>
-                </div>
-
-                <h3>
-                  <span class="language-en">Health Information Websites</span>
-                  <span class="language-vi">Trang web thông tin sức khỏe</span>
-                </h3>
-
-                <p>
-                  <span class="language-en">We provide accessible digital resources to help people find useful health information.</span>
-                  <span class="language-vi">
-                    Chúng tôi cung cấp các tài nguyên số dễ tiếp cận để mọi người tìm kiếm thông tin sức khỏe hữu ích.
-                  </span>
-                </p>
-              </article>
-            </div>
-          </div>
-
-          <!-- Summary table of digital services, purposes, and target users. -->
-          <div class="solutions-content">
-            <p class="section-label">
-              <span class="language-en">OUR DIGITAL SOLUTIONS</span>
-              <span class="language-vi">GIẢI PHÁP SỐ CỦA CHÚNG TÔI</span>
-            </p>
-
-            <div class="solutions-table-wrapper">
-              <table class="solutions-table">
-                <thead>
-                  <tr>
-                    <th scope="col">
-                      <span class="language-en">Digital Service</span>
-                      <span class="language-vi">Dịch vụ số</span>
-                    </th>
-                    <th scope="col">
-                      <span class="language-en">Purpose</span>
-                      <span class="language-vi">Mục đích</span>
-                    </th>
-                    <th scope="col">
-                      <span class="language-en">Target Users</span>
-                      <span class="language-vi">Đối tượng sử dụng</span>
-                    </th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr>
-                    <td>
-                      <span class="language-en">Online Patient Platforms</span>
-                      <span class="language-vi">Nền tảng bệnh nhân trực tuyến</span>
-                    </td>
-                    <td>
-                      <span class="language-en">Access healthcare services online</span>
-                      <span class="language-vi">Tiếp cận dịch vụ chăm sóc sức khỏe trực tuyến</span>
-                    </td>
-                    <td>
-                      <span class="language-en">Patients</span>
-                      <span class="language-vi">Bệnh nhân</span>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <span class="language-en">Appointment Booking Systems</span>
-                      <span class="language-vi">Hệ thống đặt lịch hẹn</span>
-                    </td>
-                    <td>
-                      <span class="language-en">Book and manage appointments</span>
-                      <span class="language-vi">Đặt và quản lý lịch hẹn</span>
-                    </td>
-                    <td>
-                      <span class="language-en">Patients, Clinics</span>
-                      <span class="language-vi">Bệnh nhân, phòng khám</span>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <span class="language-en">Health Information Websites</span>
-                      <span class="language-vi">Trang web thông tin sức khỏe</span>
-                    </td>
-                    <td>
-                      <span class="language-en">Access health information</span>
-                      <span class="language-vi">Tiếp cận thông tin sức khỏe</span>
-                    </td>
-                    <td>
-                      <span class="language-en">General Public</span>
-                      <span class="language-vi">Công chúng</span>
-                    </td>
-                  </tr>
-                </tbody>
-
-                <tfoot>
-                  <tr>
-                    <td colspan="3">
-                      <span class="language-en">Technology designed to improve digital healthcare access.</span>
-                      <span class="language-vi">Công nghệ nhằm nâng cao khả năng tiếp cận dịch vụ y tế số</span>
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION 2: explains the values and strengths of T1. -->
-
-      <section class="why-t1" aria-labelledby="why-heading">
-        <div class="home-container why-layout">
-          <!-- Introduction -->
-          <div class="why-intro">
+      <!-- SECTION 2: WHY WORK AT T1 — dark band; heading on the left, three values on the right.
+           Hovering a value slides a red bar across it. -->
+      <section class="values" aria-labelledby="values-heading">
+        <div class="home-container values-layout">
+          <div class="values-intro">
             <p class="section-label">
               <span class="language-en">WHY WORK AT T1</span>
               <span class="language-vi">VÌ SAO LÀM VIỆC TẠI T1</span>
             </p>
-
-            <h2 id="why-heading">
+            <h2 id="values-heading">
               <span class="language-en">Technology with people in mind.</span>
               <span class="language-vi">Công nghệ lấy con người làm trọng tâm.</span>
             </h2>
-
             <p>
               <span class="language-en">
                 At T1 you build simple, accessible and reliable products that connect people with healthcare information and services.
@@ -338,58 +273,57 @@ include 'nav.inc';
                 chăm sóc sức khỏe.
               </span>
             </p>
+            <a class="values-link" href="about.php">
+              <span class="language-en">How our team works</span>
+              <span class="language-vi">Cách đội ngũ làm việc</span>
+              <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+            </a>
           </div>
 
-          <!-- Feature 1 -->
-          <article class="why-feature">
-            <div class="feature-icon" aria-hidden="true">
-              <i class="fa-solid fa-users"></i>
-            </div>
-
-            <h3>
-              <span class="language-en">User-focused</span>
-              <span class="language-vi">Lấy người dùng làm trung tâm</span>
-            </h3>
-
-            <p>
-              <span class="language-en">We design with real people and their needs in mind.</span>
-              <span class="language-vi">Chúng tôi thiết kế dựa trên nhu cầu thực tế của người dùng.</span>
-            </p>
-          </article>
-
-          <!-- Feature 2 -->
-          <article class="why-feature">
-            <div class="feature-icon" aria-hidden="true">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-
-            <h3>
-              <span class="language-en">Reliable</span>
-              <span class="language-vi">Đáng tin cậy</span>
-            </h3>
-
-            <p>
-              <span class="language-en">We build secure and dependable technology you can trust.</span>
-              <span class="language-vi">Chúng tôi xây dựng công nghệ an toàn và ổn định để bạn có thể tin tưởng.</span>
-            </p>
-          </article>
-
-          <!-- Feature 3 -->
-          <article class="why-feature">
-            <div class="feature-icon" aria-hidden="true">
-              <i class="fa-regular fa-lightbulb"></i>
-            </div>
-
-            <h3>
-              <span class="language-en">Innovative</span>
-              <span class="language-vi">Đổi mới</span>
-            </h3>
-
-            <p>
-              <span class="language-en">We continuously improve for a healthier tomorrow.</span>
-              <span class="language-vi">Chúng tôi không ngừng cải tiến vì một tương lai khỏe mạnh hơn.</span>
-            </p>
-          </article>
+          <ol class="values-list">
+            <li class="value-item">
+              <span class="value-number" aria-hidden="true">01</span>
+              <div class="value-icon" aria-hidden="true"><i class="fa-solid fa-users"></i></div>
+              <div>
+                <h3>
+                  <span class="language-en">User-focused</span>
+                  <span class="language-vi">Lấy người dùng làm trung tâm</span>
+                </h3>
+                <p>
+                  <span class="language-en">We design with real people and their needs in mind.</span>
+                  <span class="language-vi">Chúng tôi thiết kế dựa trên nhu cầu thực tế của người dùng.</span>
+                </p>
+              </div>
+            </li>
+            <li class="value-item">
+              <span class="value-number" aria-hidden="true">02</span>
+              <div class="value-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
+              <div>
+                <h3>
+                  <span class="language-en">Reliable</span>
+                  <span class="language-vi">Đáng tin cậy</span>
+                </h3>
+                <p>
+                  <span class="language-en">We build secure and dependable technology you can trust.</span>
+                  <span class="language-vi">Chúng tôi xây dựng công nghệ an toàn và ổn định để bạn có thể tin tưởng.</span>
+                </p>
+              </div>
+            </li>
+            <li class="value-item">
+              <span class="value-number" aria-hidden="true">03</span>
+              <div class="value-icon" aria-hidden="true"><i class="fa-regular fa-lightbulb"></i></div>
+              <div>
+                <h3>
+                  <span class="language-en">Innovative</span>
+                  <span class="language-vi">Đổi mới</span>
+                </h3>
+                <p>
+                  <span class="language-en">We continuously improve for a healthier tomorrow.</span>
+                  <span class="language-vi">Chúng tôi không ngừng cải tiến vì một tương lai khỏe mạnh hơn.</span>
+                </p>
+              </div>
+            </li>
+          </ol>
         </div>
       </section>
 
