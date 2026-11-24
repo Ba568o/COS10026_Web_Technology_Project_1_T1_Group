@@ -4,6 +4,7 @@
 if (PHP_SAPI !== 'cli') { http_response_code(404); exit; }
 require_once __DIR__ . '/../auth/users.php';
 require_once __DIR__ . '/../eoi_helpers.php';
+require_once __DIR__ . '/jobs_helpers.php';
 $db = auth_database();
 // Assigned HR logins. The password matches the username and is stored as a hash.
 $hrAccounts = [
@@ -39,5 +40,11 @@ if (!$db->query("SELECT name FROM app_migrations WHERE name='eoi_seed'")->fetch(
         ]);
     }
     $db->exec("INSERT INTO app_migrations VALUES ('eoi_seed')");
+}
+jobs_ensure_table($db);
+// Seed the job listings once. Running setup again does not insert duplicates.
+if (!$db->query("SELECT name FROM app_migrations WHERE name='jobs_seed'")->fetch()) {
+    jobs_seed_if_empty($db);
+    $db->exec("INSERT IGNORE INTO app_migrations (name) VALUES ('jobs_seed')");
 }
 echo "Portal accounts and applications ready.\n";

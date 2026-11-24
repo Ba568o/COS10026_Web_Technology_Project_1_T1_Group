@@ -115,12 +115,13 @@ function jobs_seed_if_empty(PDO $db): void
     }
 
     // Normalize HCW01 if an older row still has an empty heading or the old "Description" label.
-    $db->exec(
-        "UPDATE jobs
-         SET category_en = 'Content Writing | Full-time', category_vi = 'Viết nội dung | Toàn thời gian'
-         WHERE reference = 'HCW01'
-           AND (category_en IS NULL OR category_en = '' OR LOWER(TRIM(category_en)) = 'description')"
-    );
+    // This can be removed once all seeded databases have been upgraded to the new bilingual headings.
+    // $db->exec(
+    //     "UPDATE jobs
+    //      SET category_en = 'Content Writing | Full-time', category_vi = 'Viết nội dung | Toàn thời gian'
+    //      WHERE reference = 'HCW01'
+    //        AND (category_en IS NULL OR category_en = '' OR LOWER(TRIM(category_en)) = 'description')"
+    // );
 }
 
 // Loads all job listings ordered for display, falling back to jobs_seed.php if MySQL fails.
