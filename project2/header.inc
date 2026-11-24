@@ -1,9 +1,19 @@
 <?php
 require_once __DIR__ . '/auth/session.php';
 auth_start();
+
+// Display settings saved by preferences.php (gear menu in nav.inc).
+// Each cookie is checked against its allowed values; a missing or changed cookie uses the default.
+// nav.inc reads $prefs to print "checked" on the saved options, and the CSS does the rest.
+$prefs = [
+    'theme' => ($_COOKIE['t1_theme'] ?? '') === 'dark' ? 'dark' : 'light',
+    'lang' => ($_COOKIE['t1_lang'] ?? '') === 'vi' ? 'vi' : 'en',
+    'font' => in_array($_COOKIE['t1_font'] ?? '', ['super-small', 'small', 'normal', 'large', 'super-large'], true)
+        ? $_COOKIE['t1_font'] : 'normal',
+];
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="<?= $prefs['lang'] ?>">
   <head>
     <meta charset="UTF-8" />
     <meta name="google-site-verification" content="KamfaQ0k0vBLnnJTvuiAl6BYDqPvM8UuqhwmHeVXWhk" />

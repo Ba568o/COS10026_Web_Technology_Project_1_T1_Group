@@ -1461,3 +1461,64 @@ body.about-page .about-hero-text {
     line-height: 1.08;
   }
 }
+
+/* =========================================================
+   SAVED DISPLAY SETTINGS — gear menu options are submit buttons (nav.inc → preferences.php)
+   ========================================================= */
+/* The form only groups the buttons for sending; display: contents keeps the original layout of the menu. */
+#setting-container .settings-form {
+  display: contents;
+}
+
+/* Language and font-size options: buttons that look like the old radio labels. */
+#setting-container .pref-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.2rem 0.25rem;
+  border: 0;
+  border-radius: 0.375rem;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.85rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+#setting-container .pref-option:hover {
+  background: rgba(217, 47, 68, 0.08);
+}
+
+/* Round marker in place of the radio circle; filled when this option is the saved one. */
+#setting-container .pref-dot {
+  flex: 0 0 auto;
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 2px solid #8a8a85;
+  border-radius: 50%;
+}
+
+#setting-container .pref-option[aria-pressed="true"] {
+  font-weight: bold;
+}
+
+#setting-container .pref-option[aria-pressed="true"] .pref-dot {
+  border-color: #d92f44;
+  background: radial-gradient(circle, #d92f44 0 45%, transparent 50%);
+}
+
+/* The dark-mode switch is now a <button>; keep the look of the old label. */
+#setting-container .darkmode-toggle {
+  width: 100%;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+}
+
+#setting-container .pref-option:focus-visible,
+#setting-container .darkmode-toggle:focus-visible {
+  outline: 0.1875rem solid #d5333b;
+  outline-offset: 0.125rem;
+}
