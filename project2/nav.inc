@@ -72,52 +72,77 @@ $prefsNav = (isset($prefs) && is_array($prefs) ? $prefs : []) + ['theme' => 'lig
               <i class="fa-solid fa-gear" aria-hidden="true"></i>
             </label>
 
+            <!-- The panel that opens under the gear. Three groups: language (2-way switch), dark mode (toggle),
+                 text size (5 letter buttons, small → large). Every button posts one setting to preferences.php. -->
             <div class="settings-dropdown">
-              <p class="settings-title">
-                <span class="language-en">Display settings</span>
-                <span class="language-vi">Cài đặt hiển thị</span>
-              </p>
+              <div class="settings-head">
+                <p class="settings-title">
+                  <span class="language-en">Display settings</span>
+                  <span class="language-vi">Cài đặt hiển thị</span>
+                </p>
+                <p class="settings-sub">
+                  <span class="language-en">Saved for every page</span>
+                  <span class="language-vi">Áp dụng cho mọi trang</span>
+                </p>
+              </div>
 
-              <!-- Language: one button per language. aria-pressed tells screen readers which one is active. -->
-              <fieldset class="language-options">
+              <!-- Language: segmented control. aria-pressed marks the active language. -->
+              <fieldset class="settings-group language-options">
                 <legend>
                   <span class="language-en">Language</span>
                   <span class="language-vi">Ngôn ngữ</span>
                 </legend>
-                <?php foreach (['en' => 'English', 'vi' => 'Tiếng Việt'] as $langKey => $langLabel): ?>
-                <button type="submit" class="pref-option" name="language" value="<?= $langKey ?>" aria-pressed="<?= $prefsNav['lang'] === $langKey ? 'true' : 'false' ?>">
-                  <span class="pref-dot" aria-hidden="true"></span>
-                  <?= $langLabel ?>
-                </button>
-                <?php endforeach; ?>
+                <div class="pref-segment">
+                  <?php foreach (['en' => ['EN', 'English'], 'vi' => ['VI', 'Tiếng Việt']] as $langKey => [$langCode, $langLabel]): ?>
+                  <button type="submit" class="pref-segment-btn" name="language" value="<?= $langKey ?>" aria-pressed="<?= $prefsNav['lang'] === $langKey ? 'true' : 'false' ?>">
+                    <span class="pref-code" aria-hidden="true"><?= $langCode ?></span>
+                    <?= $langLabel ?>
+                  </button>
+                  <?php endforeach; ?>
+                </div>
               </fieldset>
 
-              <!-- Theme: the button sends the opposite of the current theme, so each click switches it.
-                   It keeps the class "darkmode-toggle" and the sun/moon icons, so it looks like the old switch. -->
-              <button type="submit" class="darkmode-toggle" name="theme" value="<?= $prefsNav['theme'] === 'dark' ? 'light' : 'dark' ?>" aria-pressed="<?= $prefsNav['theme'] === 'dark' ? 'true' : 'false' ?>">
-                <span>
-                  <span class="language-en">Dark mode</span>
-                  <span class="language-vi">Chế độ tối</span>
-                </span>
-                <span class="theme-icons" aria-hidden="true">
-                  <i class="fa-solid fa-sun sun"></i>
-                  <i class="fa-solid fa-moon moon"></i>
-                </span>
-              </button>
+              <!-- Theme: one row with a sliding switch. The button sends the opposite of the current theme. -->
+              <div class="settings-group">
+                <button type="submit" class="pref-theme" name="theme" value="<?= $prefsNav['theme'] === 'dark' ? 'light' : 'dark' ?>" aria-pressed="<?= $prefsNav['theme'] === 'dark' ? 'true' : 'false' ?>">
+                  <span class="pref-theme-icon" aria-hidden="true">
+                    <i class="fa-solid <?= $prefsNav['theme'] === 'dark' ? 'fa-moon' : 'fa-sun' ?>"></i>
+                  </span>
+                  <span class="pref-theme-text">
+                    <span class="language-en">Dark mode</span>
+                    <span class="language-vi">Chế độ tối</span>
+                    <small>
+                      <span class="language-en"><?= $prefsNav['theme'] === 'dark' ? 'On' : 'Off' ?></span>
+                      <span class="language-vi"><?= $prefsNav['theme'] === 'dark' ? 'Đang bật' : 'Đang tắt' ?></span>
+                    </small>
+                  </span>
+                  <span class="pref-switch" aria-hidden="true"><span class="pref-switch-knob"></span></span>
+                </button>
+              </div>
 
-              <!-- Text size: one button per size. -->
-              <fieldset class="font-size-options">
+              <!-- Text size: five "A" buttons growing in size; the visually hidden text names each size for screen readers. -->
+              <fieldset class="settings-group font-size-options">
                 <legend>
-                  <span class="language-en">Font size</span>
+                  <span class="language-en">Text size</span>
                   <span class="language-vi">Cỡ chữ</span>
                 </legend>
-                <?php foreach (['super-small' => ['Super small', 'Rất nhỏ'], 'small' => ['Small', 'Nhỏ'], 'normal' => ['Normal', 'Bình thường'], 'large' => ['Large', 'Lớn'], 'super-large' => ['Super large', 'Rất lớn']] as $fontKey => $fontLabel): ?>
-                <button type="submit" class="pref-option" name="font_size" value="<?= $fontKey ?>" aria-pressed="<?= $prefsNav['font'] === $fontKey ? 'true' : 'false' ?>">
-                  <span class="pref-dot" aria-hidden="true"></span>
-                  <span class="language-en"><?= $fontLabel[0] ?></span>
-                  <span class="language-vi"><?= $fontLabel[1] ?></span>
-                </button>
-                <?php endforeach; ?>
+                <?php $fontNames = ['super-small' => ['Super small', 'Rất nhỏ'], 'small' => ['Small', 'Nhỏ'], 'normal' => ['Normal', 'Bình thường'], 'large' => ['Large', 'Lớn'], 'super-large' => ['Super large', 'Rất lớn']]; // [English, Vietnamese] ?>
+                <div class="pref-sizes">
+                  <?php foreach ($fontNames as $fontKey => $fontLabel): ?>
+                  <button type="submit" class="pref-size pref-size-<?= $fontKey ?>" name="font_size" value="<?= $fontKey ?>" aria-pressed="<?= $prefsNav['font'] === $fontKey ? 'true' : 'false' ?>" title="<?= $fontLabel[0] ?>">
+                    <span aria-hidden="true">A</span>
+                    <span class="visually-hidden">
+                      <span class="language-en"><?= $fontLabel[0] ?></span>
+                      <span class="language-vi"><?= $fontLabel[1] ?></span>
+                    </span>
+                  </button>
+                  <?php endforeach; ?>
+                </div>
+                <!-- Name of the current size under the buttons. -->
+                <p class="pref-size-current">
+                  <span class="language-en"><?= $fontNames[$prefsNav['font']][0] ?></span>
+                  <span class="language-vi"><?= $fontNames[$prefsNav['font']][1] ?></span>
+                </p>
               </fieldset>
             </div>
             </form>

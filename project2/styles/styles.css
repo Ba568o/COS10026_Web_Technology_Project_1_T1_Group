@@ -1463,62 +1463,308 @@ body.about-page .about-hero-text {
 }
 
 /* =========================================================
-   SAVED DISPLAY SETTINGS — gear menu options are submit buttons (nav.inc → preferences.php)
+   DISPLAY SETTINGS PANEL — gear menu in nav.inc
+   Every option is a submit button that posts one setting to preferences.php (saved in a cookie).
+   The ".site-header #setting-container" prefix makes these rules win over the older menu styles above.
+   VI: Bảng cài đặt hiển thị (ngôn ngữ, chế độ tối, cỡ chữ) mở ra khi bấm bánh răng.
    ========================================================= */
-/* The form only groups the buttons for sending; display: contents keeps the original layout of the menu. */
+
+/* The form only groups the buttons for sending; display: contents keeps the menu layout unchanged. */
 #setting-container .settings-form {
   display: contents;
 }
 
-/* Language and font-size options: buttons that look like the old radio labels. */
-#setting-container .pref-option {
+/* ---- Panel ---- */
+/* Panel colours are variables so dark mode only swaps the values (see the end of this block). */
+.site-header #setting-container .settings-dropdown {
+  --set-bg: #ffffff;
+  --set-ink: #111418;
+  --set-muted: #6b7480;
+  --set-line: #e8eaee;
+  --set-soft: #f3f4f6;
+  --set-red: #d92f44;
+  width: 18.5rem;
+  padding: 1.1rem;
+  border: 1px solid var(--set-line);
+  border-radius: 18px;
+  background: var(--set-bg);
+  color: var(--set-ink);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Small arrow that points at the gear. */
+.site-header #setting-container .settings-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  right: 1rem;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid var(--set-line);
+  border-left: 1px solid var(--set-line);
+  background: var(--set-bg);
+  transform: rotate(45deg);
+}
+
+/* Title + "Saved for every page". */
+.site-header #setting-container .settings-head {
+  margin-bottom: 0.9rem;
+
+  .settings-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .settings-sub {
+    margin: 0.15rem 0 0;
+    color: var(--set-muted);
+    font-size: 0.75rem;
+  }
+}
+
+/* Each group: no fieldset border, a thin line above, small uppercase legend. */
+.site-header #setting-container .settings-group {
+  display: block;          /* the older menu styles made these fieldsets grids */
+  min-width: 0;
+  margin: 0;
+  padding: 0.9rem 0 0;
+  border: 0;
+  border-top: 1px solid var(--set-line);
+
+  + .settings-group {
+    margin-top: 0.9rem;
+  }
+
+  legend {
+    /* float pulls the legend inside the group, so the top line is not broken by it. */
+    float: left;
+    width: 100%;
+    margin: 0 0 0.6rem;
+    padding: 0;
+    color: var(--set-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  legend + * {
+    clear: both;
+  }
+}
+
+/* ---- Language: two-way segmented control ---- */
+.site-header #setting-container .pref-segment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--set-soft);
+}
+
+.site-header #setting-container .pref-segment-btn {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-  padding: 0.2rem 0.25rem;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.4rem;
   border: 0;
-  border-radius: 0.375rem;
-  background: none;
-  color: inherit;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--set-muted);
   font: inherit;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.site-header #setting-container .pref-segment-btn:hover {
+  color: var(--set-ink);
+}
+
+/* Active language: white "card" with the code in red. */
+.site-header #setting-container .pref-segment-btn[aria-pressed="true"] {
+  background: var(--set-bg);
+  color: var(--set-ink);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.site-header #setting-container .pref-code {
+  padding: 0.1rem 0.3rem;
+  border-radius: 5px;
+  background: var(--set-line);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+}
+
+.site-header #setting-container .pref-segment-btn[aria-pressed="true"] .pref-code {
+  background: var(--set-red);
+  color: #ffffff;
+}
+
+/* ---- Dark mode: icon, label + On/Off, sliding switch ---- */
+.site-header #setting-container .pref-theme {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.55rem 0.6rem;
+  border: 0;
+  border-radius: 12px;
+  background: var(--set-soft);
+  color: var(--set-ink);
+  font: inherit;
   text-align: left;
   cursor: pointer;
 }
 
-#setting-container .pref-option:hover {
-  background: rgba(217, 47, 68, 0.08);
+.site-header #setting-container .pref-theme-icon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9px;
+  background: #fff4d6;
+  color: #e0a100;
 }
 
-/* Round marker in place of the radio circle; filled when this option is the saved one. */
-#setting-container .pref-dot {
-  flex: 0 0 auto;
-  width: 0.9rem;
-  height: 0.9rem;
-  border: 2px solid #8a8a85;
+.site-header #setting-container .pref-theme-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.88rem;
+  font-weight: 700;
+
+  small {
+    color: var(--set-muted);
+    font-size: 0.72rem;
+    font-weight: 400;
+  }
+}
+
+/* Switch track and knob; the knob slides right and the track turns red when dark mode is on. */
+.site-header #setting-container .pref-switch {
+  position: relative;
+  width: 2.6rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  background: #cfd4da;
+  transition: background 0.25s ease;
+}
+
+.site-header #setting-container .pref-switch-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(1.5rem - 6px);
+  height: calc(1.5rem - 6px);
   border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-#setting-container .pref-option[aria-pressed="true"] {
-  font-weight: bold;
+.site-header #setting-container .pref-theme[aria-pressed="true"] {
+  .pref-switch { background: var(--set-red); }
+  .pref-switch-knob { transform: translateX(1.1rem); }
+  .pref-theme-icon { background: #2a2140; color: #c9b8ff; }
 }
 
-#setting-container .pref-option[aria-pressed="true"] .pref-dot {
-  border-color: #d92f44;
-  background: radial-gradient(circle, #d92f44 0 45%, transparent 50%);
+/* ---- Text size: five "A" buttons, each a little bigger ---- */
+.site-header #setting-container .pref-sizes {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--set-soft);
 }
 
-/* The dark-mode switch is now a <button>; keep the look of the old label. */
-#setting-container .darkmode-toggle {
-  width: 100%;
-  padding: 0;
-  color: inherit;
-  font: inherit;
+.site-header #setting-container .pref-size {
+  display: grid;
+  place-items: center;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--set-muted);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-#setting-container .pref-option:focus-visible,
-#setting-container .darkmode-toggle:focus-visible {
-  outline: 0.1875rem solid #d5333b;
-  outline-offset: 0.125rem;
+/* Fixed px sizes so the letters keep their steps whatever text size is chosen. */
+.site-header #setting-container .pref-size-super-small { font-size: 11px; }
+.site-header #setting-container .pref-size-small { font-size: 14px; }
+.site-header #setting-container .pref-size-normal { font-size: 17px; }
+.site-header #setting-container .pref-size-large { font-size: 20px; }
+.site-header #setting-container .pref-size-super-large { font-size: 24px; }
+
+.site-header #setting-container .pref-size:hover {
+  color: var(--set-ink);
+}
+
+.site-header #setting-container .pref-size[aria-pressed="true"] {
+  background: var(--set-red);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(217, 47, 68, 0.35);
+}
+
+/* Name of the current size, under the buttons. */
+.site-header #setting-container .pref-size-current {
+  margin: 0.5rem 0 0;
+  color: var(--set-muted);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* Keyboard focus ring for every button in the panel. */
+.site-header #setting-container .settings-dropdown button:focus-visible {
+  outline: 2px solid var(--set-red);
+  outline-offset: 2px;
+}
+
+/* ---- Dark mode: same panel, dark values ---- */
+body:has(#dark-toggle:checked) .site-header #setting-container .settings-dropdown {
+  --set-bg: #1b1d22;
+  --set-ink: #f5f5f5;
+  --set-muted: #9aa3ad;
+  --set-line: #2e3239;
+  --set-soft: #25282e;
+  --set-red: #ff4d63;
+  border-color: var(--set-line);
+  background: var(--set-bg);
+  color: var(--set-ink);
+}
+
+/* Switch track while it is off (when it is on it stays red). */
+body:has(#dark-toggle:checked) .site-header #setting-container .pref-theme:not([aria-pressed="true"]) .pref-switch {
+  background: #3a3f47;
+}
+
+/* The older dark-mode rule recolours .font-size-options; keep the group lines on the panel colours. */
+body:has(#dark-toggle:checked) .site-header #setting-container .settings-group {
+  border-top-color: var(--set-line);
+}
+
+/* ---- Phones: the gear sits near the middle of the bar, so a panel hung from it would run off the left edge.
+        Centre the panel on the screen instead, just under the top bar, and hide the little arrow. ---- */
+@media (max-width: 700px) {
+  .site-header #setting-container .settings-dropdown {
+    position: fixed;
+    top: 4rem;
+    right: auto;
+    left: 50%;
+    width: min(20rem, calc(100vw - 1.5rem));
+    transform: translateX(-50%);
+  }
+
+  .site-header #setting-container .settings-dropdown::before {
+    display: none;
+  }
 }
