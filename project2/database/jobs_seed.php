@@ -1,5 +1,6 @@
 <?php
 // Jobs database array for the jobs.php with bilingual support for English and Vietnamese. This file is used to seed the MySQL `jobs` table and as a fallback.
+// Generative AI Acknowledgment: These data are converted from the original jobs on our 1st project using GENERATIVE AI.
 return [
     [
         'reference' => 'DHS02',
