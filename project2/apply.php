@@ -2,6 +2,7 @@
 require_once __DIR__ . '/auth/session.php';
 require_once __DIR__ . '/settings.php';
 require_once __DIR__ . '/eoi_helpers.php';
+require_once __DIR__ . '/database/jobs_helpers.php';
 auth_start();
 
 /** Trims posted text and removes tags or extra slashes. */
@@ -13,7 +14,19 @@ function apply_clean($value): string
     return trim(strip_tags(stripslashes($value)));
 }
 
-$applyPositions = ['president', 'vice-president', 'manager', 'developer', 'designer'];
+// (Hoang) Keep the 5 original positions plus the 4 roles linked from jobs.php so validation and the dropdown share one list.
+$applyPositionLabels = [
+    'president' => ['President', 'Chủ tịch'],
+    'vice-president' => ['Vice President', 'Phó chủ tịch'],
+    'manager' => ['Manager', 'Quản lý'],
+    'developer' => ['Developer', 'Lập trình viên'],
+    'designer' => ['Designer', 'Nhà thiết kế'],
+    'support-specialist' => ['Digital Health Support Specialist', 'Chuyên viên hỗ trợ sức khỏe số'],
+    'qa-tester' => ['QA Tester', 'Kiểm thử viên QA'],
+    'data-analyst' => ['Health Data Analyst', 'Chuyên viên phân tích dữ liệu y tế'],
+    'content-writer' => ['Content Writer', 'Biên tập nội dung y tế'],
+];
+$applyPositions = array_keys($applyPositionLabels);
 $applyStates = ['VIC', 'NSW', 'QLD', 'SA', 'WA', 'TAS', 'NT', 'ACT'];
 $applyGenders = ['male', 'female', 'other'];
 $applySkills = ['html-css', 'javascript', 'php', 'sql', 'python', 'project-management'];
@@ -23,8 +36,24 @@ $values = [
     'postcode' => '', 'job_reference' => '', 'position' => '', 'other_skills' => '',
     'skills' => [], 'terms' => false,
 ];
+// (Hoang) Validate ?job= against active jobs before prefilling the form; warn instead of filling invalid codes.
+$selectedJob = null;
+$invalidJobNotice = false;
 if (is_string($_GET['job'] ?? null) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $values['job_reference'] = strtoupper(apply_clean($_GET['job']));
+    $rawJob = trim($_GET['job']);
+    if ($rawJob !== '') {
+        $matchedJob = jobs_find_by_reference($rawJob);
+        if ($matchedJob !== null) {
+            $selectedJob = $matchedJob;
+            $values['job_reference'] = $matchedJob['reference'];
+            // (Hoang) Auto-select the matching dropdown option when the job defines one.
+            if (in_array($matchedJob['apply_position'] ?? '', $applyPositions, true)) {
+                $values['position'] = $matchedJob['apply_position'];
+            }
+        } else {
+            $invalidJobNotice = true;
+        }
+    }
 }
 $errors = [];
 $eoiNumber = null;
@@ -67,7 +96,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($values['suburb'] === '' || mb_strlen($values['suburb']) > 50) $errors[] = 'Suburb is required, maximum 50 characters. / Quận hoặc thành phố tối đa 50 ký tự.';
     if (!in_array($values['state'], $applyStates, true)) $errors[] = 'Choose a state. / Chọn bang.';
     if (!preg_match('/^\d{4}$/', $values['postcode'])) $errors[] = 'Postcode must be 4 digits. / Mã bưu chính gồm 4 số.';
-    if (!preg_match('/^[A-Z0-9]{5}$/', $values['job_reference'])) $errors[] = 'Job reference must be 5 letters or digits. / Mã việc gồm 5 chữ hoặc số.';
+    // Check both the 5-character format and that the reference belongs to an active opening.
+    if (!preg_match('/^[A-Z0-9]{5}$/', $values['job_reference'])) {
+        $errors[] = 'Job reference must be 5 letters or digits. / Mã việc gồm 5 chữ hoặc số.';
+    } elseif (jobs_find_by_reference($values['job_reference']) === null) {
+        $errors[] = 'Job reference does not match an active opening. / Mã việc không tồn tại trong danh sách đang tuyển.';
+    }
     if (!in_array($values['position'], $applyPositions, true)) $errors[] = 'Choose a position. / Chọn vị trí.';
     if (mb_strlen($values['other_skills']) > 500) $errors[] = 'Other skills: maximum 500 characters. / Kỹ năng khác tối đa 500 ký tự.';
     if (!$values['terms']) $errors[] = 'Please accept the terms. / Vui lòng đồng ý điều khoản.';
@@ -332,6 +366,10 @@ include 'nav.inc';
               <p class="apply-result ok" role="status"><span class="language-en">Application received. Your EOI number is <?= (int) $eoiNumber ?>.</span><span class="language-vi">Đã nhận đơn. Số EOI của bạn là <?= (int) $eoiNumber ?>.</span></p>
               <?php elseif ($errors): ?>
               <div class="apply-result bad" role="alert"><?php foreach ($errors as $error): ?><p><?= auth_language_pair($error) ?></p><?php endforeach; ?></div>
+              <?php elseif ($selectedJob): /* (Hoang) Show a confirmation badge when ?job= matched an active role. */ ?>
+              <p class="apply-result ok" role="status"><span class="language-en">Applying for <strong><?= auth_escape($selectedJob['reference']) ?></strong> &mdash; <?= auth_escape($selectedJob['title']['en'] ?? '') ?>.</span><span class="language-vi">Đang ứng tuyển <strong><?= auth_escape($selectedJob['reference']) ?></strong> &mdash; <?= auth_escape($selectedJob['title']['vi'] ?? '') ?>.</span></p>
+              <?php elseif ($invalidJobNotice): /* (Hoang) Warn gently without echoing unvalidated query input. */ ?>
+              <p class="apply-result bad" role="status"><span class="language-en">The selected job reference was not found among active openings. Please choose a valid role below.</span><span class="language-vi">Không tìm thấy mã công việc trong danh sách đang tuyển. Vui lòng chọn lại vị trí hợp lệ bên dưới.</span></p>
               <?php endif; ?>
               <form
                 action="apply.php#application"
@@ -577,7 +615,8 @@ include 'nav.inc';
                       <select id="position-en" aria-labelledby="position-label" name="position">
                         <option value="" disabled <?= $values['position'] === '' ? 'selected' : '' ?> class="language-en">-- Select Position --</option>
                         <option value="" disabled <?= $values['position'] === '' ? 'selected' : '' ?> class="language-vi">-- Chọn vị trí --</option>
-                        <?php foreach (['president' => ['President', 'Chủ tịch'], 'vice-president' => ['Vice President', 'Phó chủ tịch'], 'manager' => ['Manager', 'Quản lý'], 'developer' => ['Developer', 'Lập trình viên'], 'designer' => ['Designer', 'Nhà thiết kế']] as $position => $label): ?>
+                        <?php /* (Hoang) Render every position defined in $applyPositionLabels in EN and VI. */ ?>
+                        <?php foreach ($applyPositionLabels as $position => $label): ?>
                         <option value="<?= $position ?>" <?= $values['position'] === $position ? 'selected' : '' ?> class="language-en"><?= $label[0] ?></option>
                         <option value="<?= $position ?>" <?= $values['position'] === $position ? 'selected' : '' ?> class="language-vi"><?= $label[1] ?></option>
                         <?php endforeach; ?>
