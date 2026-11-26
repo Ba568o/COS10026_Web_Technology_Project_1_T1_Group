@@ -93,8 +93,8 @@ $prefsNav = (isset($prefs) && is_array($prefs) ? $prefs : []) + ['theme' => 'lig
                   <span class="language-vi">Ngôn ngữ</span>
                 </legend>
                 <div class="pref-segment">
-                  <?php foreach (['en' => ['EN', 'English'], 'vi' => ['VI', 'Tiếng Việt']] as $langKey => [$langCode, $langLabel]): ?>
-                  <button type="submit" class="pref-segment-btn" name="language" value="<?= $langKey ?>" aria-pressed="<?= $prefsNav['lang'] === $langKey ? 'true' : 'false' ?>">
+                  <?php foreach (['en' => ['EN', 'English'], 'vi' => ['VI', 'Tiếng Việt']] as $NavlangKey => [$langCode, $langLabel]): ?>
+                  <button type="submit" class="pref-segment-btn" name="language" value="<?= $NavlangKey ?>" aria-pressed="<?= $prefsNav['lang'] === $NavlangKey ? 'true' : 'false' ?>">
                     <span class="pref-code" aria-hidden="true"><?= $langCode ?></span>
                     <?= $langLabel ?>
                   </button>
