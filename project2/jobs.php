@@ -1,16 +1,205 @@
 <?php
-$pageTitle = 'T1 group - Jobs description';
-$pageDescription = '';
-$bodyClass = 'jobs-page';
+require_once __DIR__ . '/auth/session.php';
+require_once __DIR__ . '/includes/lang.php';
+require_once __DIR__ . '/database/jobs_helpers.php';
+
+if (!headers_sent()) {
+    header('Vary: Cookie');
+    header('Cache-Control: private, no-cache');
+}
+
+$isDark = (($_COOKIE['t1_theme'] ?? '') === 'dark');
+
+$pageTitle = t1_text('T1 Health & Wellness - Job Opportunities', 'T1 Health & Wellness - Cơ hội tuyển dụng');
+$pageDescription = t1_text(
+    'Explore open digital healthcare roles at T1 Health & Wellness.',
+    'Khám phá các vị trí chăm sóc sức khỏe số đang tuyển tại T1 Health & Wellness.'
+);
+$bodyClass = $isDark ? 'jobs-page dark-mode' : 'jobs-page light-mode';
 $pageStylesheet = 'jobs.css';
 $bodyId = 'top';
-$currentPage = basename($_SERVER['PHP_SELF']);
-include 'header.inc';
-include 'nav.inc';
+$currentPage = basename($_SERVER['SCRIPT_NAME'] ?? 'jobs.php');
+
+$filterGroups = [
+    'salary' => [
+        'legend' => ['en' => 'Salary', 'vi' => 'Lương'],
+        'id_prefix' => 'salary-',
+        'legacy' => null, // legacy query param name for backward compatibility
+        'options' => [
+            'all' => ['All salaries', 'Tất cả mức lương'],
+            'under-1200' => ['Under $1,200', 'Dưới $1,200'],
+            '400-800' => ['$400 - $800', '$400 - $800'],
+            '800-1200' => ['$800 - under $1,200', '$800 - dưới $1,200'],
+            '1200-2000' => ['$1,200 - $2,000', '$1,200 - $2,000'],
+            'over-2000' => ['Over $2,000', 'Trên $2,000'],
+            'negotiable' => ['Negotiable', 'Thỏa thuận'],
+            'other' => ['Other (custom USD range)', 'Khác (tự chọn khoảng USD)'],
+        ],
+    ],
+    'experience' => [
+        'legend' => ['en' => 'Experience', 'vi' => 'Kinh nghiệm'],
+        'id_prefix' => 'experience-',
+        'legacy' => null,
+        'options' => [
+            'all' => ['All experience levels', 'Tất cả mức kinh nghiệm'],
+            'none' => ['No experience', 'Không yêu cầu kinh nghiệm'],
+            '1-year' => ['1 year', '1 năm'],
+            '2-years' => ['2 years', '2 năm'],
+            '3-years' => ['3 years', '3 năm'],
+            '5-years' => ['5 years', '5 năm'],
+            '8-years' => ['8 years', '8 năm'],
+        ],
+    ],
+    'location' => [
+        'legend' => ['en' => 'Location', 'vi' => 'Địa điểm'],
+        'id_prefix' => 'location-',
+        'legacy' => null,
+        'options' => [
+            'all' => ['All locations', 'Tất cả địa điểm'],
+            'hcm' => ['Ho Chi Minh City', 'Thành phố Hồ Chí Minh'],
+            'hanoi' => ['Hanoi', 'Hà Nội'],
+            'danang' => ['Da Nang', 'Đà Nẵng'],
+            'cantho' => ['Can Tho', 'Cần Thơ'],
+        ],
+    ],
+    'job_type' => [
+        'legend' => ['en' => 'Job type', 'vi' => 'Loại công việc'],
+        'id_prefix' => 'job-type-',
+        'legacy' => 'job-type',
+        'options' => [
+            'all' => ['All job types', 'Tất cả loại công việc'],
+            'support' => ['Customer support', 'Hỗ trợ khách hàng'],
+            'design' => ['Product design', 'Thiết kế sản phẩm'],
+            'development' => ['Software development', 'Phát triển phần mềm'],
+            'qa' => ['Quality assurance', 'Đảm bảo chất lượng'],
+            'analytics' => ['Data analytics', 'Phân tích dữ liệu'],
+            'content' => ['Content writing', 'Viết nội dung'],
+        ],
+    ],
+];
+
+$readParam = static function (string $key, array $allowed, ?string $legacyKey = null): string {
+    $raw = $_GET[$key] ?? ($legacyKey !== null ? ($_GET[$legacyKey] ?? null) : null);
+    if (!is_string($raw)) {
+        return 'all';
+    }
+    $val = trim($raw);
+    return $val !== '' && in_array($val, $allowed, true) ? $val : 'all';
+};
+
+$readSalaryBound = static function (string $key): ?int {
+    $raw = $_GET[$key] ?? null;
+    if (!is_string($raw)) {
+        return null;
+    }
+    $val = trim($raw);
+    if ($val === '') {
+        return null;
+    }
+    $parsed = filter_var($val, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 100000]]);
+    return $parsed === false ? null : (int) $parsed;
+};
+
+$selected = [];
+foreach ($filterGroups as $param => $group) {
+    $selected[$param] = $readParam($param, array_keys($group['options']), $group['legacy']);
+}
+$salary = $selected['salary'];
+$experience = $selected['experience'];
+$location = $selected['location'];
+$jobType = $selected['job_type'];
+
+$salaryMin = $readSalaryBound('salary_min');
+$salaryMax = $readSalaryBound('salary_max');
+$salarySwapped = false;
+if ($salary === 'other' && $salaryMin !== null && $salaryMax !== null && $salaryMin > $salaryMax) {
+    [$salaryMin, $salaryMax] = [$salaryMax, $salaryMin];
+    $salarySwapped = true;
+}
+$rawQ = is_string($_GET['q'] ?? null) ? trim($_GET['q']) : '';
+$q = $rawQ === '' ? '' : (function_exists('mb_substr') ? mb_substr($rawQ, 0, 100, 'UTF-8') : substr($rawQ, 0, 100));
+
+$allJobs = jobs_fetch_all();
+$jobMatchesQuery = static function (array $job, string $needle): bool {
+    $haystacks = [
+        $job['reference'] ?? '',
+        $job['title']['en'] ?? '',
+        $job['title']['vi'] ?? '',
+        $job['company']['en'] ?? '',
+        $job['company']['vi'] ?? '',
+        $job['category_heading']['en'] ?? '',
+        $job['category_heading']['vi'] ?? '',
+        $job['location_display']['en'] ?? '',
+        $job['location_display']['vi'] ?? '',
+        $job['description']['en'] ?? '',
+        $job['description']['vi'] ?? '',
+    ];
+    foreach (['responsibilities', 'requirements', 'benefits'] as $listKey) {
+        foreach (['en', 'vi'] as $langKey) {
+            foreach ($job[$listKey][$langKey] ?? [] as $item) {
+                $haystacks[] = (string) $item;
+            }
+        }
+    }
+    $hasMb = function_exists('mb_stripos');
+    foreach ($haystacks as $text) {
+        $str = (string) $text;
+        if ($str === '') {
+            continue;
+        }
+        $matched = $hasMb ? (mb_stripos($str, $needle, 0, 'UTF-8') !== false) : (stripos($str, $needle) !== false);
+        if ($matched) {
+            return true;
+        }
+    }
+    return false;
+};
+
+$filteredJobs = array_values(array_filter($allJobs, static function (array $job) use (
+    $salary, $salaryMin, $salaryMax, $experience, $location, $jobType, $q, $jobMatchesQuery
+): bool {
+    if (!jobs_matches_salary($job, $salary, $salaryMin, $salaryMax)) {
+        return false;
+    }
+    if ($experience !== 'all' && ($job['experience_key'] ?? '') !== $experience) {
+        return false;
+    }
+    if ($location !== 'all' && ($job['location_key'] ?? '') !== $location) {
+        return false;
+    }
+    if ($jobType !== 'all' && ($job['job_type_key'] ?? '') !== $jobType) {
+        return false;
+    }
+    // shortcut: plain substring match until Phase E adds includes/search_engine.php fuzzy scoring
+    if ($q !== '' && !$jobMatchesQuery($job, $q)) {
+        return false;
+    }
+    return true;
+}));
+
+$summaryNotes = [];
+if ($salarySwapped) {
+    $summaryNotes[] = t1_text(
+        'Salary range normalized to $' . number_format((int) $salaryMin) . ' - $' . number_format((int) $salaryMax) . '.',
+        'Khoảng lương đã được chuẩn hóa thành $' . number_format((int) $salaryMin) . ' - $' . number_format((int) $salaryMax) . '.'
+    );
+} elseif ($salary === 'other' && $salaryMin === null && $salaryMax === null) {
+    $summaryNotes[] = t1_text(
+        'Enter Min or Max USD to narrow custom salary results.',
+        'Nhập mức tối thiểu hoặc tối đa (USD) để thu hẹp khoảng lương.'
+    );
+}
+if ($q !== '') {
+    $summaryNotes[] = t1_text('Keyword: "', 'Từ khóa: "') . $q . '"';
+}
+$activeSummary = implode(' ', $summaryNotes);
+
+include __DIR__ . '/header.inc';
+include __DIR__ . '/nav.inc';
 ?>
 <main id="main-content">
       <!-- HERO: page introduction and online healthcare illustration. -->
-      <section class="hero" aria-labelledby="apply-heading">
+      <section class="hero" aria-labelledby="jobs-heading">
         <!-- Background animation -->
         <div class="hero-background" aria-hidden="true">
           <div class="hero-glow"></div>
@@ -21,54 +210,34 @@ include 'nav.inc';
         <div class="container hero-layout">
           <!-- Left content -->
           <div class="hero-content">
-            <p class="tag">
-              <span class="language-en">DIGITAL HEALTHCARE</span>
-              <span class="language-vi">CHĂM SÓC SỨC KHỎE SỐ</span>
-            </p>
+            <p class="tag"><?= t1_e('DIGITAL HEALTHCARE', 'CHĂM SÓC SỨC KHỎE SỐ') ?></p>
 
-            <h1 id="apply-heading">
-              <span class="language-en">
-                Better Health
-                <br />
-                Smarter Care
-              </span>
-              <span class="language-vi">
-                Sức khỏe tốt hơn
-                <br />
-                Chăm sóc thông minh hơn
-              </span>
+            <h1 id="jobs-heading">
+              <?= t1_text('Better Health<br />Smarter Care', 'Sức khỏe tốt hơn<br />Chăm sóc thông minh hơn') ?>
             </h1>
 
             <p class="hero-text">
-              <span class="language-en">
-                T1 is a digital health and wellness provider delivering accessible online health information, convenient appointment booking
-                and patient-focused digital services.
-              </span>
-              <span class="language-vi">
-                T1 là đơn vị cung cấp dịch vụ sức khỏe và chăm sóc sức khỏe số, mang đến thông tin y tế trực tuyến dễ tiếp cận, đặt lịch hẹn
-                thuận tiện và các dịch vụ số lấy bệnh nhân làm trung tâm.
-              </span>
+              <?= t1_e(
+                  'T1 is a digital health and wellness provider delivering accessible online health information, convenient appointment booking and patient-focused digital services.',
+                  'T1 là đơn vị cung cấp dịch vụ sức khỏe và chăm sóc sức khỏe số, mang đến thông tin y tế trực tuyến dễ tiếp cận, đặt lịch hẹn thuận tiện và các dịch vụ số lấy bệnh nhân làm trung tâm.'
+              ) ?>
             </p>
 
             <a class="btn btn-submit" href="apply.php">
-              <span class="language-en">APPLY NOW</span>
-              <span class="language-vi">ỨNG TUYỂN NGAY</span>
+              <?= t1_e('APPLY NOW', 'ỨNG TUYỂN NGAY') ?>
               <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
             </a>
           </div>
 
           <!-- Right: Shared digital-health animation for Jobs, Apply, and About pages. -->
-          <div class="page-hero-animation jobs-hero-animation" aria-label="Digital healthcare careers illustration">
+          <div class="page-hero-animation jobs-hero-animation" aria-label="<?= t1_e('Digital healthcare careers illustration', 'Minh họa cơ hội nghề nghiệp chăm sóc sức khỏe số') ?>">
             <!-- Main floating interface card -->
             <div class="animation-card career-main-card">
               <div class="career-card-header">
                 <span class="career-card-icon" aria-hidden="true">
                   <i class="fa-solid fa-briefcase-medical"></i>
                 </span>
-                <span class="career-card-heading">
-                  <span class="language-en">CAREER OPPORTUNITIES</span>
-                  <span class="language-vi">CƠ HỘI NGHỀ NGHIỆP</span>
-                </span>
+                <span class="career-card-heading"><?= t1_e('CAREER OPPORTUNITIES', 'CƠ HỘI NGHỀ NGHIỆP') ?></span>
                 <span class="career-card-menu" aria-hidden="true">
                   <i class="fa-solid fa-ellipsis"></i>
                 </span>
@@ -76,18 +245,9 @@ include 'nav.inc';
 
               <div class="career-card-content">
                 <div class="career-card-copy">
-                  <span class="career-eyebrow">
-                    <span class="language-en">BUILD YOUR FUTURE</span>
-                    <span class="language-vi">XÂY DỰNG TƯƠNG LAI</span>
-                  </span>
-                  <strong>
-                    <span class="language-en">Make an impact with T1</span>
-                    <span class="language-vi">Cùng T1 tạo nên khác biệt</span>
-                  </strong>
-                  <p>
-                    <span class="language-en">Grow your skills in digital healthcare.</span>
-                    <span class="language-vi">Phát triển kỹ năng trong lĩnh vực chăm sóc sức khỏe số.</span>
-                  </p>
+                  <span class="career-eyebrow"><?= t1_e('BUILD YOUR FUTURE', 'XÂY DỰNG TƯƠNG LAI') ?></span>
+                  <strong><?= t1_e('Make an impact with T1', 'Cùng T1 tạo nên khác biệt') ?></strong>
+                  <p><?= t1_e('Grow your skills in digital healthcare.', 'Phát triển kỹ năng trong lĩnh vực chăm sóc sức khỏe số.') ?></p>
                 </div>
 
                 <div class="career-team-illustration" aria-hidden="true">
@@ -99,10 +259,7 @@ include 'nav.inc';
 
               <div class="career-card-footer">
                 <span class="career-status-dot"></span>
-                <span>
-                  <span class="language-en">Opportunities at T1</span>
-                  <span class="language-vi">Cơ hội tại T1</span>
-                </span>
+                <span><?= t1_e('Opportunities at T1', 'Cơ hội tại T1') ?></span>
                 <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
               </div>
             </div>
@@ -113,14 +270,8 @@ include 'nav.inc';
                 <i class="fa-solid fa-user-plus"></i>
               </span>
               <span class="notification-copy">
-                <strong>
-                  <span class="language-en">Join our team</span>
-                  <span class="language-vi">Gia nhập đội ngũ</span>
-                </strong>
-                <small>
-                  <span class="language-en">Your next step starts here</span>
-                  <span class="language-vi">Hành trình mới bắt đầu tại đây</span>
-                </small>
+                <strong><?= t1_e('Join our team', 'Gia nhập đội ngũ') ?></strong>
+                <small><?= t1_e('Your next step starts here', 'Hành trình mới bắt đầu tại đây') ?></small>
               </span>
               <i class="fa-solid fa-check notification-check" aria-hidden="true"></i>
             </div>
@@ -143,1062 +294,233 @@ include 'nav.inc';
         </div>
       </section>
 
-      <section class="job-layout" aria-label="Job opportunities">
+      <section class="job-layout" aria-label="<?= t1_e('Job opportunities', 'Cơ hội việc làm') ?>">
         <div id="job-list">
-          <div class="job-card salary-under-30 salary-10-20 location-hcm job-support experience-none">
-            <div class="ref-code">
-              <p>
-                <span class="language-en">Job ID:</span>
-                <span class="language-vi">Mã việc làm:</span>
-                <span class="ref-code-value"><strong>DHS02</strong></span>
-              </p>
-            </div>
-            <h2>
-              <span class="language-en">Digital Health Support Specialist</span>
-              <span class="language-vi">Chuyên viên hỗ trợ sức khỏe số</span>
-            </h2>
-            <p class="company-name">
-              <span class="language-en">T1 Health &amp; Wellness</span>
-              <span class="language-vi">T1 Sức khỏe &amp; Wellness</span>
+          <div class="job-results-bar" role="status" aria-live="polite">
+            <p class="job-results-count">
+              <?= t1_e(
+                  'Showing ' . count($filteredJobs) . ' of ' . count($allJobs) . ' jobs',
+                  'Hiển thị ' . count($filteredJobs) . ' / ' . count($allJobs) . ' việc làm'
+              ) ?>
             </p>
-            <h3>
-              <span class="language-en">Customer Support | Full-time</span>
-              <span class="language-vi">Hỗ trợ khách hàng | Toàn thời gian</span>
-            </h3>
-            <p>
-              <span class="language-en">
-                Assist users with online patient platforms and appointment booking systems, resolving common technical or account-related
-                issues.
-              </span>
-              <span class="language-vi">
-                Hỗ trợ người dùng các nền tảng bệnh nhân trực tuyến và hệ thống đặt lịch, giải quyết các vấn đề kỹ thuật hoặc tài khoản
-                thường gặp.
-              </span>
-            </p>
-            <div class="job-meta">
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Reports to</span>
-                  <span class="language-vi">Báo cáo cho</span>
-                </span>
-                <span class="language-en">Customer Support Manager</span>
-                <span class="language-vi">Quản lý hỗ trợ khách hàng</span>
-              </p>
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Salary</span>
-                  <span class="language-vi">Lương</span>
-                </span>
-                <span class="language-en">$720 - $1,120 USD / month</span>
-                <span class="language-vi">$720 - $1,120 USD / tháng</span>
-              </p>
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Location</span>
-                  <span class="language-vi">Địa điểm</span>
-                </span>
-                <span class="language-en">Ho Chi Minh City, Vietnam</span>
-                <span class="language-vi">Thành phố Hồ Chí Minh, Việt Nam</span>
-              </p>
-              <p class="experience-meta">
-                <span class="meta-label">
-                  <span class="language-en">Experience</span>
-                  <span class="language-vi">Kinh nghiệm</span>
-                </span>
-                <span class="language-en">No experience</span>
-                <span class="language-vi">Không yêu cầu kinh nghiệm</span>
-              </p>
-            </div>
-            <div class="job-details">
-              <h3>
-                <span class="language-en">Key Responsibilities</span>
-                <span class="language-vi">Trách nhiệm chính</span>
-              </h3>
-              <ul>
-                <li>
-                  <span class="language-en">Assist users with accessing and navigating online platforms.</span>
-                  <span class="language-vi">Hỗ trợ người dùng truy cập và sử dụng các nền tảng trực tuyến.</span>
-                </li>
-                <li>
-                  <span class="language-en">Guide users through appointment booking and account management.</span>
-                  <span class="language-vi">Hướng dẫn người dùng đặt lịch và quản lý tài khoản.</span>
-                </li>
-                <li>
-                  <span class="language-en">Respond to enquiries and coordinate reported issues with technical teams.</span>
-                  <span class="language-vi">Phản hồi thắc mắc và phối hợp vấn đề với đội ngũ kỹ thuật.</span>
-                </li>
-                <li>
-                  <span class="language-en">Maintain professional and helpful communication.</span>
-                  <span class="language-vi">Duy trì giao tiếp chuyên nghiệp và hữu ích.</span>
-                </li>
-              </ul>
-              <h3>
-                <span class="language-en">Requirements</span>
-                <span class="language-vi">Yêu cầu</span>
-              </h3>
-              <ul>
-                <li>
-                  <span class="language-en">Strong communication and problem-solving skills.</span>
-                  <span class="language-vi">Kỹ năng giao tiếp và giải quyết vấn đề tốt.</span>
-                </li>
-                <li>
-                  <span class="language-en">Basic computer and digital platform skills.</span>
-                  <span class="language-vi">Kỹ năng máy tính và nền tảng số cơ bản.</span>
-                </li>
-                <li>
-                  <span class="language-en">Patience and a customer-focused attitude.</span>
-                  <span class="language-vi">Kiên nhẫn và thái độ hướng đến khách hàng.</span>
-                </li>
-                <li>
-                  <span class="language-en">Ability to explain technical steps clearly.</span>
-                  <span class="language-vi">Có khả năng giải thích rõ ràng các bước kỹ thuật.</span>
-                </li>
-                <li>
-                  <span class="language-en">Previous customer support experience is desirable.</span>
-                  <span class="language-vi">Ưu tiên có kinh nghiệm hỗ trợ khách hàng.</span>
-                </li>
-              </ul>
-            </div>
-            <input type="checkbox" id="show_details_dhs02" class="show-details-checkbox visually-hidden" />
-            <label for="show_details_dhs02" class="details-toggle-label">
-              <span class="visually-hidden">
-                <span class="language-en">Toggle job details for Digital Health Support Specialist</span>
-                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Chuyên viên hỗ trợ sức khỏe số</span>
-              </span>
-              <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
-            </label>
-            <a class="job-apply-button" href="apply.php#skip-to-application">
-              <span class="language-en">Apply for this job</span>
-              <span class="language-vi">Ứng tuyển công việc này</span>
-            </a>
+            <?php if ($activeSummary !== ''): ?>
+            <p class="job-results-summary"><?= auth_escape($activeSummary) ?></p>
+            <?php endif; ?>
           </div>
 
-          <div class="job-card salary-30-50 location-hanoi job-design experience-2-years">
+          <?php if (empty($filteredJobs)): ?>
+          <div class="job-empty-state" role="status" aria-live="polite">
+            <h2><?= t1_e('No matching jobs found', 'Không tìm thấy công việc phù hợp') ?></h2>
+            <p><?= t1_e(
+                'Try adjusting your USD salary range, keyword, or filter selections to view more open positions.',
+                'Hãy thử điều chỉnh khoảng lương USD, từ khóa hoặc các lựa chọn bộ lọc để xem thêm vị trí đang tuyển.'
+            ) ?></p>
+            <a href="jobs.php#job-list" class="clear-filters"><?= t1_e('Reset all filters', 'Xóa tất cả bộ lọc') ?></a>
+          </div>
+          <?php else: ?>
+            <?php foreach ($filteredJobs as $job): ?>
+              <?php
+              $ref = (string) ($job['reference'] ?? '');
+              $titleText = t1_pick($job['title'] ?? []);
+              $detailsId = 'show_details_' . strtolower($ref);
+              $isNegotiable = ($job['salary_min'] ?? null) === null || ($job['salary_max'] ?? null) === null;
+              // shortcut: keep non-VND filter classes on cards until styles/jobs.css L286-288 is removed in Phase B step 2
+              $cardClasses = trim(implode(' ', array_filter([
+                  'job-card',
+                  !empty($job['location_key']) ? 'location-' . $job['location_key'] : '',
+                  !empty($job['job_type_key']) ? 'job-' . $job['job_type_key'] : '',
+                  !empty($job['experience_key']) ? 'experience-' . $job['experience_key'] : '',
+                  $isNegotiable ? 'salary-negotiable' : '',
+              ])));
+              $responsibilities = t1_pick_list($job['responsibilities'] ?? []);
+              $requirements = t1_pick_list($job['requirements'] ?? []);
+              $benefits = t1_pick_list($job['benefits'] ?? []);
+              ?>
+          <article id="job-<?= auth_escape($ref) ?>" class="<?= auth_escape($cardClasses) ?>">
             <div class="ref-code">
               <p>
-                <span class="language-en">Job ID:</span>
-                <span class="language-vi">Mã việc làm:</span>
-                <span class="ref-code-value"><strong>UXD04</strong></span>
+                <?= t1_e('Job ID:', 'Mã việc làm:') ?>
+                <span class="ref-code-value"><strong><?= auth_escape($ref) ?></strong></span>
               </p>
             </div>
-            <h2>
-              <span class="language-en">Healthcare UX/UI Designer</span>
-              <span class="language-vi">Nhà thiết kế UX/UI chăm sóc sức khỏe</span>
-            </h2>
-            <p class="company-name">
-              <span class="language-en">Vinmec Digital Health</span>
-              <span class="language-vi">Vinmec Sức khỏe số</span>
-            </p>
-            <h3>
-              <span class="language-en">Product Design | Full-time</span>
-              <span class="language-vi">Thiết kế sản phẩm | Toàn thời gian</span>
-            </h3>
-            <p>
-              <span class="language-en">
-                Create intuitive and accessible interfaces that help patients find health information and manage appointments with ease.
-              </span>
-              <span class="language-vi">
-                Tạo giao diện trực quan và dễ tiếp cận giúp bệnh nhân tìm thông tin sức khỏe và quản lý lịch hẹn dễ dàng.
-              </span>
-            </p>
+            <h2><?= auth_escape($titleText) ?></h2>
+            <p class="company-name"><?= auth_escape(t1_pick($job['company'] ?? [])) ?></p>
+            <h3><?= auth_escape(t1_pick($job['category_heading'] ?? [])) ?></h3>
+            <p><?= auth_escape(t1_pick($job['description'] ?? [])) ?></p>
             <div class="job-meta">
               <p>
-                <span class="meta-label">
-                  <span class="language-en">Reports to</span>
-                  <span class="language-vi">Báo cáo cho</span>
-                </span>
-                <span class="language-en">Head of Product Design</span>
-                <span class="language-vi">Trưởng bộ phận thiết kế sản phẩm</span>
+                <span class="meta-label"><?= t1_e('Reports to', 'Báo cáo cho') ?></span>
+                <?= auth_escape(t1_pick($job['reports_to'] ?? [])) ?>
               </p>
               <p>
-                <span class="meta-label">
-                  <span class="language-en">Salary</span>
-                  <span class="language-vi">Lương</span>
-                </span>
-                <span class="language-en">$1,200 - $2,000 USD / month</span>
-                <span class="language-vi">$1,200 - $2,000 USD / tháng</span>
+                <span class="meta-label"><?= t1_e('Salary', 'Lương') ?></span>
+                <?= auth_escape(t1_pick($job['salary_display'] ?? [])) ?>
               </p>
               <p>
-                <span class="meta-label">
-                  <span class="language-en">Location</span>
-                  <span class="language-vi">Địa điểm</span>
-                </span>
-                <span class="language-en">Hanoi, Vietnam</span>
-                <span class="language-vi">Hà Nội, Việt Nam</span>
+                <span class="meta-label"><?= t1_e('Location', 'Địa điểm') ?></span>
+                <?= auth_escape(t1_pick($job['location_display'] ?? [])) ?>
               </p>
               <p class="experience-meta">
-                <span class="meta-label">
-                  <span class="language-en">Experience</span>
-                  <span class="language-vi">Kinh nghiệm</span>
-                </span>
-                <span class="language-en">2 years</span>
-                <span class="language-vi">2 năm</span>
+                <span class="meta-label"><?= t1_e('Experience', 'Kinh nghiệm') ?></span>
+                <?= auth_escape(t1_pick($job['experience_display'] ?? [])) ?>
               </p>
             </div>
             <div class="job-details">
-              <h3>
-                <span class="language-en">Key Responsibilities</span>
-                <span class="language-vi">Trách nhiệm chính</span>
-              </h3>
+              <h3><?= t1_e('Key Responsibilities', 'Trách nhiệm chính') ?></h3>
               <ul>
-                <li>
-                  <span class="language-en">Design interfaces for patient platforms and booking systems.</span>
-                  <span class="language-vi">Thiết kế giao diện cho nền tảng bệnh nhân và hệ thống đặt lịch.</span>
-                </li>
-                <li>
-                  <span class="language-en">Create wireframes, prototypes and user journey maps.</span>
-                  <span class="language-vi">Tạo wireframe, nguyên mẫu và bản đồ hành trình người dùng.</span>
-                </li>
-                <li>
-                  <span class="language-en">Conduct user research and collaborate with product teams.</span>
-                  <span class="language-vi">Nghiên cứu người dùng và phối hợp với các đội ngũ sản phẩm.</span>
-                </li>
-                <li>
-                  <span class="language-en">Ensure designs are consistent, accessible and user-friendly.</span>
-                  <span class="language-vi">Đảm bảo thiết kế nhất quán, dễ tiếp cận và thân thiện.</span>
-                </li>
+                <?php foreach ($responsibilities as $item): ?>
+                <li><?= auth_escape((string) $item) ?></li>
+                <?php endforeach; ?>
               </ul>
-              <h3>
-                <span class="language-en">Requirements</span>
-                <span class="language-vi">Yêu cầu</span>
-              </h3>
+              <h3><?= t1_e('Requirements', 'Yêu cầu') ?></h3>
               <ul>
-                <li>
-                  <span class="language-en">Knowledge of UI/UX design principles.</span>
-                  <span class="language-vi">Kiến thức về nguyên tắc thiết kế UI/UX.</span>
-                </li>
-                <li>
-                  <span class="language-en">Familiarity with tools such as Figma.</span>
-                  <span class="language-vi">Quen thuộc với các công cụ như Figma.</span>
-                </li>
-                <li>
-                  <span class="language-en">Understanding of responsive web design and accessibility.</span>
-                  <span class="language-vi">Hiểu về thiết kế web đáp ứng và khả năng tiếp cận.</span>
-                </li>
-                <li>
-                  <span class="language-en">Strong visual communication and problem-solving skills.</span>
-                  <span class="language-vi">Kỹ năng giao tiếp trực quan và giải quyết vấn đề tốt.</span>
-                </li>
-                <li>
-                  <span class="language-en">A portfolio is desirable.</span>
-                  <span class="language-vi">Ưu tiên có hồ sơ năng lực.</span>
-                </li>
+                <?php foreach ($requirements as $item): ?>
+                <li><?= auth_escape((string) $item) ?></li>
+                <?php endforeach; ?>
               </ul>
+              <?php if (!empty($benefits)): ?>
+              <h3><?= t1_e('Benefits', 'Phúc lợi') ?></h3>
+              <ul>
+                <?php foreach ($benefits as $item): ?>
+                <li><?= auth_escape((string) $item) ?></li>
+                <?php endforeach; ?>
+              </ul>
+              <?php endif; ?>
             </div>
-            <input type="checkbox" id="show_details_uxd04" class="show-details-checkbox visually-hidden" />
-            <label for="show_details_uxd04" class="details-toggle-label">
-              <span class="visually-hidden">
-                <span class="language-en">Toggle job details for Healthcare UX/UI Designer</span>
-                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Nhà thiết kế UX/UI chăm sóc sức khỏe</span>
-              </span>
+            <input type="checkbox" id="<?= auth_escape($detailsId) ?>" class="show-details-checkbox visually-hidden" />
+            <label for="<?= auth_escape($detailsId) ?>" class="details-toggle-label">
+              <span class="visually-hidden"><?= auth_escape(t1_text('Toggle job details for ', 'Mở hoặc đóng thông tin công việc cho ') . $titleText) ?></span>
               <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
             </label>
-            <a class="job-apply-button" href="apply.php#skip-to-application">
-              <span class="language-en">Apply for this job</span>
-              <span class="language-vi">Ứng tuyển công việc này</span>
+            <a class="job-apply-button" href="apply.php?job=<?= auth_escape(rawurlencode($ref)) ?>#skip-to-application">
+              <?= t1_e('Apply for this job', 'Ứng tuyển công việc này') ?>
             </a>
-          </div>
-
-          <div class="job-card salary-over-50 location-danang job-development experience-8-years">
-            <div class="ref-code">
-              <p>
-                <span class="language-en">Job ID:</span>
-                <span class="language-vi">Mã việc làm:</span>
-                <span class="ref-code-value"><strong>DHD05</strong></span>
-              </p>
-            </div>
-            <h2>
-              <span class="language-en">Digital Health Software Developer</span>
-              <span class="language-vi">Lập trình viên phần mềm sức khỏe số</span>
-            </h2>
-            <p class="company-name">
-              <span class="language-en">FPT Smart Healthcare</span>
-              <span class="language-vi">FPT Chăm sóc sức khỏe thông minh</span>
-            </p>
-            <h3>
-              <span class="language-en">Software Development | Full-time</span>
-              <span class="language-vi">Phát triển phần mềm | Toàn thời gian</span>
-            </h3>
-            <p>
-              <span class="language-en">
-                Build and maintain reliable, user-friendly software for patient platforms, appointment systems and health information
-                websites.
-              </span>
-              <span class="language-vi">
-                Xây dựng và duy trì phần mềm đáng tin cậy, thân thiện cho nền tảng bệnh nhân, hệ thống đặt lịch và website thông tin sức
-                khỏe.
-              </span>
-            </p>
-            <div class="job-meta">
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Reports to</span>
-                  <span class="language-vi">Báo cáo cho</span>
-                </span>
-                <span class="language-en">Engineering Manager</span>
-                <span class="language-vi">Quản lý kỹ thuật</span>
-              </p>
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Salary</span>
-                  <span class="language-vi">Lương</span>
-                </span>
-                <span class="language-en">$1,800 - $3,000 USD / month</span>
-                <span class="language-vi">$1,800 - $3,000 USD / tháng</span>
-              </p>
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Location</span>
-                  <span class="language-vi">Địa điểm</span>
-                </span>
-                <span class="language-en">Da Nang, Vietnam</span>
-                <span class="language-vi">Đà Nẵng, Việt Nam</span>
-              </p>
-              <p class="experience-meta">
-                <span class="meta-label">
-                  <span class="language-en">Experience</span>
-                  <span class="language-vi">Kinh nghiệm</span>
-                </span>
-                <span class="language-en">8 years</span>
-                <span class="language-vi">8 năm</span>
-              </p>
-            </div>
-            <div class="job-details">
-              <h3>
-                <span class="language-en">Key Responsibilities</span>
-                <span class="language-vi">Trách nhiệm chính</span>
-              </h3>
-              <ul>
-                <li>
-                  <span class="language-en">Develop and maintain digital healthcare platform features.</span>
-                  <span class="language-vi">Phát triển và duy trì các tính năng nền tảng chăm sóc sức khỏe số.</span>
-                </li>
-                <li>
-                  <span class="language-en">Write clean, maintainable and well-tested code.</span>
-                  <span class="language-vi">Viết mã sạch, dễ bảo trì và được kiểm thử kỹ.</span>
-                </li>
-                <li>
-                  <span class="language-en">Collaborate with designers, analysts and developers.</span>
-                  <span class="language-vi">Phối hợp với nhà thiết kế, chuyên viên phân tích và lập trình viên.</span>
-                </li>
-                <li>
-                  <span class="language-en">Resolve bugs and follow security and data protection practices.</span>
-                  <span class="language-vi">Khắc phục lỗi và tuân thủ các quy trình bảo mật, bảo vệ dữ liệu.</span>
-                </li>
-              </ul>
-              <h3>
-                <span class="language-en">Requirements</span>
-                <span class="language-vi">Yêu cầu</span>
-              </h3>
-              <ul>
-                <li>
-                  <span class="language-en">Knowledge of JavaScript, Python or Java.</span>
-                  <span class="language-vi">Kiến thức về JavaScript, Python hoặc Java.</span>
-                </li>
-                <li>
-                  <span class="language-en">Understanding of web development fundamentals.</span>
-                  <span class="language-vi">Hiểu các nền tảng phát triển web.</span>
-                </li>
-                <li>
-                  <span class="language-en">Familiarity with databases and APIs is an advantage.</span>
-                  <span class="language-vi">Biết về cơ sở dữ liệu và API là một lợi thế.</span>
-                </li>
-                <li>
-                  <span class="language-en">Strong logical thinking and problem-solving skills.</span>
-                  <span class="language-vi">Tư duy logic và kỹ năng giải quyết vấn đề tốt.</span>
-                </li>
-                <li>
-                  <span class="language-en">Ability to learn new technologies.</span>
-                  <span class="language-vi">Có khả năng học công nghệ mới.</span>
-                </li>
-              </ul>
-            </div>
-            <input type="checkbox" id="show_details_dhd05" class="show-details-checkbox visually-hidden" />
-            <label for="show_details_dhd05" class="details-toggle-label">
-              <span class="visually-hidden">
-                <span class="language-en">Toggle job details for Digital Health Software Developer</span>
-                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Lập trình viên phần mềm sức khỏe số</span>
-              </span>
-              <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
-            </label>
-            <a class="job-apply-button" href="apply.php#skip-to-application">
-              <span class="language-en">Apply for this job</span>
-              <span class="language-vi">Ứng tuyển công việc này</span>
-            </a>
-          </div>
-
-          <div class="job-card salary-under-30 salary-20-under-30 location-hanoi job-qa experience-1-year">
-            <div class="ref-code">
-              <p>
-                <span class="language-en">Job ID:</span>
-                <span class="language-vi">Mã việc làm:</span>
-                <span class="ref-code-value"><strong>QAT06</strong></span>
-              </p>
-            </div>
-            <h2>
-              <span class="language-en">Healthcare Quality Assurance Tester</span>
-              <span class="language-vi">Kiểm thử đảm bảo chất lượng chăm sóc sức khỏe</span>
-            </h2>
-            <p class="company-name">
-              <span class="language-en">Medlatec Digital</span>
-              <span class="language-vi">Medlatec Số</span>
-            </p>
-            <h3>
-              <span class="language-en">Quality Assurance | Full-time</span>
-              <span class="language-vi">Đảm bảo chất lượng | Toàn thời gian</span>
-            </h3>
-            <p>
-              <span class="language-en">
-                Test digital healthcare services and appointment workflows to identify issues before release and provide a reliable user
-                experience.
-              </span>
-              <span class="language-vi">
-                Kiểm thử dịch vụ chăm sóc sức khỏe số và quy trình đặt lịch để phát hiện lỗi trước khi phát hành.
-              </span>
-            </p>
-            <div class="job-meta">
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Reports to</span>
-                  <span class="language-vi">Báo cáo cho</span>
-                </span>
-                <span class="language-en">QA Lead</span>
-                <span class="language-vi">Trưởng nhóm đảm bảo chất lượng</span>
-              </p>
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Salary</span>
-                  <span class="language-vi">Lương</span>
-                </span>
-                <span class="language-en">$880 - $1,520 USD / month</span>
-                <span class="language-vi">$880 - $1,520 USD / tháng</span>
-              </p>
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Location</span>
-                  <span class="language-vi">Địa điểm</span>
-                </span>
-                <span class="language-en">Hanoi, Vietnam</span>
-                <span class="language-vi">Hà Nội, Việt Nam</span>
-              </p>
-              <p class="experience-meta">
-                <span class="meta-label">
-                  <span class="language-en">Experience</span>
-                  <span class="language-vi">Kinh nghiệm</span>
-                </span>
-                <span class="language-en">1 year</span>
-                <span class="language-vi">1 năm</span>
-              </p>
-            </div>
-            <div class="job-details">
-              <h3>
-                <span class="language-en">Key Responsibilities</span>
-                <span class="language-vi">Trách nhiệm chính</span>
-              </h3>
-              <ul>
-                <li>
-                  <span class="language-en">Test website features and healthcare workflows.</span>
-                  <span class="language-vi">Kiểm thử tính năng website và quy trình chăm sóc sức khỏe.</span>
-                </li>
-                <li>
-                  <span class="language-en">Create and execute test cases from requirements.</span>
-                  <span class="language-vi">Tạo và thực hiện các trường hợp kiểm thử từ yêu cầu.</span>
-                </li>
-                <li>
-                  <span class="language-en">Document defects and perform regression testing.</span>
-                  <span class="language-vi">Ghi nhận lỗi và thực hiện kiểm thử hồi quy.</span>
-                </li>
-                <li>
-                  <span class="language-en">Work with developers to verify fixes.</span>
-                  <span class="language-vi">Phối hợp với lập trình viên để xác nhận bản sửa lỗi.</span>
-                </li>
-              </ul>
-              <h3>
-                <span class="language-en">Requirements</span>
-                <span class="language-vi">Yêu cầu</span>
-              </h3>
-              <ul>
-                <li>
-                  <span class="language-en">Understanding of software testing fundamentals.</span>
-                  <span class="language-vi">Hiểu các nền tảng kiểm thử phần mềm.</span>
-                </li>
-                <li>
-                  <span class="language-en">Ability to follow procedures and document results.</span>
-                  <span class="language-vi">Có khả năng tuân thủ quy trình và ghi nhận kết quả.</span>
-                </li>
-                <li>
-                  <span class="language-en">Strong attention to detail and analytical skills.</span>
-                  <span class="language-vi">Chú ý đến chi tiết và kỹ năng phân tích tốt.</span>
-                </li>
-                <li>
-                  <span class="language-en">Bug-tracking experience is an advantage.</span>
-                  <span class="language-vi">Có kinh nghiệm theo dõi lỗi là một lợi thế.</span>
-                </li>
-                <li>
-                  <span class="language-en">Basic knowledge of web applications.</span>
-                  <span class="language-vi">Kiến thức cơ bản về ứng dụng web.</span>
-                </li>
-              </ul>
-            </div>
-            <input type="checkbox" id="show_details_qat06" class="show-details-checkbox visually-hidden" />
-            <label for="show_details_qat06" class="details-toggle-label">
-              <span class="visually-hidden">
-                <span class="language-en">Toggle job details for Healthcare Quality Assurance Tester</span>
-                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Kiểm thử đảm bảo chất lượng chăm sóc sức khỏe</span>
-              </span>
-              <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
-            </label>
-            <a class="job-apply-button" href="apply.php#skip-to-application">
-              <span class="language-en">Apply for this job</span>
-              <span class="language-vi">Ứng tuyển công việc này</span>
-            </a>
-          </div>
-
-          <div class="job-card salary-over-50 location-hcm job-analytics experience-5-years">
-            <div class="ref-code">
-              <p>
-                <span class="language-en">Job ID:</span>
-                <span class="language-vi">Mã việc làm:</span>
-                <span class="ref-code-value"><strong>HDA03</strong></span>
-              </p>
-            </div>
-            <h2>
-              <span class="language-en">Health Data Analyst</span>
-              <span class="language-vi">Chuyên viên phân tích dữ liệu sức khỏe</span>
-            </h2>
-            <p class="company-name">
-              <span class="language-en">VNG HealthTech</span>
-              <span class="language-vi">VNG HealthTech</span>
-            </p>
-            <h3>
-              <span class="language-en">Data Analytics | Full-time</span>
-              <span class="language-vi">Phân tích dữ liệu | Toàn thời gian</span>
-            </h3>
-            <p>
-              <span class="language-en">
-                Analyse digital healthcare data to identify trends, evaluate service performance and support data-driven decisions
-                responsibly.
-              </span>
-              <span class="language-vi">
-                Phân tích dữ liệu chăm sóc sức khỏe số để nhận diện xu hướng, đánh giá hiệu quả dịch vụ và hỗ trợ quyết định dựa trên dữ
-                liệu.
-              </span>
-            </p>
-            <div class="job-meta">
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Reports to</span>
-                  <span class="language-vi">Báo cáo cho</span>
-                </span>
-                <span class="language-en">Data Analytics Manager</span>
-                <span class="language-vi">Quản lý phân tích dữ liệu</span>
-              </p>
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Salary</span>
-                  <span class="language-vi">Lương</span>
-                </span>
-                <span class="language-en">$1,400 - $2,400 USD / month</span>
-                <span class="language-vi">$1,400 - $2,400 USD / tháng</span>
-              </p>
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Location</span>
-                  <span class="language-vi">Địa điểm</span>
-                </span>
-                <span class="language-en">Ho Chi Minh City, Vietnam</span>
-                <span class="language-vi">Thành phố Hồ Chí Minh, Việt Nam</span>
-              </p>
-              <p class="experience-meta">
-                <span class="meta-label">
-                  <span class="language-en">Experience</span>
-                  <span class="language-vi">Kinh nghiệm</span>
-                </span>
-                <span class="language-en">5 years</span>
-                <span class="language-vi">5 năm</span>
-              </p>
-            </div>
-            <div class="job-details">
-              <h3>
-                <span class="language-en">Key Responsibilities</span>
-                <span class="language-vi">Trách nhiệm chính</span>
-              </h3>
-              <ul>
-                <li>
-                  <span class="language-en">Analyse platform usage and appointment booking records.</span>
-                  <span class="language-vi">Phân tích việc sử dụng nền tảng và hồ sơ đặt lịch.</span>
-                </li>
-                <li>
-                  <span class="language-en">Prepare reports, dashboards and visualisations.</span>
-                  <span class="language-vi">Chuẩn bị báo cáo, bảng điều khiển và hình ảnh trực quan.</span>
-                </li>
-                <li>
-                  <span class="language-en">Monitor performance and identify opportunities for improvement.</span>
-                  <span class="language-vi">Theo dõi hiệu suất và xác định cơ hội cải thiện.</span>
-                </li>
-                <li>
-                  <span class="language-en">Check data quality and follow privacy requirements.</span>
-                  <span class="language-vi">Kiểm tra chất lượng dữ liệu và tuân thủ yêu cầu về quyền riêng tư.</span>
-                </li>
-              </ul>
-              <h3>
-                <span class="language-en">Requirements</span>
-                <span class="language-vi">Yêu cầu</span>
-              </h3>
-              <ul>
-                <li>
-                  <span class="language-en">Basic knowledge of data analysis and statistics.</span>
-                  <span class="language-vi">Kiến thức cơ bản về phân tích dữ liệu và thống kê.</span>
-                </li>
-                <li>
-                  <span class="language-en">Microsoft Excel experience; SQL or visualisation tools are an advantage.</span>
-                  <span class="language-vi">Kinh nghiệm Microsoft Excel; biết SQL hoặc công cụ trực quan hóa là một lợi thế.</span>
-                </li>
-                <li>
-                  <span class="language-en">Strong analytical thinking and attention to detail.</span>
-                  <span class="language-vi">Tư duy phân tích và chú ý đến chi tiết tốt.</span>
-                </li>
-                <li>
-                  <span class="language-en">Ability to communicate findings clearly.</span>
-                  <span class="language-vi">Có khả năng trình bày phát hiện rõ ràng.</span>
-                </li>
-                <li>
-                  <span class="language-en">Understanding of data privacy is desirable.</span>
-                  <span class="language-vi">Ưu tiên hiểu về quyền riêng tư dữ liệu.</span>
-                </li>
-              </ul>
-            </div>
-            <input type="checkbox" id="show_details_hda003" class="show-details-checkbox visually-hidden" />
-            <label for="show_details_hda003" class="details-toggle-label">
-              <span class="visually-hidden">
-                <span class="language-en">Toggle job details for Health Data Analyst</span>
-                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Chuyên viên phân tích dữ liệu sức khỏe</span>
-              </span>
-              <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
-            </label>
-            <a class="job-apply-button" href="apply.php#skip-to-application">
-              <span class="language-en">Apply for this job</span>
-              <span class="language-vi">Ứng tuyển công việc này</span>
-            </a>
-          </div>
-
-          <div class="job-card salary-negotiable location-cantho job-content experience-3-years">
-            <div class="ref-code">
-              <p>
-                <span class="language-en">Job ID:</span>
-                <span class="language-vi">Mã việc làm:</span>
-                <span class="ref-code-value"><strong>HCW01</strong></span>
-              </p>
-            </div>
-            <h2>
-              <span class="language-en">Healthcare Content Writer</span>
-              <span class="language-vi">Biên tập viên nội dung chăm sóc sức khỏe</span>
-            </h2>
-            <p class="company-name">
-              <span class="language-en">eDoctor Vietnam</span>
-              <span class="language-vi">eDoctor Việt Nam</span>
-            </p>
-            <h3>
-              <span class="language-en">Description</span>
-              <span class="language-vi">Mô tả</span>
-            </h3>
-            <p>
-              <span class="language-en">
-                We are looking for a Healthcare Content Writer to create clear, engaging and reliable health-related content for our digital
-                health information websites. The successful candidate will help users understand health topics through accessible and
-                well-organised digital content.
-              </span>
-              <span class="language-vi">
-                Chúng tôi tìm kiếm biên tập viên nội dung chăm sóc sức khỏe để tạo nội dung rõ ràng, hấp dẫn và đáng tin cậy cho các website
-                thông tin sức khỏe số.
-              </span>
-            </p>
-            <div class="job-meta">
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Reports to</span>
-                  <span class="language-vi">Báo cáo cho</span>
-                </span>
-                <span class="language-en">Content Manager</span>
-                <span class="language-vi">Quản lý nội dung</span>
-              </p>
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Salary</span>
-                  <span class="language-vi">Lương</span>
-                </span>
-                <span class="language-en">Negotiable</span>
-                <span class="language-vi">Thỏa thuận</span>
-              </p>
-              <p>
-                <span class="meta-label">
-                  <span class="language-en">Location</span>
-                  <span class="language-vi">Địa điểm</span>
-                </span>
-                <span class="language-en">Can Tho, Vietnam</span>
-                <span class="language-vi">Cần Thơ, Việt Nam</span>
-              </p>
-              <p class="experience-meta">
-                <span class="meta-label">
-                  <span class="language-en">Experience</span>
-                  <span class="language-vi">Kinh nghiệm</span>
-                </span>
-                <span class="language-en">3 years</span>
-                <span class="language-vi">3 năm</span>
-              </p>
-            </div>
-            <div class="job-details">
-              <h3>
-                <span class="language-en">Key Responsibilities:</span>
-                <span class="language-vi">Trách nhiệm chính:</span>
-              </h3>
-              <ul>
-                <li>
-                  <span class="language-en">Research and write health-related articles and educational content.</span>
-                  <span class="language-vi">Nghiên cứu và viết bài báo sức khỏe cùng nội dung giáo dục.</span>
-                </li>
-                <li>
-                  <span class="language-en">Review content for clarity, accuracy and readability.</span>
-                  <span class="language-vi">Kiểm tra nội dung về tính rõ ràng, chính xác và dễ đọc.</span>
-                </li>
-                <li>
-                  <span class="language-en">Collaborate with healthcare professionals and the digital content team.</span>
-                  <span class="language-vi">Phối hợp với chuyên gia chăm sóc sức khỏe và đội ngũ nội dung số.</span>
-                </li>
-                <li>
-                  <span class="language-en">Update existing website content when information needs revision.</span>
-                  <span class="language-vi">Cập nhật nội dung website khi thông tin cần chỉnh sửa.</span>
-                </li>
-                <li>
-                  <span class="language-en">Follow content guidelines and maintain consistent writing standards.</span>
-                  <span class="language-vi">Tuân thủ hướng dẫn nội dung và duy trì tiêu chuẩn viết nhất quán.</span>
-                </li>
-              </ul>
-              <h3>
-                <span class="language-en">Requirements:</span>
-                <span class="language-vi">Yêu cầu:</span>
-              </h3>
-              <ul>
-                <li>
-                  <span class="language-en">Strong written communication and research skills.</span>
-                  <span class="language-vi">Kỹ năng viết và nghiên cứu tốt.</span>
-                </li>
-                <li>
-                  <span class="language-en">Excellent attention to detail.</span>
-                  <span class="language-vi">Chú ý xuất sắc đến chi tiết.</span>
-                </li>
-                <li>
-                  <span class="language-en">Ability to explain complex information in simple language.</span>
-                  <span class="language-vi">Có khả năng giải thích thông tin phức tạp bằng ngôn ngữ đơn giản.</span>
-                </li>
-                <li>
-                  <span class="language-en">Understanding of health and wellness topics.</span>
-                  <span class="language-vi">Hiểu về các chủ đề sức khỏe và thể chất.</span>
-                </li>
-                <li>
-                  <span class="language-en">Experience in content writing or health communication is an advantage.</span>
-                  <span class="language-vi">Có kinh nghiệm viết nội dung hoặc truyền thông sức khỏe là một lợi thế.</span>
-                </li>
-              </ul>
-              <h3>
-                <span class="language-en">Benefits</span>
-                <span class="language-vi">Phúc lợi</span>
-              </h3>
-              <ul>
-                <li>
-                  <span class="language-en">Health, dental, and vision insurance</span>
-                  <span class="language-vi">Bảo hiểm sức khỏe, nha khoa và thị lực</span>
-                </li>
-                <li>
-                  <span class="language-en">Retirement savings plan</span>
-                  <span class="language-vi">Kế hoạch tiết kiệm hưu trí</span>
-                </li>
-                <li>
-                  <span class="language-en">Paid time off and holidays</span>
-                  <span class="language-vi">Nghỉ phép và ngày lễ có lương</span>
-                </li>
-                <li>
-                  <span class="language-en">Professional development opportunities</span>
-                  <span class="language-vi">Cơ hội phát triển chuyên môn</span>
-                </li>
-                <li>
-                  <span class="language-en">Flexible work arrangements</span>
-                  <span class="language-vi">Thỏa thuận làm việc linh hoạt</span>
-                </li>
-              </ul>
-            </div>
-            <input type="checkbox" id="show_details_hcw01" class="show-details-checkbox visually-hidden" />
-            <label for="show_details_hcw01" class="details-toggle-label">
-              <span class="visually-hidden">
-                <span class="language-en">Toggle job details for Healthcare Content Writer</span>
-                <span class="language-vi">Mở hoặc đóng thông tin công việc cho Biên tập viên nội dung chăm sóc sức khỏe</span>
-              </span>
-              <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
-            </label>
-            <a class="job-apply-button" href="apply.php#skip-to-application">
-              <span class="language-en">Apply for this job</span>
-              <span class="language-vi">Ứng tuyển công việc này</span>
-            </a>
-          </div>
+          </article>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </div>
         <div class="FilterSidebar-Container">
           <input class="filter-toggle visually-hidden" type="checkbox" id="filter-toggle" />
           <label class="filter-toggle-label" for="filter-toggle">
-            <span>
-              <span class="language-en">Filter jobs</span>
-              <span class="language-vi">Lọc việc làm</span>
-            </span>
+            <span><?= t1_e('Filter jobs', 'Lọc việc làm') ?></span>
             <i class="fa-solid fa-sliders" aria-hidden="true"></i>
           </label>
-          <div id="job-filter">
-            <form>
+          <search id="job-filter" aria-labelledby="filter-heading">
+            <form method="get" action="jobs.php#job-list" autocomplete="off" aria-labelledby="filter-heading">
               <fieldset>
-                <legend class="filter-main-title" style="border: 1px solid #cccccc; color: #263746; border-radius: 5px">
-                  <span class="language-en">FILTER</span>
-                  <span class="language-vi">BỘ LỌC</span>
-                </legend>
-                
-                <button type="reset" class="clear-filters"><span class="language-en">Clear filters</span><span class="language-vi">Xóa bộ lọc</span></button>
+                <legend id="filter-heading" class="filter-main-title"><?= t1_e('FILTER', 'BỘ LỌC') ?></legend>
 
-                <fieldset class="filter-group">
-                  <legend>
-                    <span class="language-en">Salary</span>
-                    <span class="language-vi">Lương</span>
-                  </legend>
-                  <label>
-                    <input type="radio" name="salary" id="salary-all" checked />
-                    <span class="language-en">All salaries</span>
-                    <span class="language-vi">Tất cả mức lương</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="salary" id="salary-under-30" />
-                    <span class="language-en">Under $1,200 </span>
-                    <span class="language-vi">Dưới 1,200 đô la Mĩ</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="salary" id="salary-10-20" />
-                    <span class="language-en">$400 - $800 </span>
-                    <span class="language-vi">400 - 800 đô la Mĩ</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="salary" id="salary-20-under-30" />
-                    <span class="language-en">$800 - under $1,200 </span>
-                    <span class="language-vi">800 - dưới 1,200 đô la Mĩ</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="salary" id="salary-30-50" />
-                    <span class="language-en">$1,200 - $2,000 </span>
-                    <span class="language-vi">1,200 - 2,000 đô la Mĩ</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="salary" id="salary-over-50" />
-                    <span class="language-en">Over $2,000 </span>
-                    <span class="language-vi">Trên 2,000 đô la Mĩ</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="salary" id="salary-negotiable" />
-                    <span class="language-en">Negotiable</span>
-                    <span class="language-vi">Thỏa thuận</span>
-                  </label>
-                </fieldset>
+                <button type="submit" class="apply-filters-btn"><?= t1_e('Apply Filters', 'Áp dụng bộ lọc') ?></button>
+                <a href="jobs.php#job-list" class="clear-filters"><?= t1_e('Clear filters', 'Xóa bộ lọc') ?></a>
 
-                <fieldset class="filter-group">
-                  <legend>
-                    <span class="language-en">Experience</span>
-                    <span class="language-vi">Kinh nghiệm</span>
-                  </legend>
-                  <label>
-                    <input type="radio" name="experience" id="experience-all" checked />
-                    <span class="language-en">All experience levels</span>
-                    <span class="language-vi">Tất cả mức kinh nghiệm</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="experience" id="experience-none" />
-                    <span class="language-en">No experience</span>
-                    <span class="language-vi">Không yêu cầu kinh nghiệm</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="experience" id="experience-1-year" />
-                    <span class="language-en">1 year</span>
-                    <span class="language-vi">1 năm</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="experience" id="experience-2-years" />
-                    <span class="language-en">2 years</span>
-                    <span class="language-vi">2 năm</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="experience" id="experience-3-years" />
-                    <span class="language-en">3 years</span>
-                    <span class="language-vi">3 năm</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="experience" id="experience-5-years" />
-                    <span class="language-en">5 years</span>
-                    <span class="language-vi">5 năm</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="experience" id="experience-8-years" />
-                    <span class="language-en">8 years</span>
-                    <span class="language-vi">8 năm</span>
-                  </label>
-                </fieldset>
+                <div class="filter-group filter-search-group">
+                  <label for="job-keyword-search"><?= t1_e('Keyword or Job ID', 'Từ khóa hoặc mã việc làm') ?></label>
+                  <input
+                    type="search"
+                    id="job-keyword-search"
+                    name="q"
+                    value="<?= auth_escape($q) ?>"
+                    maxlength="100"
+                    autocorrect="off"
+                    autocapitalize="none"
+                    spellcheck="false"
+                    enterkeyhint="search"
+                    placeholder="<?= t1_e('Filter jobs by keyword or code...', 'Lọc việc theo từ khóa hoặc mã...') ?>"
+                  />
+                </div>
 
+                <?php foreach ($filterGroups as $paramName => $group): ?>
                 <fieldset class="filter-group">
-                  <legend>
-                    <span class="language-en">Location</span>
-                    <span class="language-vi">Địa điểm</span>
-                  </legend>
-                  <label>
-                    <input type="radio" name="location" id="location-all" checked />
-                    <span class="language-en">All locations</span>
-                    <span class="language-vi">Tất cả địa điểm</span>
+                  <legend><?= auth_escape(t1_pick($group['legend'] ?? [])) ?></legend>
+                  <?php foreach ($group['options'] as $optValue => $labels): ?>
+                    <?php
+                    $inputId = $group['id_prefix'] . $optValue;
+                    $optLabel = t1_text($labels[0], $labels[1]);
+                    ?>
+                  <label for="<?= auth_escape($inputId) ?>">
+                    <input
+                      type="radio"
+                      id="<?= auth_escape($inputId) ?>"
+                      name="<?= auth_escape($paramName) ?>"
+                      value="<?= auth_escape($optValue) ?>"
+                      <?= $selected[$paramName] === $optValue ? 'checked' : '' ?>
+                    />
+                    <?= auth_escape($optLabel) ?>
                   </label>
-                  <label>
-                    <input type="radio" name="location" id="location-hcm" />
-                    <span class="language-en">Ho Chi Minh City</span>
-                    <span class="language-vi">Thành phố Hồ Chí Minh</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="location" id="location-hanoi" />
-                    <span class="language-en">Hanoi</span>
-                    <span class="language-vi">Hà Nội</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="location" id="location-danang" />
-                    <span class="language-en">Da Nang</span>
-                    <span class="language-vi">Đà Nẵng</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="location" id="location-cantho" />
-                    <span class="language-en">Can Tho</span>
-                    <span class="language-vi">Cần Thơ</span>
-                  </label>
+                  <?php endforeach; ?>
+                  <?php if ($paramName === 'salary'): ?>
+                  <div class="salary-custom-range">
+                    <div class="salary-bound">
+                      <label for="salary-min"><?= t1_e('Min USD', 'Tối thiểu (USD)') ?></label>
+                      <input
+                        type="number"
+                        id="salary-min"
+                        name="salary_min"
+                        min="0"
+                        max="100000"
+                        step="50"
+                        inputmode="numeric"
+                        value="<?= $salaryMin !== null ? auth_escape((string) $salaryMin) : '' ?>"
+                      />
+                    </div>
+                    <div class="salary-bound">
+                      <label for="salary-max"><?= t1_e('Max USD', 'Tối đa (USD)') ?></label>
+                      <input
+                        type="number"
+                        id="salary-max"
+                        name="salary_max"
+                        min="0"
+                        max="100000"
+                        step="50"
+                        inputmode="numeric"
+                        value="<?= $salaryMax !== null ? auth_escape((string) $salaryMax) : '' ?>"
+                      />
+                    </div>
+                  </div>
+                  <?php endif; ?>
                 </fieldset>
-
-                <fieldset class="filter-group">
-                  <legend>
-                    <span class="language-en">Job type</span>
-                    <span class="language-vi">Loại công việc</span>
-                  </legend>
-                  <label>
-                    <input type="radio" name="job-type" id="job-type-all" checked />
-                    <span class="language-en">All job types</span>
-                    <span class="language-vi">Tất cả loại công việc</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="job-type" id="job-type-support" />
-                    <span class="language-en">Customer support</span>
-                    <span class="language-vi">Hỗ trợ khách hàng</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="job-type" id="job-type-design" />
-                    <span class="language-en">Product design</span>
-                    <span class="language-vi">Thiết kế sản phẩm</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="job-type" id="job-type-development" />
-                    <span class="language-en">Software development</span>
-                    <span class="language-vi">Phát triển phần mềm</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="job-type" id="job-type-qa" />
-                    <span class="language-en">Quality assurance</span>
-                    <span class="language-vi">Đảm bảo chất lượng</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="job-type" id="job-type-analytics" />
-                    <span class="language-en">Data analytics</span>
-                    <span class="language-vi">Phân tích dữ liệu</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="job-type" id="job-type-content" />
-                    <span class="language-en">Content writing</span>
-                    <span class="language-vi">Viết nội dung</span>
-                  </label>
-                </fieldset>
+                <?php endforeach; ?>
               </fieldset>
             </form>
-          </div>
+          </search>
 
           <aside class="sidebar">
             <section class="tips-box">
-              <h3>
-                <span class="language-en">Application Tips</span>
-                <span class="language-vi">Mẹo ứng tuyển</span>
-              </h3>
+              <h3><?= t1_e('Application Tips', 'Mẹo ứng tuyển') ?></h3>
               <ol>
-                <li>
-                  <span class="language-en">Read the job description carefully to understand the role and requirements.</span>
-                  <span class="language-vi">Đọc kỹ mô tả công việc để hiểu vai trò và yêu cầu.</span>
-                </li>
-                <li>
-                  <span class="language-en">Prepare your resume and cover letter tailored to the specific job.</span>
-                  <span class="language-vi">Chuẩn bị CV và thư xin việc phù hợp với công việc cụ thể.</span>
-                </li>
-                <li>
-                  <span class="language-en">Highlight relevant skills, experiences, and achievements.</span>
-                  <span class="language-vi">Làm nổi bật kỹ năng, kinh nghiệm và thành tích liên quan.</span>
-                </li>
-                <li>
-                  <span class="language-en">Follow the application instructions provided in the job listing.</span>
-                  <span class="language-vi">Thực hiện hướng dẫn ứng tuyển trong tin tuyển dụng.</span>
-                </li>
-                <li>
-                  <span class="language-en">Submit your application before the deadline.</span>
-                  <span class="language-vi">Nộp đơn trước thời hạn.</span>
-                </li>
+                <li><?= t1_e('Read the job description carefully to understand the role and requirements.', 'Đọc kỹ mô tả công việc để hiểu vai trò và yêu cầu.') ?></li>
+                <li><?= t1_e('Prepare your resume and cover letter tailored to the specific job.', 'Chuẩn bị CV và thư xin việc phù hợp với công việc cụ thể.') ?></li>
+                <li><?= t1_e('Highlight relevant skills, experiences, and achievements.', 'Làm nổi bật kỹ năng, kinh nghiệm và thành tích liên quan.') ?></li>
+                <li><?= t1_e('Follow the application instructions provided in the job listing.', 'Thực hiện hướng dẫn ứng tuyển trong tin tuyển dụng.') ?></li>
+                <li><?= t1_e('Submit your application before the deadline.', 'Nộp đơn trước thời hạn.') ?></li>
               </ol>
             </section>
             <section class="disclaimer-box">
-              <h3>
-                <span class="language-en">Disclaimer</span>
-                <span class="language-vi">Tuyên bố miễn trừ</span>
-              </h3>
+              <h3><?= t1_e('Disclaimer', 'Tuyên bố miễn trừ') ?></h3>
               <p>
-                <span class="language-en">
-                  All job listings are subject to change and may be filled or removed at any time. T1 Health &amp; Wellness is not
-                  responsible for any discrepancies or inaccuracies in the job postings.
-                </span>
-                <span class="language-vi">
-                  Tất cả tin tuyển dụng có thể thay đổi, được tuyển đủ hoặc gỡ bỏ bất cứ lúc nào. T1 Health &amp; Wellness không chịu trách
-                  nhiệm về bất kỳ sai lệch hoặc thiếu chính xác nào trong tin tuyển dụng.
-                </span>
+                <?= t1_e(
+                    'All job listings are subject to change and may be filled or removed at any time. T1 Health & Wellness is not responsible for any discrepancies or inaccuracies in the job postings.',
+                    'Tất cả tin tuyển dụng có thể thay đổi, được tuyển đủ hoặc gỡ bỏ bất cứ lúc nào. T1 Health & Wellness không chịu trách nhiệm về bất kỳ sai lệch hoặc thiếu chính xác nào trong tin tuyển dụng.'
+                ) ?>
               </p>
             </section>
             <section class="ref-code-box">
-              <h3>
-                <span class="language-en">Job Reference Code</span>
-                <span class="language-vi">Mã tham chiếu công việc</span>
-              </h3>
+              <h3><?= t1_e('Job Reference Code', 'Mã tham chiếu công việc') ?></h3>
               <p>
-                <span class="language-en">
-                  Double-check your
-                  <strong>Job Reference Code</strong>
-                  before submitting the application form!
-                </span>
-                <span class="language-vi">
-                  Hãy kiểm tra kỹ
-                  <strong>Mã tham chiếu công việc</strong>
-                  trước khi gửi đơn ứng tuyển!
-                </span>
+                <?= t1_text(
+                    'Double-check your <strong>Job Reference Code</strong> before submitting the application form!',
+                    'Hãy kiểm tra kỹ <strong>Mã tham chiếu công việc</strong> trước khi gửi đơn ứng tuyển!'
+                ) ?>
               </p>
             </section>
 
             <section class="help-box">
-              <h3>
-                <span class="language-en">Need Help?</span>
-                <span class="language-vi">Cần trợ giúp?</span>
-              </h3>
+              <h3><?= t1_e('Need Help?', 'Cần trợ giúp?') ?></h3>
               <p>
-                <span class="language-en">
-                  Contact our HR team at
-                  <a href="mailto:106208127@student.swin.edu.au">106208127@student.swin.edu.au</a>
-                </span>
-                <span class="language-vi">
-                  Liên hệ đội ngũ nhân sự qua
-                  <a href="mailto:106208127@student.swin.edu.au">106208127@student.swin.edu.au</a>
-                </span>
+                <?= t1_text(
+                    'Contact our HR team at <a href="mailto:106208127@student.swin.edu.au">106208127@student.swin.edu.au</a>',
+                    'Liên hệ đội ngũ nhân sự qua <a href="mailto:106208127@student.swin.edu.au">106208127@student.swin.edu.au</a>'
+                ) ?>
               </p>
             </section>
           </aside>
