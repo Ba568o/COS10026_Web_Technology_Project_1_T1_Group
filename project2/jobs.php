@@ -1,13 +1,23 @@
 <?php
+/**
+ * jobs.php — Data-driven job opportunities & server-side GET filtering (zero JS).
+ *
+ * - Fetches listings from MySQL via jobs_fetch_all() (with PHP fallback to jobs_seed.php).
+ * - Sanitizes GET parameters against strict allowlists + numeric USD bounds.
+ * - Renders bilingual UI via includes/lang.php (t1_text, t1_e, t1_pick, t1_pick_list)
+ *   and sets body dark/light mode class from the t1_theme cookie.
+ */
 require_once __DIR__ . '/auth/session.php';
 require_once __DIR__ . '/includes/lang.php';
 require_once __DIR__ . '/database/jobs_helpers.php';
 
+// Prevent stale bfcache/proxy responses when the user switches language or theme cookies.
 if (!headers_sent()) {
     header('Vary: Cookie');
     header('Cache-Control: private, no-cache');
 }
 
+// Theme & page metadata consumed by header.inc before any HTML output.
 $isDark = (($_COOKIE['t1_theme'] ?? '') === 'dark');
 
 $pageTitle = t1_text('T1 Health & Wellness - Job Opportunities', 'T1 Health & Wellness - Cơ hội tuyển dụng');
@@ -18,8 +28,10 @@ $pageDescription = t1_text(
 $bodyClass = $isDark ? 'jobs-page dark-mode' : 'jobs-page light-mode';
 $pageStylesheet = 'jobs.css';
 $bodyId = 'top';
+// Use SCRIPT_NAME instead of PHP_SELF to avoid PATH_INFO injection in nav links.
 $currentPage = basename($_SERVER['SCRIPT_NAME'] ?? 'jobs.php');
 
+// Single source of truth for both GET allowlist validation and radio filter rendering.
 $filterGroups = [
     'salary' => [
         'legend' => ['en' => 'Salary', 'vi' => 'Lương'],
@@ -78,6 +90,9 @@ $filterGroups = [
     ],
 ];
 
+// --- GET input sanitization & allowlist validation ---
+
+// Guard against array tampering (?location[]=...) and reject values outside the allowlist.
 $readParam = static function (string $key, array $allowed, ?string $legacyKey = null): string {
     $raw = $_GET[$key] ?? ($legacyKey !== null ? ($_GET[$legacyKey] ?? null) : null);
     if (!is_string($raw)) {
@@ -87,6 +102,7 @@ $readParam = static function (string $key, array $allowed, ?string $legacyKey = 
     return $val !== '' && in_array($val, $allowed, true) ? $val : 'all';
 };
 
+// Parse custom USD salary bounds strictly as integers within [0, 100000].
 $readSalaryBound = static function (string $key): ?int {
     $raw = $_GET[$key] ?? null;
     if (!is_string($raw)) {
@@ -112,14 +128,19 @@ $jobType = $selected['job_type'];
 $salaryMin = $readSalaryBound('salary_min');
 $salaryMax = $readSalaryBound('salary_max');
 $salarySwapped = false;
+// Normalize inverted custom USD ranges (e.g., min=2500, max=1000 -> 1000..2500).
 if ($salary === 'other' && $salaryMin !== null && $salaryMax !== null && $salaryMin > $salaryMax) {
     [$salaryMin, $salaryMax] = [$salaryMax, $salaryMin];
     $salarySwapped = true;
 }
+// Cap keyword query length at 100 characters to match maxlength="100".
 $rawQ = is_string($_GET['q'] ?? null) ? trim($_GET['q']) : '';
 $q = $rawQ === '' ? '' : (function_exists('mb_substr') ? mb_substr($rawQ, 0, 100, 'UTF-8') : substr($rawQ, 0, 100));
 
+// --- Fetch jobs from MySQL (with fallback) and apply AND filters ---
 $allJobs = jobs_fetch_all();
+
+// Check keyword across both EN and VI fields so either language query matches.
 $jobMatchesQuery = static function (array $job, string $needle): bool {
     $haystacks = [
         $job['reference'] ?? '',
@@ -177,6 +198,7 @@ $filteredJobs = array_values(array_filter($allJobs, static function (array $job)
     return true;
 }));
 
+// Build status summary notes for the live results bar.
 $summaryNotes = [];
 if ($salarySwapped) {
     $summaryNotes[] = t1_text(
@@ -294,8 +316,10 @@ include __DIR__ . '/nav.inc';
         </div>
       </section>
 
+      <!-- JOB LISTINGS & FILTER SIDEBAR -->
       <section class="job-layout" aria-label="<?= t1_e('Job opportunities', 'Cơ hội việc làm') ?>">
         <div id="job-list">
+          <!-- WCAG polite live region announcing result count and normalized filter notes. -->
           <div class="job-results-bar" role="status" aria-live="polite">
             <p class="job-results-count">
               <?= t1_e(
@@ -309,6 +333,7 @@ include __DIR__ . '/nav.inc';
           </div>
 
           <?php if (empty($filteredJobs)): ?>
+          <!-- Empty state when no job matches the active GET filters. -->
           <div class="job-empty-state" role="status" aria-live="polite">
             <h2><?= t1_e('No matching jobs found', 'Không tìm thấy công việc phù hợp') ?></h2>
             <p><?= t1_e(
@@ -379,6 +404,7 @@ include __DIR__ . '/nav.inc';
                 <?php endforeach; ?>
               </ul>
               <?php if (!empty($benefits)): ?>
+              <!-- Only HCW01 defines benefits; skip empty lists for other roles. -->
               <h3><?= t1_e('Benefits', 'Phúc lợi') ?></h3>
               <ul>
                 <?php foreach ($benefits as $item): ?>
@@ -387,11 +413,13 @@ include __DIR__ . '/nav.inc';
               </ul>
               <?php endif; ?>
             </div>
+            <!-- Pure-CSS accordion toggle paired with :has(.show-details-checkbox:checked). -->
             <input type="checkbox" id="<?= auth_escape($detailsId) ?>" class="show-details-checkbox visually-hidden" />
             <label for="<?= auth_escape($detailsId) ?>" class="details-toggle-label">
               <span class="visually-hidden"><?= auth_escape(t1_text('Toggle job details for ', 'Mở hoặc đóng thông tin công việc cho ') . $titleText) ?></span>
               <i class="fa-solid fa-caret-down arrow" aria-hidden="true"></i>
             </label>
+            <!-- Pass validated job reference to apply.php to pre-fill job_reference & position. -->
             <a class="job-apply-button" href="apply.php?job=<?= auth_escape(rawurlencode($ref)) ?>#skip-to-application">
               <?= t1_e('Apply for this job', 'Ứng tuyển công việc này') ?>
             </a>
@@ -399,7 +427,9 @@ include __DIR__ . '/nav.inc';
             <?php endforeach; ?>
           <?php endif; ?>
         </div>
+        <!-- RIGHT COLUMN: mobile drawer toggle, GET filter form, and static sidebar boxes. -->
         <div class="FilterSidebar-Container">
+          <!-- Pure-CSS mobile filter drawer toggle (<= 900px). -->
           <input class="filter-toggle visually-hidden" type="checkbox" id="filter-toggle" />
           <label class="filter-toggle-label" for="filter-toggle">
             <span><?= t1_e('Filter jobs', 'Lọc việc làm') ?></span>
@@ -411,8 +441,10 @@ include __DIR__ . '/nav.inc';
                 <legend id="filter-heading" class="filter-main-title"><?= t1_e('FILTER', 'BỘ LỌC') ?></legend>
 
                 <button type="submit" class="apply-filters-btn"><?= t1_e('Apply Filters', 'Áp dụng bộ lọc') ?></button>
+                <!-- Use an anchor reset instead of <button type="reset"> so active GET params clear completely. -->
                 <a href="jobs.php#job-list" class="clear-filters"><?= t1_e('Clear filters', 'Xóa bộ lọc') ?></a>
 
+                <!-- Scoped keyword search combined via AND with radio filters below. -->
                 <div class="filter-group filter-search-group">
                   <label for="job-keyword-search"><?= t1_e('Keyword or Job ID', 'Từ khóa hoặc mã việc làm') ?></label>
                   <input
@@ -449,6 +481,7 @@ include __DIR__ . '/nav.inc';
                   </label>
                   <?php endforeach; ?>
                   <?php if ($paramName === 'salary'): ?>
+                  <!-- Shown via CSS :has(#salary-other:checked) when custom USD salary is selected. -->
                   <div class="salary-custom-range">
                     <div class="salary-bound">
                       <label for="salary-min"><?= t1_e('Min USD', 'Tối thiểu (USD)') ?></label>
