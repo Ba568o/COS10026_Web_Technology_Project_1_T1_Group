@@ -1,13 +1,19 @@
 <?php
 require_once __DIR__ . '/auth/session.php';
+require_once __DIR__ . '/includes/lang.php';
 auth_start();
+
+// The Vary header tells caches that the page may change based on the cookie values.
+if (!headers_sent()) {
+    header('Vary: Cookie');
+}
 
 // Display settings saved by preferences.php (gear menu in nav.inc).
 // Each cookie is checked against its allowed values; a missing or changed cookie uses the default.
 // nav.inc reads $prefs to print "checked" on the saved options, and the CSS does the rest.
 $prefs = [
     'theme' => ($_COOKIE['t1_theme'] ?? '') === 'dark' ? 'dark' : 'light',
-    'lang' => ($_COOKIE['t1_lang'] ?? '') === 'vi' ? 'vi' : 'en',
+    'lang' => t1_lang(),
     'font' => in_array($_COOKIE['t1_font'] ?? '', ['super-small', 'small', 'normal', 'large', 'super-large'], true)
         ? $_COOKIE['t1_font'] : 'normal',
 ];
@@ -42,5 +48,5 @@ $prefs = [
     <?= $pageHeadExtra ?? '' ?>
   </head>
   <body id="<?= htmlspecialchars($bodyId ?? 'top', ENT_QUOTES, 'UTF-8') ?>" class="<?= htmlspecialchars($bodyClass ?? '', ENT_QUOTES, 'UTF-8') ?>">
-    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <a class="skip-link" href="#main-content"><?= t1_e('Skip to main content', 'Chuyển đến nội dung chính') ?></a>
     <header class="site-header">
