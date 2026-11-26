@@ -1,5 +1,10 @@
-/* T1 Health & Wellness — JOBS STYLES
-   Split from the original combined stylesheet without changing declarations. */
+/* =========================================================
+   T1 Health & Wellness — JOBS PAGE STYLES
+   Server-side GET filtering (no CSS :has() job-card hiding)
+   and PHP-driven theme class (body.jobs-page.dark-mode).
+   ========================================================= */
+/* Generative AI Acknowledgement: Refactored filter, results bar, empty state, and dark-mode styles with assistance from Generative AI (Gemini 4 Hydrogen). */
+/* === 1. PAGE LAYOUT & LISTING COLUMN === */
 body.jobs-page main{
   padding: 0;
 }
@@ -22,6 +27,73 @@ body.jobs-page .job-layout{
   }
 }
 
+/* === 2. RESULTS BAR & EMPTY STATE === */
+body.jobs-page .job-results-bar {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 14px 20px;
+  border: 1px solid #e2e2dc;
+  border-radius: 10px;
+  background: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+
+  p {
+    margin: 0;
+  }
+
+  .job-results-count {
+    color: #111111;
+    font-weight: 700;
+  }
+
+  .job-results-summary {
+    color: #555555;
+    font-size: 0.9rem;
+  }
+}
+
+body.jobs-page .job-empty-state {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid #e2e2dc;
+  border-radius: 12px;
+  background: #ffffff;
+
+  h2 {
+    margin: 0 0 0.5rem;
+    color: #111111;
+  }
+
+  p {
+    margin: 0 0 1.25rem;
+    color: #555555;
+    line-height: 1.6;
+  }
+
+  .clear-filters {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid #d92f44;
+    border-radius: 0.4rem;
+    color: #d92f44;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .clear-filters:hover,
+  .clear-filters:focus-visible {
+    background: #d92f44;
+    color: #ffffff;
+  }
+}
+
+/* === 3. JOB CARDS & PURE-CSS ACCORDION === */
 body.jobs-page .job-card{
   /* Base styling shared by every job listing. */
   width: 100%;
@@ -197,10 +269,12 @@ body.jobs-page .job-details{
   margin-top: 10px;
 }
 
+/* === 4. FILTER FORM, KEYWORD SEARCH & CUSTOM SALARY RANGE === */
 body.jobs-page #job-filter{
   width: 100%;
 
-  fieldset {
+  /* Target only the outer fieldset so inner .filter-group fieldsets do not get nested scrollbars. */
+  > form > fieldset {
     border: 1px solid #cccccc;
     padding: 20px;
     border-radius: 10px;
@@ -230,6 +304,12 @@ body.jobs-page #job-filter{
       font-weight: bold;
     }
 
+    .filter-main-title {
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      color: #263746;
+    }
+
     label {
       display: inline-block;
       margin-bottom: 6px;
@@ -237,9 +317,30 @@ body.jobs-page #job-filter{
       font-weight: bold;
     }
 
-    .clear-filters {
+    .apply-filters-btn {
       width: 100%;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
+      padding: 0.7rem 1rem;
+      border: 1px solid #d92f44;
+      border-radius: 0.4rem;
+      background: #d92f44;
+      color: #ffffff;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .apply-filters-btn:hover,
+    .apply-filters-btn:focus-visible {
+      background: #af1829;
+      border-color: #af1829;
+    }
+
+    .clear-filters {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      margin-top: 0.65rem;
       padding: 0.7rem 1rem;
       border: 1px solid #d92f44;
       border-radius: 0.4rem;
@@ -247,6 +348,8 @@ body.jobs-page #job-filter{
       color: #d92f44;
       font: inherit;
       font-weight: bold;
+      text-align: center;
+      text-decoration: none;
       cursor: pointer;
     }
 
@@ -254,6 +357,26 @@ body.jobs-page #job-filter{
     .clear-filters:focus-visible {
       background: #d92f44;
       color: #ffffff;
+    }
+
+    #job-keyword-search,
+    .salary-bound input {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0.5rem 0.65rem;
+      border: 1px solid #cccccc;
+      border-radius: 0.4rem;
+      background: #ffffff;
+      color: #111111;
+      font: inherit;
+    }
+
+    #job-keyword-search:focus-visible,
+    .salary-bound input:focus-visible,
+    .apply-filters-btn:focus-visible,
+    .clear-filters:focus-visible {
+      outline: 0.1875rem solid #d5333b;
+      outline-offset: 0.125rem;
     }
   }
 }
@@ -281,12 +404,28 @@ body.jobs-page .filter-group{
   input[type="radio"] {
     margin-right: 8px;
   }
+
+  /* Reveal custom USD Min/Max inputs only when "Other" salary option is checked. */
+  .salary-custom-range {
+    display: none;
+  }
+
+  .salary-bound label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
 }
 
-body.jobs-page:has(#salary-under-30:checked) .job-card:not(.salary-under-30), body.jobs-page:has(#salary-10-20:checked) .job-card:not(.salary-10-20), body.jobs-page:has(#salary-20-under-30:checked) .job-card:not(.salary-20-under-30), body.jobs-page:has(#salary-30-50:checked) .job-card:not(.salary-30-50), body.jobs-page:has(#salary-over-50:checked) .job-card:not(.salary-over-50), body.jobs-page:has(#salary-negotiable:checked) .job-card:not(.salary-negotiable), body.jobs-page:has(#experience-none:checked) .job-card:not(.experience-none), body.jobs-page:has(#experience-1-year:checked) .job-card:not(.experience-1-year), body.jobs-page:has(#experience-2-years:checked) .job-card:not(.experience-2-years), body.jobs-page:has(#experience-3-years:checked) .job-card:not(.experience-3-years), body.jobs-page:has(#experience-5-years:checked) .job-card:not(.experience-5-years), body.jobs-page:has(#experience-8-years:checked) .job-card:not(.experience-8-years), body.jobs-page:has(#location-hcm:checked) .job-card:not(.location-hcm), body.jobs-page:has(#location-hanoi:checked) .job-card:not(.location-hanoi), body.jobs-page:has(#location-danang:checked) .job-card:not(.location-danang), body.jobs-page:has(#location-cantho:checked) .job-card:not(.location-cantho), body.jobs-page:has(#job-type-support:checked) .job-card:not(.job-support), body.jobs-page:has(#job-type-design:checked) .job-card:not(.job-design), body.jobs-page:has(#job-type-development:checked) .job-card:not(.job-development), body.jobs-page:has(#job-type-qa:checked) .job-card:not(.job-qa), body.jobs-page:has(#job-type-analytics:checked) .job-card:not(.job-analytics), body.jobs-page:has(#job-type-content:checked) .job-card:not(.job-content){
-  display: none;
+body.jobs-page .filter-group:has(#salary-other:checked) .salary-custom-range {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
+/* === 5. STICKY SIDEBAR CONTAINER & INFO BOXES === */
 body.jobs-page .FilterSidebar-Container{
   flex: 0 0 clamp(16rem, 25%, 24rem);
   display: flex;
@@ -341,7 +480,8 @@ body.jobs-page .FilterSidebar-Container{
   }
 }
 
-body.jobs-page:has(#dark-toggle:checked){
+/* === 6. DARK MODE (applied via PHP $bodyClass on jobs.php) === */
+body.jobs-page.dark-mode{
   background: #111111;
   color: #f5f5f5;
 
@@ -388,6 +528,44 @@ body.jobs-page:has(#dark-toggle:checked){
 
   .job-layout {
     background: #111111;
+  }
+
+  .job-results-bar {
+    border-color: #282828;
+    background: #1b1b1b;
+
+    .job-results-count {
+      color: #ffffff;
+    }
+
+    .job-results-summary {
+      color: #dddddd;
+    }
+  }
+
+  .job-empty-state {
+    border-color: #282828;
+    background: #1b1b1b;
+
+    h2 {
+      color: #ffffff;
+    }
+
+    p {
+      color: #dddddd;
+    }
+
+    .clear-filters {
+      border-color: #ff5268;
+      color: #ff5268;
+    }
+
+    .clear-filters:hover,
+    .clear-filters:focus-visible {
+      background: #e9223e;
+      border-color: #e9223e;
+      color: #ffffff;
+    }
   }
 
   .job-card {
@@ -454,7 +632,7 @@ body.jobs-page:has(#dark-toggle:checked){
         color: #ffffff !important;
     }
   }
-  #job-filter fieldset,
+  #job-filter > form > fieldset,
   .sidebar section {
     border-color: #4e4e4e;
     background: #1b1b1b;
@@ -494,6 +672,30 @@ body.jobs-page:has(#dark-toggle:checked){
     accent-color: #e9223e;
   }
 
+  #job-filter #job-keyword-search,
+  #job-filter .salary-bound input {
+    border-color: #4e4e4e;
+    background: #111111;
+    color: #ffffff;
+  }
+
+  #job-filter #job-keyword-search::placeholder {
+    color: #bbbbbb;
+  }
+
+  #job-filter .apply-filters-btn {
+    border-color: #e9223e;
+    background: #e9223e;
+    color: #ffffff;
+  }
+
+  #job-filter .apply-filters-btn:hover,
+  #job-filter .apply-filters-btn:focus-visible {
+    border-color: #ff5268;
+    background: #ff5268;
+    color: #111111;
+  }
+
   #job-filter .clear-filters {
     border-color: #ff5268;
     color: #ff5268;
@@ -506,6 +708,7 @@ body.jobs-page:has(#dark-toggle:checked){
   }
 }
 
+/* === 7. RESPONSIVE MOBILE FILTER DRAWER (<= 900px) === */
 @media (max-width: 900px) {
 body.jobs-page .job-layout{
     flex-direction: column;
@@ -544,12 +747,12 @@ body.jobs-page .FilterSidebar-Container #job-filter {
     overflow-x: hidden;
   }
 body.jobs-page .FilterSidebar-Container #job-filter form,
-  body.jobs-page .FilterSidebar-Container #job-filter fieldset {
+  body.jobs-page .FilterSidebar-Container #job-filter > form > fieldset {
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
   }
-body.jobs-page .FilterSidebar-Container #job-filter fieldset {
+body.jobs-page .FilterSidebar-Container #job-filter > form > fieldset {
     overflow-x: hidden;
   }
 body.jobs-page .FilterSidebar-Container .sidebar {
@@ -592,7 +795,9 @@ body.jobs-page .FilterSidebar-Container .filter-toggle-label:hover {
 body.jobs-page .FilterSidebar-Container .filter-toggle-label:hover .fa-sliders {
       transform: rotate(90deg);
   }
-body.jobs-page .FilterSidebar-Container .filter-toggle-label:focus-visible {
+/* Keep keyboard focus ring visible when tabbing onto the visually-hidden checkbox. */
+body.jobs-page .FilterSidebar-Container .filter-toggle-label:focus-visible,
+body.jobs-page .FilterSidebar-Container .filter-toggle:focus-visible + .filter-toggle-label {
       outline: 0.1875rem solid #d5333b;
       outline-offset: 0.1875rem;
   }
@@ -612,7 +817,7 @@ body.jobs-page .FilterSidebar-Container #job-filter {
       max-height: 55vh;
       overflow-y: auto;
   }
-body.jobs-page .FilterSidebar-Container #job-filter fieldset {
+body.jobs-page .FilterSidebar-Container #job-filter > form > fieldset {
       padding: 12px;
   }
 body.jobs-page .FilterSidebar-Container .filter-group {
@@ -621,6 +826,7 @@ body.jobs-page .FilterSidebar-Container .filter-group {
   }
 }
 
+/* === 8. HERO ILLUSTRATION, CARD ANIMATIONS & RESPONSIVE SCALING === */
 body.jobs-page .jobs-hero-animation{
   position: relative;
   width: 100%;
@@ -1129,10 +1335,10 @@ body.jobs-page #main-content > .hero .btn-submit {
 body.jobs-page #main-content > .hero .jobs-hero-animation {
   width: 100%; max-width: 39rem; justify-self: end; margin: 0;
 }
-body.jobs-page:has(#dark-toggle:checked) #main-content > .hero { background: #111; }
-body.jobs-page:has(#dark-toggle:checked) #main-content > .hero h1 { color: #f5f5f5; }
-body.jobs-page:has(#dark-toggle:checked) #main-content > .hero .hero-text { color: #ddd; }
-body.jobs-page:has(#dark-toggle:checked) #main-content > .hero .tag { background: #d92f44; color: #fff; }
+body.jobs-page.dark-mode #main-content > .hero { background: #111; }
+body.jobs-page.dark-mode #main-content > .hero h1 { color: #f5f5f5; }
+body.jobs-page.dark-mode #main-content > .hero .hero-text { color: #ddd; }
+body.jobs-page.dark-mode #main-content > .hero .tag { background: #d92f44; color: #fff; }
 @media (max-width: 850px) {
   body.jobs-page #main-content > .hero { min-height: auto; padding: 4rem 0; }
   body.jobs-page #main-content > .hero > .container.hero-layout { grid-template-columns: 1fr; }
