@@ -1,0 +1,554 @@
+/* =========================================================
+   T1 Health & Wellness — SEARCH PAGE STYLES
+   Pairs with search.php (server-side GET ?q=...&scope=all|jobs|pages)
+   and adapts to both PHP theme cookies and the header #dark-toggle.
+   ========================================================= */
+/* Generative AI Acknowledgement: This css page was designed and written by Minh Hoang Bui, with the assistance of AI tools for code generation and optimization. */
+/* Adapt native UI (root scrollbars, search input clear button) without nested :has(). */
+html:has(body.search-page.light-mode) {
+  color-scheme: light;
+}
+
+html:has(body.search-page.dark-mode),
+html:has(body.search-page #dark-toggle:checked) {
+  color-scheme: dark;
+}
+
+/* === 1. THEME TOKENS & PAGE SHELL === */
+body.search-page {
+  --search-hero-bg: #ecece7;
+  --search-results-bg: #f8f8f6;
+  --search-surface: #ffffff;
+  --search-chip-bg: #f4f4f0;
+  --search-ink: #111111;
+  --search-muted: #595954;
+  --search-border: #dcdcd5;
+  --search-border-strong: #8c8c84;
+  --search-accent: #d92f44;
+  --search-accent-hover: #b52335;
+  --search-accent-hover-ink: #ffffff;
+  --search-accent-text: #c42337;
+  --search-badge-job-bg: #fff0f1;
+  --search-badge-job-border: #e5b3ba;
+  --search-badge-job-ink: #9e1b2c;
+  --search-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --search-shadow-hover: 0 10px 24px rgba(0, 0, 0, 0.1);
+
+  min-block-size: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--search-results-bg);
+  color: var(--search-ink);
+}
+
+body.search-page:is(.dark-mode, :has(#dark-toggle:checked)) {
+  --search-hero-bg: #0c0c0d;
+  --search-results-bg: #111111;
+  --search-surface: #1b1b1b;
+  --search-chip-bg: #242424;
+  --search-ink: #f5f5f5;
+  --search-muted: #c2c2bc;
+  --search-border: #2e2e2e;
+  --search-border-strong: #767670;
+  --search-accent: #d92f44;
+  --search-accent-hover: #ff5268;
+  --search-accent-hover-ink: #111111;
+  --search-accent-text: #ff6b7d;
+  --search-badge-job-bg: #2a1418;
+  --search-badge-job-border: #6e2632;
+  --search-badge-job-ink: #ff8090;
+  --search-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --search-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.65);
+}
+
+.search-main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-container {
+  inline-size: 100%;
+  max-inline-size: 112rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 5vw, 7.5rem);
+}
+
+.search-main :is(a, button, input):focus-visible {
+  outline: 0.1875rem solid var(--search-accent-text);
+  outline-offset: 0.1875rem;
+}
+
+/* === 2. HERO & SEARCH FORM === */
+.search-hero {
+  padding-block: clamp(2.25rem, 4.5vw, 3.75rem) clamp(1.75rem, 3.5vw, 2.75rem);
+  background: var(--search-hero-bg);
+  border-block-end: 1px solid var(--search-border);
+}
+
+.search-hero h1 {
+  margin: 0 0 0.75rem;
+  color: var(--search-ink);
+  font-size: clamp(2.25rem, 4.2vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.search-subtitle {
+  max-inline-size: 42rem;
+  margin: 0 0 1.75rem;
+  color: var(--search-muted);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.search-hero search {
+  display: block;
+  max-inline-size: 52rem;
+}
+
+.search-page-form {
+  display: flex;
+  align-items: stretch;
+  gap: 0.625rem;
+}
+
+#page-search-input {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  min-block-size: 3.125rem;
+  padding: 0.625rem 1.125rem;
+  border: 1.5px solid var(--search-border-strong);
+  border-radius: 0.5rem;
+  background: var(--search-surface);
+  color: var(--search-ink);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#page-search-input::placeholder {
+  color: var(--search-muted);
+  opacity: 1;
+}
+
+#page-search-input:focus-visible {
+  border-color: var(--search-accent);
+}
+
+.search-submit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-inline-size: 7.5rem;
+  min-block-size: 3.125rem;
+  padding: 0.6875rem 1.5rem;
+  border: 1.5px solid var(--search-accent);
+  border-radius: 0.5rem;
+  background: var(--search-accent);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.search-submit-button:hover {
+  background: var(--search-accent-hover);
+  border-color: var(--search-accent-hover);
+  color: var(--search-accent-hover-ink);
+}
+
+.search-submit-button:active {
+  transform: translateY(1px);
+}
+
+/* === 3. SCOPE TABS === */
+.search-scope-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block-start: 1.25rem;
+}
+
+.search-scope-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-block-size: 2.75rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--search-border-strong);
+  border-radius: 999px;
+  background: var(--search-surface);
+  color: var(--search-ink);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.search-scope-tab:not(.is-active):hover {
+  border-color: var(--search-accent);
+  color: var(--search-accent-text);
+}
+
+.search-scope-tab:active {
+  transform: translateY(1px);
+}
+
+.search-scope-tab.is-active,
+.search-scope-tab[aria-current="page"] {
+  border-color: var(--search-ink);
+  background: var(--search-ink);
+  color: var(--search-surface);
+}
+
+.search-tab-count {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+
+/* === 4. RESULTS SECTION, GUIDE & EMPTY STATES === */
+.search-results-section {
+  flex: 1 0 auto;
+  padding-block: clamp(1.75rem, 3.5vw, 3rem) clamp(3rem, 5vw, 4.5rem);
+  background: var(--search-results-bg);
+}
+
+.search-guide-box,
+.search-empty-state {
+  max-inline-size: 46rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--search-border);
+  border-block-start: 3px solid var(--search-accent);
+  border-radius: 0.625rem;
+  background: var(--search-surface);
+  box-shadow: var(--search-shadow);
+}
+
+.search-guide-box h2,
+.search-empty-state h2 {
+  margin: 0 0 0.625rem;
+  color: var(--search-ink);
+  font-size: 1.375rem;
+  line-height: 1.25;
+}
+
+.search-guide-box p,
+.search-empty-state p {
+  margin: 0;
+  color: var(--search-muted);
+  line-height: 1.6;
+}
+
+.search-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.search-quick-links a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--search-border-strong);
+  border-radius: 999px;
+  background: var(--search-chip-bg);
+  color: var(--search-ink);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.search-quick-links a:hover {
+  border-color: var(--search-accent);
+  background: var(--search-surface);
+  color: var(--search-accent-text);
+  transform: translateY(-1px);
+}
+
+.search-quick-links a:active {
+  transform: translateY(0);
+}
+
+.search-status-bar {
+  margin: 0 0 1.75rem;
+  padding-block-end: 0.875rem;
+  border-block-end: 1px solid var(--search-border);
+  color: var(--search-muted);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.search-suggestion {
+  margin-block-start: 0.75rem;
+}
+
+.search-suggestion a {
+  color: var(--search-accent-text);
+  font-weight: 700;
+  text-underline-offset: 0.2rem;
+}
+
+.search-suggestion a:hover {
+  color: var(--search-ink);
+}
+
+.search-fallback-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block-start: 1.375rem;
+}
+
+.search-fallback-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 2.75rem;
+  padding: 0.5rem 1.15rem;
+  border: 1.5px solid var(--search-border-strong);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--search-ink);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.search-fallback-links a:first-child {
+  border-color: var(--search-accent);
+  background: var(--search-accent);
+  color: #ffffff;
+}
+
+.search-fallback-links a:first-child:hover {
+  border-color: var(--search-accent-hover);
+  background: var(--search-accent-hover);
+  color: var(--search-accent-hover-ink);
+}
+
+.search-fallback-links a:not(:first-child):hover {
+  border-color: var(--search-accent);
+  color: var(--search-accent-text);
+}
+
+.search-fallback-links a:active {
+  transform: translateY(1px);
+}
+
+/* === 5. RESULT GROUPS & CARDS === */
+.search-group + .search-group {
+  margin-block-start: 2.75rem;
+}
+
+.search-group h2 {
+  margin: 0 0 1.125rem;
+  color: var(--search-ink);
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.search-result-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 24rem), 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.search-result-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem;
+  border: 1px solid var(--search-border);
+  border-radius: 0.625rem;
+  background: var(--search-surface);
+  box-shadow: var(--search-shadow);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-result-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--search-accent);
+  box-shadow: var(--search-shadow-hover);
+}
+
+.search-result-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-block-end: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--search-border);
+  border-radius: 999px;
+  background: var(--search-chip-bg);
+  color: var(--search-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.search-job-card .search-result-badge {
+  border-color: var(--search-badge-job-border);
+  background: var(--search-badge-job-bg);
+  color: var(--search-badge-job-ink);
+}
+
+.search-page-card .search-result-badge {
+  border-color: var(--search-border-strong);
+  color: var(--search-ink);
+}
+
+.search-result-card h3 {
+  margin: 0 0 0.5rem;
+  color: var(--search-ink);
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.search-result-card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.search-result-card h3 a:hover {
+  color: var(--search-accent-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.search-job-meta {
+  margin: 0 0 0.75rem;
+  padding-inline-start: 0.75rem;
+  border-inline-start: 3px solid var(--search-accent);
+  color: var(--search-ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.search-result-excerpt {
+  margin: 0;
+  color: var(--search-muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.search-result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  inline-size: 100%;
+  margin: auto 0 0;
+  padding-block-start: 1.25rem;
+}
+
+.search-result-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 2.75rem;
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--search-border-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--search-ink);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.search-result-actions a:hover {
+  border-color: var(--search-accent);
+  color: var(--search-accent-text);
+}
+
+.search-result-actions a[href^="apply.php"] {
+  border-color: var(--search-accent);
+  background: var(--search-accent);
+  color: #ffffff;
+}
+
+.search-result-actions a[href^="apply.php"]:hover {
+  border-color: var(--search-accent-hover);
+  background: var(--search-accent-hover);
+  color: var(--search-accent-hover-ink);
+}
+
+.search-result-actions a:active {
+  transform: translateY(1px);
+}
+
+/* === 6. RESPONSIVE, REDUCED MOTION & FORCED COLORS === */
+@media (max-width: 640px) {
+  .search-page-form {
+    flex-direction: column;
+  }
+
+  .search-submit-button {
+    inline-size: 100%;
+  }
+
+  .search-fallback-links a,
+  .search-result-actions a {
+    flex: 1 1 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.search-page *,
+  body.search-page *::before,
+  body.search-page *::after {
+    transition: none;
+  }
+
+  .search-result-card:hover,
+  .search-submit-button:active,
+  .search-scope-tab:active,
+  .search-quick-links a:hover,
+  .search-quick-links a:active,
+  .search-fallback-links a:active,
+  .search-result-actions a:active {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .search-scope-tab.is-active,
+  .search-scope-tab[aria-current="page"] {
+    border: 2px solid Highlight;
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .search-submit-button,
+  .search-fallback-links a:first-child,
+  .search-result-actions a[href^="apply.php"] {
+    border: 2px solid ButtonText;
+    background: ButtonFace;
+    color: ButtonText;
+  }
+
+  .search-result-card,
+  .search-guide-box,
+  .search-empty-state {
+    border-color: CanvasText;
+  }
+}
